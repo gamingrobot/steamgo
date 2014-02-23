@@ -1,7 +1,6 @@
 =======
-steamgo
+Steam for Go
 =======
-# Steam for Go
 
 This library allows you to interact with Steam as if it was an actual Steam client.
 It's a port of [SteamKit2](https://github.com/SteamRE/SteamKit) to Go.
