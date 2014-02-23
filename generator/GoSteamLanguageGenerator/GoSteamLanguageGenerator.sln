@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GoSteamLanguageGenerator", "GoSteamLanguageGenerator.csproj", "{3D9A7297-6008-47C5-A386-8A0D1AD82035}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SteamLanguageParser", "..\SteamKit\Resources\SteamLanguageParser\SteamLanguageParser.csproj", "{EBF5B7D5-58F4-4F68-A997-1BE71A72F078}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SteamLanguageParser", "..\SteamLanguageParser\SteamLanguageParser.csproj", "{EBF5B7D5-58F4-4F68-A997-1BE71A72F078}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
