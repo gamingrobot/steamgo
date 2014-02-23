@@ -1,3 +1,6 @@
+=======
+steamgo
+=======
 # Steam for Go
 
 This library allows you to interact with Steam as if it was an actual Steam client.
@@ -35,4 +38,4 @@ Apply the protocol changes where necessary.
 
 ## License
 
-Steam for Go is licensed under the New BSD License. More information can be found in LICENSE.txt.
+Steam for Go is licensed under the New BSD License. More information can be found in LICENSE
