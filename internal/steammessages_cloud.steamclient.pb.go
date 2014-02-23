@@ -2,6 +2,31 @@
 // source: steammessages_cloud.steamclient.proto
 // DO NOT EDIT!
 
+/*
+Package steammessages_cloud_steamclient is a generated protocol buffer package.
+
+It is generated from these files:
+	steammessages_cloud.steamclient.proto
+
+It has these top-level messages:
+	CCloud_GetUploadServerInfo_Request
+	CCloud_GetUploadServerInfo_Response
+	CCloud_BeginHTTPUpload_Request
+	CCloud_BeginHTTPUpload_Response
+	CCloud_CommitHTTPUpload_Request
+	CCloud_CommitHTTPUpload_Response
+	CCloud_GetFileDetails_Request
+	CCloud_UserFile
+	CCloud_GetFileDetails_Response
+	CCloud_EnumerateUserFiles_Request
+	CCloud_EnumerateUserFiles_Response
+	CCloud_Delete_Request
+	CCloud_Delete_Response
+	CCloud_GetClientEncryptionKey_Request
+	CCloud_GetClientEncryptionKey_Response
+	CCloud_CDNReport_Notification
+	CCloud_ExternalStorageTransferReport_Notification
+*/
 package internal
 
 import proto "code.google.com/p/goprotobuf/proto"
@@ -46,6 +71,218 @@ func (m *CCloud_GetUploadServerInfo_Response) GetServerUrl() string {
 		return *m.ServerUrl
 	}
 	return ""
+}
+
+type CCloud_BeginHTTPUpload_Request struct {
+	Appid                *uint32  `protobuf:"varint,1,opt,name=appid" json:"appid,omitempty"`
+	FileSize             *uint32  `protobuf:"varint,2,opt,name=file_size" json:"file_size,omitempty"`
+	Filename             *string  `protobuf:"bytes,3,opt,name=filename" json:"filename,omitempty"`
+	FileSha              *string  `protobuf:"bytes,4,opt,name=file_sha" json:"file_sha,omitempty"`
+	IsPublic             *bool    `protobuf:"varint,5,opt,name=is_public" json:"is_public,omitempty"`
+	PlatformsToSync      []string `protobuf:"bytes,6,rep,name=platforms_to_sync" json:"platforms_to_sync,omitempty"`
+	RequestHeadersNames  []string `protobuf:"bytes,7,rep,name=request_headers_names" json:"request_headers_names,omitempty"`
+	RequestHeadersValues []string `protobuf:"bytes,8,rep,name=request_headers_values" json:"request_headers_values,omitempty"`
+	XXX_unrecognized     []byte   `json:"-"`
+}
+
+func (m *CCloud_BeginHTTPUpload_Request) Reset()         { *m = CCloud_BeginHTTPUpload_Request{} }
+func (m *CCloud_BeginHTTPUpload_Request) String() string { return proto.CompactTextString(m) }
+func (*CCloud_BeginHTTPUpload_Request) ProtoMessage()    {}
+
+func (m *CCloud_BeginHTTPUpload_Request) GetAppid() uint32 {
+	if m != nil && m.Appid != nil {
+		return *m.Appid
+	}
+	return 0
+}
+
+func (m *CCloud_BeginHTTPUpload_Request) GetFileSize() uint32 {
+	if m != nil && m.FileSize != nil {
+		return *m.FileSize
+	}
+	return 0
+}
+
+func (m *CCloud_BeginHTTPUpload_Request) GetFilename() string {
+	if m != nil && m.Filename != nil {
+		return *m.Filename
+	}
+	return ""
+}
+
+func (m *CCloud_BeginHTTPUpload_Request) GetFileSha() string {
+	if m != nil && m.FileSha != nil {
+		return *m.FileSha
+	}
+	return ""
+}
+
+func (m *CCloud_BeginHTTPUpload_Request) GetIsPublic() bool {
+	if m != nil && m.IsPublic != nil {
+		return *m.IsPublic
+	}
+	return false
+}
+
+func (m *CCloud_BeginHTTPUpload_Request) GetPlatformsToSync() []string {
+	if m != nil {
+		return m.PlatformsToSync
+	}
+	return nil
+}
+
+func (m *CCloud_BeginHTTPUpload_Request) GetRequestHeadersNames() []string {
+	if m != nil {
+		return m.RequestHeadersNames
+	}
+	return nil
+}
+
+func (m *CCloud_BeginHTTPUpload_Request) GetRequestHeadersValues() []string {
+	if m != nil {
+		return m.RequestHeadersValues
+	}
+	return nil
+}
+
+type CCloud_BeginHTTPUpload_Response struct {
+	Ugcid            *uint64                                        `protobuf:"fixed64,1,opt,name=ugcid" json:"ugcid,omitempty"`
+	Timestamp        *uint32                                        `protobuf:"fixed32,2,opt,name=timestamp" json:"timestamp,omitempty"`
+	UrlHost          *string                                        `protobuf:"bytes,3,opt,name=url_host" json:"url_host,omitempty"`
+	UrlPath          *string                                        `protobuf:"bytes,4,opt,name=url_path" json:"url_path,omitempty"`
+	UseHttps         *bool                                          `protobuf:"varint,5,opt,name=use_https" json:"use_https,omitempty"`
+	RequestHeaders   []*CCloud_BeginHTTPUpload_Response_HTTPHeaders `protobuf:"bytes,6,rep,name=request_headers" json:"request_headers,omitempty"`
+	XXX_unrecognized []byte                                         `json:"-"`
+}
+
+func (m *CCloud_BeginHTTPUpload_Response) Reset()         { *m = CCloud_BeginHTTPUpload_Response{} }
+func (m *CCloud_BeginHTTPUpload_Response) String() string { return proto.CompactTextString(m) }
+func (*CCloud_BeginHTTPUpload_Response) ProtoMessage()    {}
+
+func (m *CCloud_BeginHTTPUpload_Response) GetUgcid() uint64 {
+	if m != nil && m.Ugcid != nil {
+		return *m.Ugcid
+	}
+	return 0
+}
+
+func (m *CCloud_BeginHTTPUpload_Response) GetTimestamp() uint32 {
+	if m != nil && m.Timestamp != nil {
+		return *m.Timestamp
+	}
+	return 0
+}
+
+func (m *CCloud_BeginHTTPUpload_Response) GetUrlHost() string {
+	if m != nil && m.UrlHost != nil {
+		return *m.UrlHost
+	}
+	return ""
+}
+
+func (m *CCloud_BeginHTTPUpload_Response) GetUrlPath() string {
+	if m != nil && m.UrlPath != nil {
+		return *m.UrlPath
+	}
+	return ""
+}
+
+func (m *CCloud_BeginHTTPUpload_Response) GetUseHttps() bool {
+	if m != nil && m.UseHttps != nil {
+		return *m.UseHttps
+	}
+	return false
+}
+
+func (m *CCloud_BeginHTTPUpload_Response) GetRequestHeaders() []*CCloud_BeginHTTPUpload_Response_HTTPHeaders {
+	if m != nil {
+		return m.RequestHeaders
+	}
+	return nil
+}
+
+type CCloud_BeginHTTPUpload_Response_HTTPHeaders struct {
+	Name             *string `protobuf:"bytes,1,opt,name=name" json:"name,omitempty"`
+	Value            *string `protobuf:"bytes,2,opt,name=value" json:"value,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CCloud_BeginHTTPUpload_Response_HTTPHeaders) Reset() {
+	*m = CCloud_BeginHTTPUpload_Response_HTTPHeaders{}
+}
+func (m *CCloud_BeginHTTPUpload_Response_HTTPHeaders) String() string {
+	return proto.CompactTextString(m)
+}
+func (*CCloud_BeginHTTPUpload_Response_HTTPHeaders) ProtoMessage() {}
+
+func (m *CCloud_BeginHTTPUpload_Response_HTTPHeaders) GetName() string {
+	if m != nil && m.Name != nil {
+		return *m.Name
+	}
+	return ""
+}
+
+func (m *CCloud_BeginHTTPUpload_Response_HTTPHeaders) GetValue() string {
+	if m != nil && m.Value != nil {
+		return *m.Value
+	}
+	return ""
+}
+
+type CCloud_CommitHTTPUpload_Request struct {
+	TransferSucceeded *bool   `protobuf:"varint,1,opt,name=transfer_succeeded" json:"transfer_succeeded,omitempty"`
+	Appid             *uint32 `protobuf:"varint,2,opt,name=appid" json:"appid,omitempty"`
+	FileSha           *string `protobuf:"bytes,3,opt,name=file_sha" json:"file_sha,omitempty"`
+	Filename          *string `protobuf:"bytes,4,opt,name=filename" json:"filename,omitempty"`
+	XXX_unrecognized  []byte  `json:"-"`
+}
+
+func (m *CCloud_CommitHTTPUpload_Request) Reset()         { *m = CCloud_CommitHTTPUpload_Request{} }
+func (m *CCloud_CommitHTTPUpload_Request) String() string { return proto.CompactTextString(m) }
+func (*CCloud_CommitHTTPUpload_Request) ProtoMessage()    {}
+
+func (m *CCloud_CommitHTTPUpload_Request) GetTransferSucceeded() bool {
+	if m != nil && m.TransferSucceeded != nil {
+		return *m.TransferSucceeded
+	}
+	return false
+}
+
+func (m *CCloud_CommitHTTPUpload_Request) GetAppid() uint32 {
+	if m != nil && m.Appid != nil {
+		return *m.Appid
+	}
+	return 0
+}
+
+func (m *CCloud_CommitHTTPUpload_Request) GetFileSha() string {
+	if m != nil && m.FileSha != nil {
+		return *m.FileSha
+	}
+	return ""
+}
+
+func (m *CCloud_CommitHTTPUpload_Request) GetFilename() string {
+	if m != nil && m.Filename != nil {
+		return *m.Filename
+	}
+	return ""
+}
+
+type CCloud_CommitHTTPUpload_Response struct {
+	FileCommitted    *bool  `protobuf:"varint,1,opt,name=file_committed" json:"file_committed,omitempty"`
+	XXX_unrecognized []byte `json:"-"`
+}
+
+func (m *CCloud_CommitHTTPUpload_Response) Reset()         { *m = CCloud_CommitHTTPUpload_Response{} }
+func (m *CCloud_CommitHTTPUpload_Response) String() string { return proto.CompactTextString(m) }
+func (*CCloud_CommitHTTPUpload_Response) ProtoMessage()    {}
+
+func (m *CCloud_CommitHTTPUpload_Response) GetFileCommitted() bool {
+	if m != nil && m.FileCommitted != nil {
+		return *m.FileCommitted
+	}
+	return false
 }
 
 type CCloud_GetFileDetails_Request struct {
@@ -342,6 +579,90 @@ func (m *CCloud_CDNReport_Notification) GetReceivedBytes() uint64 {
 func (m *CCloud_CDNReport_Notification) GetDuration() uint32 {
 	if m != nil && m.Duration != nil {
 		return *m.Duration
+	}
+	return 0
+}
+
+type CCloud_ExternalStorageTransferReport_Notification struct {
+	Host             *string `protobuf:"bytes,1,opt,name=host" json:"host,omitempty"`
+	Path             *string `protobuf:"bytes,2,opt,name=path" json:"path,omitempty"`
+	IsUpload         *bool   `protobuf:"varint,3,opt,name=is_upload" json:"is_upload,omitempty"`
+	Success          *bool   `protobuf:"varint,4,opt,name=success" json:"success,omitempty"`
+	HttpStatusCode   *uint32 `protobuf:"varint,5,opt,name=http_status_code" json:"http_status_code,omitempty"`
+	BytesExpected    *uint64 `protobuf:"varint,6,opt,name=bytes_expected" json:"bytes_expected,omitempty"`
+	BytesActual      *uint64 `protobuf:"varint,7,opt,name=bytes_actual" json:"bytes_actual,omitempty"`
+	DurationMs       *uint32 `protobuf:"varint,8,opt,name=duration_ms" json:"duration_ms,omitempty"`
+	Cellid           *uint32 `protobuf:"varint,9,opt,name=cellid" json:"cellid,omitempty"`
+	XXX_unrecognized []byte  `json:"-"`
+}
+
+func (m *CCloud_ExternalStorageTransferReport_Notification) Reset() {
+	*m = CCloud_ExternalStorageTransferReport_Notification{}
+}
+func (m *CCloud_ExternalStorageTransferReport_Notification) String() string {
+	return proto.CompactTextString(m)
+}
+func (*CCloud_ExternalStorageTransferReport_Notification) ProtoMessage() {}
+
+func (m *CCloud_ExternalStorageTransferReport_Notification) GetHost() string {
+	if m != nil && m.Host != nil {
+		return *m.Host
+	}
+	return ""
+}
+
+func (m *CCloud_ExternalStorageTransferReport_Notification) GetPath() string {
+	if m != nil && m.Path != nil {
+		return *m.Path
+	}
+	return ""
+}
+
+func (m *CCloud_ExternalStorageTransferReport_Notification) GetIsUpload() bool {
+	if m != nil && m.IsUpload != nil {
+		return *m.IsUpload
+	}
+	return false
+}
+
+func (m *CCloud_ExternalStorageTransferReport_Notification) GetSuccess() bool {
+	if m != nil && m.Success != nil {
+		return *m.Success
+	}
+	return false
+}
+
+func (m *CCloud_ExternalStorageTransferReport_Notification) GetHttpStatusCode() uint32 {
+	if m != nil && m.HttpStatusCode != nil {
+		return *m.HttpStatusCode
+	}
+	return 0
+}
+
+func (m *CCloud_ExternalStorageTransferReport_Notification) GetBytesExpected() uint64 {
+	if m != nil && m.BytesExpected != nil {
+		return *m.BytesExpected
+	}
+	return 0
+}
+
+func (m *CCloud_ExternalStorageTransferReport_Notification) GetBytesActual() uint64 {
+	if m != nil && m.BytesActual != nil {
+		return *m.BytesActual
+	}
+	return 0
+}
+
+func (m *CCloud_ExternalStorageTransferReport_Notification) GetDurationMs() uint32 {
+	if m != nil && m.DurationMs != nil {
+		return *m.DurationMs
+	}
+	return 0
+}
+
+func (m *CCloud_ExternalStorageTransferReport_Notification) GetCellid() uint32 {
+	if m != nil && m.Cellid != nil {
+		return *m.Cellid
 	}
 	return 0
 }

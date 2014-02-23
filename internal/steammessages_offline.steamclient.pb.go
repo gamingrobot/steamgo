@@ -2,6 +2,19 @@
 // source: steammessages_offline.steamclient.proto
 // DO NOT EDIT!
 
+/*
+Package steammessages_offline_steamclient is a generated protocol buffer package.
+
+It is generated from these files:
+	steammessages_offline.steamclient.proto
+
+It has these top-level messages:
+	COffline_GetOfflineLogonTicket_Request
+	COffline_GetOfflineLogonTicket_Response
+	COffline_GetUnsignedOfflineLogonTicket_Request
+	COffline_OfflineLogonTicket
+	COffline_GetUnsignedOfflineLogonTicket_Response
+*/
 package internal
 
 import proto "code.google.com/p/goprotobuf/proto"

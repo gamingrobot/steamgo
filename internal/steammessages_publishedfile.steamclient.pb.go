@@ -2,6 +2,31 @@
 // source: steammessages_publishedfile.steamclient.proto
 // DO NOT EDIT!
 
+/*
+Package steammessages_publishedfile_steamclient is a generated protocol buffer package.
+
+It is generated from these files:
+	steammessages_publishedfile.steamclient.proto
+
+It has these top-level messages:
+	CPublishedFile_Subscribe_Request
+	CPublishedFile_Subscribe_Response
+	CPublishedFile_Unsubscribe_Request
+	CPublishedFile_Unsubscribe_Response
+	CPublishedFile_Publish_Request
+	CPublishedFile_Publish_Response
+	CPublishedFile_GetDetails_Request
+	PublishedFileDetails
+	CPublishedFile_GetDetails_Response
+	CPublishedFile_GetUserFiles_Request
+	CPublishedFile_GetUserFiles_Response
+	CPublishedFile_Update_Request
+	CPublishedFile_Update_Response
+	CPublishedFile_RefreshVotingQueue_Request
+	CPublishedFile_RefreshVotingQueue_Response
+	CPublishedFile_QueryFiles_Request
+	CPublishedFile_QueryFiles_Response
+*/
 package internal
 
 import proto "code.google.com/p/goprotobuf/proto"
@@ -18,10 +43,9 @@ var _ = math.Inf
 
 type CPublishedFile_Subscribe_Request struct {
 	Publishedfileid  *uint64 `protobuf:"varint,1,opt,name=publishedfileid" json:"publishedfileid,omitempty"`
-	Steamid          *uint64 `protobuf:"varint,2,opt,name=steamid" json:"steamid,omitempty"`
-	ListType         *uint32 `protobuf:"varint,3,opt,name=list_type" json:"list_type,omitempty"`
-	Appid            *int32  `protobuf:"varint,4,opt,name=appid" json:"appid,omitempty"`
-	NotifyClient     *bool   `protobuf:"varint,5,opt,name=notify_client" json:"notify_client,omitempty"`
+	ListType         *uint32 `protobuf:"varint,2,opt,name=list_type" json:"list_type,omitempty"`
+	Appid            *int32  `protobuf:"varint,3,opt,name=appid" json:"appid,omitempty"`
+	NotifyClient     *bool   `protobuf:"varint,4,opt,name=notify_client" json:"notify_client,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
@@ -32,13 +56,6 @@ func (*CPublishedFile_Subscribe_Request) ProtoMessage()    {}
 func (m *CPublishedFile_Subscribe_Request) GetPublishedfileid() uint64 {
 	if m != nil && m.Publishedfileid != nil {
 		return *m.Publishedfileid
-	}
-	return 0
-}
-
-func (m *CPublishedFile_Subscribe_Request) GetSteamid() uint64 {
-	if m != nil && m.Steamid != nil {
-		return *m.Steamid
 	}
 	return 0
 }
@@ -74,10 +91,9 @@ func (*CPublishedFile_Subscribe_Response) ProtoMessage()    {}
 
 type CPublishedFile_Unsubscribe_Request struct {
 	Publishedfileid  *uint64 `protobuf:"varint,1,opt,name=publishedfileid" json:"publishedfileid,omitempty"`
-	Steamid          *uint64 `protobuf:"varint,2,opt,name=steamid" json:"steamid,omitempty"`
-	ListType         *uint32 `protobuf:"varint,3,opt,name=list_type" json:"list_type,omitempty"`
-	Appid            *int32  `protobuf:"varint,4,opt,name=appid" json:"appid,omitempty"`
-	NotifyClient     *bool   `protobuf:"varint,5,opt,name=notify_client" json:"notify_client,omitempty"`
+	ListType         *uint32 `protobuf:"varint,2,opt,name=list_type" json:"list_type,omitempty"`
+	Appid            *int32  `protobuf:"varint,3,opt,name=appid" json:"appid,omitempty"`
+	NotifyClient     *bool   `protobuf:"varint,4,opt,name=notify_client" json:"notify_client,omitempty"`
 	XXX_unrecognized []byte  `json:"-"`
 }
 
@@ -88,13 +104,6 @@ func (*CPublishedFile_Unsubscribe_Request) ProtoMessage()    {}
 func (m *CPublishedFile_Unsubscribe_Request) GetPublishedfileid() uint64 {
 	if m != nil && m.Publishedfileid != nil {
 		return *m.Publishedfileid
-	}
-	return 0
-}
-
-func (m *CPublishedFile_Unsubscribe_Request) GetSteamid() uint64 {
-	if m != nil && m.Steamid != nil {
-		return *m.Steamid
 	}
 	return 0
 }

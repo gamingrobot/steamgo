@@ -223,7 +223,7 @@ const (
 	EMsg_DRMEmptyGuidCache                                             = 645
 	EMsg_DRMEmptyGuidCacheResponse                                     = 646
 	EMsg_BaseCS                                                        = 650
-	EMsg_CSUserContentRequest                                          = 652
+	EMsg_CSUserContentRequest                                          = 652 // Deprecated
 	EMsg_BaseClient                                                    = 700
 	EMsg_ClientLogOn_Deprecated                                        = 701
 	EMsg_ClientAnonLogOn_Deprecated                                    = 702
@@ -256,7 +256,7 @@ const (
 	EMsg_ClientAckMessageByGID                                         = 735
 	EMsg_ClientGetPurchaseReceipts                                     = 736
 	EMsg_ClientAckPurchaseReceipt                                      = 737
-	EMsg_ClientGamesPlayed3_obsolete                                   = 738
+	EMsg_ClientGamesPlayed3_obsolete                                   = 738 // Deprecated
 	EMsg_ClientSendGuestPass                                           = 739
 	EMsg_ClientAckGuestPass                                            = 740
 	EMsg_ClientRedeemGuestPass                                         = 741
@@ -266,8 +266,8 @@ const (
 	EMsg_ClientAcknowledgeClanInvite                                   = 745
 	EMsg_ClientPurchaseWithMachineID                                   = 746
 	EMsg_ClientAppUsageEvent                                           = 747
-	EMsg_ClientGetGiftTargetList                                       = 748
-	EMsg_ClientGetGiftTargetListResponse                               = 749
+	EMsg_ClientGetGiftTargetList                                       = 748 // Deprecated
+	EMsg_ClientGetGiftTargetListResponse                               = 749 // Deprecated
 	EMsg_ClientLogOnResponse                                           = 751
 	EMsg_ClientVACChallenge                                            = 753
 	EMsg_ClientSetHeartbeatRate                                        = 755
@@ -296,14 +296,14 @@ const (
 	EMsg_ClientEncryptPct                                              = 784
 	EMsg_ClientGetLegacyGameKeyResponse                                = 785
 	EMsg_ClientFavoritesList                                           = 786
-	EMsg_CSUserContentApprove                                          = 787
-	EMsg_CSUserContentDeny                                             = 788
+	EMsg_CSUserContentApprove                                          = 787 // Deprecated
+	EMsg_CSUserContentDeny                                             = 788 // Deprecated
 	EMsg_ClientInitPurchaseResponse                                    = 789
 	EMsg_ClientAddFriend                                               = 791
 	EMsg_ClientAddFriendResponse                                       = 792
 	EMsg_ClientInviteFriend                                            = 793
 	EMsg_ClientInviteFriendResponse                                    = 794
-	EMsg_ClientSendGuestPassResponse                                   = 795
+	EMsg_ClientSendGuestPassResponse                                   = 795 // Deprecated
 	EMsg_ClientAckGuestPassResponse                                    = 796
 	EMsg_ClientRedeemGuestPassResponse                                 = 797
 	EMsg_ClientUpdateGuestPassesList                                   = 798
@@ -1175,7 +1175,7 @@ const (
 	EMsg_ClientLBSFindOrCreateLBResponse                               = 5417
 	EMsg_ClientLBSGetLBEntries                                         = 5418
 	EMsg_ClientLBSGetLBEntriesResponse                                 = 5419
-	EMsg_ClientMarketingMessageUpdate                                  = 5420
+	EMsg_ClientMarketingMessageUpdate                                  = 5420 // Deprecated
 	EMsg_ClientChatDeclined                                            = 5426
 	EMsg_ClientFriendMsgIncoming                                       = 5427
 	EMsg_ClientAuthList_Deprecated                                     = 5428
@@ -1324,8 +1324,10 @@ const (
 	EMsg_ClientPlayerNicknameList                                      = 5587
 	EMsg_AMClientSetPlayerNickname                                     = 5588
 	EMsg_AMClientSetPlayerNicknameResponse                             = 5589
-	EMsg_ClientRequestOAuthTokenForApp                                 = 5590
-	EMsg_ClientRequestOAuthTokenForAppResponse                         = 5591
+	EMsg_ClientRequestOAuthTokenForApp                                 = 5590 // Deprecated
+	EMsg_ClientRequestOAuthTokenForAppResponse                         = 5591 // Deprecated
+	EMsg_ClientCreateAccountProto                                      = 5590
+	EMsg_ClientCreateAccountProtoResponse                              = 5591
 	EMsg_ClientGetNumberOfCurrentPlayersDP                             = 5592
 	EMsg_ClientGetNumberOfCurrentPlayersDPResponse                     = 5593
 	EMsg_ClientServiceMethod                                           = 5594
@@ -1484,8 +1486,8 @@ const (
 	EMsg_ClientUCMDeleteScreenshotResponse                             = 7310
 	EMsg_ClientUCMPublishFile                                          = 7311
 	EMsg_ClientUCMPublishFileResponse                                  = 7312
-	EMsg_ClientUCMGetPublishedFileDetails                              = 7313
-	EMsg_ClientUCMGetPublishedFileDetailsResponse                      = 7314
+	EMsg_ClientUCMGetPublishedFileDetails                              = 7313 // Deprecated
+	EMsg_ClientUCMGetPublishedFileDetailsResponse                      = 7314 // Deprecated
 	EMsg_ClientUCMDeletePublishedFile                                  = 7315
 	EMsg_ClientUCMDeletePublishedFileResponse                          = 7316
 	EMsg_ClientUCMEnumerateUserPublishedFiles                          = 7317
@@ -1668,12 +1670,18 @@ const (
 	EMsg_LogsinkBase                                                   = 8800
 	EMsg_LogsinkWriteReport                                            = 8800
 	EMsg_PICSBase                                                      = 8900
-	EMsg_PICSChangesSinceRequest                                       = 8901
-	EMsg_PICSChangesSinceResponse                                      = 8902
-	EMsg_PICSProductInfoRequest                                        = 8903
-	EMsg_PICSProductInfoResponse                                       = 8904
-	EMsg_PICSAccessTokenRequest                                        = 8905
-	EMsg_PICSAccessTokenResponse                                       = 8906
+	EMsg_PICSChangesSinceRequest                                       = 8901 // Deprecated: renamed to ClientPICSChangesSinceRequest
+	EMsg_ClientPICSChangesSinceRequest                                 = 8901
+	EMsg_PICSChangesSinceResponse                                      = 8902 // Deprecated: renamed to ClientPICSChangesSinceResponse
+	EMsg_ClientPICSChangesSinceResponse                                = 8902
+	EMsg_PICSProductInfoRequest                                        = 8903 // Deprecated: renamed to ClientPICSProductInfoRequest
+	EMsg_ClientPICSProductInfoRequest                                  = 8903
+	EMsg_PICSProductInfoResponse                                       = 8904 // Deprecated: renamed to ClientPICSProductInfoResponse
+	EMsg_ClientPICSProductInfoResponse                                 = 8904
+	EMsg_PICSAccessTokenRequest                                        = 8905 // Deprecated: renamed to ClientPICSAccessTokenRequest
+	EMsg_ClientPICSAccessTokenRequest                                  = 8905
+	EMsg_PICSAccessTokenResponse                                       = 8906 // Deprecated: renamed to ClientPICSAccessTokenResponse
+	EMsg_ClientPICSAccessTokenResponse                                 = 8906
 	EMsg_WorkerProcess                                                 = 9000
 	EMsg_WorkerProcessPingRequest                                      = 9000
 	EMsg_WorkerProcessPingResponse                                     = 9001
@@ -1725,7 +1733,3379 @@ const (
 	EMsg_ClientSharedLicensesStopPlaying                               = 9404 // Deprecated
 	EMsg_ClientSharedLibraryLockStatus                                 = 9405
 	EMsg_ClientSharedLibraryStopPlaying                                = 9406
+	EMsg_ClientUnlockStreaming                                         = 9507
+	EMsg_ClientUnlockStreamingResponse                                 = 9508
+	EMsg_ClientPlayingSessionState                                     = 9600
+	EMsg_ClientPlayingSessionKick                                      = 9601 // Deprecated: renamed to ClientKickPlayingSession
+	EMsg_ClientKickPlayingSession                                      = 9601
 )
+
+func (e EMsg) String() string {
+	switch e {
+	case EMsg_Invalid:
+		return "EMsg_Invalid"
+	case EMsg_Multi:
+		return "EMsg_Multi"
+	case EMsg_BaseGeneral:
+		return "EMsg_BaseGeneral"
+	case EMsg_DestJobFailed:
+		return "EMsg_DestJobFailed"
+	case EMsg_Alert:
+		return "EMsg_Alert"
+	case EMsg_SCIDRequest:
+		return "EMsg_SCIDRequest"
+	case EMsg_SCIDResponse:
+		return "EMsg_SCIDResponse"
+	case EMsg_JobHeartbeat:
+		return "EMsg_JobHeartbeat"
+	case EMsg_HubConnect:
+		return "EMsg_HubConnect"
+	case EMsg_Subscribe:
+		return "EMsg_Subscribe"
+	case EMsg_RouteMessage:
+		return "EMsg_RouteMessage"
+	case EMsg_RemoteSysID:
+		return "EMsg_RemoteSysID"
+	case EMsg_AMCreateAccountResponse:
+		return "EMsg_AMCreateAccountResponse"
+	case EMsg_WGRequest:
+		return "EMsg_WGRequest"
+	case EMsg_WGResponse:
+		return "EMsg_WGResponse"
+	case EMsg_KeepAlive:
+		return "EMsg_KeepAlive"
+	case EMsg_WebAPIJobRequest:
+		return "EMsg_WebAPIJobRequest"
+	case EMsg_WebAPIJobResponse:
+		return "EMsg_WebAPIJobResponse"
+	case EMsg_ClientSessionStart:
+		return "EMsg_ClientSessionStart"
+	case EMsg_ClientSessionEnd:
+		return "EMsg_ClientSessionEnd"
+	case EMsg_ClientSessionUpdateAuthTicket:
+		return "EMsg_ClientSessionUpdateAuthTicket"
+	case EMsg_StatsDeprecated:
+		return "EMsg_StatsDeprecated"
+	case EMsg_Ping:
+		return "EMsg_Ping"
+	case EMsg_PingResponse:
+		return "EMsg_PingResponse"
+	case EMsg_Stats:
+		return "EMsg_Stats"
+	case EMsg_RequestFullStatsBlock:
+		return "EMsg_RequestFullStatsBlock"
+	case EMsg_LoadDBOCacheItem:
+		return "EMsg_LoadDBOCacheItem"
+	case EMsg_LoadDBOCacheItemResponse:
+		return "EMsg_LoadDBOCacheItemResponse"
+	case EMsg_InvalidateDBOCacheItems:
+		return "EMsg_InvalidateDBOCacheItems"
+	case EMsg_ServiceMethod:
+		return "EMsg_ServiceMethod"
+	case EMsg_ServiceMethodResponse:
+		return "EMsg_ServiceMethodResponse"
+	case EMsg_BaseShell:
+		return "EMsg_BaseShell"
+	case EMsg_Exit:
+		return "EMsg_Exit"
+	case EMsg_DirRequest:
+		return "EMsg_DirRequest"
+	case EMsg_DirResponse:
+		return "EMsg_DirResponse"
+	case EMsg_ZipRequest:
+		return "EMsg_ZipRequest"
+	case EMsg_ZipResponse:
+		return "EMsg_ZipResponse"
+	case EMsg_UpdateRecordResponse:
+		return "EMsg_UpdateRecordResponse"
+	case EMsg_UpdateCreditCardRequest:
+		return "EMsg_UpdateCreditCardRequest"
+	case EMsg_UpdateUserBanResponse:
+		return "EMsg_UpdateUserBanResponse"
+	case EMsg_PrepareToExit:
+		return "EMsg_PrepareToExit"
+	case EMsg_ContentDescriptionUpdate:
+		return "EMsg_ContentDescriptionUpdate"
+	case EMsg_TestResetServer:
+		return "EMsg_TestResetServer"
+	case EMsg_UniverseChanged:
+		return "EMsg_UniverseChanged"
+	case EMsg_ShellConfigInfoUpdate:
+		return "EMsg_ShellConfigInfoUpdate"
+	case EMsg_RequestWindowsEventLogEntries:
+		return "EMsg_RequestWindowsEventLogEntries"
+	case EMsg_ProvideWindowsEventLogEntries:
+		return "EMsg_ProvideWindowsEventLogEntries"
+	case EMsg_ShellSearchLogs:
+		return "EMsg_ShellSearchLogs"
+	case EMsg_ShellSearchLogsResponse:
+		return "EMsg_ShellSearchLogsResponse"
+	case EMsg_ShellCheckWindowsUpdates:
+		return "EMsg_ShellCheckWindowsUpdates"
+	case EMsg_ShellCheckWindowsUpdatesResponse:
+		return "EMsg_ShellCheckWindowsUpdatesResponse"
+	case EMsg_ShellFlushUserLicenseCache:
+		return "EMsg_ShellFlushUserLicenseCache"
+	case EMsg_BaseGM:
+		return "EMsg_BaseGM"
+	case EMsg_ShellFailed:
+		return "EMsg_ShellFailed"
+	case EMsg_ExitShells:
+		return "EMsg_ExitShells"
+	case EMsg_ExitShell:
+		return "EMsg_ExitShell"
+	case EMsg_GracefulExitShell:
+		return "EMsg_GracefulExitShell"
+	case EMsg_NotifyWatchdog:
+		return "EMsg_NotifyWatchdog"
+	case EMsg_LicenseProcessingComplete:
+		return "EMsg_LicenseProcessingComplete"
+	case EMsg_SetTestFlag:
+		return "EMsg_SetTestFlag"
+	case EMsg_QueuedEmailsComplete:
+		return "EMsg_QueuedEmailsComplete"
+	case EMsg_GMReportPHPError:
+		return "EMsg_GMReportPHPError"
+	case EMsg_GMDRMSync:
+		return "EMsg_GMDRMSync"
+	case EMsg_PhysicalBoxInventory:
+		return "EMsg_PhysicalBoxInventory"
+	case EMsg_UpdateConfigFile:
+		return "EMsg_UpdateConfigFile"
+	case EMsg_TestInitDB:
+		return "EMsg_TestInitDB"
+	case EMsg_GMWriteConfigToSQL:
+		return "EMsg_GMWriteConfigToSQL"
+	case EMsg_GMLoadActivationCodes:
+		return "EMsg_GMLoadActivationCodes"
+	case EMsg_GMQueueForFBS:
+		return "EMsg_GMQueueForFBS"
+	case EMsg_GMSchemaConversionResults:
+		return "EMsg_GMSchemaConversionResults"
+	case EMsg_GMSchemaConversionResultsResponse:
+		return "EMsg_GMSchemaConversionResultsResponse"
+	case EMsg_GMWriteShellFailureToSQL:
+		return "EMsg_GMWriteShellFailureToSQL"
+	case EMsg_BaseAIS:
+		return "EMsg_BaseAIS"
+	case EMsg_AISRefreshContentDescription:
+		return "EMsg_AISRefreshContentDescription"
+	case EMsg_AISRequestContentDescription:
+		return "EMsg_AISRequestContentDescription"
+	case EMsg_AISUpdateAppInfo:
+		return "EMsg_AISUpdateAppInfo"
+	case EMsg_AISUpdatePackageInfo:
+		return "EMsg_AISUpdatePackageInfo"
+	case EMsg_AISGetPackageChangeNumber:
+		return "EMsg_AISGetPackageChangeNumber"
+	case EMsg_AISGetPackageChangeNumberResponse:
+		return "EMsg_AISGetPackageChangeNumberResponse"
+	case EMsg_AISAppInfoTableChanged:
+		return "EMsg_AISAppInfoTableChanged"
+	case EMsg_AISUpdatePackageInfoResponse:
+		return "EMsg_AISUpdatePackageInfoResponse"
+	case EMsg_AISCreateMarketingMessage:
+		return "EMsg_AISCreateMarketingMessage"
+	case EMsg_AISCreateMarketingMessageResponse:
+		return "EMsg_AISCreateMarketingMessageResponse"
+	case EMsg_AISGetMarketingMessage:
+		return "EMsg_AISGetMarketingMessage"
+	case EMsg_AISGetMarketingMessageResponse:
+		return "EMsg_AISGetMarketingMessageResponse"
+	case EMsg_AISUpdateMarketingMessage:
+		return "EMsg_AISUpdateMarketingMessage"
+	case EMsg_AISUpdateMarketingMessageResponse:
+		return "EMsg_AISUpdateMarketingMessageResponse"
+	case EMsg_AISRequestMarketingMessageUpdate:
+		return "EMsg_AISRequestMarketingMessageUpdate"
+	case EMsg_AISDeleteMarketingMessage:
+		return "EMsg_AISDeleteMarketingMessage"
+	case EMsg_AISGetMarketingTreatments:
+		return "EMsg_AISGetMarketingTreatments"
+	case EMsg_AISGetMarketingTreatmentsResponse:
+		return "EMsg_AISGetMarketingTreatmentsResponse"
+	case EMsg_AISRequestMarketingTreatmentUpdate:
+		return "EMsg_AISRequestMarketingTreatmentUpdate"
+	case EMsg_AISTestAddPackage:
+		return "EMsg_AISTestAddPackage"
+	case EMsg_AIGetAppGCFlags:
+		return "EMsg_AIGetAppGCFlags"
+	case EMsg_AIGetAppGCFlagsResponse:
+		return "EMsg_AIGetAppGCFlagsResponse"
+	case EMsg_AIGetAppList:
+		return "EMsg_AIGetAppList"
+	case EMsg_AIGetAppListResponse:
+		return "EMsg_AIGetAppListResponse"
+	case EMsg_AIGetAppInfo:
+		return "EMsg_AIGetAppInfo"
+	case EMsg_AIGetAppInfoResponse:
+		return "EMsg_AIGetAppInfoResponse"
+	case EMsg_AISGetCouponDefinition:
+		return "EMsg_AISGetCouponDefinition"
+	case EMsg_AISGetCouponDefinitionResponse:
+		return "EMsg_AISGetCouponDefinitionResponse"
+	case EMsg_BaseAM:
+		return "EMsg_BaseAM"
+	case EMsg_AMUpdateUserBanRequest:
+		return "EMsg_AMUpdateUserBanRequest"
+	case EMsg_AMAddLicense:
+		return "EMsg_AMAddLicense"
+	case EMsg_AMBeginProcessingLicenses:
+		return "EMsg_AMBeginProcessingLicenses"
+	case EMsg_AMSendSystemIMToUser:
+		return "EMsg_AMSendSystemIMToUser"
+	case EMsg_AMExtendLicense:
+		return "EMsg_AMExtendLicense"
+	case EMsg_AMAddMinutesToLicense:
+		return "EMsg_AMAddMinutesToLicense"
+	case EMsg_AMCancelLicense:
+		return "EMsg_AMCancelLicense"
+	case EMsg_AMInitPurchase:
+		return "EMsg_AMInitPurchase"
+	case EMsg_AMPurchaseResponse:
+		return "EMsg_AMPurchaseResponse"
+	case EMsg_AMGetFinalPrice:
+		return "EMsg_AMGetFinalPrice"
+	case EMsg_AMGetFinalPriceResponse:
+		return "EMsg_AMGetFinalPriceResponse"
+	case EMsg_AMGetLegacyGameKey:
+		return "EMsg_AMGetLegacyGameKey"
+	case EMsg_AMGetLegacyGameKeyResponse:
+		return "EMsg_AMGetLegacyGameKeyResponse"
+	case EMsg_AMFindHungTransactions:
+		return "EMsg_AMFindHungTransactions"
+	case EMsg_AMSetAccountTrustedRequest:
+		return "EMsg_AMSetAccountTrustedRequest"
+	case EMsg_AMCompletePurchase:
+		return "EMsg_AMCompletePurchase"
+	case EMsg_AMCancelPurchase:
+		return "EMsg_AMCancelPurchase"
+	case EMsg_AMNewChallenge:
+		return "EMsg_AMNewChallenge"
+	case EMsg_AMFixPendingPurchase:
+		return "EMsg_AMFixPendingPurchase"
+	case EMsg_AMIsUserBanned:
+		return "EMsg_AMIsUserBanned"
+	case EMsg_AMRegisterKey:
+		return "EMsg_AMRegisterKey"
+	case EMsg_AMLoadActivationCodes:
+		return "EMsg_AMLoadActivationCodes"
+	case EMsg_AMLoadActivationCodesResponse:
+		return "EMsg_AMLoadActivationCodesResponse"
+	case EMsg_AMLookupKeyResponse:
+		return "EMsg_AMLookupKeyResponse"
+	case EMsg_AMLookupKey:
+		return "EMsg_AMLookupKey"
+	case EMsg_AMChatCleanup:
+		return "EMsg_AMChatCleanup"
+	case EMsg_AMClanCleanup:
+		return "EMsg_AMClanCleanup"
+	case EMsg_AMFixPendingRefund:
+		return "EMsg_AMFixPendingRefund"
+	case EMsg_AMReverseChargeback:
+		return "EMsg_AMReverseChargeback"
+	case EMsg_AMReverseChargebackResponse:
+		return "EMsg_AMReverseChargebackResponse"
+	case EMsg_AMClanCleanupList:
+		return "EMsg_AMClanCleanupList"
+	case EMsg_AMGetLicenses:
+		return "EMsg_AMGetLicenses"
+	case EMsg_AMGetLicensesResponse:
+		return "EMsg_AMGetLicensesResponse"
+	case EMsg_AllowUserToPlayQuery:
+		return "EMsg_AllowUserToPlayQuery"
+	case EMsg_AllowUserToPlayResponse:
+		return "EMsg_AllowUserToPlayResponse"
+	case EMsg_AMVerfiyUser:
+		return "EMsg_AMVerfiyUser"
+	case EMsg_AMClientNotPlaying:
+		return "EMsg_AMClientNotPlaying"
+	case EMsg_ClientRequestFriendship:
+		return "EMsg_ClientRequestFriendship"
+	case EMsg_AMRelayPublishStatus:
+		return "EMsg_AMRelayPublishStatus"
+	case EMsg_AMResetCommunityContent:
+		return "EMsg_AMResetCommunityContent"
+	case EMsg_AMPrimePersonaStateCache:
+		return "EMsg_AMPrimePersonaStateCache"
+	case EMsg_AMAllowUserContentQuery:
+		return "EMsg_AMAllowUserContentQuery"
+	case EMsg_AMAllowUserContentResponse:
+		return "EMsg_AMAllowUserContentResponse"
+	case EMsg_AMInitPurchaseResponse:
+		return "EMsg_AMInitPurchaseResponse"
+	case EMsg_AMRevokePurchaseResponse:
+		return "EMsg_AMRevokePurchaseResponse"
+	case EMsg_AMLockProfile:
+		return "EMsg_AMLockProfile"
+	case EMsg_AMRefreshGuestPasses:
+		return "EMsg_AMRefreshGuestPasses"
+	case EMsg_AMInviteUserToClan:
+		return "EMsg_AMInviteUserToClan"
+	case EMsg_AMAcknowledgeClanInvite:
+		return "EMsg_AMAcknowledgeClanInvite"
+	case EMsg_AMGrantGuestPasses:
+		return "EMsg_AMGrantGuestPasses"
+	case EMsg_AMClanDataUpdated:
+		return "EMsg_AMClanDataUpdated"
+	case EMsg_AMReloadAccount:
+		return "EMsg_AMReloadAccount"
+	case EMsg_AMClientChatMsgRelay:
+		return "EMsg_AMClientChatMsgRelay"
+	case EMsg_AMChatMulti:
+		return "EMsg_AMChatMulti"
+	case EMsg_AMClientChatInviteRelay:
+		return "EMsg_AMClientChatInviteRelay"
+	case EMsg_AMChatInvite:
+		return "EMsg_AMChatInvite"
+	case EMsg_AMClientJoinChatRelay:
+		return "EMsg_AMClientJoinChatRelay"
+	case EMsg_AMClientChatMemberInfoRelay:
+		return "EMsg_AMClientChatMemberInfoRelay"
+	case EMsg_AMPublishChatMemberInfo:
+		return "EMsg_AMPublishChatMemberInfo"
+	case EMsg_AMClientAcceptFriendInvite:
+		return "EMsg_AMClientAcceptFriendInvite"
+	case EMsg_AMChatEnter:
+		return "EMsg_AMChatEnter"
+	case EMsg_AMClientPublishRemovalFromSource:
+		return "EMsg_AMClientPublishRemovalFromSource"
+	case EMsg_AMChatActionResult:
+		return "EMsg_AMChatActionResult"
+	case EMsg_AMFindAccounts:
+		return "EMsg_AMFindAccounts"
+	case EMsg_AMFindAccountsResponse:
+		return "EMsg_AMFindAccountsResponse"
+	case EMsg_AMSetAccountFlags:
+		return "EMsg_AMSetAccountFlags"
+	case EMsg_AMCreateClan:
+		return "EMsg_AMCreateClan"
+	case EMsg_AMCreateClanResponse:
+		return "EMsg_AMCreateClanResponse"
+	case EMsg_AMGetClanDetails:
+		return "EMsg_AMGetClanDetails"
+	case EMsg_AMGetClanDetailsResponse:
+		return "EMsg_AMGetClanDetailsResponse"
+	case EMsg_AMSetPersonaName:
+		return "EMsg_AMSetPersonaName"
+	case EMsg_AMSetAvatar:
+		return "EMsg_AMSetAvatar"
+	case EMsg_AMAuthenticateUser:
+		return "EMsg_AMAuthenticateUser"
+	case EMsg_AMAuthenticateUserResponse:
+		return "EMsg_AMAuthenticateUserResponse"
+	case EMsg_AMGetAccountFriendsCount:
+		return "EMsg_AMGetAccountFriendsCount"
+	case EMsg_AMGetAccountFriendsCountResponse:
+		return "EMsg_AMGetAccountFriendsCountResponse"
+	case EMsg_AMP2PIntroducerMessage:
+		return "EMsg_AMP2PIntroducerMessage"
+	case EMsg_ClientChatAction:
+		return "EMsg_ClientChatAction"
+	case EMsg_AMClientChatActionRelay:
+		return "EMsg_AMClientChatActionRelay"
+	case EMsg_BaseVS:
+		return "EMsg_BaseVS"
+	case EMsg_VACResponse:
+		return "EMsg_VACResponse"
+	case EMsg_ReqChallengeTest:
+		return "EMsg_ReqChallengeTest"
+	case EMsg_VSMarkCheat:
+		return "EMsg_VSMarkCheat"
+	case EMsg_VSAddCheat:
+		return "EMsg_VSAddCheat"
+	case EMsg_VSPurgeCodeModDB:
+		return "EMsg_VSPurgeCodeModDB"
+	case EMsg_VSGetChallengeResults:
+		return "EMsg_VSGetChallengeResults"
+	case EMsg_VSChallengeResultText:
+		return "EMsg_VSChallengeResultText"
+	case EMsg_VSReportLingerer:
+		return "EMsg_VSReportLingerer"
+	case EMsg_VSRequestManagedChallenge:
+		return "EMsg_VSRequestManagedChallenge"
+	case EMsg_VSLoadDBFinished:
+		return "EMsg_VSLoadDBFinished"
+	case EMsg_BaseDRMS:
+		return "EMsg_BaseDRMS"
+	case EMsg_DRMBuildBlobRequest:
+		return "EMsg_DRMBuildBlobRequest"
+	case EMsg_DRMBuildBlobResponse:
+		return "EMsg_DRMBuildBlobResponse"
+	case EMsg_DRMResolveGuidRequest:
+		return "EMsg_DRMResolveGuidRequest"
+	case EMsg_DRMResolveGuidResponse:
+		return "EMsg_DRMResolveGuidResponse"
+	case EMsg_DRMVariabilityReport:
+		return "EMsg_DRMVariabilityReport"
+	case EMsg_DRMVariabilityReportResponse:
+		return "EMsg_DRMVariabilityReportResponse"
+	case EMsg_DRMStabilityReport:
+		return "EMsg_DRMStabilityReport"
+	case EMsg_DRMStabilityReportResponse:
+		return "EMsg_DRMStabilityReportResponse"
+	case EMsg_DRMDetailsReportRequest:
+		return "EMsg_DRMDetailsReportRequest"
+	case EMsg_DRMDetailsReportResponse:
+		return "EMsg_DRMDetailsReportResponse"
+	case EMsg_DRMProcessFile:
+		return "EMsg_DRMProcessFile"
+	case EMsg_DRMAdminUpdate:
+		return "EMsg_DRMAdminUpdate"
+	case EMsg_DRMAdminUpdateResponse:
+		return "EMsg_DRMAdminUpdateResponse"
+	case EMsg_DRMSync:
+		return "EMsg_DRMSync"
+	case EMsg_DRMSyncResponse:
+		return "EMsg_DRMSyncResponse"
+	case EMsg_DRMProcessFileResponse:
+		return "EMsg_DRMProcessFileResponse"
+	case EMsg_DRMEmptyGuidCache:
+		return "EMsg_DRMEmptyGuidCache"
+	case EMsg_DRMEmptyGuidCacheResponse:
+		return "EMsg_DRMEmptyGuidCacheResponse"
+	case EMsg_BaseCS:
+		return "EMsg_BaseCS"
+	case EMsg_CSUserContentRequest:
+		return "EMsg_CSUserContentRequest"
+	case EMsg_BaseClient:
+		return "EMsg_BaseClient"
+	case EMsg_ClientLogOn_Deprecated:
+		return "EMsg_ClientLogOn_Deprecated"
+	case EMsg_ClientAnonLogOn_Deprecated:
+		return "EMsg_ClientAnonLogOn_Deprecated"
+	case EMsg_ClientHeartBeat:
+		return "EMsg_ClientHeartBeat"
+	case EMsg_ClientVACResponse:
+		return "EMsg_ClientVACResponse"
+	case EMsg_ClientGamesPlayed_obsolete:
+		return "EMsg_ClientGamesPlayed_obsolete"
+	case EMsg_ClientLogOff:
+		return "EMsg_ClientLogOff"
+	case EMsg_ClientNoUDPConnectivity:
+		return "EMsg_ClientNoUDPConnectivity"
+	case EMsg_ClientInformOfCreateAccount:
+		return "EMsg_ClientInformOfCreateAccount"
+	case EMsg_ClientAckVACBan:
+		return "EMsg_ClientAckVACBan"
+	case EMsg_ClientConnectionStats:
+		return "EMsg_ClientConnectionStats"
+	case EMsg_ClientInitPurchase:
+		return "EMsg_ClientInitPurchase"
+	case EMsg_ClientPingResponse:
+		return "EMsg_ClientPingResponse"
+	case EMsg_ClientRemoveFriend:
+		return "EMsg_ClientRemoveFriend"
+	case EMsg_ClientGamesPlayedNoDataBlob:
+		return "EMsg_ClientGamesPlayedNoDataBlob"
+	case EMsg_ClientChangeStatus:
+		return "EMsg_ClientChangeStatus"
+	case EMsg_ClientVacStatusResponse:
+		return "EMsg_ClientVacStatusResponse"
+	case EMsg_ClientFriendMsg:
+		return "EMsg_ClientFriendMsg"
+	case EMsg_ClientGameConnect_obsolete:
+		return "EMsg_ClientGameConnect_obsolete"
+	case EMsg_ClientGamesPlayed2_obsolete:
+		return "EMsg_ClientGamesPlayed2_obsolete"
+	case EMsg_ClientGameEnded_obsolete:
+		return "EMsg_ClientGameEnded_obsolete"
+	case EMsg_ClientGetFinalPrice:
+		return "EMsg_ClientGetFinalPrice"
+	case EMsg_ClientSystemIM:
+		return "EMsg_ClientSystemIM"
+	case EMsg_ClientSystemIMAck:
+		return "EMsg_ClientSystemIMAck"
+	case EMsg_ClientGetLicenses:
+		return "EMsg_ClientGetLicenses"
+	case EMsg_ClientCancelLicense:
+		return "EMsg_ClientCancelLicense"
+	case EMsg_ClientGetLegacyGameKey:
+		return "EMsg_ClientGetLegacyGameKey"
+	case EMsg_ClientContentServerLogOn_Deprecated:
+		return "EMsg_ClientContentServerLogOn_Deprecated"
+	case EMsg_ClientAckVACBan2:
+		return "EMsg_ClientAckVACBan2"
+	case EMsg_ClientAckMessageByGID:
+		return "EMsg_ClientAckMessageByGID"
+	case EMsg_ClientGetPurchaseReceipts:
+		return "EMsg_ClientGetPurchaseReceipts"
+	case EMsg_ClientAckPurchaseReceipt:
+		return "EMsg_ClientAckPurchaseReceipt"
+	case EMsg_ClientGamesPlayed3_obsolete:
+		return "EMsg_ClientGamesPlayed3_obsolete"
+	case EMsg_ClientSendGuestPass:
+		return "EMsg_ClientSendGuestPass"
+	case EMsg_ClientAckGuestPass:
+		return "EMsg_ClientAckGuestPass"
+	case EMsg_ClientRedeemGuestPass:
+		return "EMsg_ClientRedeemGuestPass"
+	case EMsg_ClientGamesPlayed:
+		return "EMsg_ClientGamesPlayed"
+	case EMsg_ClientRegisterKey:
+		return "EMsg_ClientRegisterKey"
+	case EMsg_ClientInviteUserToClan:
+		return "EMsg_ClientInviteUserToClan"
+	case EMsg_ClientAcknowledgeClanInvite:
+		return "EMsg_ClientAcknowledgeClanInvite"
+	case EMsg_ClientPurchaseWithMachineID:
+		return "EMsg_ClientPurchaseWithMachineID"
+	case EMsg_ClientAppUsageEvent:
+		return "EMsg_ClientAppUsageEvent"
+	case EMsg_ClientGetGiftTargetList:
+		return "EMsg_ClientGetGiftTargetList"
+	case EMsg_ClientGetGiftTargetListResponse:
+		return "EMsg_ClientGetGiftTargetListResponse"
+	case EMsg_ClientLogOnResponse:
+		return "EMsg_ClientLogOnResponse"
+	case EMsg_ClientVACChallenge:
+		return "EMsg_ClientVACChallenge"
+	case EMsg_ClientSetHeartbeatRate:
+		return "EMsg_ClientSetHeartbeatRate"
+	case EMsg_ClientNotLoggedOnDeprecated:
+		return "EMsg_ClientNotLoggedOnDeprecated"
+	case EMsg_ClientLoggedOff:
+		return "EMsg_ClientLoggedOff"
+	case EMsg_GSApprove:
+		return "EMsg_GSApprove"
+	case EMsg_GSDeny:
+		return "EMsg_GSDeny"
+	case EMsg_GSKick:
+		return "EMsg_GSKick"
+	case EMsg_ClientCreateAcctResponse:
+		return "EMsg_ClientCreateAcctResponse"
+	case EMsg_ClientPurchaseResponse:
+		return "EMsg_ClientPurchaseResponse"
+	case EMsg_ClientPing:
+		return "EMsg_ClientPing"
+	case EMsg_ClientNOP:
+		return "EMsg_ClientNOP"
+	case EMsg_ClientPersonaState:
+		return "EMsg_ClientPersonaState"
+	case EMsg_ClientFriendsList:
+		return "EMsg_ClientFriendsList"
+	case EMsg_ClientAccountInfo:
+		return "EMsg_ClientAccountInfo"
+	case EMsg_ClientVacStatusQuery:
+		return "EMsg_ClientVacStatusQuery"
+	case EMsg_ClientNewsUpdate:
+		return "EMsg_ClientNewsUpdate"
+	case EMsg_ClientGameConnectDeny:
+		return "EMsg_ClientGameConnectDeny"
+	case EMsg_GSStatusReply:
+		return "EMsg_GSStatusReply"
+	case EMsg_ClientGetFinalPriceResponse:
+		return "EMsg_ClientGetFinalPriceResponse"
+	case EMsg_ClientGameConnectTokens:
+		return "EMsg_ClientGameConnectTokens"
+	case EMsg_ClientLicenseList:
+		return "EMsg_ClientLicenseList"
+	case EMsg_ClientCancelLicenseResponse:
+		return "EMsg_ClientCancelLicenseResponse"
+	case EMsg_ClientVACBanStatus:
+		return "EMsg_ClientVACBanStatus"
+	case EMsg_ClientCMList:
+		return "EMsg_ClientCMList"
+	case EMsg_ClientEncryptPct:
+		return "EMsg_ClientEncryptPct"
+	case EMsg_ClientGetLegacyGameKeyResponse:
+		return "EMsg_ClientGetLegacyGameKeyResponse"
+	case EMsg_ClientFavoritesList:
+		return "EMsg_ClientFavoritesList"
+	case EMsg_CSUserContentApprove:
+		return "EMsg_CSUserContentApprove"
+	case EMsg_CSUserContentDeny:
+		return "EMsg_CSUserContentDeny"
+	case EMsg_ClientInitPurchaseResponse:
+		return "EMsg_ClientInitPurchaseResponse"
+	case EMsg_ClientAddFriend:
+		return "EMsg_ClientAddFriend"
+	case EMsg_ClientAddFriendResponse:
+		return "EMsg_ClientAddFriendResponse"
+	case EMsg_ClientInviteFriend:
+		return "EMsg_ClientInviteFriend"
+	case EMsg_ClientInviteFriendResponse:
+		return "EMsg_ClientInviteFriendResponse"
+	case EMsg_ClientSendGuestPassResponse:
+		return "EMsg_ClientSendGuestPassResponse"
+	case EMsg_ClientAckGuestPassResponse:
+		return "EMsg_ClientAckGuestPassResponse"
+	case EMsg_ClientRedeemGuestPassResponse:
+		return "EMsg_ClientRedeemGuestPassResponse"
+	case EMsg_ClientUpdateGuestPassesList:
+		return "EMsg_ClientUpdateGuestPassesList"
+	case EMsg_ClientChatMsg:
+		return "EMsg_ClientChatMsg"
+	case EMsg_ClientChatInvite:
+		return "EMsg_ClientChatInvite"
+	case EMsg_ClientJoinChat:
+		return "EMsg_ClientJoinChat"
+	case EMsg_ClientChatMemberInfo:
+		return "EMsg_ClientChatMemberInfo"
+	case EMsg_ClientLogOnWithCredentials_Deprecated:
+		return "EMsg_ClientLogOnWithCredentials_Deprecated"
+	case EMsg_ClientPasswordChangeResponse:
+		return "EMsg_ClientPasswordChangeResponse"
+	case EMsg_ClientChatEnter:
+		return "EMsg_ClientChatEnter"
+	case EMsg_ClientFriendRemovedFromSource:
+		return "EMsg_ClientFriendRemovedFromSource"
+	case EMsg_ClientCreateChat:
+		return "EMsg_ClientCreateChat"
+	case EMsg_ClientCreateChatResponse:
+		return "EMsg_ClientCreateChatResponse"
+	case EMsg_ClientUpdateChatMetadata:
+		return "EMsg_ClientUpdateChatMetadata"
+	case EMsg_ClientP2PIntroducerMessage:
+		return "EMsg_ClientP2PIntroducerMessage"
+	case EMsg_ClientChatActionResult:
+		return "EMsg_ClientChatActionResult"
+	case EMsg_ClientRequestFriendData:
+		return "EMsg_ClientRequestFriendData"
+	case EMsg_ClientGetUserStats:
+		return "EMsg_ClientGetUserStats"
+	case EMsg_ClientGetUserStatsResponse:
+		return "EMsg_ClientGetUserStatsResponse"
+	case EMsg_ClientStoreUserStats:
+		return "EMsg_ClientStoreUserStats"
+	case EMsg_ClientStoreUserStatsResponse:
+		return "EMsg_ClientStoreUserStatsResponse"
+	case EMsg_ClientClanState:
+		return "EMsg_ClientClanState"
+	case EMsg_ClientServiceModule:
+		return "EMsg_ClientServiceModule"
+	case EMsg_ClientServiceCall:
+		return "EMsg_ClientServiceCall"
+	case EMsg_ClientServiceCallResponse:
+		return "EMsg_ClientServiceCallResponse"
+	case EMsg_ClientPackageInfoRequest:
+		return "EMsg_ClientPackageInfoRequest"
+	case EMsg_ClientPackageInfoResponse:
+		return "EMsg_ClientPackageInfoResponse"
+	case EMsg_ClientNatTraversalStatEvent:
+		return "EMsg_ClientNatTraversalStatEvent"
+	case EMsg_ClientAppInfoRequest:
+		return "EMsg_ClientAppInfoRequest"
+	case EMsg_ClientAppInfoResponse:
+		return "EMsg_ClientAppInfoResponse"
+	case EMsg_ClientSteamUsageEvent:
+		return "EMsg_ClientSteamUsageEvent"
+	case EMsg_ClientCheckPassword:
+		return "EMsg_ClientCheckPassword"
+	case EMsg_ClientResetPassword:
+		return "EMsg_ClientResetPassword"
+	case EMsg_ClientCheckPasswordResponse:
+		return "EMsg_ClientCheckPasswordResponse"
+	case EMsg_ClientResetPasswordResponse:
+		return "EMsg_ClientResetPasswordResponse"
+	case EMsg_ClientSessionToken:
+		return "EMsg_ClientSessionToken"
+	case EMsg_ClientDRMProblemReport:
+		return "EMsg_ClientDRMProblemReport"
+	case EMsg_ClientSetIgnoreFriend:
+		return "EMsg_ClientSetIgnoreFriend"
+	case EMsg_ClientSetIgnoreFriendResponse:
+		return "EMsg_ClientSetIgnoreFriendResponse"
+	case EMsg_ClientGetAppOwnershipTicket:
+		return "EMsg_ClientGetAppOwnershipTicket"
+	case EMsg_ClientGetAppOwnershipTicketResponse:
+		return "EMsg_ClientGetAppOwnershipTicketResponse"
+	case EMsg_ClientGetLobbyListResponse:
+		return "EMsg_ClientGetLobbyListResponse"
+	case EMsg_ClientGetLobbyMetadata:
+		return "EMsg_ClientGetLobbyMetadata"
+	case EMsg_ClientGetLobbyMetadataResponse:
+		return "EMsg_ClientGetLobbyMetadataResponse"
+	case EMsg_ClientVTTCert:
+		return "EMsg_ClientVTTCert"
+	case EMsg_ClientAppInfoUpdate:
+		return "EMsg_ClientAppInfoUpdate"
+	case EMsg_ClientAppInfoChanges:
+		return "EMsg_ClientAppInfoChanges"
+	case EMsg_ClientServerList:
+		return "EMsg_ClientServerList"
+	case EMsg_ClientEmailChangeResponse:
+		return "EMsg_ClientEmailChangeResponse"
+	case EMsg_ClientSecretQAChangeResponse:
+		return "EMsg_ClientSecretQAChangeResponse"
+	case EMsg_ClientDRMBlobRequest:
+		return "EMsg_ClientDRMBlobRequest"
+	case EMsg_ClientDRMBlobResponse:
+		return "EMsg_ClientDRMBlobResponse"
+	case EMsg_ClientLookupKey:
+		return "EMsg_ClientLookupKey"
+	case EMsg_ClientLookupKeyResponse:
+		return "EMsg_ClientLookupKeyResponse"
+	case EMsg_BaseGameServer:
+		return "EMsg_BaseGameServer"
+	case EMsg_GSDisconnectNotice:
+		return "EMsg_GSDisconnectNotice"
+	case EMsg_GSStatus:
+		return "EMsg_GSStatus"
+	case EMsg_GSUserPlaying:
+		return "EMsg_GSUserPlaying"
+	case EMsg_GSStatus2:
+		return "EMsg_GSStatus2"
+	case EMsg_GSStatusUpdate_Unused:
+		return "EMsg_GSStatusUpdate_Unused"
+	case EMsg_GSServerType:
+		return "EMsg_GSServerType"
+	case EMsg_GSPlayerList:
+		return "EMsg_GSPlayerList"
+	case EMsg_GSGetUserAchievementStatus:
+		return "EMsg_GSGetUserAchievementStatus"
+	case EMsg_GSGetUserAchievementStatusResponse:
+		return "EMsg_GSGetUserAchievementStatusResponse"
+	case EMsg_GSGetPlayStats:
+		return "EMsg_GSGetPlayStats"
+	case EMsg_GSGetPlayStatsResponse:
+		return "EMsg_GSGetPlayStatsResponse"
+	case EMsg_GSGetUserGroupStatus:
+		return "EMsg_GSGetUserGroupStatus"
+	case EMsg_AMGetUserGroupStatus:
+		return "EMsg_AMGetUserGroupStatus"
+	case EMsg_AMGetUserGroupStatusResponse:
+		return "EMsg_AMGetUserGroupStatusResponse"
+	case EMsg_GSGetUserGroupStatusResponse:
+		return "EMsg_GSGetUserGroupStatusResponse"
+	case EMsg_GSGetReputation:
+		return "EMsg_GSGetReputation"
+	case EMsg_GSGetReputationResponse:
+		return "EMsg_GSGetReputationResponse"
+	case EMsg_GSAssociateWithClan:
+		return "EMsg_GSAssociateWithClan"
+	case EMsg_GSAssociateWithClanResponse:
+		return "EMsg_GSAssociateWithClanResponse"
+	case EMsg_GSComputeNewPlayerCompatibility:
+		return "EMsg_GSComputeNewPlayerCompatibility"
+	case EMsg_GSComputeNewPlayerCompatibilityResponse:
+		return "EMsg_GSComputeNewPlayerCompatibilityResponse"
+	case EMsg_BaseAdmin:
+		return "EMsg_BaseAdmin"
+	case EMsg_AdminCmdResponse:
+		return "EMsg_AdminCmdResponse"
+	case EMsg_AdminLogListenRequest:
+		return "EMsg_AdminLogListenRequest"
+	case EMsg_AdminLogEvent:
+		return "EMsg_AdminLogEvent"
+	case EMsg_LogSearchRequest:
+		return "EMsg_LogSearchRequest"
+	case EMsg_LogSearchResponse:
+		return "EMsg_LogSearchResponse"
+	case EMsg_LogSearchCancel:
+		return "EMsg_LogSearchCancel"
+	case EMsg_UniverseData:
+		return "EMsg_UniverseData"
+	case EMsg_RequestStatHistory:
+		return "EMsg_RequestStatHistory"
+	case EMsg_StatHistory:
+		return "EMsg_StatHistory"
+	case EMsg_AdminPwLogon:
+		return "EMsg_AdminPwLogon"
+	case EMsg_AdminPwLogonResponse:
+		return "EMsg_AdminPwLogonResponse"
+	case EMsg_AdminSpew:
+		return "EMsg_AdminSpew"
+	case EMsg_AdminConsoleTitle:
+		return "EMsg_AdminConsoleTitle"
+	case EMsg_AdminGCSpew:
+		return "EMsg_AdminGCSpew"
+	case EMsg_AdminGCCommand:
+		return "EMsg_AdminGCCommand"
+	case EMsg_AdminGCGetCommandList:
+		return "EMsg_AdminGCGetCommandList"
+	case EMsg_AdminGCGetCommandListResponse:
+		return "EMsg_AdminGCGetCommandListResponse"
+	case EMsg_FBSConnectionData:
+		return "EMsg_FBSConnectionData"
+	case EMsg_AdminMsgSpew:
+		return "EMsg_AdminMsgSpew"
+	case EMsg_BaseFBS:
+		return "EMsg_BaseFBS"
+	case EMsg_FBSVersionInfo:
+		return "EMsg_FBSVersionInfo"
+	case EMsg_FBSForceRefresh:
+		return "EMsg_FBSForceRefresh"
+	case EMsg_FBSForceBounce:
+		return "EMsg_FBSForceBounce"
+	case EMsg_FBSDeployPackage:
+		return "EMsg_FBSDeployPackage"
+	case EMsg_FBSDeployResponse:
+		return "EMsg_FBSDeployResponse"
+	case EMsg_FBSUpdateBootstrapper:
+		return "EMsg_FBSUpdateBootstrapper"
+	case EMsg_FBSSetState:
+		return "EMsg_FBSSetState"
+	case EMsg_FBSApplyOSUpdates:
+		return "EMsg_FBSApplyOSUpdates"
+	case EMsg_FBSRunCMDScript:
+		return "EMsg_FBSRunCMDScript"
+	case EMsg_FBSRebootBox:
+		return "EMsg_FBSRebootBox"
+	case EMsg_FBSSetBigBrotherMode:
+		return "EMsg_FBSSetBigBrotherMode"
+	case EMsg_FBSMinidumpServer:
+		return "EMsg_FBSMinidumpServer"
+	case EMsg_FBSSetShellCount_obsolete:
+		return "EMsg_FBSSetShellCount_obsolete"
+	case EMsg_FBSDeployHotFixPackage:
+		return "EMsg_FBSDeployHotFixPackage"
+	case EMsg_FBSDeployHotFixResponse:
+		return "EMsg_FBSDeployHotFixResponse"
+	case EMsg_FBSDownloadHotFix:
+		return "EMsg_FBSDownloadHotFix"
+	case EMsg_FBSDownloadHotFixResponse:
+		return "EMsg_FBSDownloadHotFixResponse"
+	case EMsg_FBSUpdateTargetConfigFile:
+		return "EMsg_FBSUpdateTargetConfigFile"
+	case EMsg_FBSApplyAccountCred:
+		return "EMsg_FBSApplyAccountCred"
+	case EMsg_FBSApplyAccountCredResponse:
+		return "EMsg_FBSApplyAccountCredResponse"
+	case EMsg_FBSSetShellCount:
+		return "EMsg_FBSSetShellCount"
+	case EMsg_FBSTerminateShell:
+		return "EMsg_FBSTerminateShell"
+	case EMsg_FBSQueryGMForRequest:
+		return "EMsg_FBSQueryGMForRequest"
+	case EMsg_FBSQueryGMResponse:
+		return "EMsg_FBSQueryGMResponse"
+	case EMsg_FBSTerminateZombies:
+		return "EMsg_FBSTerminateZombies"
+	case EMsg_FBSInfoFromBootstrapper:
+		return "EMsg_FBSInfoFromBootstrapper"
+	case EMsg_FBSRebootBoxResponse:
+		return "EMsg_FBSRebootBoxResponse"
+	case EMsg_FBSBootstrapperPackageRequest:
+		return "EMsg_FBSBootstrapperPackageRequest"
+	case EMsg_FBSBootstrapperPackageResponse:
+		return "EMsg_FBSBootstrapperPackageResponse"
+	case EMsg_FBSBootstrapperGetPackageChunk:
+		return "EMsg_FBSBootstrapperGetPackageChunk"
+	case EMsg_FBSBootstrapperGetPackageChunkResponse:
+		return "EMsg_FBSBootstrapperGetPackageChunkResponse"
+	case EMsg_FBSBootstrapperPackageTransferProgress:
+		return "EMsg_FBSBootstrapperPackageTransferProgress"
+	case EMsg_FBSRestartBootstrapper:
+		return "EMsg_FBSRestartBootstrapper"
+	case EMsg_BaseFileXfer:
+		return "EMsg_BaseFileXfer"
+	case EMsg_FileXferResponse:
+		return "EMsg_FileXferResponse"
+	case EMsg_FileXferData:
+		return "EMsg_FileXferData"
+	case EMsg_FileXferEnd:
+		return "EMsg_FileXferEnd"
+	case EMsg_FileXferDataAck:
+		return "EMsg_FileXferDataAck"
+	case EMsg_BaseChannelAuth:
+		return "EMsg_BaseChannelAuth"
+	case EMsg_ChannelAuthResponse:
+		return "EMsg_ChannelAuthResponse"
+	case EMsg_ChannelAuthResult:
+		return "EMsg_ChannelAuthResult"
+	case EMsg_ChannelEncryptRequest:
+		return "EMsg_ChannelEncryptRequest"
+	case EMsg_ChannelEncryptResponse:
+		return "EMsg_ChannelEncryptResponse"
+	case EMsg_ChannelEncryptResult:
+		return "EMsg_ChannelEncryptResult"
+	case EMsg_BaseBS:
+		return "EMsg_BaseBS"
+	case EMsg_BSPurchaseStart:
+		return "EMsg_BSPurchaseStart"
+	case EMsg_BSPurchaseResponse:
+		return "EMsg_BSPurchaseResponse"
+	case EMsg_BSSettleStart:
+		return "EMsg_BSSettleStart"
+	case EMsg_BSSettleComplete:
+		return "EMsg_BSSettleComplete"
+	case EMsg_BSBannedRequest:
+		return "EMsg_BSBannedRequest"
+	case EMsg_BSInitPayPalTxn:
+		return "EMsg_BSInitPayPalTxn"
+	case EMsg_BSInitPayPalTxnResponse:
+		return "EMsg_BSInitPayPalTxnResponse"
+	case EMsg_BSGetPayPalUserInfo:
+		return "EMsg_BSGetPayPalUserInfo"
+	case EMsg_BSGetPayPalUserInfoResponse:
+		return "EMsg_BSGetPayPalUserInfoResponse"
+	case EMsg_BSRefundTxn:
+		return "EMsg_BSRefundTxn"
+	case EMsg_BSRefundTxnResponse:
+		return "EMsg_BSRefundTxnResponse"
+	case EMsg_BSGetEvents:
+		return "EMsg_BSGetEvents"
+	case EMsg_BSChaseRFRRequest:
+		return "EMsg_BSChaseRFRRequest"
+	case EMsg_BSPaymentInstrBan:
+		return "EMsg_BSPaymentInstrBan"
+	case EMsg_BSPaymentInstrBanResponse:
+		return "EMsg_BSPaymentInstrBanResponse"
+	case EMsg_BSProcessGCReports:
+		return "EMsg_BSProcessGCReports"
+	case EMsg_BSProcessPPReports:
+		return "EMsg_BSProcessPPReports"
+	case EMsg_BSInitGCBankXferTxn:
+		return "EMsg_BSInitGCBankXferTxn"
+	case EMsg_BSInitGCBankXferTxnResponse:
+		return "EMsg_BSInitGCBankXferTxnResponse"
+	case EMsg_BSQueryGCBankXferTxn:
+		return "EMsg_BSQueryGCBankXferTxn"
+	case EMsg_BSQueryGCBankXferTxnResponse:
+		return "EMsg_BSQueryGCBankXferTxnResponse"
+	case EMsg_BSCommitGCTxn:
+		return "EMsg_BSCommitGCTxn"
+	case EMsg_BSQueryGCOrderStatus:
+		return "EMsg_BSQueryGCOrderStatus"
+	case EMsg_BSQueryGCOrderStatusResponse:
+		return "EMsg_BSQueryGCOrderStatusResponse"
+	case EMsg_BSQueryCBOrderStatus:
+		return "EMsg_BSQueryCBOrderStatus"
+	case EMsg_BSQueryCBOrderStatusResponse:
+		return "EMsg_BSQueryCBOrderStatusResponse"
+	case EMsg_BSRunRedFlagReport:
+		return "EMsg_BSRunRedFlagReport"
+	case EMsg_BSQueryPaymentInstUsage:
+		return "EMsg_BSQueryPaymentInstUsage"
+	case EMsg_BSQueryPaymentInstResponse:
+		return "EMsg_BSQueryPaymentInstResponse"
+	case EMsg_BSQueryTxnExtendedInfo:
+		return "EMsg_BSQueryTxnExtendedInfo"
+	case EMsg_BSQueryTxnExtendedInfoResponse:
+		return "EMsg_BSQueryTxnExtendedInfoResponse"
+	case EMsg_BSUpdateConversionRates:
+		return "EMsg_BSUpdateConversionRates"
+	case EMsg_BSProcessUSBankReports:
+		return "EMsg_BSProcessUSBankReports"
+	case EMsg_BSPurchaseMicroTxn:
+		return "EMsg_BSPurchaseMicroTxn"
+	case EMsg_BSPurchaseMicroTxnResponse:
+		return "EMsg_BSPurchaseMicroTxnResponse"
+	case EMsg_BSStartShippingJobs:
+		return "EMsg_BSStartShippingJobs"
+	case EMsg_BSQueryBankInformation:
+		return "EMsg_BSQueryBankInformation"
+	case EMsg_BSQueryBankInformationResponse:
+		return "EMsg_BSQueryBankInformationResponse"
+	case EMsg_BSValidateXsollaSignature:
+		return "EMsg_BSValidateXsollaSignature"
+	case EMsg_BSValidateXsollaSignatureResponse:
+		return "EMsg_BSValidateXsollaSignatureResponse"
+	case EMsg_BSQiwiWalletInvoice:
+		return "EMsg_BSQiwiWalletInvoice"
+	case EMsg_BSQiwiWalletInvoiceResponse:
+		return "EMsg_BSQiwiWalletInvoiceResponse"
+	case EMsg_BSUpdateInventoryFromProPack:
+		return "EMsg_BSUpdateInventoryFromProPack"
+	case EMsg_BSUpdateInventoryFromProPackResponse:
+		return "EMsg_BSUpdateInventoryFromProPackResponse"
+	case EMsg_BSSendShippingRequest:
+		return "EMsg_BSSendShippingRequest"
+	case EMsg_BSSendShippingRequestResponse:
+		return "EMsg_BSSendShippingRequestResponse"
+	case EMsg_BSGetProPackOrderStatus:
+		return "EMsg_BSGetProPackOrderStatus"
+	case EMsg_BSGetProPackOrderStatusResponse:
+		return "EMsg_BSGetProPackOrderStatusResponse"
+	case EMsg_BSCheckJobRunning:
+		return "EMsg_BSCheckJobRunning"
+	case EMsg_BSCheckJobRunningResponse:
+		return "EMsg_BSCheckJobRunningResponse"
+	case EMsg_BSResetPackagePurchaseRateLimit:
+		return "EMsg_BSResetPackagePurchaseRateLimit"
+	case EMsg_BSResetPackagePurchaseRateLimitResponse:
+		return "EMsg_BSResetPackagePurchaseRateLimitResponse"
+	case EMsg_BSUpdatePaymentData:
+		return "EMsg_BSUpdatePaymentData"
+	case EMsg_BSUpdatePaymentDataResponse:
+		return "EMsg_BSUpdatePaymentDataResponse"
+	case EMsg_BSGetBillingAddress:
+		return "EMsg_BSGetBillingAddress"
+	case EMsg_BSGetBillingAddressResponse:
+		return "EMsg_BSGetBillingAddressResponse"
+	case EMsg_BSGetCreditCardInfo:
+		return "EMsg_BSGetCreditCardInfo"
+	case EMsg_BSGetCreditCardInfoResponse:
+		return "EMsg_BSGetCreditCardInfoResponse"
+	case EMsg_BSRemoveExpiredPaymentData:
+		return "EMsg_BSRemoveExpiredPaymentData"
+	case EMsg_BSRemoveExpiredPaymentDataResponse:
+		return "EMsg_BSRemoveExpiredPaymentDataResponse"
+	case EMsg_BSConvertToCurrentKeys:
+		return "EMsg_BSConvertToCurrentKeys"
+	case EMsg_BSConvertToCurrentKeysResponse:
+		return "EMsg_BSConvertToCurrentKeysResponse"
+	case EMsg_BSInitPurchase:
+		return "EMsg_BSInitPurchase"
+	case EMsg_BSInitPurchaseResponse:
+		return "EMsg_BSInitPurchaseResponse"
+	case EMsg_BSCompletePurchase:
+		return "EMsg_BSCompletePurchase"
+	case EMsg_BSCompletePurchaseResponse:
+		return "EMsg_BSCompletePurchaseResponse"
+	case EMsg_BSPruneCardUsageStats:
+		return "EMsg_BSPruneCardUsageStats"
+	case EMsg_BSPruneCardUsageStatsResponse:
+		return "EMsg_BSPruneCardUsageStatsResponse"
+	case EMsg_BSStoreBankInformation:
+		return "EMsg_BSStoreBankInformation"
+	case EMsg_BSStoreBankInformationResponse:
+		return "EMsg_BSStoreBankInformationResponse"
+	case EMsg_BSVerifyPOSAKey:
+		return "EMsg_BSVerifyPOSAKey"
+	case EMsg_BSVerifyPOSAKeyResponse:
+		return "EMsg_BSVerifyPOSAKeyResponse"
+	case EMsg_BSReverseRedeemPOSAKey:
+		return "EMsg_BSReverseRedeemPOSAKey"
+	case EMsg_BSReverseRedeemPOSAKeyResponse:
+		return "EMsg_BSReverseRedeemPOSAKeyResponse"
+	case EMsg_BSQueryFindCreditCard:
+		return "EMsg_BSQueryFindCreditCard"
+	case EMsg_BSQueryFindCreditCardResponse:
+		return "EMsg_BSQueryFindCreditCardResponse"
+	case EMsg_BSStatusInquiryPOSAKey:
+		return "EMsg_BSStatusInquiryPOSAKey"
+	case EMsg_BSStatusInquiryPOSAKeyResponse:
+		return "EMsg_BSStatusInquiryPOSAKeyResponse"
+	case EMsg_BSValidateMoPaySignature:
+		return "EMsg_BSValidateMoPaySignature"
+	case EMsg_BSValidateMoPaySignatureResponse:
+		return "EMsg_BSValidateMoPaySignatureResponse"
+	case EMsg_BSMoPayConfirmProductDelivery:
+		return "EMsg_BSMoPayConfirmProductDelivery"
+	case EMsg_BSMoPayConfirmProductDeliveryResponse:
+		return "EMsg_BSMoPayConfirmProductDeliveryResponse"
+	case EMsg_BSGenerateMoPayMD5:
+		return "EMsg_BSGenerateMoPayMD5"
+	case EMsg_BSGenerateMoPayMD5Response:
+		return "EMsg_BSGenerateMoPayMD5Response"
+	case EMsg_BSBoaCompraConfirmProductDelivery:
+		return "EMsg_BSBoaCompraConfirmProductDelivery"
+	case EMsg_BSBoaCompraConfirmProductDeliveryResponse:
+		return "EMsg_BSBoaCompraConfirmProductDeliveryResponse"
+	case EMsg_BSGenerateBoaCompraMD5:
+		return "EMsg_BSGenerateBoaCompraMD5"
+	case EMsg_BSGenerateBoaCompraMD5Response:
+		return "EMsg_BSGenerateBoaCompraMD5Response"
+	case EMsg_BaseATS:
+		return "EMsg_BaseATS"
+	case EMsg_ATSStartStressTest:
+		return "EMsg_ATSStartStressTest"
+	case EMsg_ATSStopStressTest:
+		return "EMsg_ATSStopStressTest"
+	case EMsg_ATSRunFailServerTest:
+		return "EMsg_ATSRunFailServerTest"
+	case EMsg_ATSUFSPerfTestTask:
+		return "EMsg_ATSUFSPerfTestTask"
+	case EMsg_ATSUFSPerfTestResponse:
+		return "EMsg_ATSUFSPerfTestResponse"
+	case EMsg_ATSCycleTCM:
+		return "EMsg_ATSCycleTCM"
+	case EMsg_ATSInitDRMSStressTest:
+		return "EMsg_ATSInitDRMSStressTest"
+	case EMsg_ATSCallTest:
+		return "EMsg_ATSCallTest"
+	case EMsg_ATSCallTestReply:
+		return "EMsg_ATSCallTestReply"
+	case EMsg_ATSStartExternalStress:
+		return "EMsg_ATSStartExternalStress"
+	case EMsg_ATSExternalStressJobStart:
+		return "EMsg_ATSExternalStressJobStart"
+	case EMsg_ATSExternalStressJobQueued:
+		return "EMsg_ATSExternalStressJobQueued"
+	case EMsg_ATSExternalStressJobRunning:
+		return "EMsg_ATSExternalStressJobRunning"
+	case EMsg_ATSExternalStressJobStopped:
+		return "EMsg_ATSExternalStressJobStopped"
+	case EMsg_ATSExternalStressJobStopAll:
+		return "EMsg_ATSExternalStressJobStopAll"
+	case EMsg_ATSExternalStressActionResult:
+		return "EMsg_ATSExternalStressActionResult"
+	case EMsg_ATSStarted:
+		return "EMsg_ATSStarted"
+	case EMsg_ATSCSPerfTestTask:
+		return "EMsg_ATSCSPerfTestTask"
+	case EMsg_ATSCSPerfTestResponse:
+		return "EMsg_ATSCSPerfTestResponse"
+	case EMsg_BaseDP:
+		return "EMsg_BaseDP"
+	case EMsg_DPSetPublishingState:
+		return "EMsg_DPSetPublishingState"
+	case EMsg_DPGamePlayedStats:
+		return "EMsg_DPGamePlayedStats"
+	case EMsg_DPUniquePlayersStat:
+		return "EMsg_DPUniquePlayersStat"
+	case EMsg_DPVacInfractionStats:
+		return "EMsg_DPVacInfractionStats"
+	case EMsg_DPVacBanStats:
+		return "EMsg_DPVacBanStats"
+	case EMsg_DPCoplayStats:
+		return "EMsg_DPCoplayStats"
+	case EMsg_DPNatTraversalStats:
+		return "EMsg_DPNatTraversalStats"
+	case EMsg_DPSteamUsageEvent:
+		return "EMsg_DPSteamUsageEvent"
+	case EMsg_DPVacCertBanStats:
+		return "EMsg_DPVacCertBanStats"
+	case EMsg_DPVacCafeBanStats:
+		return "EMsg_DPVacCafeBanStats"
+	case EMsg_DPCloudStats:
+		return "EMsg_DPCloudStats"
+	case EMsg_DPAchievementStats:
+		return "EMsg_DPAchievementStats"
+	case EMsg_DPAccountCreationStats:
+		return "EMsg_DPAccountCreationStats"
+	case EMsg_DPGetPlayerCount:
+		return "EMsg_DPGetPlayerCount"
+	case EMsg_DPGetPlayerCountResponse:
+		return "EMsg_DPGetPlayerCountResponse"
+	case EMsg_DPGameServersPlayersStats:
+		return "EMsg_DPGameServersPlayersStats"
+	case EMsg_DPDownloadRateStatistics:
+		return "EMsg_DPDownloadRateStatistics"
+	case EMsg_DPFacebookStatistics:
+		return "EMsg_DPFacebookStatistics"
+	case EMsg_ClientDPCheckSpecialSurvey:
+		return "EMsg_ClientDPCheckSpecialSurvey"
+	case EMsg_ClientDPCheckSpecialSurveyResponse:
+		return "EMsg_ClientDPCheckSpecialSurveyResponse"
+	case EMsg_ClientDPSendSpecialSurveyResponse:
+		return "EMsg_ClientDPSendSpecialSurveyResponse"
+	case EMsg_ClientDPSendSpecialSurveyResponseReply:
+		return "EMsg_ClientDPSendSpecialSurveyResponseReply"
+	case EMsg_DPStoreSaleStatistics:
+		return "EMsg_DPStoreSaleStatistics"
+	case EMsg_ClientDPUpdateAppJobReport:
+		return "EMsg_ClientDPUpdateAppJobReport"
+	case EMsg_ClientDPSteam2AppStarted:
+		return "EMsg_ClientDPSteam2AppStarted"
+	case EMsg_DPUpdateContentEvent:
+		return "EMsg_DPUpdateContentEvent"
+	case EMsg_BaseCM:
+		return "EMsg_BaseCM"
+	case EMsg_CMSetAllowState:
+		return "EMsg_CMSetAllowState"
+	case EMsg_CMSpewAllowState:
+		return "EMsg_CMSpewAllowState"
+	case EMsg_CMAppInfoResponse:
+		return "EMsg_CMAppInfoResponse"
+	case EMsg_BaseDSS:
+		return "EMsg_BaseDSS"
+	case EMsg_DSSNewFile:
+		return "EMsg_DSSNewFile"
+	case EMsg_DSSCurrentFileList:
+		return "EMsg_DSSCurrentFileList"
+	case EMsg_DSSSynchList:
+		return "EMsg_DSSSynchList"
+	case EMsg_DSSSynchListResponse:
+		return "EMsg_DSSSynchListResponse"
+	case EMsg_DSSSynchSubscribe:
+		return "EMsg_DSSSynchSubscribe"
+	case EMsg_DSSSynchUnsubscribe:
+		return "EMsg_DSSSynchUnsubscribe"
+	case EMsg_BaseEPM:
+		return "EMsg_BaseEPM"
+	case EMsg_EPMStartProcess:
+		return "EMsg_EPMStartProcess"
+	case EMsg_EPMStopProcess:
+		return "EMsg_EPMStopProcess"
+	case EMsg_EPMRestartProcess:
+		return "EMsg_EPMRestartProcess"
+	case EMsg_BaseGC:
+		return "EMsg_BaseGC"
+	case EMsg_AMRelayToGC:
+		return "EMsg_AMRelayToGC"
+	case EMsg_GCUpdatePlayedState:
+		return "EMsg_GCUpdatePlayedState"
+	case EMsg_GCCmdRevive:
+		return "EMsg_GCCmdRevive"
+	case EMsg_GCCmdBounce:
+		return "EMsg_GCCmdBounce"
+	case EMsg_GCCmdForceBounce:
+		return "EMsg_GCCmdForceBounce"
+	case EMsg_GCCmdDown:
+		return "EMsg_GCCmdDown"
+	case EMsg_GCCmdDeploy:
+		return "EMsg_GCCmdDeploy"
+	case EMsg_GCCmdDeployResponse:
+		return "EMsg_GCCmdDeployResponse"
+	case EMsg_GCCmdSwitch:
+		return "EMsg_GCCmdSwitch"
+	case EMsg_AMRefreshSessions:
+		return "EMsg_AMRefreshSessions"
+	case EMsg_GCUpdateGSState:
+		return "EMsg_GCUpdateGSState"
+	case EMsg_GCAchievementAwarded:
+		return "EMsg_GCAchievementAwarded"
+	case EMsg_GCSystemMessage:
+		return "EMsg_GCSystemMessage"
+	case EMsg_GCValidateSession:
+		return "EMsg_GCValidateSession"
+	case EMsg_GCValidateSessionResponse:
+		return "EMsg_GCValidateSessionResponse"
+	case EMsg_GCCmdStatus:
+		return "EMsg_GCCmdStatus"
+	case EMsg_GCRegisterWebInterfaces:
+		return "EMsg_GCRegisterWebInterfaces"
+	case EMsg_GCGetAccountDetails:
+		return "EMsg_GCGetAccountDetails"
+	case EMsg_GCInterAppMessage:
+		return "EMsg_GCInterAppMessage"
+	case EMsg_GCGetEmailTemplate:
+		return "EMsg_GCGetEmailTemplate"
+	case EMsg_GCGetEmailTemplateResponse:
+		return "EMsg_GCGetEmailTemplateResponse"
+	case EMsg_ISRelayToGCH:
+		return "EMsg_ISRelayToGCH"
+	case EMsg_GCHRelayClientToIS:
+		return "EMsg_GCHRelayClientToIS"
+	case EMsg_GCHUpdateSession:
+		return "EMsg_GCHUpdateSession"
+	case EMsg_GCHRequestUpdateSession:
+		return "EMsg_GCHRequestUpdateSession"
+	case EMsg_GCHRequestStatus:
+		return "EMsg_GCHRequestStatus"
+	case EMsg_GCHRequestStatusResponse:
+		return "EMsg_GCHRequestStatusResponse"
+	case EMsg_BaseP2P:
+		return "EMsg_BaseP2P"
+	case EMsg_P2PIntroducerMessage:
+		return "EMsg_P2PIntroducerMessage"
+	case EMsg_BaseSM:
+		return "EMsg_BaseSM"
+	case EMsg_SMExpensiveReport:
+		return "EMsg_SMExpensiveReport"
+	case EMsg_SMHourlyReport:
+		return "EMsg_SMHourlyReport"
+	case EMsg_SMFishingReport:
+		return "EMsg_SMFishingReport"
+	case EMsg_SMPartitionRenames:
+		return "EMsg_SMPartitionRenames"
+	case EMsg_SMMonitorSpace:
+		return "EMsg_SMMonitorSpace"
+	case EMsg_SMGetSchemaConversionResults:
+		return "EMsg_SMGetSchemaConversionResults"
+	case EMsg_SMGetSchemaConversionResultsResponse:
+		return "EMsg_SMGetSchemaConversionResultsResponse"
+	case EMsg_BaseTest:
+		return "EMsg_BaseTest"
+	case EMsg_JobHeartbeatTest:
+		return "EMsg_JobHeartbeatTest"
+	case EMsg_JobHeartbeatTestResponse:
+		return "EMsg_JobHeartbeatTestResponse"
+	case EMsg_BaseFTSRange:
+		return "EMsg_BaseFTSRange"
+	case EMsg_FTSGetBrowseCounts:
+		return "EMsg_FTSGetBrowseCounts"
+	case EMsg_FTSGetBrowseCountsResponse:
+		return "EMsg_FTSGetBrowseCountsResponse"
+	case EMsg_FTSBrowseClans:
+		return "EMsg_FTSBrowseClans"
+	case EMsg_FTSBrowseClansResponse:
+		return "EMsg_FTSBrowseClansResponse"
+	case EMsg_FTSSearchClansByLocation:
+		return "EMsg_FTSSearchClansByLocation"
+	case EMsg_FTSSearchClansByLocationResponse:
+		return "EMsg_FTSSearchClansByLocationResponse"
+	case EMsg_FTSSearchPlayersByLocation:
+		return "EMsg_FTSSearchPlayersByLocation"
+	case EMsg_FTSSearchPlayersByLocationResponse:
+		return "EMsg_FTSSearchPlayersByLocationResponse"
+	case EMsg_FTSClanDeleted:
+		return "EMsg_FTSClanDeleted"
+	case EMsg_FTSSearch:
+		return "EMsg_FTSSearch"
+	case EMsg_FTSSearchResponse:
+		return "EMsg_FTSSearchResponse"
+	case EMsg_FTSSearchStatus:
+		return "EMsg_FTSSearchStatus"
+	case EMsg_FTSSearchStatusResponse:
+		return "EMsg_FTSSearchStatusResponse"
+	case EMsg_FTSGetGSPlayStats:
+		return "EMsg_FTSGetGSPlayStats"
+	case EMsg_FTSGetGSPlayStatsResponse:
+		return "EMsg_FTSGetGSPlayStatsResponse"
+	case EMsg_FTSGetGSPlayStatsForServer:
+		return "EMsg_FTSGetGSPlayStatsForServer"
+	case EMsg_FTSGetGSPlayStatsForServerResponse:
+		return "EMsg_FTSGetGSPlayStatsForServerResponse"
+	case EMsg_FTSReportIPUpdates:
+		return "EMsg_FTSReportIPUpdates"
+	case EMsg_BaseCCSRange:
+		return "EMsg_BaseCCSRange"
+	case EMsg_CCSGetComments:
+		return "EMsg_CCSGetComments"
+	case EMsg_CCSGetCommentsResponse:
+		return "EMsg_CCSGetCommentsResponse"
+	case EMsg_CCSAddComment:
+		return "EMsg_CCSAddComment"
+	case EMsg_CCSAddCommentResponse:
+		return "EMsg_CCSAddCommentResponse"
+	case EMsg_CCSDeleteComment:
+		return "EMsg_CCSDeleteComment"
+	case EMsg_CCSDeleteCommentResponse:
+		return "EMsg_CCSDeleteCommentResponse"
+	case EMsg_CCSPreloadComments:
+		return "EMsg_CCSPreloadComments"
+	case EMsg_CCSNotifyCommentCount:
+		return "EMsg_CCSNotifyCommentCount"
+	case EMsg_CCSGetCommentsForNews:
+		return "EMsg_CCSGetCommentsForNews"
+	case EMsg_CCSGetCommentsForNewsResponse:
+		return "EMsg_CCSGetCommentsForNewsResponse"
+	case EMsg_CCSDeleteAllComments:
+		return "EMsg_CCSDeleteAllComments"
+	case EMsg_CCSDeleteAllCommentsResponse:
+		return "EMsg_CCSDeleteAllCommentsResponse"
+	case EMsg_BaseLBSRange:
+		return "EMsg_BaseLBSRange"
+	case EMsg_LBSSetScore:
+		return "EMsg_LBSSetScore"
+	case EMsg_LBSSetScoreResponse:
+		return "EMsg_LBSSetScoreResponse"
+	case EMsg_LBSFindOrCreateLB:
+		return "EMsg_LBSFindOrCreateLB"
+	case EMsg_LBSFindOrCreateLBResponse:
+		return "EMsg_LBSFindOrCreateLBResponse"
+	case EMsg_LBSGetLBEntries:
+		return "EMsg_LBSGetLBEntries"
+	case EMsg_LBSGetLBEntriesResponse:
+		return "EMsg_LBSGetLBEntriesResponse"
+	case EMsg_LBSGetLBList:
+		return "EMsg_LBSGetLBList"
+	case EMsg_LBSGetLBListResponse:
+		return "EMsg_LBSGetLBListResponse"
+	case EMsg_LBSSetLBDetails:
+		return "EMsg_LBSSetLBDetails"
+	case EMsg_LBSDeleteLB:
+		return "EMsg_LBSDeleteLB"
+	case EMsg_LBSDeleteLBEntry:
+		return "EMsg_LBSDeleteLBEntry"
+	case EMsg_LBSResetLB:
+		return "EMsg_LBSResetLB"
+	case EMsg_BaseOGS:
+		return "EMsg_BaseOGS"
+	case EMsg_OGSBeginSession:
+		return "EMsg_OGSBeginSession"
+	case EMsg_OGSBeginSessionResponse:
+		return "EMsg_OGSBeginSessionResponse"
+	case EMsg_OGSEndSession:
+		return "EMsg_OGSEndSession"
+	case EMsg_OGSEndSessionResponse:
+		return "EMsg_OGSEndSessionResponse"
+	case EMsg_OGSWriteAppSessionRow:
+		return "EMsg_OGSWriteAppSessionRow"
+	case EMsg_BaseBRP:
+		return "EMsg_BaseBRP"
+	case EMsg_BRPStartShippingJobs:
+		return "EMsg_BRPStartShippingJobs"
+	case EMsg_BRPProcessUSBankReports:
+		return "EMsg_BRPProcessUSBankReports"
+	case EMsg_BRPProcessGCReports:
+		return "EMsg_BRPProcessGCReports"
+	case EMsg_BRPProcessPPReports:
+		return "EMsg_BRPProcessPPReports"
+	case EMsg_BRPSettleNOVA:
+		return "EMsg_BRPSettleNOVA"
+	case EMsg_BRPSettleCB:
+		return "EMsg_BRPSettleCB"
+	case EMsg_BRPCommitGC:
+		return "EMsg_BRPCommitGC"
+	case EMsg_BRPCommitGCResponse:
+		return "EMsg_BRPCommitGCResponse"
+	case EMsg_BRPFindHungTransactions:
+		return "EMsg_BRPFindHungTransactions"
+	case EMsg_BRPCheckFinanceCloseOutDate:
+		return "EMsg_BRPCheckFinanceCloseOutDate"
+	case EMsg_BRPProcessLicenses:
+		return "EMsg_BRPProcessLicenses"
+	case EMsg_BRPProcessLicensesResponse:
+		return "EMsg_BRPProcessLicensesResponse"
+	case EMsg_BRPRemoveExpiredPaymentData:
+		return "EMsg_BRPRemoveExpiredPaymentData"
+	case EMsg_BRPRemoveExpiredPaymentDataResponse:
+		return "EMsg_BRPRemoveExpiredPaymentDataResponse"
+	case EMsg_BRPConvertToCurrentKeys:
+		return "EMsg_BRPConvertToCurrentKeys"
+	case EMsg_BRPConvertToCurrentKeysResponse:
+		return "EMsg_BRPConvertToCurrentKeysResponse"
+	case EMsg_BRPPruneCardUsageStats:
+		return "EMsg_BRPPruneCardUsageStats"
+	case EMsg_BRPPruneCardUsageStatsResponse:
+		return "EMsg_BRPPruneCardUsageStatsResponse"
+	case EMsg_BRPCheckActivationCodes:
+		return "EMsg_BRPCheckActivationCodes"
+	case EMsg_BRPCheckActivationCodesResponse:
+		return "EMsg_BRPCheckActivationCodesResponse"
+	case EMsg_BaseAMRange2:
+		return "EMsg_BaseAMRange2"
+	case EMsg_AMCreateChat:
+		return "EMsg_AMCreateChat"
+	case EMsg_AMCreateChatResponse:
+		return "EMsg_AMCreateChatResponse"
+	case EMsg_AMUpdateChatMetadata:
+		return "EMsg_AMUpdateChatMetadata"
+	case EMsg_AMPublishChatMetadata:
+		return "EMsg_AMPublishChatMetadata"
+	case EMsg_AMSetProfileURL:
+		return "EMsg_AMSetProfileURL"
+	case EMsg_AMGetAccountEmailAddress:
+		return "EMsg_AMGetAccountEmailAddress"
+	case EMsg_AMGetAccountEmailAddressResponse:
+		return "EMsg_AMGetAccountEmailAddressResponse"
+	case EMsg_AMRequestFriendData:
+		return "EMsg_AMRequestFriendData"
+	case EMsg_AMRouteToClients:
+		return "EMsg_AMRouteToClients"
+	case EMsg_AMLeaveClan:
+		return "EMsg_AMLeaveClan"
+	case EMsg_AMClanPermissions:
+		return "EMsg_AMClanPermissions"
+	case EMsg_AMClanPermissionsResponse:
+		return "EMsg_AMClanPermissionsResponse"
+	case EMsg_AMCreateClanEvent:
+		return "EMsg_AMCreateClanEvent"
+	case EMsg_AMCreateClanEventResponse:
+		return "EMsg_AMCreateClanEventResponse"
+	case EMsg_AMUpdateClanEvent:
+		return "EMsg_AMUpdateClanEvent"
+	case EMsg_AMUpdateClanEventResponse:
+		return "EMsg_AMUpdateClanEventResponse"
+	case EMsg_AMGetClanEvents:
+		return "EMsg_AMGetClanEvents"
+	case EMsg_AMGetClanEventsResponse:
+		return "EMsg_AMGetClanEventsResponse"
+	case EMsg_AMDeleteClanEvent:
+		return "EMsg_AMDeleteClanEvent"
+	case EMsg_AMDeleteClanEventResponse:
+		return "EMsg_AMDeleteClanEventResponse"
+	case EMsg_AMSetClanPermissionSettings:
+		return "EMsg_AMSetClanPermissionSettings"
+	case EMsg_AMSetClanPermissionSettingsResponse:
+		return "EMsg_AMSetClanPermissionSettingsResponse"
+	case EMsg_AMGetClanPermissionSettings:
+		return "EMsg_AMGetClanPermissionSettings"
+	case EMsg_AMGetClanPermissionSettingsResponse:
+		return "EMsg_AMGetClanPermissionSettingsResponse"
+	case EMsg_AMPublishChatRoomInfo:
+		return "EMsg_AMPublishChatRoomInfo"
+	case EMsg_ClientChatRoomInfo:
+		return "EMsg_ClientChatRoomInfo"
+	case EMsg_AMCreateClanAnnouncement:
+		return "EMsg_AMCreateClanAnnouncement"
+	case EMsg_AMCreateClanAnnouncementResponse:
+		return "EMsg_AMCreateClanAnnouncementResponse"
+	case EMsg_AMUpdateClanAnnouncement:
+		return "EMsg_AMUpdateClanAnnouncement"
+	case EMsg_AMUpdateClanAnnouncementResponse:
+		return "EMsg_AMUpdateClanAnnouncementResponse"
+	case EMsg_AMGetClanAnnouncementsCount:
+		return "EMsg_AMGetClanAnnouncementsCount"
+	case EMsg_AMGetClanAnnouncementsCountResponse:
+		return "EMsg_AMGetClanAnnouncementsCountResponse"
+	case EMsg_AMGetClanAnnouncements:
+		return "EMsg_AMGetClanAnnouncements"
+	case EMsg_AMGetClanAnnouncementsResponse:
+		return "EMsg_AMGetClanAnnouncementsResponse"
+	case EMsg_AMDeleteClanAnnouncement:
+		return "EMsg_AMDeleteClanAnnouncement"
+	case EMsg_AMDeleteClanAnnouncementResponse:
+		return "EMsg_AMDeleteClanAnnouncementResponse"
+	case EMsg_AMGetSingleClanAnnouncement:
+		return "EMsg_AMGetSingleClanAnnouncement"
+	case EMsg_AMGetSingleClanAnnouncementResponse:
+		return "EMsg_AMGetSingleClanAnnouncementResponse"
+	case EMsg_AMGetClanHistory:
+		return "EMsg_AMGetClanHistory"
+	case EMsg_AMGetClanHistoryResponse:
+		return "EMsg_AMGetClanHistoryResponse"
+	case EMsg_AMGetClanPermissionBits:
+		return "EMsg_AMGetClanPermissionBits"
+	case EMsg_AMGetClanPermissionBitsResponse:
+		return "EMsg_AMGetClanPermissionBitsResponse"
+	case EMsg_AMSetClanPermissionBits:
+		return "EMsg_AMSetClanPermissionBits"
+	case EMsg_AMSetClanPermissionBitsResponse:
+		return "EMsg_AMSetClanPermissionBitsResponse"
+	case EMsg_AMSessionInfoRequest:
+		return "EMsg_AMSessionInfoRequest"
+	case EMsg_AMSessionInfoResponse:
+		return "EMsg_AMSessionInfoResponse"
+	case EMsg_AMValidateWGToken:
+		return "EMsg_AMValidateWGToken"
+	case EMsg_AMGetSingleClanEvent:
+		return "EMsg_AMGetSingleClanEvent"
+	case EMsg_AMGetSingleClanEventResponse:
+		return "EMsg_AMGetSingleClanEventResponse"
+	case EMsg_AMGetClanRank:
+		return "EMsg_AMGetClanRank"
+	case EMsg_AMGetClanRankResponse:
+		return "EMsg_AMGetClanRankResponse"
+	case EMsg_AMSetClanRank:
+		return "EMsg_AMSetClanRank"
+	case EMsg_AMSetClanRankResponse:
+		return "EMsg_AMSetClanRankResponse"
+	case EMsg_AMGetClanPOTW:
+		return "EMsg_AMGetClanPOTW"
+	case EMsg_AMGetClanPOTWResponse:
+		return "EMsg_AMGetClanPOTWResponse"
+	case EMsg_AMSetClanPOTW:
+		return "EMsg_AMSetClanPOTW"
+	case EMsg_AMSetClanPOTWResponse:
+		return "EMsg_AMSetClanPOTWResponse"
+	case EMsg_AMRequestChatMetadata:
+		return "EMsg_AMRequestChatMetadata"
+	case EMsg_AMDumpUser:
+		return "EMsg_AMDumpUser"
+	case EMsg_AMKickUserFromClan:
+		return "EMsg_AMKickUserFromClan"
+	case EMsg_AMAddFounderToClan:
+		return "EMsg_AMAddFounderToClan"
+	case EMsg_AMValidateWGTokenResponse:
+		return "EMsg_AMValidateWGTokenResponse"
+	case EMsg_AMSetCommunityState:
+		return "EMsg_AMSetCommunityState"
+	case EMsg_AMSetAccountDetails:
+		return "EMsg_AMSetAccountDetails"
+	case EMsg_AMGetChatBanList:
+		return "EMsg_AMGetChatBanList"
+	case EMsg_AMGetChatBanListResponse:
+		return "EMsg_AMGetChatBanListResponse"
+	case EMsg_AMUnBanFromChat:
+		return "EMsg_AMUnBanFromChat"
+	case EMsg_AMSetClanDetails:
+		return "EMsg_AMSetClanDetails"
+	case EMsg_AMGetAccountLinks:
+		return "EMsg_AMGetAccountLinks"
+	case EMsg_AMGetAccountLinksResponse:
+		return "EMsg_AMGetAccountLinksResponse"
+	case EMsg_AMSetAccountLinks:
+		return "EMsg_AMSetAccountLinks"
+	case EMsg_AMSetAccountLinksResponse:
+		return "EMsg_AMSetAccountLinksResponse"
+	case EMsg_AMGetUserGameStats:
+		return "EMsg_AMGetUserGameStats"
+	case EMsg_AMGetUserGameStatsResponse:
+		return "EMsg_AMGetUserGameStatsResponse"
+	case EMsg_AMCheckClanMembership:
+		return "EMsg_AMCheckClanMembership"
+	case EMsg_AMGetClanMembers:
+		return "EMsg_AMGetClanMembers"
+	case EMsg_AMGetClanMembersResponse:
+		return "EMsg_AMGetClanMembersResponse"
+	case EMsg_AMJoinPublicClan:
+		return "EMsg_AMJoinPublicClan"
+	case EMsg_AMNotifyChatOfClanChange:
+		return "EMsg_AMNotifyChatOfClanChange"
+	case EMsg_AMResubmitPurchase:
+		return "EMsg_AMResubmitPurchase"
+	case EMsg_AMAddFriend:
+		return "EMsg_AMAddFriend"
+	case EMsg_AMAddFriendResponse:
+		return "EMsg_AMAddFriendResponse"
+	case EMsg_AMRemoveFriend:
+		return "EMsg_AMRemoveFriend"
+	case EMsg_AMDumpClan:
+		return "EMsg_AMDumpClan"
+	case EMsg_AMChangeClanOwner:
+		return "EMsg_AMChangeClanOwner"
+	case EMsg_AMCancelEasyCollect:
+		return "EMsg_AMCancelEasyCollect"
+	case EMsg_AMCancelEasyCollectResponse:
+		return "EMsg_AMCancelEasyCollectResponse"
+	case EMsg_AMGetClanMembershipList:
+		return "EMsg_AMGetClanMembershipList"
+	case EMsg_AMGetClanMembershipListResponse:
+		return "EMsg_AMGetClanMembershipListResponse"
+	case EMsg_AMClansInCommon:
+		return "EMsg_AMClansInCommon"
+	case EMsg_AMClansInCommonResponse:
+		return "EMsg_AMClansInCommonResponse"
+	case EMsg_AMIsValidAccountID:
+		return "EMsg_AMIsValidAccountID"
+	case EMsg_AMConvertClan:
+		return "EMsg_AMConvertClan"
+	case EMsg_AMGetGiftTargetListRelay:
+		return "EMsg_AMGetGiftTargetListRelay"
+	case EMsg_AMWipeFriendsList:
+		return "EMsg_AMWipeFriendsList"
+	case EMsg_AMSetIgnored:
+		return "EMsg_AMSetIgnored"
+	case EMsg_AMClansInCommonCountResponse:
+		return "EMsg_AMClansInCommonCountResponse"
+	case EMsg_AMFriendsList:
+		return "EMsg_AMFriendsList"
+	case EMsg_AMFriendsListResponse:
+		return "EMsg_AMFriendsListResponse"
+	case EMsg_AMFriendsInCommon:
+		return "EMsg_AMFriendsInCommon"
+	case EMsg_AMFriendsInCommonResponse:
+		return "EMsg_AMFriendsInCommonResponse"
+	case EMsg_AMFriendsInCommonCountResponse:
+		return "EMsg_AMFriendsInCommonCountResponse"
+	case EMsg_AMClansInCommonCount:
+		return "EMsg_AMClansInCommonCount"
+	case EMsg_AMChallengeVerdict:
+		return "EMsg_AMChallengeVerdict"
+	case EMsg_AMChallengeNotification:
+		return "EMsg_AMChallengeNotification"
+	case EMsg_AMFindGSByIP:
+		return "EMsg_AMFindGSByIP"
+	case EMsg_AMFoundGSByIP:
+		return "EMsg_AMFoundGSByIP"
+	case EMsg_AMGiftRevoked:
+		return "EMsg_AMGiftRevoked"
+	case EMsg_AMCreateAccountRecord:
+		return "EMsg_AMCreateAccountRecord"
+	case EMsg_AMUserClanList:
+		return "EMsg_AMUserClanList"
+	case EMsg_AMUserClanListResponse:
+		return "EMsg_AMUserClanListResponse"
+	case EMsg_AMGetAccountDetails2:
+		return "EMsg_AMGetAccountDetails2"
+	case EMsg_AMGetAccountDetailsResponse2:
+		return "EMsg_AMGetAccountDetailsResponse2"
+	case EMsg_AMSetCommunityProfileSettings:
+		return "EMsg_AMSetCommunityProfileSettings"
+	case EMsg_AMSetCommunityProfileSettingsResponse:
+		return "EMsg_AMSetCommunityProfileSettingsResponse"
+	case EMsg_AMGetCommunityPrivacyState:
+		return "EMsg_AMGetCommunityPrivacyState"
+	case EMsg_AMGetCommunityPrivacyStateResponse:
+		return "EMsg_AMGetCommunityPrivacyStateResponse"
+	case EMsg_AMCheckClanInviteRateLimiting:
+		return "EMsg_AMCheckClanInviteRateLimiting"
+	case EMsg_AMGetUserAchievementStatus:
+		return "EMsg_AMGetUserAchievementStatus"
+	case EMsg_AMGetIgnored:
+		return "EMsg_AMGetIgnored"
+	case EMsg_AMGetIgnoredResponse:
+		return "EMsg_AMGetIgnoredResponse"
+	case EMsg_AMSetIgnoredResponse:
+		return "EMsg_AMSetIgnoredResponse"
+	case EMsg_AMSetFriendRelationshipNone:
+		return "EMsg_AMSetFriendRelationshipNone"
+	case EMsg_AMGetFriendRelationship:
+		return "EMsg_AMGetFriendRelationship"
+	case EMsg_AMGetFriendRelationshipResponse:
+		return "EMsg_AMGetFriendRelationshipResponse"
+	case EMsg_AMServiceModulesCache:
+		return "EMsg_AMServiceModulesCache"
+	case EMsg_AMServiceModulesCall:
+		return "EMsg_AMServiceModulesCall"
+	case EMsg_AMServiceModulesCallResponse:
+		return "EMsg_AMServiceModulesCallResponse"
+	case EMsg_AMGetCaptchaDataForIP:
+		return "EMsg_AMGetCaptchaDataForIP"
+	case EMsg_AMGetCaptchaDataForIPResponse:
+		return "EMsg_AMGetCaptchaDataForIPResponse"
+	case EMsg_AMValidateCaptchaDataForIP:
+		return "EMsg_AMValidateCaptchaDataForIP"
+	case EMsg_AMValidateCaptchaDataForIPResponse:
+		return "EMsg_AMValidateCaptchaDataForIPResponse"
+	case EMsg_AMTrackFailedAuthByIP:
+		return "EMsg_AMTrackFailedAuthByIP"
+	case EMsg_AMGetCaptchaDataByGID:
+		return "EMsg_AMGetCaptchaDataByGID"
+	case EMsg_AMGetCaptchaDataByGIDResponse:
+		return "EMsg_AMGetCaptchaDataByGIDResponse"
+	case EMsg_AMGetLobbyList:
+		return "EMsg_AMGetLobbyList"
+	case EMsg_AMGetLobbyListResponse:
+		return "EMsg_AMGetLobbyListResponse"
+	case EMsg_AMGetLobbyMetadata:
+		return "EMsg_AMGetLobbyMetadata"
+	case EMsg_AMGetLobbyMetadataResponse:
+		return "EMsg_AMGetLobbyMetadataResponse"
+	case EMsg_AMAddFriendNews:
+		return "EMsg_AMAddFriendNews"
+	case EMsg_AMAddClanNews:
+		return "EMsg_AMAddClanNews"
+	case EMsg_AMWriteNews:
+		return "EMsg_AMWriteNews"
+	case EMsg_AMFindClanUser:
+		return "EMsg_AMFindClanUser"
+	case EMsg_AMFindClanUserResponse:
+		return "EMsg_AMFindClanUserResponse"
+	case EMsg_AMBanFromChat:
+		return "EMsg_AMBanFromChat"
+	case EMsg_AMGetUserHistoryResponse:
+		return "EMsg_AMGetUserHistoryResponse"
+	case EMsg_AMGetUserNewsSubscriptions:
+		return "EMsg_AMGetUserNewsSubscriptions"
+	case EMsg_AMGetUserNewsSubscriptionsResponse:
+		return "EMsg_AMGetUserNewsSubscriptionsResponse"
+	case EMsg_AMSetUserNewsSubscriptions:
+		return "EMsg_AMSetUserNewsSubscriptions"
+	case EMsg_AMGetUserNews:
+		return "EMsg_AMGetUserNews"
+	case EMsg_AMGetUserNewsResponse:
+		return "EMsg_AMGetUserNewsResponse"
+	case EMsg_AMSendQueuedEmails:
+		return "EMsg_AMSendQueuedEmails"
+	case EMsg_AMSetLicenseFlags:
+		return "EMsg_AMSetLicenseFlags"
+	case EMsg_AMGetUserHistory:
+		return "EMsg_AMGetUserHistory"
+	case EMsg_AMDeleteUserNews:
+		return "EMsg_AMDeleteUserNews"
+	case EMsg_AMAllowUserFilesRequest:
+		return "EMsg_AMAllowUserFilesRequest"
+	case EMsg_AMAllowUserFilesResponse:
+		return "EMsg_AMAllowUserFilesResponse"
+	case EMsg_AMGetAccountStatus:
+		return "EMsg_AMGetAccountStatus"
+	case EMsg_AMGetAccountStatusResponse:
+		return "EMsg_AMGetAccountStatusResponse"
+	case EMsg_AMEditBanReason:
+		return "EMsg_AMEditBanReason"
+	case EMsg_AMCheckClanMembershipResponse:
+		return "EMsg_AMCheckClanMembershipResponse"
+	case EMsg_AMProbeClanMembershipList:
+		return "EMsg_AMProbeClanMembershipList"
+	case EMsg_AMProbeClanMembershipListResponse:
+		return "EMsg_AMProbeClanMembershipListResponse"
+	case EMsg_AMGetFriendsLobbies:
+		return "EMsg_AMGetFriendsLobbies"
+	case EMsg_AMGetFriendsLobbiesResponse:
+		return "EMsg_AMGetFriendsLobbiesResponse"
+	case EMsg_AMGetUserFriendNewsResponse:
+		return "EMsg_AMGetUserFriendNewsResponse"
+	case EMsg_AMGetUserFriendNews:
+		return "EMsg_AMGetUserFriendNews"
+	case EMsg_AMGetUserClansNewsResponse:
+		return "EMsg_AMGetUserClansNewsResponse"
+	case EMsg_AMGetUserClansNews:
+		return "EMsg_AMGetUserClansNews"
+	case EMsg_AMStoreInitPurchase:
+		return "EMsg_AMStoreInitPurchase"
+	case EMsg_AMStoreInitPurchaseResponse:
+		return "EMsg_AMStoreInitPurchaseResponse"
+	case EMsg_AMStoreGetFinalPrice:
+		return "EMsg_AMStoreGetFinalPrice"
+	case EMsg_AMStoreGetFinalPriceResponse:
+		return "EMsg_AMStoreGetFinalPriceResponse"
+	case EMsg_AMStoreCompletePurchase:
+		return "EMsg_AMStoreCompletePurchase"
+	case EMsg_AMStoreCancelPurchase:
+		return "EMsg_AMStoreCancelPurchase"
+	case EMsg_AMStorePurchaseResponse:
+		return "EMsg_AMStorePurchaseResponse"
+	case EMsg_AMCreateAccountRecordInSteam3:
+		return "EMsg_AMCreateAccountRecordInSteam3"
+	case EMsg_AMGetPreviousCBAccount:
+		return "EMsg_AMGetPreviousCBAccount"
+	case EMsg_AMGetPreviousCBAccountResponse:
+		return "EMsg_AMGetPreviousCBAccountResponse"
+	case EMsg_AMUpdateBillingAddress:
+		return "EMsg_AMUpdateBillingAddress"
+	case EMsg_AMUpdateBillingAddressResponse:
+		return "EMsg_AMUpdateBillingAddressResponse"
+	case EMsg_AMGetBillingAddress:
+		return "EMsg_AMGetBillingAddress"
+	case EMsg_AMGetBillingAddressResponse:
+		return "EMsg_AMGetBillingAddressResponse"
+	case EMsg_AMGetUserLicenseHistory:
+		return "EMsg_AMGetUserLicenseHistory"
+	case EMsg_AMGetUserLicenseHistoryResponse:
+		return "EMsg_AMGetUserLicenseHistoryResponse"
+	case EMsg_AMSupportChangePassword:
+		return "EMsg_AMSupportChangePassword"
+	case EMsg_AMSupportChangeEmail:
+		return "EMsg_AMSupportChangeEmail"
+	case EMsg_AMSupportChangeSecretQA:
+		return "EMsg_AMSupportChangeSecretQA"
+	case EMsg_AMResetUserVerificationGSByIP:
+		return "EMsg_AMResetUserVerificationGSByIP"
+	case EMsg_AMUpdateGSPlayStats:
+		return "EMsg_AMUpdateGSPlayStats"
+	case EMsg_AMSupportEnableOrDisable:
+		return "EMsg_AMSupportEnableOrDisable"
+	case EMsg_AMGetComments:
+		return "EMsg_AMGetComments"
+	case EMsg_AMGetCommentsResponse:
+		return "EMsg_AMGetCommentsResponse"
+	case EMsg_AMAddComment:
+		return "EMsg_AMAddComment"
+	case EMsg_AMAddCommentResponse:
+		return "EMsg_AMAddCommentResponse"
+	case EMsg_AMDeleteComment:
+		return "EMsg_AMDeleteComment"
+	case EMsg_AMDeleteCommentResponse:
+		return "EMsg_AMDeleteCommentResponse"
+	case EMsg_AMGetPurchaseStatus:
+		return "EMsg_AMGetPurchaseStatus"
+	case EMsg_AMSupportIsAccountEnabled:
+		return "EMsg_AMSupportIsAccountEnabled"
+	case EMsg_AMSupportIsAccountEnabledResponse:
+		return "EMsg_AMSupportIsAccountEnabledResponse"
+	case EMsg_AMGetUserStats:
+		return "EMsg_AMGetUserStats"
+	case EMsg_AMSupportKickSession:
+		return "EMsg_AMSupportKickSession"
+	case EMsg_AMGSSearch:
+		return "EMsg_AMGSSearch"
+	case EMsg_MarketingMessageUpdate:
+		return "EMsg_MarketingMessageUpdate"
+	case EMsg_AMRouteFriendMsg:
+		return "EMsg_AMRouteFriendMsg"
+	case EMsg_AMTicketAuthRequestOrResponse:
+		return "EMsg_AMTicketAuthRequestOrResponse"
+	case EMsg_AMVerifyDepotManagementRights:
+		return "EMsg_AMVerifyDepotManagementRights"
+	case EMsg_AMVerifyDepotManagementRightsResponse:
+		return "EMsg_AMVerifyDepotManagementRightsResponse"
+	case EMsg_AMAddFreeLicense:
+		return "EMsg_AMAddFreeLicense"
+	case EMsg_AMGetUserFriendsMinutesPlayed:
+		return "EMsg_AMGetUserFriendsMinutesPlayed"
+	case EMsg_AMGetUserFriendsMinutesPlayedResponse:
+		return "EMsg_AMGetUserFriendsMinutesPlayedResponse"
+	case EMsg_AMGetUserMinutesPlayed:
+		return "EMsg_AMGetUserMinutesPlayed"
+	case EMsg_AMGetUserMinutesPlayedResponse:
+		return "EMsg_AMGetUserMinutesPlayedResponse"
+	case EMsg_AMValidateEmailLink:
+		return "EMsg_AMValidateEmailLink"
+	case EMsg_AMValidateEmailLinkResponse:
+		return "EMsg_AMValidateEmailLinkResponse"
+	case EMsg_AMAddUsersToMarketingTreatment:
+		return "EMsg_AMAddUsersToMarketingTreatment"
+	case EMsg_AMStoreUserStats:
+		return "EMsg_AMStoreUserStats"
+	case EMsg_AMGetUserGameplayInfo:
+		return "EMsg_AMGetUserGameplayInfo"
+	case EMsg_AMGetUserGameplayInfoResponse:
+		return "EMsg_AMGetUserGameplayInfoResponse"
+	case EMsg_AMGetCardList:
+		return "EMsg_AMGetCardList"
+	case EMsg_AMGetCardListResponse:
+		return "EMsg_AMGetCardListResponse"
+	case EMsg_AMDeleteStoredCard:
+		return "EMsg_AMDeleteStoredCard"
+	case EMsg_AMRevokeLegacyGameKeys:
+		return "EMsg_AMRevokeLegacyGameKeys"
+	case EMsg_AMGetWalletDetails:
+		return "EMsg_AMGetWalletDetails"
+	case EMsg_AMGetWalletDetailsResponse:
+		return "EMsg_AMGetWalletDetailsResponse"
+	case EMsg_AMDeleteStoredPaymentInfo:
+		return "EMsg_AMDeleteStoredPaymentInfo"
+	case EMsg_AMGetStoredPaymentSummary:
+		return "EMsg_AMGetStoredPaymentSummary"
+	case EMsg_AMGetStoredPaymentSummaryResponse:
+		return "EMsg_AMGetStoredPaymentSummaryResponse"
+	case EMsg_AMGetWalletConversionRate:
+		return "EMsg_AMGetWalletConversionRate"
+	case EMsg_AMGetWalletConversionRateResponse:
+		return "EMsg_AMGetWalletConversionRateResponse"
+	case EMsg_AMConvertWallet:
+		return "EMsg_AMConvertWallet"
+	case EMsg_AMConvertWalletResponse:
+		return "EMsg_AMConvertWalletResponse"
+	case EMsg_AMRelayGetFriendsWhoPlayGame:
+		return "EMsg_AMRelayGetFriendsWhoPlayGame"
+	case EMsg_AMRelayGetFriendsWhoPlayGameResponse:
+		return "EMsg_AMRelayGetFriendsWhoPlayGameResponse"
+	case EMsg_AMSetPreApproval:
+		return "EMsg_AMSetPreApproval"
+	case EMsg_AMSetPreApprovalResponse:
+		return "EMsg_AMSetPreApprovalResponse"
+	case EMsg_AMMarketingTreatmentUpdate:
+		return "EMsg_AMMarketingTreatmentUpdate"
+	case EMsg_AMCreateRefund:
+		return "EMsg_AMCreateRefund"
+	case EMsg_AMCreateRefundResponse:
+		return "EMsg_AMCreateRefundResponse"
+	case EMsg_AMCreateChargeback:
+		return "EMsg_AMCreateChargeback"
+	case EMsg_AMCreateChargebackResponse:
+		return "EMsg_AMCreateChargebackResponse"
+	case EMsg_AMCreateDispute:
+		return "EMsg_AMCreateDispute"
+	case EMsg_AMCreateDisputeResponse:
+		return "EMsg_AMCreateDisputeResponse"
+	case EMsg_AMClearDispute:
+		return "EMsg_AMClearDispute"
+	case EMsg_AMClearDisputeResponse:
+		return "EMsg_AMClearDisputeResponse"
+	case EMsg_AMPlayerNicknameList:
+		return "EMsg_AMPlayerNicknameList"
+	case EMsg_AMPlayerNicknameListResponse:
+		return "EMsg_AMPlayerNicknameListResponse"
+	case EMsg_AMSetDRMTestConfig:
+		return "EMsg_AMSetDRMTestConfig"
+	case EMsg_AMGetUserCurrentGameInfo:
+		return "EMsg_AMGetUserCurrentGameInfo"
+	case EMsg_AMGetUserCurrentGameInfoResponse:
+		return "EMsg_AMGetUserCurrentGameInfoResponse"
+	case EMsg_AMGetGSPlayerList:
+		return "EMsg_AMGetGSPlayerList"
+	case EMsg_AMGetGSPlayerListResponse:
+		return "EMsg_AMGetGSPlayerListResponse"
+	case EMsg_AMUpdatePersonaStateCache:
+		return "EMsg_AMUpdatePersonaStateCache"
+	case EMsg_AMGetGameMembers:
+		return "EMsg_AMGetGameMembers"
+	case EMsg_AMGetGameMembersResponse:
+		return "EMsg_AMGetGameMembersResponse"
+	case EMsg_AMGetSteamIDForMicroTxn:
+		return "EMsg_AMGetSteamIDForMicroTxn"
+	case EMsg_AMGetSteamIDForMicroTxnResponse:
+		return "EMsg_AMGetSteamIDForMicroTxnResponse"
+	case EMsg_AMAddPublisherUser:
+		return "EMsg_AMAddPublisherUser"
+	case EMsg_AMRemovePublisherUser:
+		return "EMsg_AMRemovePublisherUser"
+	case EMsg_AMGetUserLicenseList:
+		return "EMsg_AMGetUserLicenseList"
+	case EMsg_AMGetUserLicenseListResponse:
+		return "EMsg_AMGetUserLicenseListResponse"
+	case EMsg_AMReloadGameGroupPolicy:
+		return "EMsg_AMReloadGameGroupPolicy"
+	case EMsg_AMAddFreeLicenseResponse:
+		return "EMsg_AMAddFreeLicenseResponse"
+	case EMsg_AMVACStatusUpdate:
+		return "EMsg_AMVACStatusUpdate"
+	case EMsg_AMGetAccountDetails:
+		return "EMsg_AMGetAccountDetails"
+	case EMsg_AMGetAccountDetailsResponse:
+		return "EMsg_AMGetAccountDetailsResponse"
+	case EMsg_AMGetPlayerLinkDetails:
+		return "EMsg_AMGetPlayerLinkDetails"
+	case EMsg_AMGetPlayerLinkDetailsResponse:
+		return "EMsg_AMGetPlayerLinkDetailsResponse"
+	case EMsg_AMSubscribeToPersonaFeed:
+		return "EMsg_AMSubscribeToPersonaFeed"
+	case EMsg_AMGetUserVacBanList:
+		return "EMsg_AMGetUserVacBanList"
+	case EMsg_AMGetUserVacBanListResponse:
+		return "EMsg_AMGetUserVacBanListResponse"
+	case EMsg_AMGetAccountFlagsForWGSpoofing:
+		return "EMsg_AMGetAccountFlagsForWGSpoofing"
+	case EMsg_AMGetAccountFlagsForWGSpoofingResponse:
+		return "EMsg_AMGetAccountFlagsForWGSpoofingResponse"
+	case EMsg_AMGetFriendsWishlistInfo:
+		return "EMsg_AMGetFriendsWishlistInfo"
+	case EMsg_AMGetFriendsWishlistInfoResponse:
+		return "EMsg_AMGetFriendsWishlistInfoResponse"
+	case EMsg_AMGetClanOfficers:
+		return "EMsg_AMGetClanOfficers"
+	case EMsg_AMGetClanOfficersResponse:
+		return "EMsg_AMGetClanOfficersResponse"
+	case EMsg_AMNameChange:
+		return "EMsg_AMNameChange"
+	case EMsg_AMGetNameHistory:
+		return "EMsg_AMGetNameHistory"
+	case EMsg_AMGetNameHistoryResponse:
+		return "EMsg_AMGetNameHistoryResponse"
+	case EMsg_AMUpdateProviderStatus:
+		return "EMsg_AMUpdateProviderStatus"
+	case EMsg_AMClearPersonaMetadataBlob:
+		return "EMsg_AMClearPersonaMetadataBlob"
+	case EMsg_AMSupportRemoveAccountSecurity:
+		return "EMsg_AMSupportRemoveAccountSecurity"
+	case EMsg_AMIsAccountInCaptchaGracePeriod:
+		return "EMsg_AMIsAccountInCaptchaGracePeriod"
+	case EMsg_AMIsAccountInCaptchaGracePeriodResponse:
+		return "EMsg_AMIsAccountInCaptchaGracePeriodResponse"
+	case EMsg_AMAccountPS3Unlink:
+		return "EMsg_AMAccountPS3Unlink"
+	case EMsg_AMAccountPS3UnlinkResponse:
+		return "EMsg_AMAccountPS3UnlinkResponse"
+	case EMsg_AMStoreUserStatsResponse:
+		return "EMsg_AMStoreUserStatsResponse"
+	case EMsg_AMGetAccountPSNInfo:
+		return "EMsg_AMGetAccountPSNInfo"
+	case EMsg_AMGetAccountPSNInfoResponse:
+		return "EMsg_AMGetAccountPSNInfoResponse"
+	case EMsg_AMAuthenticatedPlayerList:
+		return "EMsg_AMAuthenticatedPlayerList"
+	case EMsg_AMGetUserGifts:
+		return "EMsg_AMGetUserGifts"
+	case EMsg_AMGetUserGiftsResponse:
+		return "EMsg_AMGetUserGiftsResponse"
+	case EMsg_AMTransferLockedGifts:
+		return "EMsg_AMTransferLockedGifts"
+	case EMsg_AMTransferLockedGiftsResponse:
+		return "EMsg_AMTransferLockedGiftsResponse"
+	case EMsg_AMPlayerHostedOnGameServer:
+		return "EMsg_AMPlayerHostedOnGameServer"
+	case EMsg_AMGetAccountBanInfo:
+		return "EMsg_AMGetAccountBanInfo"
+	case EMsg_AMGetAccountBanInfoResponse:
+		return "EMsg_AMGetAccountBanInfoResponse"
+	case EMsg_AMRecordBanEnforcement:
+		return "EMsg_AMRecordBanEnforcement"
+	case EMsg_AMRollbackGiftTransfer:
+		return "EMsg_AMRollbackGiftTransfer"
+	case EMsg_AMRollbackGiftTransferResponse:
+		return "EMsg_AMRollbackGiftTransferResponse"
+	case EMsg_AMHandlePendingTransaction:
+		return "EMsg_AMHandlePendingTransaction"
+	case EMsg_AMRequestClanDetails:
+		return "EMsg_AMRequestClanDetails"
+	case EMsg_AMDeleteStoredPaypalAgreement:
+		return "EMsg_AMDeleteStoredPaypalAgreement"
+	case EMsg_AMGameServerUpdate:
+		return "EMsg_AMGameServerUpdate"
+	case EMsg_AMGameServerRemove:
+		return "EMsg_AMGameServerRemove"
+	case EMsg_AMGetPaypalAgreements:
+		return "EMsg_AMGetPaypalAgreements"
+	case EMsg_AMGetPaypalAgreementsResponse:
+		return "EMsg_AMGetPaypalAgreementsResponse"
+	case EMsg_AMGameServerPlayerCompatibilityCheck:
+		return "EMsg_AMGameServerPlayerCompatibilityCheck"
+	case EMsg_AMGameServerPlayerCompatibilityCheckResponse:
+		return "EMsg_AMGameServerPlayerCompatibilityCheckResponse"
+	case EMsg_AMRenewLicense:
+		return "EMsg_AMRenewLicense"
+	case EMsg_AMGetAccountCommunityBanInfo:
+		return "EMsg_AMGetAccountCommunityBanInfo"
+	case EMsg_AMGetAccountCommunityBanInfoResponse:
+		return "EMsg_AMGetAccountCommunityBanInfoResponse"
+	case EMsg_AMGameServerAccountChangePassword:
+		return "EMsg_AMGameServerAccountChangePassword"
+	case EMsg_AMGameServerAccountDeleteAccount:
+		return "EMsg_AMGameServerAccountDeleteAccount"
+	case EMsg_AMRenewLicenseResponse:
+		return "EMsg_AMRenewLicenseResponse"
+	case EMsg_AMSendEmail:
+		return "EMsg_AMSendEmail"
+	case EMsg_AMXsollaPayment:
+		return "EMsg_AMXsollaPayment"
+	case EMsg_AMXsollaPaymentResponse:
+		return "EMsg_AMXsollaPaymentResponse"
+	case EMsg_AMAcctAllowedToPurchase:
+		return "EMsg_AMAcctAllowedToPurchase"
+	case EMsg_AMAcctAllowedToPurchaseResponse:
+		return "EMsg_AMAcctAllowedToPurchaseResponse"
+	case EMsg_AMSwapXsollaDeposit:
+		return "EMsg_AMSwapXsollaDeposit"
+	case EMsg_AMSwapXsollaDepositResponse:
+		return "EMsg_AMSwapXsollaDepositResponse"
+	case EMsg_AMSetUserGiftUnowned:
+		return "EMsg_AMSetUserGiftUnowned"
+	case EMsg_AMSetUserGiftUnownedResponse:
+		return "EMsg_AMSetUserGiftUnownedResponse"
+	case EMsg_AMClaimUnownedUserGift:
+		return "EMsg_AMClaimUnownedUserGift"
+	case EMsg_AMClaimUnownedUserGiftResponse:
+		return "EMsg_AMClaimUnownedUserGiftResponse"
+	case EMsg_AMSetClanName:
+		return "EMsg_AMSetClanName"
+	case EMsg_AMSetClanNameResponse:
+		return "EMsg_AMSetClanNameResponse"
+	case EMsg_AMGrantCoupon:
+		return "EMsg_AMGrantCoupon"
+	case EMsg_AMGrantCouponResponse:
+		return "EMsg_AMGrantCouponResponse"
+	case EMsg_AMIsPackageRestrictedInUserCountry:
+		return "EMsg_AMIsPackageRestrictedInUserCountry"
+	case EMsg_AMIsPackageRestrictedInUserCountryResponse:
+		return "EMsg_AMIsPackageRestrictedInUserCountryResponse"
+	case EMsg_AMHandlePendingTransactionResponse:
+		return "EMsg_AMHandlePendingTransactionResponse"
+	case EMsg_AMGrantGuestPasses2:
+		return "EMsg_AMGrantGuestPasses2"
+	case EMsg_AMGrantGuestPasses2Response:
+		return "EMsg_AMGrantGuestPasses2Response"
+	case EMsg_AMSessionQuery:
+		return "EMsg_AMSessionQuery"
+	case EMsg_AMSessionQueryResponse:
+		return "EMsg_AMSessionQueryResponse"
+	case EMsg_AMGetPlayerBanDetails:
+		return "EMsg_AMGetPlayerBanDetails"
+	case EMsg_AMGetPlayerBanDetailsResponse:
+		return "EMsg_AMGetPlayerBanDetailsResponse"
+	case EMsg_AMFinalizePurchase:
+		return "EMsg_AMFinalizePurchase"
+	case EMsg_AMFinalizePurchaseResponse:
+		return "EMsg_AMFinalizePurchaseResponse"
+	case EMsg_AMPersonaChangeResponse:
+		return "EMsg_AMPersonaChangeResponse"
+	case EMsg_AMGetClanDetailsForForumCreation:
+		return "EMsg_AMGetClanDetailsForForumCreation"
+	case EMsg_AMGetClanDetailsForForumCreationResponse:
+		return "EMsg_AMGetClanDetailsForForumCreationResponse"
+	case EMsg_AMGetPendingNotificationCount:
+		return "EMsg_AMGetPendingNotificationCount"
+	case EMsg_AMGetPendingNotificationCountResponse:
+		return "EMsg_AMGetPendingNotificationCountResponse"
+	case EMsg_AMPasswordHashUpgrade:
+		return "EMsg_AMPasswordHashUpgrade"
+	case EMsg_AMMoPayPayment:
+		return "EMsg_AMMoPayPayment"
+	case EMsg_AMMoPayPaymentResponse:
+		return "EMsg_AMMoPayPaymentResponse"
+	case EMsg_AMBoaCompraPayment:
+		return "EMsg_AMBoaCompraPayment"
+	case EMsg_AMBoaCompraPaymentResponse:
+		return "EMsg_AMBoaCompraPaymentResponse"
+	case EMsg_AMExpireCaptchaByGID:
+		return "EMsg_AMExpireCaptchaByGID"
+	case EMsg_AMCompleteExternalPurchase:
+		return "EMsg_AMCompleteExternalPurchase"
+	case EMsg_AMCompleteExternalPurchaseResponse:
+		return "EMsg_AMCompleteExternalPurchaseResponse"
+	case EMsg_AMResolveNegativeWalletCredits:
+		return "EMsg_AMResolveNegativeWalletCredits"
+	case EMsg_AMResolveNegativeWalletCreditsResponse:
+		return "EMsg_AMResolveNegativeWalletCreditsResponse"
+	case EMsg_AMPayelpPayment:
+		return "EMsg_AMPayelpPayment"
+	case EMsg_AMPayelpPaymentResponse:
+		return "EMsg_AMPayelpPaymentResponse"
+	case EMsg_AMPlayerGetClanBasicDetails:
+		return "EMsg_AMPlayerGetClanBasicDetails"
+	case EMsg_AMPlayerGetClanBasicDetailsResponse:
+		return "EMsg_AMPlayerGetClanBasicDetailsResponse"
+	case EMsg_BasePSRange:
+		return "EMsg_BasePSRange"
+	case EMsg_PSCreateShoppingCart:
+		return "EMsg_PSCreateShoppingCart"
+	case EMsg_PSCreateShoppingCartResponse:
+		return "EMsg_PSCreateShoppingCartResponse"
+	case EMsg_PSIsValidShoppingCart:
+		return "EMsg_PSIsValidShoppingCart"
+	case EMsg_PSIsValidShoppingCartResponse:
+		return "EMsg_PSIsValidShoppingCartResponse"
+	case EMsg_PSAddPackageToShoppingCart:
+		return "EMsg_PSAddPackageToShoppingCart"
+	case EMsg_PSAddPackageToShoppingCartResponse:
+		return "EMsg_PSAddPackageToShoppingCartResponse"
+	case EMsg_PSRemoveLineItemFromShoppingCart:
+		return "EMsg_PSRemoveLineItemFromShoppingCart"
+	case EMsg_PSRemoveLineItemFromShoppingCartResponse:
+		return "EMsg_PSRemoveLineItemFromShoppingCartResponse"
+	case EMsg_PSGetShoppingCartContents:
+		return "EMsg_PSGetShoppingCartContents"
+	case EMsg_PSGetShoppingCartContentsResponse:
+		return "EMsg_PSGetShoppingCartContentsResponse"
+	case EMsg_PSAddWalletCreditToShoppingCart:
+		return "EMsg_PSAddWalletCreditToShoppingCart"
+	case EMsg_PSAddWalletCreditToShoppingCartResponse:
+		return "EMsg_PSAddWalletCreditToShoppingCartResponse"
+	case EMsg_BaseUFSRange:
+		return "EMsg_BaseUFSRange"
+	case EMsg_ClientUFSUploadFileRequest:
+		return "EMsg_ClientUFSUploadFileRequest"
+	case EMsg_ClientUFSUploadFileResponse:
+		return "EMsg_ClientUFSUploadFileResponse"
+	case EMsg_ClientUFSUploadFileChunk:
+		return "EMsg_ClientUFSUploadFileChunk"
+	case EMsg_ClientUFSUploadFileFinished:
+		return "EMsg_ClientUFSUploadFileFinished"
+	case EMsg_ClientUFSGetFileListForApp:
+		return "EMsg_ClientUFSGetFileListForApp"
+	case EMsg_ClientUFSGetFileListForAppResponse:
+		return "EMsg_ClientUFSGetFileListForAppResponse"
+	case EMsg_ClientUFSDownloadRequest:
+		return "EMsg_ClientUFSDownloadRequest"
+	case EMsg_ClientUFSDownloadResponse:
+		return "EMsg_ClientUFSDownloadResponse"
+	case EMsg_ClientUFSDownloadChunk:
+		return "EMsg_ClientUFSDownloadChunk"
+	case EMsg_ClientUFSLoginRequest:
+		return "EMsg_ClientUFSLoginRequest"
+	case EMsg_ClientUFSLoginResponse:
+		return "EMsg_ClientUFSLoginResponse"
+	case EMsg_UFSReloadPartitionInfo:
+		return "EMsg_UFSReloadPartitionInfo"
+	case EMsg_ClientUFSTransferHeartbeat:
+		return "EMsg_ClientUFSTransferHeartbeat"
+	case EMsg_UFSSynchronizeFile:
+		return "EMsg_UFSSynchronizeFile"
+	case EMsg_UFSSynchronizeFileResponse:
+		return "EMsg_UFSSynchronizeFileResponse"
+	case EMsg_ClientUFSDeleteFileRequest:
+		return "EMsg_ClientUFSDeleteFileRequest"
+	case EMsg_ClientUFSDeleteFileResponse:
+		return "EMsg_ClientUFSDeleteFileResponse"
+	case EMsg_UFSDownloadRequest:
+		return "EMsg_UFSDownloadRequest"
+	case EMsg_UFSDownloadResponse:
+		return "EMsg_UFSDownloadResponse"
+	case EMsg_UFSDownloadChunk:
+		return "EMsg_UFSDownloadChunk"
+	case EMsg_ClientUFSGetUGCDetails:
+		return "EMsg_ClientUFSGetUGCDetails"
+	case EMsg_ClientUFSGetUGCDetailsResponse:
+		return "EMsg_ClientUFSGetUGCDetailsResponse"
+	case EMsg_UFSUpdateFileFlags:
+		return "EMsg_UFSUpdateFileFlags"
+	case EMsg_UFSUpdateFileFlagsResponse:
+		return "EMsg_UFSUpdateFileFlagsResponse"
+	case EMsg_ClientUFSGetSingleFileInfo:
+		return "EMsg_ClientUFSGetSingleFileInfo"
+	case EMsg_ClientUFSGetSingleFileInfoResponse:
+		return "EMsg_ClientUFSGetSingleFileInfoResponse"
+	case EMsg_ClientUFSShareFile:
+		return "EMsg_ClientUFSShareFile"
+	case EMsg_ClientUFSShareFileResponse:
+		return "EMsg_ClientUFSShareFileResponse"
+	case EMsg_UFSReloadAccount:
+		return "EMsg_UFSReloadAccount"
+	case EMsg_UFSReloadAccountResponse:
+		return "EMsg_UFSReloadAccountResponse"
+	case EMsg_UFSUpdateRecordBatched:
+		return "EMsg_UFSUpdateRecordBatched"
+	case EMsg_UFSUpdateRecordBatchedResponse:
+		return "EMsg_UFSUpdateRecordBatchedResponse"
+	case EMsg_UFSMigrateFile:
+		return "EMsg_UFSMigrateFile"
+	case EMsg_UFSMigrateFileResponse:
+		return "EMsg_UFSMigrateFileResponse"
+	case EMsg_UFSGetUGCURLs:
+		return "EMsg_UFSGetUGCURLs"
+	case EMsg_UFSGetUGCURLsResponse:
+		return "EMsg_UFSGetUGCURLsResponse"
+	case EMsg_UFSHttpUploadFileFinishRequest:
+		return "EMsg_UFSHttpUploadFileFinishRequest"
+	case EMsg_UFSHttpUploadFileFinishResponse:
+		return "EMsg_UFSHttpUploadFileFinishResponse"
+	case EMsg_UFSDownloadStartRequest:
+		return "EMsg_UFSDownloadStartRequest"
+	case EMsg_UFSDownloadStartResponse:
+		return "EMsg_UFSDownloadStartResponse"
+	case EMsg_UFSDownloadChunkRequest:
+		return "EMsg_UFSDownloadChunkRequest"
+	case EMsg_UFSDownloadChunkResponse:
+		return "EMsg_UFSDownloadChunkResponse"
+	case EMsg_UFSDownloadFinishRequest:
+		return "EMsg_UFSDownloadFinishRequest"
+	case EMsg_UFSDownloadFinishResponse:
+		return "EMsg_UFSDownloadFinishResponse"
+	case EMsg_UFSFlushURLCache:
+		return "EMsg_UFSFlushURLCache"
+	case EMsg_UFSUploadCommit:
+		return "EMsg_UFSUploadCommit"
+	case EMsg_UFSUploadCommitResponse:
+		return "EMsg_UFSUploadCommitResponse"
+	case EMsg_BaseClient2:
+		return "EMsg_BaseClient2"
+	case EMsg_ClientRequestForgottenPasswordEmail:
+		return "EMsg_ClientRequestForgottenPasswordEmail"
+	case EMsg_ClientRequestForgottenPasswordEmailResponse:
+		return "EMsg_ClientRequestForgottenPasswordEmailResponse"
+	case EMsg_ClientCreateAccountResponse:
+		return "EMsg_ClientCreateAccountResponse"
+	case EMsg_ClientResetForgottenPassword:
+		return "EMsg_ClientResetForgottenPassword"
+	case EMsg_ClientResetForgottenPasswordResponse:
+		return "EMsg_ClientResetForgottenPasswordResponse"
+	case EMsg_ClientCreateAccount2:
+		return "EMsg_ClientCreateAccount2"
+	case EMsg_ClientInformOfResetForgottenPassword:
+		return "EMsg_ClientInformOfResetForgottenPassword"
+	case EMsg_ClientInformOfResetForgottenPasswordResponse:
+		return "EMsg_ClientInformOfResetForgottenPasswordResponse"
+	case EMsg_ClientAnonUserLogOn_Deprecated:
+		return "EMsg_ClientAnonUserLogOn_Deprecated"
+	case EMsg_ClientGamesPlayedWithDataBlob:
+		return "EMsg_ClientGamesPlayedWithDataBlob"
+	case EMsg_ClientUpdateUserGameInfo:
+		return "EMsg_ClientUpdateUserGameInfo"
+	case EMsg_ClientFileToDownload:
+		return "EMsg_ClientFileToDownload"
+	case EMsg_ClientFileToDownloadResponse:
+		return "EMsg_ClientFileToDownloadResponse"
+	case EMsg_ClientLBSSetScore:
+		return "EMsg_ClientLBSSetScore"
+	case EMsg_ClientLBSSetScoreResponse:
+		return "EMsg_ClientLBSSetScoreResponse"
+	case EMsg_ClientLBSFindOrCreateLB:
+		return "EMsg_ClientLBSFindOrCreateLB"
+	case EMsg_ClientLBSFindOrCreateLBResponse:
+		return "EMsg_ClientLBSFindOrCreateLBResponse"
+	case EMsg_ClientLBSGetLBEntries:
+		return "EMsg_ClientLBSGetLBEntries"
+	case EMsg_ClientLBSGetLBEntriesResponse:
+		return "EMsg_ClientLBSGetLBEntriesResponse"
+	case EMsg_ClientMarketingMessageUpdate:
+		return "EMsg_ClientMarketingMessageUpdate"
+	case EMsg_ClientChatDeclined:
+		return "EMsg_ClientChatDeclined"
+	case EMsg_ClientFriendMsgIncoming:
+		return "EMsg_ClientFriendMsgIncoming"
+	case EMsg_ClientAuthList_Deprecated:
+		return "EMsg_ClientAuthList_Deprecated"
+	case EMsg_ClientTicketAuthComplete:
+		return "EMsg_ClientTicketAuthComplete"
+	case EMsg_ClientIsLimitedAccount:
+		return "EMsg_ClientIsLimitedAccount"
+	case EMsg_ClientRequestAuthList:
+		return "EMsg_ClientRequestAuthList"
+	case EMsg_ClientAuthList:
+		return "EMsg_ClientAuthList"
+	case EMsg_ClientStat:
+		return "EMsg_ClientStat"
+	case EMsg_ClientP2PConnectionInfo:
+		return "EMsg_ClientP2PConnectionInfo"
+	case EMsg_ClientP2PConnectionFailInfo:
+		return "EMsg_ClientP2PConnectionFailInfo"
+	case EMsg_ClientGetNumberOfCurrentPlayers:
+		return "EMsg_ClientGetNumberOfCurrentPlayers"
+	case EMsg_ClientGetNumberOfCurrentPlayersResponse:
+		return "EMsg_ClientGetNumberOfCurrentPlayersResponse"
+	case EMsg_ClientGetDepotDecryptionKey:
+		return "EMsg_ClientGetDepotDecryptionKey"
+	case EMsg_ClientGetDepotDecryptionKeyResponse:
+		return "EMsg_ClientGetDepotDecryptionKeyResponse"
+	case EMsg_GSPerformHardwareSurvey:
+		return "EMsg_GSPerformHardwareSurvey"
+	case EMsg_ClientGetAppBetaPasswords:
+		return "EMsg_ClientGetAppBetaPasswords"
+	case EMsg_ClientGetAppBetaPasswordsResponse:
+		return "EMsg_ClientGetAppBetaPasswordsResponse"
+	case EMsg_ClientEnableTestLicense:
+		return "EMsg_ClientEnableTestLicense"
+	case EMsg_ClientEnableTestLicenseResponse:
+		return "EMsg_ClientEnableTestLicenseResponse"
+	case EMsg_ClientDisableTestLicense:
+		return "EMsg_ClientDisableTestLicense"
+	case EMsg_ClientDisableTestLicenseResponse:
+		return "EMsg_ClientDisableTestLicenseResponse"
+	case EMsg_ClientRequestValidationMail:
+		return "EMsg_ClientRequestValidationMail"
+	case EMsg_ClientRequestValidationMailResponse:
+		return "EMsg_ClientRequestValidationMailResponse"
+	case EMsg_ClientToGC:
+		return "EMsg_ClientToGC"
+	case EMsg_ClientFromGC:
+		return "EMsg_ClientFromGC"
+	case EMsg_ClientRequestChangeMail:
+		return "EMsg_ClientRequestChangeMail"
+	case EMsg_ClientRequestChangeMailResponse:
+		return "EMsg_ClientRequestChangeMailResponse"
+	case EMsg_ClientEmailAddrInfo:
+		return "EMsg_ClientEmailAddrInfo"
+	case EMsg_ClientPasswordChange3:
+		return "EMsg_ClientPasswordChange3"
+	case EMsg_ClientEmailChange3:
+		return "EMsg_ClientEmailChange3"
+	case EMsg_ClientPersonalQAChange3:
+		return "EMsg_ClientPersonalQAChange3"
+	case EMsg_ClientResetForgottenPassword3:
+		return "EMsg_ClientResetForgottenPassword3"
+	case EMsg_ClientRequestForgottenPasswordEmail3:
+		return "EMsg_ClientRequestForgottenPasswordEmail3"
+	case EMsg_ClientCreateAccount3:
+		return "EMsg_ClientCreateAccount3"
+	case EMsg_ClientNewLoginKey:
+		return "EMsg_ClientNewLoginKey"
+	case EMsg_ClientNewLoginKeyAccepted:
+		return "EMsg_ClientNewLoginKeyAccepted"
+	case EMsg_ClientLogOnWithHash_Deprecated:
+		return "EMsg_ClientLogOnWithHash_Deprecated"
+	case EMsg_ClientStoreUserStats2:
+		return "EMsg_ClientStoreUserStats2"
+	case EMsg_ClientStatsUpdated:
+		return "EMsg_ClientStatsUpdated"
+	case EMsg_ClientActivateOEMLicense:
+		return "EMsg_ClientActivateOEMLicense"
+	case EMsg_ClientRegisterOEMMachine:
+		return "EMsg_ClientRegisterOEMMachine"
+	case EMsg_ClientRegisterOEMMachineResponse:
+		return "EMsg_ClientRegisterOEMMachineResponse"
+	case EMsg_ClientRequestedClientStats:
+		return "EMsg_ClientRequestedClientStats"
+	case EMsg_ClientStat2Int32:
+		return "EMsg_ClientStat2Int32"
+	case EMsg_ClientStat2:
+		return "EMsg_ClientStat2"
+	case EMsg_ClientVerifyPassword:
+		return "EMsg_ClientVerifyPassword"
+	case EMsg_ClientVerifyPasswordResponse:
+		return "EMsg_ClientVerifyPasswordResponse"
+	case EMsg_ClientDRMDownloadRequest:
+		return "EMsg_ClientDRMDownloadRequest"
+	case EMsg_ClientDRMDownloadResponse:
+		return "EMsg_ClientDRMDownloadResponse"
+	case EMsg_ClientDRMFinalResult:
+		return "EMsg_ClientDRMFinalResult"
+	case EMsg_ClientGetFriendsWhoPlayGame:
+		return "EMsg_ClientGetFriendsWhoPlayGame"
+	case EMsg_ClientGetFriendsWhoPlayGameResponse:
+		return "EMsg_ClientGetFriendsWhoPlayGameResponse"
+	case EMsg_ClientOGSBeginSession:
+		return "EMsg_ClientOGSBeginSession"
+	case EMsg_ClientOGSBeginSessionResponse:
+		return "EMsg_ClientOGSBeginSessionResponse"
+	case EMsg_ClientOGSEndSession:
+		return "EMsg_ClientOGSEndSession"
+	case EMsg_ClientOGSEndSessionResponse:
+		return "EMsg_ClientOGSEndSessionResponse"
+	case EMsg_ClientOGSWriteRow:
+		return "EMsg_ClientOGSWriteRow"
+	case EMsg_ClientDRMTest:
+		return "EMsg_ClientDRMTest"
+	case EMsg_ClientDRMTestResult:
+		return "EMsg_ClientDRMTestResult"
+	case EMsg_ClientServerUnavailable:
+		return "EMsg_ClientServerUnavailable"
+	case EMsg_ClientServersAvailable:
+		return "EMsg_ClientServersAvailable"
+	case EMsg_ClientRegisterAuthTicketWithCM:
+		return "EMsg_ClientRegisterAuthTicketWithCM"
+	case EMsg_ClientGCMsgFailed:
+		return "EMsg_ClientGCMsgFailed"
+	case EMsg_ClientMicroTxnAuthRequest:
+		return "EMsg_ClientMicroTxnAuthRequest"
+	case EMsg_ClientMicroTxnAuthorize:
+		return "EMsg_ClientMicroTxnAuthorize"
+	case EMsg_ClientMicroTxnAuthorizeResponse:
+		return "EMsg_ClientMicroTxnAuthorizeResponse"
+	case EMsg_ClientAppMinutesPlayedData:
+		return "EMsg_ClientAppMinutesPlayedData"
+	case EMsg_ClientGetMicroTxnInfo:
+		return "EMsg_ClientGetMicroTxnInfo"
+	case EMsg_ClientGetMicroTxnInfoResponse:
+		return "EMsg_ClientGetMicroTxnInfoResponse"
+	case EMsg_ClientMarketingMessageUpdate2:
+		return "EMsg_ClientMarketingMessageUpdate2"
+	case EMsg_ClientDeregisterWithServer:
+		return "EMsg_ClientDeregisterWithServer"
+	case EMsg_ClientSubscribeToPersonaFeed:
+		return "EMsg_ClientSubscribeToPersonaFeed"
+	case EMsg_ClientLogon:
+		return "EMsg_ClientLogon"
+	case EMsg_ClientGetClientDetails:
+		return "EMsg_ClientGetClientDetails"
+	case EMsg_ClientGetClientDetailsResponse:
+		return "EMsg_ClientGetClientDetailsResponse"
+	case EMsg_ClientReportOverlayDetourFailure:
+		return "EMsg_ClientReportOverlayDetourFailure"
+	case EMsg_ClientGetClientAppList:
+		return "EMsg_ClientGetClientAppList"
+	case EMsg_ClientGetClientAppListResponse:
+		return "EMsg_ClientGetClientAppListResponse"
+	case EMsg_ClientInstallClientApp:
+		return "EMsg_ClientInstallClientApp"
+	case EMsg_ClientInstallClientAppResponse:
+		return "EMsg_ClientInstallClientAppResponse"
+	case EMsg_ClientUninstallClientApp:
+		return "EMsg_ClientUninstallClientApp"
+	case EMsg_ClientUninstallClientAppResponse:
+		return "EMsg_ClientUninstallClientAppResponse"
+	case EMsg_ClientSetClientAppUpdateState:
+		return "EMsg_ClientSetClientAppUpdateState"
+	case EMsg_ClientSetClientAppUpdateStateResponse:
+		return "EMsg_ClientSetClientAppUpdateStateResponse"
+	case EMsg_ClientRequestEncryptedAppTicket:
+		return "EMsg_ClientRequestEncryptedAppTicket"
+	case EMsg_ClientRequestEncryptedAppTicketResponse:
+		return "EMsg_ClientRequestEncryptedAppTicketResponse"
+	case EMsg_ClientWalletInfoUpdate:
+		return "EMsg_ClientWalletInfoUpdate"
+	case EMsg_ClientLBSSetUGC:
+		return "EMsg_ClientLBSSetUGC"
+	case EMsg_ClientLBSSetUGCResponse:
+		return "EMsg_ClientLBSSetUGCResponse"
+	case EMsg_ClientAMGetClanOfficers:
+		return "EMsg_ClientAMGetClanOfficers"
+	case EMsg_ClientAMGetClanOfficersResponse:
+		return "EMsg_ClientAMGetClanOfficersResponse"
+	case EMsg_ClientCheckFileSignature:
+		return "EMsg_ClientCheckFileSignature"
+	case EMsg_ClientCheckFileSignatureResponse:
+		return "EMsg_ClientCheckFileSignatureResponse"
+	case EMsg_ClientFriendProfileInfo:
+		return "EMsg_ClientFriendProfileInfo"
+	case EMsg_ClientFriendProfileInfoResponse:
+		return "EMsg_ClientFriendProfileInfoResponse"
+	case EMsg_ClientUpdateMachineAuth:
+		return "EMsg_ClientUpdateMachineAuth"
+	case EMsg_ClientUpdateMachineAuthResponse:
+		return "EMsg_ClientUpdateMachineAuthResponse"
+	case EMsg_ClientReadMachineAuth:
+		return "EMsg_ClientReadMachineAuth"
+	case EMsg_ClientReadMachineAuthResponse:
+		return "EMsg_ClientReadMachineAuthResponse"
+	case EMsg_ClientRequestMachineAuth:
+		return "EMsg_ClientRequestMachineAuth"
+	case EMsg_ClientRequestMachineAuthResponse:
+		return "EMsg_ClientRequestMachineAuthResponse"
+	case EMsg_ClientScreenshotsChanged:
+		return "EMsg_ClientScreenshotsChanged"
+	case EMsg_ClientEmailChange4:
+		return "EMsg_ClientEmailChange4"
+	case EMsg_ClientEmailChangeResponse4:
+		return "EMsg_ClientEmailChangeResponse4"
+	case EMsg_ClientGetCDNAuthToken:
+		return "EMsg_ClientGetCDNAuthToken"
+	case EMsg_ClientGetCDNAuthTokenResponse:
+		return "EMsg_ClientGetCDNAuthTokenResponse"
+	case EMsg_ClientDownloadRateStatistics:
+		return "EMsg_ClientDownloadRateStatistics"
+	case EMsg_ClientRequestAccountData:
+		return "EMsg_ClientRequestAccountData"
+	case EMsg_ClientRequestAccountDataResponse:
+		return "EMsg_ClientRequestAccountDataResponse"
+	case EMsg_ClientResetForgottenPassword4:
+		return "EMsg_ClientResetForgottenPassword4"
+	case EMsg_ClientHideFriend:
+		return "EMsg_ClientHideFriend"
+	case EMsg_ClientFriendsGroupsList:
+		return "EMsg_ClientFriendsGroupsList"
+	case EMsg_ClientGetClanActivityCounts:
+		return "EMsg_ClientGetClanActivityCounts"
+	case EMsg_ClientGetClanActivityCountsResponse:
+		return "EMsg_ClientGetClanActivityCountsResponse"
+	case EMsg_ClientOGSReportString:
+		return "EMsg_ClientOGSReportString"
+	case EMsg_ClientOGSReportBug:
+		return "EMsg_ClientOGSReportBug"
+	case EMsg_ClientSentLogs:
+		return "EMsg_ClientSentLogs"
+	case EMsg_ClientLogonGameServer:
+		return "EMsg_ClientLogonGameServer"
+	case EMsg_AMClientCreateFriendsGroup:
+		return "EMsg_AMClientCreateFriendsGroup"
+	case EMsg_AMClientCreateFriendsGroupResponse:
+		return "EMsg_AMClientCreateFriendsGroupResponse"
+	case EMsg_AMClientDeleteFriendsGroup:
+		return "EMsg_AMClientDeleteFriendsGroup"
+	case EMsg_AMClientDeleteFriendsGroupResponse:
+		return "EMsg_AMClientDeleteFriendsGroupResponse"
+	case EMsg_AMClientRenameFriendsGroup:
+		return "EMsg_AMClientRenameFriendsGroup"
+	case EMsg_AMClientRenameFriendsGroupResponse:
+		return "EMsg_AMClientRenameFriendsGroupResponse"
+	case EMsg_AMClientAddFriendToGroup:
+		return "EMsg_AMClientAddFriendToGroup"
+	case EMsg_AMClientAddFriendToGroupResponse:
+		return "EMsg_AMClientAddFriendToGroupResponse"
+	case EMsg_AMClientRemoveFriendFromGroup:
+		return "EMsg_AMClientRemoveFriendFromGroup"
+	case EMsg_AMClientRemoveFriendFromGroupResponse:
+		return "EMsg_AMClientRemoveFriendFromGroupResponse"
+	case EMsg_ClientAMGetPersonaNameHistory:
+		return "EMsg_ClientAMGetPersonaNameHistory"
+	case EMsg_ClientAMGetPersonaNameHistoryResponse:
+		return "EMsg_ClientAMGetPersonaNameHistoryResponse"
+	case EMsg_ClientRequestFreeLicense:
+		return "EMsg_ClientRequestFreeLicense"
+	case EMsg_ClientRequestFreeLicenseResponse:
+		return "EMsg_ClientRequestFreeLicenseResponse"
+	case EMsg_ClientDRMDownloadRequestWithCrashData:
+		return "EMsg_ClientDRMDownloadRequestWithCrashData"
+	case EMsg_ClientAuthListAck:
+		return "EMsg_ClientAuthListAck"
+	case EMsg_ClientItemAnnouncements:
+		return "EMsg_ClientItemAnnouncements"
+	case EMsg_ClientRequestItemAnnouncements:
+		return "EMsg_ClientRequestItemAnnouncements"
+	case EMsg_ClientFriendMsgEchoToSender:
+		return "EMsg_ClientFriendMsgEchoToSender"
+	case EMsg_ClientChangeSteamGuardOptions:
+		return "EMsg_ClientChangeSteamGuardOptions"
+	case EMsg_ClientChangeSteamGuardOptionsResponse:
+		return "EMsg_ClientChangeSteamGuardOptionsResponse"
+	case EMsg_ClientOGSGameServerPingSample:
+		return "EMsg_ClientOGSGameServerPingSample"
+	case EMsg_ClientCommentNotifications:
+		return "EMsg_ClientCommentNotifications"
+	case EMsg_ClientRequestCommentNotifications:
+		return "EMsg_ClientRequestCommentNotifications"
+	case EMsg_ClientPersonaChangeResponse:
+		return "EMsg_ClientPersonaChangeResponse"
+	case EMsg_ClientRequestWebAPIAuthenticateUserNonce:
+		return "EMsg_ClientRequestWebAPIAuthenticateUserNonce"
+	case EMsg_ClientRequestWebAPIAuthenticateUserNonceResponse:
+		return "EMsg_ClientRequestWebAPIAuthenticateUserNonceResponse"
+	case EMsg_ClientPlayerNicknameList:
+		return "EMsg_ClientPlayerNicknameList"
+	case EMsg_AMClientSetPlayerNickname:
+		return "EMsg_AMClientSetPlayerNickname"
+	case EMsg_AMClientSetPlayerNicknameResponse:
+		return "EMsg_AMClientSetPlayerNicknameResponse"
+	case EMsg_ClientRequestOAuthTokenForApp:
+		return "EMsg_ClientRequestOAuthTokenForApp"
+	case EMsg_ClientRequestOAuthTokenForAppResponse:
+		return "EMsg_ClientRequestOAuthTokenForAppResponse"
+	case EMsg_ClientGetNumberOfCurrentPlayersDP:
+		return "EMsg_ClientGetNumberOfCurrentPlayersDP"
+	case EMsg_ClientGetNumberOfCurrentPlayersDPResponse:
+		return "EMsg_ClientGetNumberOfCurrentPlayersDPResponse"
+	case EMsg_ClientServiceMethod:
+		return "EMsg_ClientServiceMethod"
+	case EMsg_ClientServiceMethodResponse:
+		return "EMsg_ClientServiceMethodResponse"
+	case EMsg_ClientFriendUserStatusPublished:
+		return "EMsg_ClientFriendUserStatusPublished"
+	case EMsg_ClientCurrentUIMode:
+		return "EMsg_ClientCurrentUIMode"
+	case EMsg_ClientVanityURLChangedNotification:
+		return "EMsg_ClientVanityURLChangedNotification"
+	case EMsg_ClientUserNotifications:
+		return "EMsg_ClientUserNotifications"
+	case EMsg_BaseDFS:
+		return "EMsg_BaseDFS"
+	case EMsg_DFSGetFile:
+		return "EMsg_DFSGetFile"
+	case EMsg_DFSInstallLocalFile:
+		return "EMsg_DFSInstallLocalFile"
+	case EMsg_DFSConnection:
+		return "EMsg_DFSConnection"
+	case EMsg_DFSConnectionReply:
+		return "EMsg_DFSConnectionReply"
+	case EMsg_ClientDFSAuthenticateRequest:
+		return "EMsg_ClientDFSAuthenticateRequest"
+	case EMsg_ClientDFSAuthenticateResponse:
+		return "EMsg_ClientDFSAuthenticateResponse"
+	case EMsg_ClientDFSEndSession:
+		return "EMsg_ClientDFSEndSession"
+	case EMsg_DFSPurgeFile:
+		return "EMsg_DFSPurgeFile"
+	case EMsg_DFSRouteFile:
+		return "EMsg_DFSRouteFile"
+	case EMsg_DFSGetFileFromServer:
+		return "EMsg_DFSGetFileFromServer"
+	case EMsg_DFSAcceptedResponse:
+		return "EMsg_DFSAcceptedResponse"
+	case EMsg_DFSRequestPingback:
+		return "EMsg_DFSRequestPingback"
+	case EMsg_DFSRecvTransmitFile:
+		return "EMsg_DFSRecvTransmitFile"
+	case EMsg_DFSSendTransmitFile:
+		return "EMsg_DFSSendTransmitFile"
+	case EMsg_DFSRequestPingback2:
+		return "EMsg_DFSRequestPingback2"
+	case EMsg_DFSResponsePingback2:
+		return "EMsg_DFSResponsePingback2"
+	case EMsg_ClientDFSDownloadStatus:
+		return "EMsg_ClientDFSDownloadStatus"
+	case EMsg_DFSStartTransfer:
+		return "EMsg_DFSStartTransfer"
+	case EMsg_DFSTransferComplete:
+		return "EMsg_DFSTransferComplete"
+	case EMsg_BaseMDS:
+		return "EMsg_BaseMDS"
+	case EMsg_ClientMDSLoginRequest:
+		return "EMsg_ClientMDSLoginRequest"
+	case EMsg_ClientMDSLoginResponse:
+		return "EMsg_ClientMDSLoginResponse"
+	case EMsg_ClientMDSUploadManifestRequest:
+		return "EMsg_ClientMDSUploadManifestRequest"
+	case EMsg_ClientMDSUploadManifestResponse:
+		return "EMsg_ClientMDSUploadManifestResponse"
+	case EMsg_ClientMDSTransmitManifestDataChunk:
+		return "EMsg_ClientMDSTransmitManifestDataChunk"
+	case EMsg_ClientMDSHeartbeat:
+		return "EMsg_ClientMDSHeartbeat"
+	case EMsg_ClientMDSUploadDepotChunks:
+		return "EMsg_ClientMDSUploadDepotChunks"
+	case EMsg_ClientMDSUploadDepotChunksResponse:
+		return "EMsg_ClientMDSUploadDepotChunksResponse"
+	case EMsg_ClientMDSInitDepotBuildRequest:
+		return "EMsg_ClientMDSInitDepotBuildRequest"
+	case EMsg_ClientMDSInitDepotBuildResponse:
+		return "EMsg_ClientMDSInitDepotBuildResponse"
+	case EMsg_AMToMDSGetDepotDecryptionKey:
+		return "EMsg_AMToMDSGetDepotDecryptionKey"
+	case EMsg_MDSToAMGetDepotDecryptionKeyResponse:
+		return "EMsg_MDSToAMGetDepotDecryptionKeyResponse"
+	case EMsg_MDSGetVersionsForDepot:
+		return "EMsg_MDSGetVersionsForDepot"
+	case EMsg_MDSGetVersionsForDepotResponse:
+		return "EMsg_MDSGetVersionsForDepotResponse"
+	case EMsg_MDSSetPublicVersionForDepot:
+		return "EMsg_MDSSetPublicVersionForDepot"
+	case EMsg_MDSSetPublicVersionForDepotResponse:
+		return "EMsg_MDSSetPublicVersionForDepotResponse"
+	case EMsg_ClientMDSGetDepotManifest:
+		return "EMsg_ClientMDSGetDepotManifest"
+	case EMsg_ClientMDSGetDepotManifestResponse:
+		return "EMsg_ClientMDSGetDepotManifestResponse"
+	case EMsg_ClientMDSGetDepotManifestChunk:
+		return "EMsg_ClientMDSGetDepotManifestChunk"
+	case EMsg_ClientMDSUploadRateTest:
+		return "EMsg_ClientMDSUploadRateTest"
+	case EMsg_ClientMDSUploadRateTestResponse:
+		return "EMsg_ClientMDSUploadRateTestResponse"
+	case EMsg_MDSDownloadDepotChunksAck:
+		return "EMsg_MDSDownloadDepotChunksAck"
+	case EMsg_MDSContentServerStatsBroadcast:
+		return "EMsg_MDSContentServerStatsBroadcast"
+	case EMsg_MDSContentServerConfigRequest:
+		return "EMsg_MDSContentServerConfigRequest"
+	case EMsg_MDSContentServerConfig:
+		return "EMsg_MDSContentServerConfig"
+	case EMsg_MDSGetDepotManifest:
+		return "EMsg_MDSGetDepotManifest"
+	case EMsg_MDSGetDepotManifestResponse:
+		return "EMsg_MDSGetDepotManifestResponse"
+	case EMsg_MDSGetDepotManifestChunk:
+		return "EMsg_MDSGetDepotManifestChunk"
+	case EMsg_MDSGetDepotChunk:
+		return "EMsg_MDSGetDepotChunk"
+	case EMsg_MDSGetDepotChunkResponse:
+		return "EMsg_MDSGetDepotChunkResponse"
+	case EMsg_MDSGetDepotChunkChunk:
+		return "EMsg_MDSGetDepotChunkChunk"
+	case EMsg_MDSUpdateContentServerConfig:
+		return "EMsg_MDSUpdateContentServerConfig"
+	case EMsg_MDSGetServerListForUser:
+		return "EMsg_MDSGetServerListForUser"
+	case EMsg_MDSGetServerListForUserResponse:
+		return "EMsg_MDSGetServerListForUserResponse"
+	case EMsg_ClientMDSRegisterAppBuild:
+		return "EMsg_ClientMDSRegisterAppBuild"
+	case EMsg_ClientMDSRegisterAppBuildResponse:
+		return "EMsg_ClientMDSRegisterAppBuildResponse"
+	case EMsg_ClientMDSSetAppBuildLive:
+		return "EMsg_ClientMDSSetAppBuildLive"
+	case EMsg_ClientMDSSetAppBuildLiveResponse:
+		return "EMsg_ClientMDSSetAppBuildLiveResponse"
+	case EMsg_ClientMDSGetPrevDepotBuild:
+		return "EMsg_ClientMDSGetPrevDepotBuild"
+	case EMsg_ClientMDSGetPrevDepotBuildResponse:
+		return "EMsg_ClientMDSGetPrevDepotBuildResponse"
+	case EMsg_MDSToCSFlushChunk:
+		return "EMsg_MDSToCSFlushChunk"
+	case EMsg_ClientMDSSignInstallScript:
+		return "EMsg_ClientMDSSignInstallScript"
+	case EMsg_ClientMDSSignInstallScriptResponse:
+		return "EMsg_ClientMDSSignInstallScriptResponse"
+	case EMsg_CSBase:
+		return "EMsg_CSBase"
+	case EMsg_CSPing:
+		return "EMsg_CSPing"
+	case EMsg_CSPingResponse:
+		return "EMsg_CSPingResponse"
+	case EMsg_GMSBase:
+		return "EMsg_GMSBase"
+	case EMsg_GMSGameServerReplicate:
+		return "EMsg_GMSGameServerReplicate"
+	case EMsg_ClientGMSServerQuery:
+		return "EMsg_ClientGMSServerQuery"
+	case EMsg_GMSClientServerQueryResponse:
+		return "EMsg_GMSClientServerQueryResponse"
+	case EMsg_AMGMSGameServerUpdate:
+		return "EMsg_AMGMSGameServerUpdate"
+	case EMsg_AMGMSGameServerRemove:
+		return "EMsg_AMGMSGameServerRemove"
+	case EMsg_GameServerOutOfDate:
+		return "EMsg_GameServerOutOfDate"
+	case EMsg_ClientAuthorizeLocalDeviceRequest:
+		return "EMsg_ClientAuthorizeLocalDeviceRequest"
+	case EMsg_ClientAuthorizeLocalDevice:
+		return "EMsg_ClientAuthorizeLocalDevice"
+	case EMsg_ClientDeauthorizeLocalDeviceRequest:
+		return "EMsg_ClientDeauthorizeLocalDeviceRequest"
+	case EMsg_ClientDeauthorizeLocalDevice:
+		return "EMsg_ClientDeauthorizeLocalDevice"
+	case EMsg_ClientUseLocalDeviceAuthorizations:
+		return "EMsg_ClientUseLocalDeviceAuthorizations"
+	case EMsg_ClientGetAuthorizedDevices:
+		return "EMsg_ClientGetAuthorizedDevices"
+	case EMsg_ClientGetAuthorizedDevicesResponse:
+		return "EMsg_ClientGetAuthorizedDevicesResponse"
+	case EMsg_MMSBase:
+		return "EMsg_MMSBase"
+	case EMsg_ClientMMSCreateLobby:
+		return "EMsg_ClientMMSCreateLobby"
+	case EMsg_ClientMMSCreateLobbyResponse:
+		return "EMsg_ClientMMSCreateLobbyResponse"
+	case EMsg_ClientMMSJoinLobby:
+		return "EMsg_ClientMMSJoinLobby"
+	case EMsg_ClientMMSJoinLobbyResponse:
+		return "EMsg_ClientMMSJoinLobbyResponse"
+	case EMsg_ClientMMSLeaveLobby:
+		return "EMsg_ClientMMSLeaveLobby"
+	case EMsg_ClientMMSLeaveLobbyResponse:
+		return "EMsg_ClientMMSLeaveLobbyResponse"
+	case EMsg_ClientMMSGetLobbyList:
+		return "EMsg_ClientMMSGetLobbyList"
+	case EMsg_ClientMMSGetLobbyListResponse:
+		return "EMsg_ClientMMSGetLobbyListResponse"
+	case EMsg_ClientMMSSetLobbyData:
+		return "EMsg_ClientMMSSetLobbyData"
+	case EMsg_ClientMMSSetLobbyDataResponse:
+		return "EMsg_ClientMMSSetLobbyDataResponse"
+	case EMsg_ClientMMSGetLobbyData:
+		return "EMsg_ClientMMSGetLobbyData"
+	case EMsg_ClientMMSLobbyData:
+		return "EMsg_ClientMMSLobbyData"
+	case EMsg_ClientMMSSendLobbyChatMsg:
+		return "EMsg_ClientMMSSendLobbyChatMsg"
+	case EMsg_ClientMMSLobbyChatMsg:
+		return "EMsg_ClientMMSLobbyChatMsg"
+	case EMsg_ClientMMSSetLobbyOwner:
+		return "EMsg_ClientMMSSetLobbyOwner"
+	case EMsg_ClientMMSSetLobbyOwnerResponse:
+		return "EMsg_ClientMMSSetLobbyOwnerResponse"
+	case EMsg_ClientMMSSetLobbyGameServer:
+		return "EMsg_ClientMMSSetLobbyGameServer"
+	case EMsg_ClientMMSLobbyGameServerSet:
+		return "EMsg_ClientMMSLobbyGameServerSet"
+	case EMsg_ClientMMSUserJoinedLobby:
+		return "EMsg_ClientMMSUserJoinedLobby"
+	case EMsg_ClientMMSUserLeftLobby:
+		return "EMsg_ClientMMSUserLeftLobby"
+	case EMsg_ClientMMSInviteToLobby:
+		return "EMsg_ClientMMSInviteToLobby"
+	case EMsg_ClientMMSFlushFrenemyListCache:
+		return "EMsg_ClientMMSFlushFrenemyListCache"
+	case EMsg_ClientMMSFlushFrenemyListCacheResponse:
+		return "EMsg_ClientMMSFlushFrenemyListCacheResponse"
+	case EMsg_ClientMMSSetLobbyLinked:
+		return "EMsg_ClientMMSSetLobbyLinked"
+	case EMsg_NonStdMsgBase:
+		return "EMsg_NonStdMsgBase"
+	case EMsg_NonStdMsgMemcached:
+		return "EMsg_NonStdMsgMemcached"
+	case EMsg_NonStdMsgHTTPServer:
+		return "EMsg_NonStdMsgHTTPServer"
+	case EMsg_NonStdMsgHTTPClient:
+		return "EMsg_NonStdMsgHTTPClient"
+	case EMsg_NonStdMsgWGResponse:
+		return "EMsg_NonStdMsgWGResponse"
+	case EMsg_NonStdMsgPHPSimulator:
+		return "EMsg_NonStdMsgPHPSimulator"
+	case EMsg_NonStdMsgChase:
+		return "EMsg_NonStdMsgChase"
+	case EMsg_NonStdMsgDFSTransfer:
+		return "EMsg_NonStdMsgDFSTransfer"
+	case EMsg_NonStdMsgTests:
+		return "EMsg_NonStdMsgTests"
+	case EMsg_NonStdMsgUMQpipeAAPL:
+		return "EMsg_NonStdMsgUMQpipeAAPL"
+	case EMsg_NonStdMsgSyslog:
+		return "EMsg_NonStdMsgSyslog"
+	case EMsg_NonStdMsgLogsink:
+		return "EMsg_NonStdMsgLogsink"
+	case EMsg_UDSBase:
+		return "EMsg_UDSBase"
+	case EMsg_ClientUDSP2PSessionStarted:
+		return "EMsg_ClientUDSP2PSessionStarted"
+	case EMsg_ClientUDSP2PSessionEnded:
+		return "EMsg_ClientUDSP2PSessionEnded"
+	case EMsg_UDSRenderUserAuth:
+		return "EMsg_UDSRenderUserAuth"
+	case EMsg_UDSRenderUserAuthResponse:
+		return "EMsg_UDSRenderUserAuthResponse"
+	case EMsg_ClientUDSInviteToGame:
+		return "EMsg_ClientUDSInviteToGame"
+	case EMsg_UDSFindSession:
+		return "EMsg_UDSFindSession"
+	case EMsg_UDSFindSessionResponse:
+		return "EMsg_UDSFindSessionResponse"
+	case EMsg_MPASBase:
+		return "EMsg_MPASBase"
+	case EMsg_MPASVacBanReset:
+		return "EMsg_MPASVacBanReset"
+	case EMsg_KGSBase:
+		return "EMsg_KGSBase"
+	case EMsg_KGSAllocateKeyRange:
+		return "EMsg_KGSAllocateKeyRange"
+	case EMsg_KGSAllocateKeyRangeResponse:
+		return "EMsg_KGSAllocateKeyRangeResponse"
+	case EMsg_KGSGenerateKeys:
+		return "EMsg_KGSGenerateKeys"
+	case EMsg_KGSGenerateKeysResponse:
+		return "EMsg_KGSGenerateKeysResponse"
+	case EMsg_KGSRemapKeys:
+		return "EMsg_KGSRemapKeys"
+	case EMsg_KGSRemapKeysResponse:
+		return "EMsg_KGSRemapKeysResponse"
+	case EMsg_KGSGenerateGameStopWCKeys:
+		return "EMsg_KGSGenerateGameStopWCKeys"
+	case EMsg_KGSGenerateGameStopWCKeysResponse:
+		return "EMsg_KGSGenerateGameStopWCKeysResponse"
+	case EMsg_UCMBase:
+		return "EMsg_UCMBase"
+	case EMsg_ClientUCMAddScreenshot:
+		return "EMsg_ClientUCMAddScreenshot"
+	case EMsg_ClientUCMAddScreenshotResponse:
+		return "EMsg_ClientUCMAddScreenshotResponse"
+	case EMsg_UCMValidateObjectExists:
+		return "EMsg_UCMValidateObjectExists"
+	case EMsg_UCMValidateObjectExistsResponse:
+		return "EMsg_UCMValidateObjectExistsResponse"
+	case EMsg_UCMResetCommunityContent:
+		return "EMsg_UCMResetCommunityContent"
+	case EMsg_UCMResetCommunityContentResponse:
+		return "EMsg_UCMResetCommunityContentResponse"
+	case EMsg_ClientUCMDeleteScreenshot:
+		return "EMsg_ClientUCMDeleteScreenshot"
+	case EMsg_ClientUCMDeleteScreenshotResponse:
+		return "EMsg_ClientUCMDeleteScreenshotResponse"
+	case EMsg_ClientUCMPublishFile:
+		return "EMsg_ClientUCMPublishFile"
+	case EMsg_ClientUCMPublishFileResponse:
+		return "EMsg_ClientUCMPublishFileResponse"
+	case EMsg_ClientUCMGetPublishedFileDetails:
+		return "EMsg_ClientUCMGetPublishedFileDetails"
+	case EMsg_ClientUCMGetPublishedFileDetailsResponse:
+		return "EMsg_ClientUCMGetPublishedFileDetailsResponse"
+	case EMsg_ClientUCMDeletePublishedFile:
+		return "EMsg_ClientUCMDeletePublishedFile"
+	case EMsg_ClientUCMDeletePublishedFileResponse:
+		return "EMsg_ClientUCMDeletePublishedFileResponse"
+	case EMsg_ClientUCMEnumerateUserPublishedFiles:
+		return "EMsg_ClientUCMEnumerateUserPublishedFiles"
+	case EMsg_ClientUCMEnumerateUserPublishedFilesResponse:
+		return "EMsg_ClientUCMEnumerateUserPublishedFilesResponse"
+	case EMsg_ClientUCMSubscribePublishedFile:
+		return "EMsg_ClientUCMSubscribePublishedFile"
+	case EMsg_ClientUCMSubscribePublishedFileResponse:
+		return "EMsg_ClientUCMSubscribePublishedFileResponse"
+	case EMsg_ClientUCMEnumerateUserSubscribedFiles:
+		return "EMsg_ClientUCMEnumerateUserSubscribedFiles"
+	case EMsg_ClientUCMEnumerateUserSubscribedFilesResponse:
+		return "EMsg_ClientUCMEnumerateUserSubscribedFilesResponse"
+	case EMsg_ClientUCMUnsubscribePublishedFile:
+		return "EMsg_ClientUCMUnsubscribePublishedFile"
+	case EMsg_ClientUCMUnsubscribePublishedFileResponse:
+		return "EMsg_ClientUCMUnsubscribePublishedFileResponse"
+	case EMsg_ClientUCMUpdatePublishedFile:
+		return "EMsg_ClientUCMUpdatePublishedFile"
+	case EMsg_ClientUCMUpdatePublishedFileResponse:
+		return "EMsg_ClientUCMUpdatePublishedFileResponse"
+	case EMsg_UCMUpdatePublishedFile:
+		return "EMsg_UCMUpdatePublishedFile"
+	case EMsg_UCMUpdatePublishedFileResponse:
+		return "EMsg_UCMUpdatePublishedFileResponse"
+	case EMsg_UCMDeletePublishedFile:
+		return "EMsg_UCMDeletePublishedFile"
+	case EMsg_UCMDeletePublishedFileResponse:
+		return "EMsg_UCMDeletePublishedFileResponse"
+	case EMsg_UCMUpdatePublishedFileStat:
+		return "EMsg_UCMUpdatePublishedFileStat"
+	case EMsg_UCMUpdatePublishedFileBan:
+		return "EMsg_UCMUpdatePublishedFileBan"
+	case EMsg_UCMUpdatePublishedFileBanResponse:
+		return "EMsg_UCMUpdatePublishedFileBanResponse"
+	case EMsg_UCMUpdateTaggedScreenshot:
+		return "EMsg_UCMUpdateTaggedScreenshot"
+	case EMsg_UCMAddTaggedScreenshot:
+		return "EMsg_UCMAddTaggedScreenshot"
+	case EMsg_UCMRemoveTaggedScreenshot:
+		return "EMsg_UCMRemoveTaggedScreenshot"
+	case EMsg_UCMReloadPublishedFile:
+		return "EMsg_UCMReloadPublishedFile"
+	case EMsg_UCMReloadUserFileListCaches:
+		return "EMsg_UCMReloadUserFileListCaches"
+	case EMsg_UCMPublishedFileReported:
+		return "EMsg_UCMPublishedFileReported"
+	case EMsg_UCMUpdatePublishedFileIncompatibleStatus:
+		return "EMsg_UCMUpdatePublishedFileIncompatibleStatus"
+	case EMsg_UCMPublishedFilePreviewAdd:
+		return "EMsg_UCMPublishedFilePreviewAdd"
+	case EMsg_UCMPublishedFilePreviewAddResponse:
+		return "EMsg_UCMPublishedFilePreviewAddResponse"
+	case EMsg_UCMPublishedFilePreviewRemove:
+		return "EMsg_UCMPublishedFilePreviewRemove"
+	case EMsg_UCMPublishedFilePreviewRemoveResponse:
+		return "EMsg_UCMPublishedFilePreviewRemoveResponse"
+	case EMsg_UCMPublishedFilePreviewChangeSortOrder:
+		return "EMsg_UCMPublishedFilePreviewChangeSortOrder"
+	case EMsg_UCMPublishedFilePreviewChangeSortOrderResponse:
+		return "EMsg_UCMPublishedFilePreviewChangeSortOrderResponse"
+	case EMsg_ClientUCMPublishedFileSubscribed:
+		return "EMsg_ClientUCMPublishedFileSubscribed"
+	case EMsg_ClientUCMPublishedFileUnsubscribed:
+		return "EMsg_ClientUCMPublishedFileUnsubscribed"
+	case EMsg_UCMPublishedFileSubscribed:
+		return "EMsg_UCMPublishedFileSubscribed"
+	case EMsg_UCMPublishedFileUnsubscribed:
+		return "EMsg_UCMPublishedFileUnsubscribed"
+	case EMsg_UCMPublishFile:
+		return "EMsg_UCMPublishFile"
+	case EMsg_UCMPublishFileResponse:
+		return "EMsg_UCMPublishFileResponse"
+	case EMsg_UCMPublishedFileChildAdd:
+		return "EMsg_UCMPublishedFileChildAdd"
+	case EMsg_UCMPublishedFileChildAddResponse:
+		return "EMsg_UCMPublishedFileChildAddResponse"
+	case EMsg_UCMPublishedFileChildRemove:
+		return "EMsg_UCMPublishedFileChildRemove"
+	case EMsg_UCMPublishedFileChildRemoveResponse:
+		return "EMsg_UCMPublishedFileChildRemoveResponse"
+	case EMsg_UCMPublishedFileChildChangeSortOrder:
+		return "EMsg_UCMPublishedFileChildChangeSortOrder"
+	case EMsg_UCMPublishedFileChildChangeSortOrderResponse:
+		return "EMsg_UCMPublishedFileChildChangeSortOrderResponse"
+	case EMsg_UCMPublishedFileParentChanged:
+		return "EMsg_UCMPublishedFileParentChanged"
+	case EMsg_ClientUCMGetPublishedFilesForUser:
+		return "EMsg_ClientUCMGetPublishedFilesForUser"
+	case EMsg_ClientUCMGetPublishedFilesForUserResponse:
+		return "EMsg_ClientUCMGetPublishedFilesForUserResponse"
+	case EMsg_UCMGetPublishedFilesForUser:
+		return "EMsg_UCMGetPublishedFilesForUser"
+	case EMsg_UCMGetPublishedFilesForUserResponse:
+		return "EMsg_UCMGetPublishedFilesForUserResponse"
+	case EMsg_ClientUCMSetUserPublishedFileAction:
+		return "EMsg_ClientUCMSetUserPublishedFileAction"
+	case EMsg_ClientUCMSetUserPublishedFileActionResponse:
+		return "EMsg_ClientUCMSetUserPublishedFileActionResponse"
+	case EMsg_ClientUCMEnumeratePublishedFilesByUserAction:
+		return "EMsg_ClientUCMEnumeratePublishedFilesByUserAction"
+	case EMsg_ClientUCMEnumeratePublishedFilesByUserActionResponse:
+		return "EMsg_ClientUCMEnumeratePublishedFilesByUserActionResponse"
+	case EMsg_ClientUCMPublishedFileDeleted:
+		return "EMsg_ClientUCMPublishedFileDeleted"
+	case EMsg_UCMGetUserSubscribedFiles:
+		return "EMsg_UCMGetUserSubscribedFiles"
+	case EMsg_UCMGetUserSubscribedFilesResponse:
+		return "EMsg_UCMGetUserSubscribedFilesResponse"
+	case EMsg_UCMFixStatsPublishedFile:
+		return "EMsg_UCMFixStatsPublishedFile"
+	case EMsg_UCMDeleteOldScreenshot:
+		return "EMsg_UCMDeleteOldScreenshot"
+	case EMsg_UCMDeleteOldScreenshotResponse:
+		return "EMsg_UCMDeleteOldScreenshotResponse"
+	case EMsg_UCMDeleteOldVideo:
+		return "EMsg_UCMDeleteOldVideo"
+	case EMsg_UCMDeleteOldVideoResponse:
+		return "EMsg_UCMDeleteOldVideoResponse"
+	case EMsg_UCMUpdateOldScreenshotPrivacy:
+		return "EMsg_UCMUpdateOldScreenshotPrivacy"
+	case EMsg_UCMUpdateOldScreenshotPrivacyResponse:
+		return "EMsg_UCMUpdateOldScreenshotPrivacyResponse"
+	case EMsg_ClientUCMEnumerateUserSubscribedFilesWithUpdates:
+		return "EMsg_ClientUCMEnumerateUserSubscribedFilesWithUpdates"
+	case EMsg_ClientUCMEnumerateUserSubscribedFilesWithUpdatesResponse:
+		return "EMsg_ClientUCMEnumerateUserSubscribedFilesWithUpdatesResponse"
+	case EMsg_UCMPublishedFileContentUpdated:
+		return "EMsg_UCMPublishedFileContentUpdated"
+	case EMsg_UCMPublishedFileUpdated:
+		return "EMsg_UCMPublishedFileUpdated"
+	case EMsg_FSBase:
+		return "EMsg_FSBase"
+	case EMsg_ClientRichPresenceUpload:
+		return "EMsg_ClientRichPresenceUpload"
+	case EMsg_ClientRichPresenceRequest:
+		return "EMsg_ClientRichPresenceRequest"
+	case EMsg_ClientRichPresenceInfo:
+		return "EMsg_ClientRichPresenceInfo"
+	case EMsg_FSRichPresenceRequest:
+		return "EMsg_FSRichPresenceRequest"
+	case EMsg_FSRichPresenceResponse:
+		return "EMsg_FSRichPresenceResponse"
+	case EMsg_FSComputeFrenematrix:
+		return "EMsg_FSComputeFrenematrix"
+	case EMsg_FSComputeFrenematrixResponse:
+		return "EMsg_FSComputeFrenematrixResponse"
+	case EMsg_FSPlayStatusNotification:
+		return "EMsg_FSPlayStatusNotification"
+	case EMsg_FSPublishPersonaStatus:
+		return "EMsg_FSPublishPersonaStatus"
+	case EMsg_FSAddOrRemoveFollower:
+		return "EMsg_FSAddOrRemoveFollower"
+	case EMsg_FSAddOrRemoveFollowerResponse:
+		return "EMsg_FSAddOrRemoveFollowerResponse"
+	case EMsg_FSUpdateFollowingList:
+		return "EMsg_FSUpdateFollowingList"
+	case EMsg_FSCommentNotification:
+		return "EMsg_FSCommentNotification"
+	case EMsg_FSCommentNotificationViewed:
+		return "EMsg_FSCommentNotificationViewed"
+	case EMsg_ClientFSGetFollowerCount:
+		return "EMsg_ClientFSGetFollowerCount"
+	case EMsg_ClientFSGetFollowerCountResponse:
+		return "EMsg_ClientFSGetFollowerCountResponse"
+	case EMsg_ClientFSGetIsFollowing:
+		return "EMsg_ClientFSGetIsFollowing"
+	case EMsg_ClientFSGetIsFollowingResponse:
+		return "EMsg_ClientFSGetIsFollowingResponse"
+	case EMsg_ClientFSEnumerateFollowingList:
+		return "EMsg_ClientFSEnumerateFollowingList"
+	case EMsg_ClientFSEnumerateFollowingListResponse:
+		return "EMsg_ClientFSEnumerateFollowingListResponse"
+	case EMsg_FSGetPendingNotificationCount:
+		return "EMsg_FSGetPendingNotificationCount"
+	case EMsg_FSGetPendingNotificationCountResponse:
+		return "EMsg_FSGetPendingNotificationCountResponse"
+	case EMsg_ClientFSOfflineMessageNotification:
+		return "EMsg_ClientFSOfflineMessageNotification"
+	case EMsg_ClientFSRequestOfflineMessageCount:
+		return "EMsg_ClientFSRequestOfflineMessageCount"
+	case EMsg_ClientFSGetFriendMessageHistory:
+		return "EMsg_ClientFSGetFriendMessageHistory"
+	case EMsg_ClientFSGetFriendMessageHistoryResponse:
+		return "EMsg_ClientFSGetFriendMessageHistoryResponse"
+	case EMsg_ClientFSGetFriendMessageHistoryForOfflineMessages:
+		return "EMsg_ClientFSGetFriendMessageHistoryForOfflineMessages"
+	case EMsg_ClientFSGetFriendsSteamLevels:
+		return "EMsg_ClientFSGetFriendsSteamLevels"
+	case EMsg_ClientFSGetFriendsSteamLevelsResponse:
+		return "EMsg_ClientFSGetFriendsSteamLevelsResponse"
+	case EMsg_DRMRange2:
+		return "EMsg_DRMRange2"
+	case EMsg_CEGVersionSetEnableDisableResponse:
+		return "EMsg_CEGVersionSetEnableDisableResponse"
+	case EMsg_CEGPropStatusDRMSRequest:
+		return "EMsg_CEGPropStatusDRMSRequest"
+	case EMsg_CEGPropStatusDRMSResponse:
+		return "EMsg_CEGPropStatusDRMSResponse"
+	case EMsg_CEGWhackFailureReportRequest:
+		return "EMsg_CEGWhackFailureReportRequest"
+	case EMsg_CEGWhackFailureReportResponse:
+		return "EMsg_CEGWhackFailureReportResponse"
+	case EMsg_DRMSFetchVersionSet:
+		return "EMsg_DRMSFetchVersionSet"
+	case EMsg_DRMSFetchVersionSetResponse:
+		return "EMsg_DRMSFetchVersionSetResponse"
+	case EMsg_EconBase:
+		return "EMsg_EconBase"
+	case EMsg_EconTrading_InitiateTradeRequest:
+		return "EMsg_EconTrading_InitiateTradeRequest"
+	case EMsg_EconTrading_InitiateTradeProposed:
+		return "EMsg_EconTrading_InitiateTradeProposed"
+	case EMsg_EconTrading_InitiateTradeResponse:
+		return "EMsg_EconTrading_InitiateTradeResponse"
+	case EMsg_EconTrading_InitiateTradeResult:
+		return "EMsg_EconTrading_InitiateTradeResult"
+	case EMsg_EconTrading_StartSession:
+		return "EMsg_EconTrading_StartSession"
+	case EMsg_EconTrading_CancelTradeRequest:
+		return "EMsg_EconTrading_CancelTradeRequest"
+	case EMsg_EconFlushInventoryCache:
+		return "EMsg_EconFlushInventoryCache"
+	case EMsg_EconFlushInventoryCacheResponse:
+		return "EMsg_EconFlushInventoryCacheResponse"
+	case EMsg_EconCDKeyProcessTransaction:
+		return "EMsg_EconCDKeyProcessTransaction"
+	case EMsg_EconCDKeyProcessTransactionResponse:
+		return "EMsg_EconCDKeyProcessTransactionResponse"
+	case EMsg_EconGetErrorLogs:
+		return "EMsg_EconGetErrorLogs"
+	case EMsg_EconGetErrorLogsResponse:
+		return "EMsg_EconGetErrorLogsResponse"
+	case EMsg_RMRange:
+		return "EMsg_RMRange"
+	case EMsg_RMTestVerisignOTPResponse:
+		return "EMsg_RMTestVerisignOTPResponse"
+	case EMsg_RMDeleteMemcachedKeys:
+		return "EMsg_RMDeleteMemcachedKeys"
+	case EMsg_RMRemoteInvoke:
+		return "EMsg_RMRemoteInvoke"
+	case EMsg_BadLoginIPList:
+		return "EMsg_BadLoginIPList"
+	case EMsg_UGSBase:
+		return "EMsg_UGSBase"
+	case EMsg_ClientUGSGetGlobalStats:
+		return "EMsg_ClientUGSGetGlobalStats"
+	case EMsg_ClientUGSGetGlobalStatsResponse:
+		return "EMsg_ClientUGSGetGlobalStatsResponse"
+	case EMsg_StoreBase:
+		return "EMsg_StoreBase"
+	case EMsg_UMQBase:
+		return "EMsg_UMQBase"
+	case EMsg_UMQLogonResponse:
+		return "EMsg_UMQLogonResponse"
+	case EMsg_UMQLogoffRequest:
+		return "EMsg_UMQLogoffRequest"
+	case EMsg_UMQLogoffResponse:
+		return "EMsg_UMQLogoffResponse"
+	case EMsg_UMQSendChatMessage:
+		return "EMsg_UMQSendChatMessage"
+	case EMsg_UMQIncomingChatMessage:
+		return "EMsg_UMQIncomingChatMessage"
+	case EMsg_UMQPoll:
+		return "EMsg_UMQPoll"
+	case EMsg_UMQPollResults:
+		return "EMsg_UMQPollResults"
+	case EMsg_UMQ2AM_ClientMsgBatch:
+		return "EMsg_UMQ2AM_ClientMsgBatch"
+	case EMsg_UMQEnqueueMobileSalePromotions:
+		return "EMsg_UMQEnqueueMobileSalePromotions"
+	case EMsg_UMQEnqueueMobileAnnouncements:
+		return "EMsg_UMQEnqueueMobileAnnouncements"
+	case EMsg_WorkshopBase:
+		return "EMsg_WorkshopBase"
+	case EMsg_WorkshopAcceptTOSResponse:
+		return "EMsg_WorkshopAcceptTOSResponse"
+	case EMsg_WebAPIBase:
+		return "EMsg_WebAPIBase"
+	case EMsg_WebAPIValidateOAuth2TokenResponse:
+		return "EMsg_WebAPIValidateOAuth2TokenResponse"
+	case EMsg_WebAPIInvalidateTokensForAccount:
+		return "EMsg_WebAPIInvalidateTokensForAccount"
+	case EMsg_WebAPIRegisterGCInterfaces:
+		return "EMsg_WebAPIRegisterGCInterfaces"
+	case EMsg_WebAPIInvalidateOAuthClientCache:
+		return "EMsg_WebAPIInvalidateOAuthClientCache"
+	case EMsg_WebAPIInvalidateOAuthTokenCache:
+		return "EMsg_WebAPIInvalidateOAuthTokenCache"
+	case EMsg_BackpackBase:
+		return "EMsg_BackpackBase"
+	case EMsg_BackpackAddToCurrency:
+		return "EMsg_BackpackAddToCurrency"
+	case EMsg_BackpackAddToCurrencyResponse:
+		return "EMsg_BackpackAddToCurrencyResponse"
+	case EMsg_CREBase:
+		return "EMsg_CREBase"
+	case EMsg_CRERankByTrend:
+		return "EMsg_CRERankByTrend"
+	case EMsg_CRERankByTrendResponse:
+		return "EMsg_CRERankByTrendResponse"
+	case EMsg_CREItemVoteSummary:
+		return "EMsg_CREItemVoteSummary"
+	case EMsg_CREItemVoteSummaryResponse:
+		return "EMsg_CREItemVoteSummaryResponse"
+	case EMsg_CRERankByVote:
+		return "EMsg_CRERankByVote"
+	case EMsg_CRERankByVoteResponse:
+		return "EMsg_CRERankByVoteResponse"
+	case EMsg_CREUpdateUserPublishedItemVote:
+		return "EMsg_CREUpdateUserPublishedItemVote"
+	case EMsg_CREUpdateUserPublishedItemVoteResponse:
+		return "EMsg_CREUpdateUserPublishedItemVoteResponse"
+	case EMsg_CREGetUserPublishedItemVoteDetails:
+		return "EMsg_CREGetUserPublishedItemVoteDetails"
+	case EMsg_CREGetUserPublishedItemVoteDetailsResponse:
+		return "EMsg_CREGetUserPublishedItemVoteDetailsResponse"
+	case EMsg_CREEnumeratePublishedFiles:
+		return "EMsg_CREEnumeratePublishedFiles"
+	case EMsg_CREEnumeratePublishedFilesResponse:
+		return "EMsg_CREEnumeratePublishedFilesResponse"
+	case EMsg_CREPublishedFileVoteAdded:
+		return "EMsg_CREPublishedFileVoteAdded"
+	case EMsg_SecretsBase:
+		return "EMsg_SecretsBase"
+	case EMsg_SecretsCredentialPairResponse:
+		return "EMsg_SecretsCredentialPairResponse"
+	case EMsg_SecretsRequestServerIdentity:
+		return "EMsg_SecretsRequestServerIdentity"
+	case EMsg_SecretsServerIdentityResponse:
+		return "EMsg_SecretsServerIdentityResponse"
+	case EMsg_SecretsUpdateServerIdentities:
+		return "EMsg_SecretsUpdateServerIdentities"
+	case EMsg_BoxMonitorBase:
+		return "EMsg_BoxMonitorBase"
+	case EMsg_BoxMonitorReportResponse:
+		return "EMsg_BoxMonitorReportResponse"
+	case EMsg_LogsinkBase:
+		return "EMsg_LogsinkBase"
+	case EMsg_PICSBase:
+		return "EMsg_PICSBase"
+	case EMsg_PICSChangesSinceRequest:
+		return "EMsg_PICSChangesSinceRequest"
+	case EMsg_PICSChangesSinceResponse:
+		return "EMsg_PICSChangesSinceResponse"
+	case EMsg_PICSProductInfoRequest:
+		return "EMsg_PICSProductInfoRequest"
+	case EMsg_PICSProductInfoResponse:
+		return "EMsg_PICSProductInfoResponse"
+	case EMsg_PICSAccessTokenRequest:
+		return "EMsg_PICSAccessTokenRequest"
+	case EMsg_PICSAccessTokenResponse:
+		return "EMsg_PICSAccessTokenResponse"
+	case EMsg_WorkerProcess:
+		return "EMsg_WorkerProcess"
+	case EMsg_WorkerProcessPingResponse:
+		return "EMsg_WorkerProcessPingResponse"
+	case EMsg_WorkerProcessShutdown:
+		return "EMsg_WorkerProcessShutdown"
+	case EMsg_DRMWorkerProcess:
+		return "EMsg_DRMWorkerProcess"
+	case EMsg_DRMWorkerProcessDRMAndSignResponse:
+		return "EMsg_DRMWorkerProcessDRMAndSignResponse"
+	case EMsg_DRMWorkerProcessSteamworksInfoRequest:
+		return "EMsg_DRMWorkerProcessSteamworksInfoRequest"
+	case EMsg_DRMWorkerProcessSteamworksInfoResponse:
+		return "EMsg_DRMWorkerProcessSteamworksInfoResponse"
+	case EMsg_DRMWorkerProcessInstallDRMDLLRequest:
+		return "EMsg_DRMWorkerProcessInstallDRMDLLRequest"
+	case EMsg_DRMWorkerProcessInstallDRMDLLResponse:
+		return "EMsg_DRMWorkerProcessInstallDRMDLLResponse"
+	case EMsg_DRMWorkerProcessSecretIdStringRequest:
+		return "EMsg_DRMWorkerProcessSecretIdStringRequest"
+	case EMsg_DRMWorkerProcessSecretIdStringResponse:
+		return "EMsg_DRMWorkerProcessSecretIdStringResponse"
+	case EMsg_DRMWorkerProcessGetDRMGuidsFromFileRequest:
+		return "EMsg_DRMWorkerProcessGetDRMGuidsFromFileRequest"
+	case EMsg_DRMWorkerProcessGetDRMGuidsFromFileResponse:
+		return "EMsg_DRMWorkerProcessGetDRMGuidsFromFileResponse"
+	case EMsg_DRMWorkerProcessInstallProcessedFilesRequest:
+		return "EMsg_DRMWorkerProcessInstallProcessedFilesRequest"
+	case EMsg_DRMWorkerProcessInstallProcessedFilesResponse:
+		return "EMsg_DRMWorkerProcessInstallProcessedFilesResponse"
+	case EMsg_DRMWorkerProcessExamineBlobRequest:
+		return "EMsg_DRMWorkerProcessExamineBlobRequest"
+	case EMsg_DRMWorkerProcessExamineBlobResponse:
+		return "EMsg_DRMWorkerProcessExamineBlobResponse"
+	case EMsg_DRMWorkerProcessDescribeSecretRequest:
+		return "EMsg_DRMWorkerProcessDescribeSecretRequest"
+	case EMsg_DRMWorkerProcessDescribeSecretResponse:
+		return "EMsg_DRMWorkerProcessDescribeSecretResponse"
+	case EMsg_DRMWorkerProcessBackfillOriginalRequest:
+		return "EMsg_DRMWorkerProcessBackfillOriginalRequest"
+	case EMsg_DRMWorkerProcessBackfillOriginalResponse:
+		return "EMsg_DRMWorkerProcessBackfillOriginalResponse"
+	case EMsg_DRMWorkerProcessValidateDRMDLLRequest:
+		return "EMsg_DRMWorkerProcessValidateDRMDLLRequest"
+	case EMsg_DRMWorkerProcessValidateDRMDLLResponse:
+		return "EMsg_DRMWorkerProcessValidateDRMDLLResponse"
+	case EMsg_DRMWorkerProcessValidateFileRequest:
+		return "EMsg_DRMWorkerProcessValidateFileRequest"
+	case EMsg_DRMWorkerProcessValidateFileResponse:
+		return "EMsg_DRMWorkerProcessValidateFileResponse"
+	case EMsg_DRMWorkerProcessSplitAndInstallRequest:
+		return "EMsg_DRMWorkerProcessSplitAndInstallRequest"
+	case EMsg_DRMWorkerProcessSplitAndInstallResponse:
+		return "EMsg_DRMWorkerProcessSplitAndInstallResponse"
+	case EMsg_DRMWorkerProcessGetBlobRequest:
+		return "EMsg_DRMWorkerProcessGetBlobRequest"
+	case EMsg_DRMWorkerProcessGetBlobResponse:
+		return "EMsg_DRMWorkerProcessGetBlobResponse"
+	case EMsg_DRMWorkerProcessEvaluateCrashRequest:
+		return "EMsg_DRMWorkerProcessEvaluateCrashRequest"
+	case EMsg_DRMWorkerProcessEvaluateCrashResponse:
+		return "EMsg_DRMWorkerProcessEvaluateCrashResponse"
+	case EMsg_DRMWorkerProcessAnalyzeFileRequest:
+		return "EMsg_DRMWorkerProcessAnalyzeFileRequest"
+	case EMsg_DRMWorkerProcessAnalyzeFileResponse:
+		return "EMsg_DRMWorkerProcessAnalyzeFileResponse"
+	case EMsg_DRMWorkerProcessUnpackBlobRequest:
+		return "EMsg_DRMWorkerProcessUnpackBlobRequest"
+	case EMsg_DRMWorkerProcessUnpackBlobResponse:
+		return "EMsg_DRMWorkerProcessUnpackBlobResponse"
+	case EMsg_DRMWorkerProcessInstallAllRequest:
+		return "EMsg_DRMWorkerProcessInstallAllRequest"
+	case EMsg_DRMWorkerProcessInstallAllResponse:
+		return "EMsg_DRMWorkerProcessInstallAllResponse"
+	case EMsg_TestWorkerProcess:
+		return "EMsg_TestWorkerProcess"
+	case EMsg_TestWorkerProcessLoadUnloadModuleResponse:
+		return "EMsg_TestWorkerProcessLoadUnloadModuleResponse"
+	case EMsg_TestWorkerProcessServiceModuleCallRequest:
+		return "EMsg_TestWorkerProcessServiceModuleCallRequest"
+	case EMsg_TestWorkerProcessServiceModuleCallResponse:
+		return "EMsg_TestWorkerProcessServiceModuleCallResponse"
+	case EMsg_ClientGetEmoticonList:
+		return "EMsg_ClientGetEmoticonList"
+	case EMsg_ClientEmoticonList:
+		return "EMsg_ClientEmoticonList"
+	case EMsg_ClientSharedLibraryBase:
+		return "EMsg_ClientSharedLibraryBase"
+	case EMsg_ClientSharedLicensesLockStatus:
+		return "EMsg_ClientSharedLicensesLockStatus"
+	case EMsg_ClientSharedLicensesStopPlaying:
+		return "EMsg_ClientSharedLicensesStopPlaying"
+	case EMsg_ClientSharedLibraryLockStatus:
+		return "EMsg_ClientSharedLibraryLockStatus"
+	case EMsg_ClientSharedLibraryStopPlaying:
+		return "EMsg_ClientSharedLibraryStopPlaying"
+	case EMsg_ClientUnlockStreaming:
+		return "EMsg_ClientUnlockStreaming"
+	case EMsg_ClientUnlockStreamingResponse:
+		return "EMsg_ClientUnlockStreamingResponse"
+	case EMsg_ClientPlayingSessionState:
+		return "EMsg_ClientPlayingSessionState"
+	case EMsg_ClientPlayingSessionKick:
+		return "EMsg_ClientPlayingSessionKick"
+	default:
+		return "INVALID"
+	}
+}
 
 type EResult int32
 
@@ -1808,7 +5188,188 @@ const (
 	EResult_BadResponse                                     = 76
 	EResult_RequirePasswordReEntry                          = 77
 	EResult_ValueOutOfRange                                 = 78
+	EResult_UnexpectedError                                 = 79
+	EResult_Disabled                                        = 80
+	EResult_InvalidCEGSubmission                            = 81
+	EResult_RestrictedDevice                                = 82
+	EResult_RegionLocked                                    = 83
+	EResult_RateLimitExceeded                               = 84
 )
+
+func (e EResult) String() string {
+	switch e {
+	case EResult_Invalid:
+		return "EResult_Invalid"
+	case EResult_OK:
+		return "EResult_OK"
+	case EResult_Fail:
+		return "EResult_Fail"
+	case EResult_NoConnection:
+		return "EResult_NoConnection"
+	case EResult_InvalidPassword:
+		return "EResult_InvalidPassword"
+	case EResult_LoggedInElsewhere:
+		return "EResult_LoggedInElsewhere"
+	case EResult_InvalidProtocolVer:
+		return "EResult_InvalidProtocolVer"
+	case EResult_InvalidParam:
+		return "EResult_InvalidParam"
+	case EResult_FileNotFound:
+		return "EResult_FileNotFound"
+	case EResult_Busy:
+		return "EResult_Busy"
+	case EResult_InvalidState:
+		return "EResult_InvalidState"
+	case EResult_InvalidName:
+		return "EResult_InvalidName"
+	case EResult_InvalidEmail:
+		return "EResult_InvalidEmail"
+	case EResult_DuplicateName:
+		return "EResult_DuplicateName"
+	case EResult_AccessDenied:
+		return "EResult_AccessDenied"
+	case EResult_Timeout:
+		return "EResult_Timeout"
+	case EResult_Banned:
+		return "EResult_Banned"
+	case EResult_AccountNotFound:
+		return "EResult_AccountNotFound"
+	case EResult_InvalidSteamID:
+		return "EResult_InvalidSteamID"
+	case EResult_ServiceUnavailable:
+		return "EResult_ServiceUnavailable"
+	case EResult_NotLoggedOn:
+		return "EResult_NotLoggedOn"
+	case EResult_Pending:
+		return "EResult_Pending"
+	case EResult_EncryptionFailure:
+		return "EResult_EncryptionFailure"
+	case EResult_InsufficientPrivilege:
+		return "EResult_InsufficientPrivilege"
+	case EResult_LimitExceeded:
+		return "EResult_LimitExceeded"
+	case EResult_Revoked:
+		return "EResult_Revoked"
+	case EResult_Expired:
+		return "EResult_Expired"
+	case EResult_AlreadyRedeemed:
+		return "EResult_AlreadyRedeemed"
+	case EResult_DuplicateRequest:
+		return "EResult_DuplicateRequest"
+	case EResult_AlreadyOwned:
+		return "EResult_AlreadyOwned"
+	case EResult_IPNotFound:
+		return "EResult_IPNotFound"
+	case EResult_PersistFailed:
+		return "EResult_PersistFailed"
+	case EResult_LockingFailed:
+		return "EResult_LockingFailed"
+	case EResult_LogonSessionReplaced:
+		return "EResult_LogonSessionReplaced"
+	case EResult_ConnectFailed:
+		return "EResult_ConnectFailed"
+	case EResult_HandshakeFailed:
+		return "EResult_HandshakeFailed"
+	case EResult_IOFailure:
+		return "EResult_IOFailure"
+	case EResult_RemoteDisconnect:
+		return "EResult_RemoteDisconnect"
+	case EResult_ShoppingCartNotFound:
+		return "EResult_ShoppingCartNotFound"
+	case EResult_Blocked:
+		return "EResult_Blocked"
+	case EResult_Ignored:
+		return "EResult_Ignored"
+	case EResult_NoMatch:
+		return "EResult_NoMatch"
+	case EResult_AccountDisabled:
+		return "EResult_AccountDisabled"
+	case EResult_ServiceReadOnly:
+		return "EResult_ServiceReadOnly"
+	case EResult_AccountNotFeatured:
+		return "EResult_AccountNotFeatured"
+	case EResult_AdministratorOK:
+		return "EResult_AdministratorOK"
+	case EResult_ContentVersion:
+		return "EResult_ContentVersion"
+	case EResult_TryAnotherCM:
+		return "EResult_TryAnotherCM"
+	case EResult_PasswordRequiredToKickSession:
+		return "EResult_PasswordRequiredToKickSession"
+	case EResult_AlreadyLoggedInElsewhere:
+		return "EResult_AlreadyLoggedInElsewhere"
+	case EResult_Suspended:
+		return "EResult_Suspended"
+	case EResult_Cancelled:
+		return "EResult_Cancelled"
+	case EResult_DataCorruption:
+		return "EResult_DataCorruption"
+	case EResult_DiskFull:
+		return "EResult_DiskFull"
+	case EResult_RemoteCallFailed:
+		return "EResult_RemoteCallFailed"
+	case EResult_PasswordNotSet:
+		return "EResult_PasswordNotSet"
+	case EResult_PSNAccountNotLinked:
+		return "EResult_PSNAccountNotLinked"
+	case EResult_InvalidPSNTicket:
+		return "EResult_InvalidPSNTicket"
+	case EResult_PSNAccountAlreadyLinked:
+		return "EResult_PSNAccountAlreadyLinked"
+	case EResult_RemoteFileConflict:
+		return "EResult_RemoteFileConflict"
+	case EResult_IllegalPassword:
+		return "EResult_IllegalPassword"
+	case EResult_SameAsPreviousValue:
+		return "EResult_SameAsPreviousValue"
+	case EResult_AccountLogonDenied:
+		return "EResult_AccountLogonDenied"
+	case EResult_CannotUseOldPassword:
+		return "EResult_CannotUseOldPassword"
+	case EResult_InvalidLoginAuthCode:
+		return "EResult_InvalidLoginAuthCode"
+	case EResult_AccountLogonDeniedNoMailSent:
+		return "EResult_AccountLogonDeniedNoMailSent"
+	case EResult_HardwareNotCapableOfIPT:
+		return "EResult_HardwareNotCapableOfIPT"
+	case EResult_IPTInitError:
+		return "EResult_IPTInitError"
+	case EResult_ParentalControlRestricted:
+		return "EResult_ParentalControlRestricted"
+	case EResult_FacebookQueryError:
+		return "EResult_FacebookQueryError"
+	case EResult_ExpiredLoginAuthCode:
+		return "EResult_ExpiredLoginAuthCode"
+	case EResult_IPLoginRestrictionFailed:
+		return "EResult_IPLoginRestrictionFailed"
+	case EResult_AccountLocked:
+		return "EResult_AccountLocked"
+	case EResult_AccountLogonDeniedVerifiedEmailRequired:
+		return "EResult_AccountLogonDeniedVerifiedEmailRequired"
+	case EResult_NoMatchingURL:
+		return "EResult_NoMatchingURL"
+	case EResult_BadResponse:
+		return "EResult_BadResponse"
+	case EResult_RequirePasswordReEntry:
+		return "EResult_RequirePasswordReEntry"
+	case EResult_ValueOutOfRange:
+		return "EResult_ValueOutOfRange"
+	case EResult_UnexpectedError:
+		return "EResult_UnexpectedError"
+	case EResult_Disabled:
+		return "EResult_Disabled"
+	case EResult_InvalidCEGSubmission:
+		return "EResult_InvalidCEGSubmission"
+	case EResult_RestrictedDevice:
+		return "EResult_RestrictedDevice"
+	case EResult_RegionLocked:
+		return "EResult_RegionLocked"
+	case EResult_RateLimitExceeded:
+		return "EResult_RateLimitExceeded"
+	default:
+		return "INVALID"
+	}
+}
 
 type EUniverse int32
 
@@ -1822,6 +5383,25 @@ const (
 	EUniverse_Max                = 5
 )
 
+func (e EUniverse) String() string {
+	switch e {
+	case EUniverse_Invalid:
+		return "EUniverse_Invalid"
+	case EUniverse_Public:
+		return "EUniverse_Public"
+	case EUniverse_Beta:
+		return "EUniverse_Beta"
+	case EUniverse_Internal:
+		return "EUniverse_Internal"
+	case EUniverse_Dev:
+		return "EUniverse_Dev"
+	case EUniverse_RC:
+		return "EUniverse_RC"
+	default:
+		return "INVALID"
+	}
+}
+
 type EChatEntryType int32
 
 const (
@@ -1829,7 +5409,7 @@ const (
 	EChatEntryType_ChatMsg                         = 1
 	EChatEntryType_Typing                          = 2
 	EChatEntryType_InviteGame                      = 3
-	EChatEntryType_Emote                           = 4
+	EChatEntryType_Emote                           = 4 // Deprecated: No longer supported by clients
 	EChatEntryType_LobbyGameStart                  = 5
 	EChatEntryType_LeftConversation                = 6
 	EChatEntryType_Entered                         = 7
@@ -1838,6 +5418,37 @@ const (
 	EChatEntryType_Disconnected                    = 10
 	EChatEntryType_HistoricalChat                  = 11
 )
+
+func (e EChatEntryType) String() string {
+	switch e {
+	case EChatEntryType_Invalid:
+		return "EChatEntryType_Invalid"
+	case EChatEntryType_ChatMsg:
+		return "EChatEntryType_ChatMsg"
+	case EChatEntryType_Typing:
+		return "EChatEntryType_Typing"
+	case EChatEntryType_InviteGame:
+		return "EChatEntryType_InviteGame"
+	case EChatEntryType_Emote:
+		return "EChatEntryType_Emote"
+	case EChatEntryType_LobbyGameStart:
+		return "EChatEntryType_LobbyGameStart"
+	case EChatEntryType_LeftConversation:
+		return "EChatEntryType_LeftConversation"
+	case EChatEntryType_Entered:
+		return "EChatEntryType_Entered"
+	case EChatEntryType_WasKicked:
+		return "EChatEntryType_WasKicked"
+	case EChatEntryType_WasBanned:
+		return "EChatEntryType_WasBanned"
+	case EChatEntryType_Disconnected:
+		return "EChatEntryType_Disconnected"
+	case EChatEntryType_HistoricalChat:
+		return "EChatEntryType_HistoricalChat"
+	default:
+		return "INVALID"
+	}
+}
 
 type EPersonaState int32
 
@@ -1851,6 +5462,29 @@ const (
 	EPersonaState_LookingToPlay                = 6
 	EPersonaState_Max                          = 7
 )
+
+func (e EPersonaState) String() string {
+	switch e {
+	case EPersonaState_Offline:
+		return "EPersonaState_Offline"
+	case EPersonaState_Online:
+		return "EPersonaState_Online"
+	case EPersonaState_Busy:
+		return "EPersonaState_Busy"
+	case EPersonaState_Away:
+		return "EPersonaState_Away"
+	case EPersonaState_Snooze:
+		return "EPersonaState_Snooze"
+	case EPersonaState_LookingToTrade:
+		return "EPersonaState_LookingToTrade"
+	case EPersonaState_LookingToPlay:
+		return "EPersonaState_LookingToPlay"
+	case EPersonaState_Max:
+		return "EPersonaState_Max"
+	default:
+		return "INVALID"
+	}
+}
 
 type EAccountType int32
 
@@ -1869,6 +5503,37 @@ const (
 	EAccountType_Max                         = 11
 )
 
+func (e EAccountType) String() string {
+	switch e {
+	case EAccountType_Invalid:
+		return "EAccountType_Invalid"
+	case EAccountType_Individual:
+		return "EAccountType_Individual"
+	case EAccountType_Multiseat:
+		return "EAccountType_Multiseat"
+	case EAccountType_GameServer:
+		return "EAccountType_GameServer"
+	case EAccountType_AnonGameServer:
+		return "EAccountType_AnonGameServer"
+	case EAccountType_Pending:
+		return "EAccountType_Pending"
+	case EAccountType_ContentServer:
+		return "EAccountType_ContentServer"
+	case EAccountType_Clan:
+		return "EAccountType_Clan"
+	case EAccountType_Chat:
+		return "EAccountType_Chat"
+	case EAccountType_ConsoleUser:
+		return "EAccountType_ConsoleUser"
+	case EAccountType_AnonUser:
+		return "EAccountType_AnonUser"
+	case EAccountType_Max:
+		return "EAccountType_Max"
+	default:
+		return "INVALID"
+	}
+}
+
 type EFriendRelationship int32
 
 const (
@@ -1884,6 +5549,31 @@ const (
 	EFriendRelationship_SuggestedFriend                      = 7
 	EFriendRelationship_Max                                  = 8
 )
+
+func (e EFriendRelationship) String() string {
+	switch e {
+	case EFriendRelationship_None:
+		return "EFriendRelationship_None"
+	case EFriendRelationship_Blocked:
+		return "EFriendRelationship_Blocked"
+	case EFriendRelationship_PendingInvitee:
+		return "EFriendRelationship_PendingInvitee"
+	case EFriendRelationship_Friend:
+		return "EFriendRelationship_Friend"
+	case EFriendRelationship_RequestInitiator:
+		return "EFriendRelationship_RequestInitiator"
+	case EFriendRelationship_Ignored:
+		return "EFriendRelationship_Ignored"
+	case EFriendRelationship_IgnoredFriend:
+		return "EFriendRelationship_IgnoredFriend"
+	case EFriendRelationship_SuggestedFriend:
+		return "EFriendRelationship_SuggestedFriend"
+	case EFriendRelationship_Max:
+		return "EFriendRelationship_Max"
+	default:
+		return "INVALID"
+	}
+}
 
 type EAccountFlags int32
 
@@ -1919,6 +5609,71 @@ const (
 	EAccountFlags_GlobalModerator                          = 134217728
 )
 
+func (e EAccountFlags) String() string {
+	switch e {
+	case EAccountFlags_NormalUser:
+		return "EAccountFlags_NormalUser"
+	case EAccountFlags_PersonaNameSet:
+		return "EAccountFlags_PersonaNameSet"
+	case EAccountFlags_Unbannable:
+		return "EAccountFlags_Unbannable"
+	case EAccountFlags_PasswordSet:
+		return "EAccountFlags_PasswordSet"
+	case EAccountFlags_Support:
+		return "EAccountFlags_Support"
+	case EAccountFlags_Admin:
+		return "EAccountFlags_Admin"
+	case EAccountFlags_Supervisor:
+		return "EAccountFlags_Supervisor"
+	case EAccountFlags_AppEditor:
+		return "EAccountFlags_AppEditor"
+	case EAccountFlags_HWIDSet:
+		return "EAccountFlags_HWIDSet"
+	case EAccountFlags_PersonalQASet:
+		return "EAccountFlags_PersonalQASet"
+	case EAccountFlags_VacBeta:
+		return "EAccountFlags_VacBeta"
+	case EAccountFlags_Debug:
+		return "EAccountFlags_Debug"
+	case EAccountFlags_Disabled:
+		return "EAccountFlags_Disabled"
+	case EAccountFlags_LimitedUser:
+		return "EAccountFlags_LimitedUser"
+	case EAccountFlags_LimitedUserForce:
+		return "EAccountFlags_LimitedUserForce"
+	case EAccountFlags_EmailValidated:
+		return "EAccountFlags_EmailValidated"
+	case EAccountFlags_MarketingTreatment:
+		return "EAccountFlags_MarketingTreatment"
+	case EAccountFlags_OGGInviteOptOut:
+		return "EAccountFlags_OGGInviteOptOut"
+	case EAccountFlags_ForcePasswordChange:
+		return "EAccountFlags_ForcePasswordChange"
+	case EAccountFlags_ForceEmailVerification:
+		return "EAccountFlags_ForceEmailVerification"
+	case EAccountFlags_LogonExtraSecurity:
+		return "EAccountFlags_LogonExtraSecurity"
+	case EAccountFlags_LogonExtraSecurityDisabled:
+		return "EAccountFlags_LogonExtraSecurityDisabled"
+	case EAccountFlags_Steam2MigrationComplete:
+		return "EAccountFlags_Steam2MigrationComplete"
+	case EAccountFlags_NeedLogs:
+		return "EAccountFlags_NeedLogs"
+	case EAccountFlags_Lockdown:
+		return "EAccountFlags_Lockdown"
+	case EAccountFlags_MasterAppEditor:
+		return "EAccountFlags_MasterAppEditor"
+	case EAccountFlags_BannedFromWebAPI:
+		return "EAccountFlags_BannedFromWebAPI"
+	case EAccountFlags_ClansOnlyFromFriends:
+		return "EAccountFlags_ClansOnlyFromFriends"
+	case EAccountFlags_GlobalModerator:
+		return "EAccountFlags_GlobalModerator"
+	default:
+		return "INVALID"
+	}
+}
+
 type EClanPermission int32
 
 const (
@@ -1938,6 +5693,41 @@ const (
 	EClanPermission_OwnerAllowed                          = EClanPermission_NonMember | EClanPermission_Member | EClanPermission_Moderator | EClanPermission_Officer | EClanPermission_Owner
 	EClanPermission_Anybody                               = EClanPermission_NonMember | EClanPermission_Member | EClanPermission_Moderator | EClanPermission_Officer | EClanPermission_Owner
 )
+
+func (e EClanPermission) String() string {
+	switch e {
+	case EClanPermission_Nobody:
+		return "EClanPermission_Nobody"
+	case EClanPermission_Owner:
+		return "EClanPermission_Owner"
+	case EClanPermission_Officer:
+		return "EClanPermission_Officer"
+	case EClanPermission_OwnerAndOfficer:
+		return "EClanPermission_OwnerAndOfficer"
+	case EClanPermission_Member:
+		return "EClanPermission_Member"
+	case EClanPermission_Moderator:
+		return "EClanPermission_Moderator"
+	case EClanPermission_OwnerOfficerModerator:
+		return "EClanPermission_OwnerOfficerModerator"
+	case EClanPermission_AllMembers:
+		return "EClanPermission_AllMembers"
+	case EClanPermission_OGGGameOwner:
+		return "EClanPermission_OGGGameOwner"
+	case EClanPermission_NonMember:
+		return "EClanPermission_NonMember"
+	case EClanPermission_MemberAllowed:
+		return "EClanPermission_MemberAllowed"
+	case EClanPermission_ModeratorAllowed:
+		return "EClanPermission_ModeratorAllowed"
+	case EClanPermission_OfficerAllowed:
+		return "EClanPermission_OfficerAllowed"
+	case EClanPermission_OwnerAllowed:
+		return "EClanPermission_OwnerAllowed"
+	default:
+		return "INVALID"
+	}
+}
 
 type EChatPermission int32
 
@@ -1959,6 +5749,39 @@ const (
 	EChatPermission_Mask                                     = 1019
 )
 
+func (e EChatPermission) String() string {
+	switch e {
+	case EChatPermission_Close:
+		return "EChatPermission_Close"
+	case EChatPermission_Invite:
+		return "EChatPermission_Invite"
+	case EChatPermission_Talk:
+		return "EChatPermission_Talk"
+	case EChatPermission_Kick:
+		return "EChatPermission_Kick"
+	case EChatPermission_Mute:
+		return "EChatPermission_Mute"
+	case EChatPermission_SetMetadata:
+		return "EChatPermission_SetMetadata"
+	case EChatPermission_ChangePermissions:
+		return "EChatPermission_ChangePermissions"
+	case EChatPermission_Ban:
+		return "EChatPermission_Ban"
+	case EChatPermission_ChangeAccess:
+		return "EChatPermission_ChangeAccess"
+	case EChatPermission_EveryoneDefault:
+		return "EChatPermission_EveryoneDefault"
+	case EChatPermission_MemberDefault:
+		return "EChatPermission_MemberDefault"
+	case EChatPermission_OwnerDefault:
+		return "EChatPermission_OwnerDefault"
+	case EChatPermission_Mask:
+		return "EChatPermission_Mask"
+	default:
+		return "INVALID"
+	}
+}
+
 type EFriendFlags int32
 
 const (
@@ -1977,6 +5800,37 @@ const (
 	EFriendFlags_FlagAll                           = 65535
 )
 
+func (e EFriendFlags) String() string {
+	switch e {
+	case EFriendFlags_None:
+		return "EFriendFlags_None"
+	case EFriendFlags_Blocked:
+		return "EFriendFlags_Blocked"
+	case EFriendFlags_FriendshipRequested:
+		return "EFriendFlags_FriendshipRequested"
+	case EFriendFlags_Immediate:
+		return "EFriendFlags_Immediate"
+	case EFriendFlags_ClanMember:
+		return "EFriendFlags_ClanMember"
+	case EFriendFlags_GameServer:
+		return "EFriendFlags_GameServer"
+	case EFriendFlags_RequestingFriendship:
+		return "EFriendFlags_RequestingFriendship"
+	case EFriendFlags_RequestingInfo:
+		return "EFriendFlags_RequestingInfo"
+	case EFriendFlags_Ignored:
+		return "EFriendFlags_Ignored"
+	case EFriendFlags_IgnoredFriend:
+		return "EFriendFlags_IgnoredFriend"
+	case EFriendFlags_Suggested:
+		return "EFriendFlags_Suggested"
+	case EFriendFlags_FlagAll:
+		return "EFriendFlags_FlagAll"
+	default:
+		return "INVALID"
+	}
+}
+
 type EPersonaStateFlag int32
 
 const (
@@ -1986,6 +5840,23 @@ const (
 	EPersonaStateFlag_OnlineUsingMobile                       = 512
 	EPersonaStateFlag_OnlineUsingBigPicture                   = 1024
 )
+
+func (e EPersonaStateFlag) String() string {
+	switch e {
+	case EPersonaStateFlag_HasRichPresence:
+		return "EPersonaStateFlag_HasRichPresence"
+	case EPersonaStateFlag_InJoinableGame:
+		return "EPersonaStateFlag_InJoinableGame"
+	case EPersonaStateFlag_OnlineUsingWeb:
+		return "EPersonaStateFlag_OnlineUsingWeb"
+	case EPersonaStateFlag_OnlineUsingMobile:
+		return "EPersonaStateFlag_OnlineUsingMobile"
+	case EPersonaStateFlag_OnlineUsingBigPicture:
+		return "EPersonaStateFlag_OnlineUsingBigPicture"
+	default:
+		return "INVALID"
+	}
+}
 
 type EClientPersonaStateFlag int32
 
@@ -2004,6 +5875,37 @@ const (
 	EClientPersonaStateFlag_Facebook                              = 2048
 )
 
+func (e EClientPersonaStateFlag) String() string {
+	switch e {
+	case EClientPersonaStateFlag_Status:
+		return "EClientPersonaStateFlag_Status"
+	case EClientPersonaStateFlag_PlayerName:
+		return "EClientPersonaStateFlag_PlayerName"
+	case EClientPersonaStateFlag_QueryPort:
+		return "EClientPersonaStateFlag_QueryPort"
+	case EClientPersonaStateFlag_SourceID:
+		return "EClientPersonaStateFlag_SourceID"
+	case EClientPersonaStateFlag_Presence:
+		return "EClientPersonaStateFlag_Presence"
+	case EClientPersonaStateFlag_Metadata:
+		return "EClientPersonaStateFlag_Metadata"
+	case EClientPersonaStateFlag_LastSeen:
+		return "EClientPersonaStateFlag_LastSeen"
+	case EClientPersonaStateFlag_ClanInfo:
+		return "EClientPersonaStateFlag_ClanInfo"
+	case EClientPersonaStateFlag_GameExtraInfo:
+		return "EClientPersonaStateFlag_GameExtraInfo"
+	case EClientPersonaStateFlag_GameDataBlob:
+		return "EClientPersonaStateFlag_GameDataBlob"
+	case EClientPersonaStateFlag_ClanTag:
+		return "EClientPersonaStateFlag_ClanTag"
+	case EClientPersonaStateFlag_Facebook:
+		return "EClientPersonaStateFlag_Facebook"
+	default:
+		return "INVALID"
+	}
+}
+
 type EAppUsageEvent int32
 
 const (
@@ -2016,6 +5918,29 @@ const (
 	EAppUsageEvent_InGameAdViewed                       = 7
 	EAppUsageEvent_GameLaunchFreeWeekend                = 8
 )
+
+func (e EAppUsageEvent) String() string {
+	switch e {
+	case EAppUsageEvent_GameLaunch:
+		return "EAppUsageEvent_GameLaunch"
+	case EAppUsageEvent_GameLaunchTrial:
+		return "EAppUsageEvent_GameLaunchTrial"
+	case EAppUsageEvent_Media:
+		return "EAppUsageEvent_Media"
+	case EAppUsageEvent_PreloadStart:
+		return "EAppUsageEvent_PreloadStart"
+	case EAppUsageEvent_PreloadFinish:
+		return "EAppUsageEvent_PreloadFinish"
+	case EAppUsageEvent_MarketingMessageView:
+		return "EAppUsageEvent_MarketingMessageView"
+	case EAppUsageEvent_InGameAdViewed:
+		return "EAppUsageEvent_InGameAdViewed"
+	case EAppUsageEvent_GameLaunchFreeWeekend:
+		return "EAppUsageEvent_GameLaunchFreeWeekend"
+	default:
+		return "INVALID"
+	}
+}
 
 type ELicenseFlags int32
 
@@ -2031,6 +5956,31 @@ const (
 	ELicenseFlags_ImportedFromSteam2               = 0x80
 )
 
+func (e ELicenseFlags) String() string {
+	switch e {
+	case ELicenseFlags_None:
+		return "ELicenseFlags_None"
+	case ELicenseFlags_Renew:
+		return "ELicenseFlags_Renew"
+	case ELicenseFlags_RenewalFailed:
+		return "ELicenseFlags_RenewalFailed"
+	case ELicenseFlags_Pending:
+		return "ELicenseFlags_Pending"
+	case ELicenseFlags_Expired:
+		return "ELicenseFlags_Expired"
+	case ELicenseFlags_CancelledByUser:
+		return "ELicenseFlags_CancelledByUser"
+	case ELicenseFlags_CancelledByAdmin:
+		return "ELicenseFlags_CancelledByAdmin"
+	case ELicenseFlags_LowViolenceContent:
+		return "ELicenseFlags_LowViolenceContent"
+	case ELicenseFlags_ImportedFromSteam2:
+		return "ELicenseFlags_ImportedFromSteam2"
+	default:
+		return "INVALID"
+	}
+}
+
 type ELicenseType int32
 
 const (
@@ -2042,6 +5992,27 @@ const (
 	ELicenseType_RecurringChargeLimitedUseWithOverages              = 5
 	ELicenseType_RecurringOption                                    = 6
 )
+
+func (e ELicenseType) String() string {
+	switch e {
+	case ELicenseType_NoLicense:
+		return "ELicenseType_NoLicense"
+	case ELicenseType_SinglePurchase:
+		return "ELicenseType_SinglePurchase"
+	case ELicenseType_SinglePurchaseLimitedUse:
+		return "ELicenseType_SinglePurchaseLimitedUse"
+	case ELicenseType_RecurringCharge:
+		return "ELicenseType_RecurringCharge"
+	case ELicenseType_RecurringChargeLimitedUse:
+		return "ELicenseType_RecurringChargeLimitedUse"
+	case ELicenseType_RecurringChargeLimitedUseWithOverages:
+		return "ELicenseType_RecurringChargeLimitedUseWithOverages"
+	case ELicenseType_RecurringOption:
+		return "ELicenseType_RecurringOption"
+	default:
+		return "INVALID"
+	}
+}
 
 type EPaymentMethod int32
 
@@ -2085,6 +6056,87 @@ const (
 	EPaymentMethod_Complimentary                      = 1024
 )
 
+func (e EPaymentMethod) String() string {
+	switch e {
+	case EPaymentMethod_None:
+		return "EPaymentMethod_None"
+	case EPaymentMethod_ActivationCode:
+		return "EPaymentMethod_ActivationCode"
+	case EPaymentMethod_CreditCard:
+		return "EPaymentMethod_CreditCard"
+	case EPaymentMethod_Giropay:
+		return "EPaymentMethod_Giropay"
+	case EPaymentMethod_PayPal:
+		return "EPaymentMethod_PayPal"
+	case EPaymentMethod_Ideal:
+		return "EPaymentMethod_Ideal"
+	case EPaymentMethod_PaySafeCard:
+		return "EPaymentMethod_PaySafeCard"
+	case EPaymentMethod_Sofort:
+		return "EPaymentMethod_Sofort"
+	case EPaymentMethod_GuestPass:
+		return "EPaymentMethod_GuestPass"
+	case EPaymentMethod_WebMoney:
+		return "EPaymentMethod_WebMoney"
+	case EPaymentMethod_MoneyBookers:
+		return "EPaymentMethod_MoneyBookers"
+	case EPaymentMethod_AliPay:
+		return "EPaymentMethod_AliPay"
+	case EPaymentMethod_Yandex:
+		return "EPaymentMethod_Yandex"
+	case EPaymentMethod_Kiosk:
+		return "EPaymentMethod_Kiosk"
+	case EPaymentMethod_Qiwi:
+		return "EPaymentMethod_Qiwi"
+	case EPaymentMethod_GameStop:
+		return "EPaymentMethod_GameStop"
+	case EPaymentMethod_HardwarePromo:
+		return "EPaymentMethod_HardwarePromo"
+	case EPaymentMethod_MoPay:
+		return "EPaymentMethod_MoPay"
+	case EPaymentMethod_BoletoBancario:
+		return "EPaymentMethod_BoletoBancario"
+	case EPaymentMethod_BoaCompraGold:
+		return "EPaymentMethod_BoaCompraGold"
+	case EPaymentMethod_BancoDoBrasilOnline:
+		return "EPaymentMethod_BancoDoBrasilOnline"
+	case EPaymentMethod_ItauOnline:
+		return "EPaymentMethod_ItauOnline"
+	case EPaymentMethod_BradescoOnline:
+		return "EPaymentMethod_BradescoOnline"
+	case EPaymentMethod_Pagseguro:
+		return "EPaymentMethod_Pagseguro"
+	case EPaymentMethod_VisaBrazil:
+		return "EPaymentMethod_VisaBrazil"
+	case EPaymentMethod_AmexBrazil:
+		return "EPaymentMethod_AmexBrazil"
+	case EPaymentMethod_Aura:
+		return "EPaymentMethod_Aura"
+	case EPaymentMethod_Hipercard:
+		return "EPaymentMethod_Hipercard"
+	case EPaymentMethod_MastercardBrazil:
+		return "EPaymentMethod_MastercardBrazil"
+	case EPaymentMethod_DinersCardBrazil:
+		return "EPaymentMethod_DinersCardBrazil"
+	case EPaymentMethod_ClickAndBuy:
+		return "EPaymentMethod_ClickAndBuy"
+	case EPaymentMethod_AutoGrant:
+		return "EPaymentMethod_AutoGrant"
+	case EPaymentMethod_Wallet:
+		return "EPaymentMethod_Wallet"
+	case EPaymentMethod_Valve:
+		return "EPaymentMethod_Valve"
+	case EPaymentMethod_OEMTicket:
+		return "EPaymentMethod_OEMTicket"
+	case EPaymentMethod_Split:
+		return "EPaymentMethod_Split"
+	case EPaymentMethod_Complimentary:
+		return "EPaymentMethod_Complimentary"
+	default:
+		return "INVALID"
+	}
+}
+
 type EIntroducerRouting int32
 
 const (
@@ -2092,6 +6144,19 @@ const (
 	EIntroducerRouting_P2PVoiceChat                     = 1
 	EIntroducerRouting_P2PNetworking                    = 2
 )
+
+func (e EIntroducerRouting) String() string {
+	switch e {
+	case EIntroducerRouting_FileShare:
+		return "EIntroducerRouting_FileShare"
+	case EIntroducerRouting_P2PVoiceChat:
+		return "EIntroducerRouting_P2PVoiceChat"
+	case EIntroducerRouting_P2PNetworking:
+		return "EIntroducerRouting_P2PNetworking"
+	default:
+		return "INVALID"
+	}
+}
 
 type EServerFlags int32
 
@@ -2104,6 +6169,27 @@ const (
 	EServerFlags_Passworded              = 16
 	EServerFlags_Private                 = 32
 )
+
+func (e EServerFlags) String() string {
+	switch e {
+	case EServerFlags_None:
+		return "EServerFlags_None"
+	case EServerFlags_Active:
+		return "EServerFlags_Active"
+	case EServerFlags_Secure:
+		return "EServerFlags_Secure"
+	case EServerFlags_Dedicated:
+		return "EServerFlags_Dedicated"
+	case EServerFlags_Linux:
+		return "EServerFlags_Linux"
+	case EServerFlags_Passworded:
+		return "EServerFlags_Passworded"
+	case EServerFlags_Private:
+		return "EServerFlags_Private"
+	default:
+		return "INVALID"
+	}
+}
 
 type EDenyReason int32
 
@@ -2125,6 +6211,43 @@ const (
 	EDenyReason_SteamOwnerLeftGuestUser             = 15
 )
 
+func (e EDenyReason) String() string {
+	switch e {
+	case EDenyReason_InvalidVersion:
+		return "EDenyReason_InvalidVersion"
+	case EDenyReason_Generic:
+		return "EDenyReason_Generic"
+	case EDenyReason_NotLoggedOn:
+		return "EDenyReason_NotLoggedOn"
+	case EDenyReason_NoLicense:
+		return "EDenyReason_NoLicense"
+	case EDenyReason_Cheater:
+		return "EDenyReason_Cheater"
+	case EDenyReason_LoggedInElseWhere:
+		return "EDenyReason_LoggedInElseWhere"
+	case EDenyReason_UnknownText:
+		return "EDenyReason_UnknownText"
+	case EDenyReason_IncompatibleAnticheat:
+		return "EDenyReason_IncompatibleAnticheat"
+	case EDenyReason_MemoryCorruption:
+		return "EDenyReason_MemoryCorruption"
+	case EDenyReason_IncompatibleSoftware:
+		return "EDenyReason_IncompatibleSoftware"
+	case EDenyReason_SteamConnectionLost:
+		return "EDenyReason_SteamConnectionLost"
+	case EDenyReason_SteamConnectionError:
+		return "EDenyReason_SteamConnectionError"
+	case EDenyReason_SteamResponseTimedOut:
+		return "EDenyReason_SteamResponseTimedOut"
+	case EDenyReason_SteamValidationStalled:
+		return "EDenyReason_SteamValidationStalled"
+	case EDenyReason_SteamOwnerLeftGuestUser:
+		return "EDenyReason_SteamOwnerLeftGuestUser"
+	default:
+		return "INVALID"
+	}
+}
+
 type EClanRank int32
 
 const (
@@ -2134,6 +6257,23 @@ const (
 	EClanRank_Member              = 3
 	EClanRank_Moderator           = 4
 )
+
+func (e EClanRank) String() string {
+	switch e {
+	case EClanRank_None:
+		return "EClanRank_None"
+	case EClanRank_Owner:
+		return "EClanRank_Owner"
+	case EClanRank_Officer:
+		return "EClanRank_Officer"
+	case EClanRank_Member:
+		return "EClanRank_Member"
+	case EClanRank_Moderator:
+		return "EClanRank_Moderator"
+	default:
+		return "INVALID"
+	}
+}
 
 type EClanRelationship int32
 
@@ -2145,6 +6285,25 @@ const (
 	EClanRelationship_Kicked                             = 4
 	EClanRelationship_KickAcknowledged                   = 5
 )
+
+func (e EClanRelationship) String() string {
+	switch e {
+	case EClanRelationship_None:
+		return "EClanRelationship_None"
+	case EClanRelationship_Blocked:
+		return "EClanRelationship_Blocked"
+	case EClanRelationship_Invited:
+		return "EClanRelationship_Invited"
+	case EClanRelationship_Member:
+		return "EClanRelationship_Member"
+	case EClanRelationship_Kicked:
+		return "EClanRelationship_Kicked"
+	case EClanRelationship_KickAcknowledged:
+		return "EClanRelationship_KickAcknowledged"
+	default:
+		return "INVALID"
+	}
+}
 
 type EAuthSessionResponse int32
 
@@ -2159,6 +6318,31 @@ const (
 	EAuthSessionResponse_AuthTicketInvalidAlreadyUsed                      = 7
 	EAuthSessionResponse_AuthTicketInvalid                                 = 8
 )
+
+func (e EAuthSessionResponse) String() string {
+	switch e {
+	case EAuthSessionResponse_OK:
+		return "EAuthSessionResponse_OK"
+	case EAuthSessionResponse_UserNotConnectedToSteam:
+		return "EAuthSessionResponse_UserNotConnectedToSteam"
+	case EAuthSessionResponse_NoLicenseOrExpired:
+		return "EAuthSessionResponse_NoLicenseOrExpired"
+	case EAuthSessionResponse_VACBanned:
+		return "EAuthSessionResponse_VACBanned"
+	case EAuthSessionResponse_LoggedInElseWhere:
+		return "EAuthSessionResponse_LoggedInElseWhere"
+	case EAuthSessionResponse_VACCheckTimedOut:
+		return "EAuthSessionResponse_VACCheckTimedOut"
+	case EAuthSessionResponse_AuthTicketCanceled:
+		return "EAuthSessionResponse_AuthTicketCanceled"
+	case EAuthSessionResponse_AuthTicketInvalidAlreadyUsed:
+		return "EAuthSessionResponse_AuthTicketInvalidAlreadyUsed"
+	case EAuthSessionResponse_AuthTicketInvalid:
+		return "EAuthSessionResponse_AuthTicketInvalid"
+	default:
+		return "INVALID"
+	}
+}
 
 type EChatRoomEnterResponse int32
 
@@ -2179,6 +6363,41 @@ const (
 	EChatRoomEnterResponse_RankOutOfRange                            = 14 // Deprecated
 )
 
+func (e EChatRoomEnterResponse) String() string {
+	switch e {
+	case EChatRoomEnterResponse_Success:
+		return "EChatRoomEnterResponse_Success"
+	case EChatRoomEnterResponse_DoesntExist:
+		return "EChatRoomEnterResponse_DoesntExist"
+	case EChatRoomEnterResponse_NotAllowed:
+		return "EChatRoomEnterResponse_NotAllowed"
+	case EChatRoomEnterResponse_Full:
+		return "EChatRoomEnterResponse_Full"
+	case EChatRoomEnterResponse_Error:
+		return "EChatRoomEnterResponse_Error"
+	case EChatRoomEnterResponse_Banned:
+		return "EChatRoomEnterResponse_Banned"
+	case EChatRoomEnterResponse_Limited:
+		return "EChatRoomEnterResponse_Limited"
+	case EChatRoomEnterResponse_ClanDisabled:
+		return "EChatRoomEnterResponse_ClanDisabled"
+	case EChatRoomEnterResponse_CommunityBan:
+		return "EChatRoomEnterResponse_CommunityBan"
+	case EChatRoomEnterResponse_MemberBlockedYou:
+		return "EChatRoomEnterResponse_MemberBlockedYou"
+	case EChatRoomEnterResponse_YouBlockedMember:
+		return "EChatRoomEnterResponse_YouBlockedMember"
+	case EChatRoomEnterResponse_NoRankingDataLobby:
+		return "EChatRoomEnterResponse_NoRankingDataLobby"
+	case EChatRoomEnterResponse_NoRankingDataUser:
+		return "EChatRoomEnterResponse_NoRankingDataUser"
+	case EChatRoomEnterResponse_RankOutOfRange:
+		return "EChatRoomEnterResponse_RankOutOfRange"
+	default:
+		return "INVALID"
+	}
+}
+
 type EChatRoomType int32
 
 const (
@@ -2187,6 +6406,19 @@ const (
 	EChatRoomType_Lobby                = 3
 )
 
+func (e EChatRoomType) String() string {
+	switch e {
+	case EChatRoomType_Friend:
+		return "EChatRoomType_Friend"
+	case EChatRoomType_MUC:
+		return "EChatRoomType_MUC"
+	case EChatRoomType_Lobby:
+		return "EChatRoomType_Lobby"
+	default:
+		return "INVALID"
+	}
+}
+
 type EChatInfoType int32
 
 const (
@@ -2194,6 +6426,19 @@ const (
 	EChatInfoType_InfoUpdate                      = 2
 	EChatInfoType_MemberLimitChange               = 3
 )
+
+func (e EChatInfoType) String() string {
+	switch e {
+	case EChatInfoType_StateChange:
+		return "EChatInfoType_StateChange"
+	case EChatInfoType_InfoUpdate:
+		return "EChatInfoType_InfoUpdate"
+	case EChatInfoType_MemberLimitChange:
+		return "EChatInfoType_MemberLimitChange"
+	default:
+		return "INVALID"
+	}
+}
 
 type EChatAction int32
 
@@ -2216,6 +6461,45 @@ const (
 	EChatAction_SetUnmoderated                    = 16
 )
 
+func (e EChatAction) String() string {
+	switch e {
+	case EChatAction_InviteChat:
+		return "EChatAction_InviteChat"
+	case EChatAction_Kick:
+		return "EChatAction_Kick"
+	case EChatAction_Ban:
+		return "EChatAction_Ban"
+	case EChatAction_UnBan:
+		return "EChatAction_UnBan"
+	case EChatAction_StartVoiceSpeak:
+		return "EChatAction_StartVoiceSpeak"
+	case EChatAction_EndVoiceSpeak:
+		return "EChatAction_EndVoiceSpeak"
+	case EChatAction_LockChat:
+		return "EChatAction_LockChat"
+	case EChatAction_UnlockChat:
+		return "EChatAction_UnlockChat"
+	case EChatAction_CloseChat:
+		return "EChatAction_CloseChat"
+	case EChatAction_SetJoinable:
+		return "EChatAction_SetJoinable"
+	case EChatAction_SetUnjoinable:
+		return "EChatAction_SetUnjoinable"
+	case EChatAction_SetOwner:
+		return "EChatAction_SetOwner"
+	case EChatAction_SetInvisibleToFriends:
+		return "EChatAction_SetInvisibleToFriends"
+	case EChatAction_SetVisibleToFriends:
+		return "EChatAction_SetVisibleToFriends"
+	case EChatAction_SetModerated:
+		return "EChatAction_SetModerated"
+	case EChatAction_SetUnmoderated:
+		return "EChatAction_SetUnmoderated"
+	default:
+		return "INVALID"
+	}
+}
+
 type EChatActionResult int32
 
 const (
@@ -2230,6 +6514,33 @@ const (
 	EChatActionResult_ChatFull                                 = 9
 	EChatActionResult_VoiceSlotsFull                           = 10
 )
+
+func (e EChatActionResult) String() string {
+	switch e {
+	case EChatActionResult_Success:
+		return "EChatActionResult_Success"
+	case EChatActionResult_Error:
+		return "EChatActionResult_Error"
+	case EChatActionResult_NotPermitted:
+		return "EChatActionResult_NotPermitted"
+	case EChatActionResult_NotAllowedOnClanMember:
+		return "EChatActionResult_NotAllowedOnClanMember"
+	case EChatActionResult_NotAllowedOnBannedUser:
+		return "EChatActionResult_NotAllowedOnBannedUser"
+	case EChatActionResult_NotAllowedOnChatOwner:
+		return "EChatActionResult_NotAllowedOnChatOwner"
+	case EChatActionResult_NotAllowedOnSelf:
+		return "EChatActionResult_NotAllowedOnSelf"
+	case EChatActionResult_ChatDoesntExist:
+		return "EChatActionResult_ChatDoesntExist"
+	case EChatActionResult_ChatFull:
+		return "EChatActionResult_ChatFull"
+	case EChatActionResult_VoiceSlotsFull:
+		return "EChatActionResult_VoiceSlotsFull"
+	default:
+		return "INVALID"
+	}
+}
 
 type EAppInfoSection int32
 
@@ -2255,6 +6566,47 @@ const (
 	EAppInfoSection_Max                         = 16
 )
 
+func (e EAppInfoSection) String() string {
+	switch e {
+	case EAppInfoSection_Unknown:
+		return "EAppInfoSection_Unknown"
+	case EAppInfoSection_All:
+		return "EAppInfoSection_All"
+	case EAppInfoSection_First:
+		return "EAppInfoSection_First"
+	case EAppInfoSection_Extended:
+		return "EAppInfoSection_Extended"
+	case EAppInfoSection_Config:
+		return "EAppInfoSection_Config"
+	case EAppInfoSection_Stats:
+		return "EAppInfoSection_Stats"
+	case EAppInfoSection_Install:
+		return "EAppInfoSection_Install"
+	case EAppInfoSection_Depots:
+		return "EAppInfoSection_Depots"
+	case EAppInfoSection_VAC:
+		return "EAppInfoSection_VAC"
+	case EAppInfoSection_DRM:
+		return "EAppInfoSection_DRM"
+	case EAppInfoSection_UFS:
+		return "EAppInfoSection_UFS"
+	case EAppInfoSection_OGG:
+		return "EAppInfoSection_OGG"
+	case EAppInfoSection_Items:
+		return "EAppInfoSection_Items"
+	case EAppInfoSection_Policies:
+		return "EAppInfoSection_Policies"
+	case EAppInfoSection_SysReqs:
+		return "EAppInfoSection_SysReqs"
+	case EAppInfoSection_Community:
+		return "EAppInfoSection_Community"
+	case EAppInfoSection_Max:
+		return "EAppInfoSection_Max"
+	default:
+		return "INVALID"
+	}
+}
+
 type EContentDownloadSourceType int32
 
 const (
@@ -2267,6 +6619,25 @@ const (
 	EContentDownloadSourceType_Max                                   = 5
 )
 
+func (e EContentDownloadSourceType) String() string {
+	switch e {
+	case EContentDownloadSourceType_Invalid:
+		return "EContentDownloadSourceType_Invalid"
+	case EContentDownloadSourceType_CS:
+		return "EContentDownloadSourceType_CS"
+	case EContentDownloadSourceType_CDN:
+		return "EContentDownloadSourceType_CDN"
+	case EContentDownloadSourceType_LCS:
+		return "EContentDownloadSourceType_LCS"
+	case EContentDownloadSourceType_Proxy:
+		return "EContentDownloadSourceType_Proxy"
+	case EContentDownloadSourceType_Max:
+		return "EContentDownloadSourceType_Max"
+	default:
+		return "INVALID"
+	}
+}
+
 type EPlatformType int32
 
 const (
@@ -2278,6 +6649,27 @@ const (
 	EPlatformType_PS3                   = 5
 	EPlatformType_Max                   = 6
 )
+
+func (e EPlatformType) String() string {
+	switch e {
+	case EPlatformType_Unknown:
+		return "EPlatformType_Unknown"
+	case EPlatformType_Win32:
+		return "EPlatformType_Win32"
+	case EPlatformType_Win64:
+		return "EPlatformType_Win64"
+	case EPlatformType_Linux:
+		return "EPlatformType_Linux"
+	case EPlatformType_OSX:
+		return "EPlatformType_OSX"
+	case EPlatformType_PS3:
+		return "EPlatformType_PS3"
+	case EPlatformType_Max:
+		return "EPlatformType_Max"
+	default:
+		return "INVALID"
+	}
+}
 
 type EOSType int32
 
@@ -2320,6 +6712,85 @@ const (
 	EOSType_WinMAX                 = 15
 	EOSType_Max                    = 26
 )
+
+func (e EOSType) String() string {
+	switch e {
+	case EOSType_Unknown:
+		return "EOSType_Unknown"
+	case EOSType_UMQ:
+		return "EOSType_UMQ"
+	case EOSType_PS3:
+		return "EOSType_PS3"
+	case EOSType_MacOSUnknown:
+		return "EOSType_MacOSUnknown"
+	case EOSType_MacOS104:
+		return "EOSType_MacOS104"
+	case EOSType_MacOS105:
+		return "EOSType_MacOS105"
+	case EOSType_MacOS1058:
+		return "EOSType_MacOS1058"
+	case EOSType_MacOS106:
+		return "EOSType_MacOS106"
+	case EOSType_MacOS1063:
+		return "EOSType_MacOS1063"
+	case EOSType_MacOS1064_slgu:
+		return "EOSType_MacOS1064_slgu"
+	case EOSType_MacOS1067:
+		return "EOSType_MacOS1067"
+	case EOSType_MacOS107:
+		return "EOSType_MacOS107"
+	case EOSType_MacOS108:
+		return "EOSType_MacOS108"
+	case EOSType_MacOS109:
+		return "EOSType_MacOS109"
+	case EOSType_LinuxUnknown:
+		return "EOSType_LinuxUnknown"
+	case EOSType_Linux22:
+		return "EOSType_Linux22"
+	case EOSType_Linux24:
+		return "EOSType_Linux24"
+	case EOSType_Linux26:
+		return "EOSType_Linux26"
+	case EOSType_Linux32:
+		return "EOSType_Linux32"
+	case EOSType_WinUnknown:
+		return "EOSType_WinUnknown"
+	case EOSType_Win311:
+		return "EOSType_Win311"
+	case EOSType_Win95:
+		return "EOSType_Win95"
+	case EOSType_Win98:
+		return "EOSType_Win98"
+	case EOSType_WinME:
+		return "EOSType_WinME"
+	case EOSType_WinNT:
+		return "EOSType_WinNT"
+	case EOSType_Win200:
+		return "EOSType_Win200"
+	case EOSType_WinXP:
+		return "EOSType_WinXP"
+	case EOSType_Win2003:
+		return "EOSType_Win2003"
+	case EOSType_WinVista:
+		return "EOSType_WinVista"
+	case EOSType_Win7:
+		return "EOSType_Win7"
+	case EOSType_Win2008:
+		return "EOSType_Win2008"
+	case EOSType_Win2012:
+		return "EOSType_Win2012"
+	case EOSType_Windows8:
+		return "EOSType_Windows8"
+	case EOSType_Windows81:
+		return "EOSType_Windows81"
+	case EOSType_WinMAX:
+		return "EOSType_WinMAX"
+	case EOSType_Max:
+		return "EOSType_Max"
+	default:
+		return "INVALID"
+	}
+}
 
 type EServerType int32
 
@@ -2397,6 +6868,147 @@ const (
 	EServerType_Max                           = 67
 )
 
+func (e EServerType) String() string {
+	switch e {
+	case EServerType_Invalid:
+		return "EServerType_Invalid"
+	case EServerType_First:
+		return "EServerType_First"
+	case EServerType_GM:
+		return "EServerType_GM"
+	case EServerType_BUM:
+		return "EServerType_BUM"
+	case EServerType_AM:
+		return "EServerType_AM"
+	case EServerType_BS:
+		return "EServerType_BS"
+	case EServerType_VS:
+		return "EServerType_VS"
+	case EServerType_ATS:
+		return "EServerType_ATS"
+	case EServerType_CM:
+		return "EServerType_CM"
+	case EServerType_FBS:
+		return "EServerType_FBS"
+	case EServerType_FG:
+		return "EServerType_FG"
+	case EServerType_SS:
+		return "EServerType_SS"
+	case EServerType_DRMS:
+		return "EServerType_DRMS"
+	case EServerType_HubOBSOLETE:
+		return "EServerType_HubOBSOLETE"
+	case EServerType_Console:
+		return "EServerType_Console"
+	case EServerType_ASBOBSOLETE:
+		return "EServerType_ASBOBSOLETE"
+	case EServerType_Client:
+		return "EServerType_Client"
+	case EServerType_BootstrapOBSOLETE:
+		return "EServerType_BootstrapOBSOLETE"
+	case EServerType_DP:
+		return "EServerType_DP"
+	case EServerType_WG:
+		return "EServerType_WG"
+	case EServerType_SM:
+		return "EServerType_SM"
+	case EServerType_UFS:
+		return "EServerType_UFS"
+	case EServerType_Util:
+		return "EServerType_Util"
+	case EServerType_DSS:
+		return "EServerType_DSS"
+	case EServerType_P2PRelayOBSOLETE:
+		return "EServerType_P2PRelayOBSOLETE"
+	case EServerType_AppInformation:
+		return "EServerType_AppInformation"
+	case EServerType_Spare:
+		return "EServerType_Spare"
+	case EServerType_FTS:
+		return "EServerType_FTS"
+	case EServerType_EPM:
+		return "EServerType_EPM"
+	case EServerType_PS:
+		return "EServerType_PS"
+	case EServerType_IS:
+		return "EServerType_IS"
+	case EServerType_CCS:
+		return "EServerType_CCS"
+	case EServerType_DFS:
+		return "EServerType_DFS"
+	case EServerType_LBS:
+		return "EServerType_LBS"
+	case EServerType_MDS:
+		return "EServerType_MDS"
+	case EServerType_CS:
+		return "EServerType_CS"
+	case EServerType_GC:
+		return "EServerType_GC"
+	case EServerType_NS:
+		return "EServerType_NS"
+	case EServerType_OGS:
+		return "EServerType_OGS"
+	case EServerType_WebAPI:
+		return "EServerType_WebAPI"
+	case EServerType_UDS:
+		return "EServerType_UDS"
+	case EServerType_MMS:
+		return "EServerType_MMS"
+	case EServerType_GMS:
+		return "EServerType_GMS"
+	case EServerType_KGS:
+		return "EServerType_KGS"
+	case EServerType_UCM:
+		return "EServerType_UCM"
+	case EServerType_RM:
+		return "EServerType_RM"
+	case EServerType_FS:
+		return "EServerType_FS"
+	case EServerType_Econ:
+		return "EServerType_Econ"
+	case EServerType_Backpack:
+		return "EServerType_Backpack"
+	case EServerType_UGS:
+		return "EServerType_UGS"
+	case EServerType_Store:
+		return "EServerType_Store"
+	case EServerType_MoneyStats:
+		return "EServerType_MoneyStats"
+	case EServerType_CRE:
+		return "EServerType_CRE"
+	case EServerType_UMQ:
+		return "EServerType_UMQ"
+	case EServerType_Workshop:
+		return "EServerType_Workshop"
+	case EServerType_BRP:
+		return "EServerType_BRP"
+	case EServerType_GCH:
+		return "EServerType_GCH"
+	case EServerType_MPAS:
+		return "EServerType_MPAS"
+	case EServerType_Trade:
+		return "EServerType_Trade"
+	case EServerType_Secrets:
+		return "EServerType_Secrets"
+	case EServerType_Logsink:
+		return "EServerType_Logsink"
+	case EServerType_Market:
+		return "EServerType_Market"
+	case EServerType_Quest:
+		return "EServerType_Quest"
+	case EServerType_WDS:
+		return "EServerType_WDS"
+	case EServerType_ACS:
+		return "EServerType_ACS"
+	case EServerType_PNP:
+		return "EServerType_PNP"
+	case EServerType_Max:
+		return "EServerType_Max"
+	default:
+		return "INVALID"
+	}
+}
+
 type EBillingType int32
 
 const (
@@ -2413,6 +7025,35 @@ const (
 	EBillingType_NumBillingTypes                     = 10
 )
 
+func (e EBillingType) String() string {
+	switch e {
+	case EBillingType_NoCost:
+		return "EBillingType_NoCost"
+	case EBillingType_BillOnceOnly:
+		return "EBillingType_BillOnceOnly"
+	case EBillingType_BillMonthly:
+		return "EBillingType_BillMonthly"
+	case EBillingType_ProofOfPrepurchaseOnly:
+		return "EBillingType_ProofOfPrepurchaseOnly"
+	case EBillingType_GuestPass:
+		return "EBillingType_GuestPass"
+	case EBillingType_HardwarePromo:
+		return "EBillingType_HardwarePromo"
+	case EBillingType_Gift:
+		return "EBillingType_Gift"
+	case EBillingType_AutoGrant:
+		return "EBillingType_AutoGrant"
+	case EBillingType_OEMTicket:
+		return "EBillingType_OEMTicket"
+	case EBillingType_RecurringOption:
+		return "EBillingType_RecurringOption"
+	case EBillingType_NumBillingTypes:
+		return "EBillingType_NumBillingTypes"
+	default:
+		return "INVALID"
+	}
+}
+
 type EActivationCodeClass uint32
 
 const (
@@ -2426,6 +7067,29 @@ const (
 	EActivationCodeClass_Invalid                           = 4294967295
 )
 
+func (e EActivationCodeClass) String() string {
+	switch e {
+	case EActivationCodeClass_WonCDKey:
+		return "EActivationCodeClass_WonCDKey"
+	case EActivationCodeClass_ValveCDKey:
+		return "EActivationCodeClass_ValveCDKey"
+	case EActivationCodeClass_Doom3CDKey:
+		return "EActivationCodeClass_Doom3CDKey"
+	case EActivationCodeClass_DBLookup:
+		return "EActivationCodeClass_DBLookup"
+	case EActivationCodeClass_Steam2010Key:
+		return "EActivationCodeClass_Steam2010Key"
+	case EActivationCodeClass_Max:
+		return "EActivationCodeClass_Max"
+	case EActivationCodeClass_Test:
+		return "EActivationCodeClass_Test"
+	case EActivationCodeClass_Invalid:
+		return "EActivationCodeClass_Invalid"
+	default:
+		return "INVALID"
+	}
+}
+
 type EChatMemberStateChange int32
 
 const (
@@ -2437,6 +7101,27 @@ const (
 	EChatMemberStateChange_VoiceSpeaking                            = 0x1000
 	EChatMemberStateChange_VoiceDoneSpeaking                        = 0x2000
 )
+
+func (e EChatMemberStateChange) String() string {
+	switch e {
+	case EChatMemberStateChange_Entered:
+		return "EChatMemberStateChange_Entered"
+	case EChatMemberStateChange_Left:
+		return "EChatMemberStateChange_Left"
+	case EChatMemberStateChange_Disconnected:
+		return "EChatMemberStateChange_Disconnected"
+	case EChatMemberStateChange_Kicked:
+		return "EChatMemberStateChange_Kicked"
+	case EChatMemberStateChange_Banned:
+		return "EChatMemberStateChange_Banned"
+	case EChatMemberStateChange_VoiceSpeaking:
+		return "EChatMemberStateChange_VoiceSpeaking"
+	case EChatMemberStateChange_VoiceDoneSpeaking:
+		return "EChatMemberStateChange_VoiceDoneSpeaking"
+	default:
+		return "INVALID"
+	}
+}
 
 type ERegionCode uint8
 
@@ -2451,6 +7136,31 @@ const (
 	ERegionCode_Africa                   = 0x07
 	ERegionCode_World                    = 0xFF
 )
+
+func (e ERegionCode) String() string {
+	switch e {
+	case ERegionCode_USEast:
+		return "ERegionCode_USEast"
+	case ERegionCode_USWest:
+		return "ERegionCode_USWest"
+	case ERegionCode_SouthAmerica:
+		return "ERegionCode_SouthAmerica"
+	case ERegionCode_Europe:
+		return "ERegionCode_Europe"
+	case ERegionCode_Asia:
+		return "ERegionCode_Asia"
+	case ERegionCode_Australia:
+		return "ERegionCode_Australia"
+	case ERegionCode_MiddleEast:
+		return "ERegionCode_MiddleEast"
+	case ERegionCode_Africa:
+		return "ERegionCode_Africa"
+	case ERegionCode_World:
+		return "ERegionCode_World"
+	default:
+		return "INVALID"
+	}
+}
 
 type ECurrencyCode int32
 
@@ -2467,6 +7177,33 @@ const (
 	ECurrencyCode_Max                   = 10
 )
 
+func (e ECurrencyCode) String() string {
+	switch e {
+	case ECurrencyCode_Invalid:
+		return "ECurrencyCode_Invalid"
+	case ECurrencyCode_USD:
+		return "ECurrencyCode_USD"
+	case ECurrencyCode_GBP:
+		return "ECurrencyCode_GBP"
+	case ECurrencyCode_EUR:
+		return "ECurrencyCode_EUR"
+	case ECurrencyCode_CHF:
+		return "ECurrencyCode_CHF"
+	case ECurrencyCode_RUB:
+		return "ECurrencyCode_RUB"
+	case ECurrencyCode_PLN:
+		return "ECurrencyCode_PLN"
+	case ECurrencyCode_BRL:
+		return "ECurrencyCode_BRL"
+	case ECurrencyCode_NOK:
+		return "ECurrencyCode_NOK"
+	case ECurrencyCode_Max:
+		return "ECurrencyCode_Max"
+	default:
+		return "INVALID"
+	}
+}
+
 type EDepotFileFlag int32
 
 const (
@@ -2481,6 +7218,31 @@ const (
 	EDepotFileFlag_InstallScript                      = 256
 )
 
+func (e EDepotFileFlag) String() string {
+	switch e {
+	case EDepotFileFlag_UserConfig:
+		return "EDepotFileFlag_UserConfig"
+	case EDepotFileFlag_VersionedUserConfig:
+		return "EDepotFileFlag_VersionedUserConfig"
+	case EDepotFileFlag_Encrypted:
+		return "EDepotFileFlag_Encrypted"
+	case EDepotFileFlag_ReadOnly:
+		return "EDepotFileFlag_ReadOnly"
+	case EDepotFileFlag_Hidden:
+		return "EDepotFileFlag_Hidden"
+	case EDepotFileFlag_Executable:
+		return "EDepotFileFlag_Executable"
+	case EDepotFileFlag_Directory:
+		return "EDepotFileFlag_Directory"
+	case EDepotFileFlag_CustomExecutable:
+		return "EDepotFileFlag_CustomExecutable"
+	case EDepotFileFlag_InstallScript:
+		return "EDepotFileFlag_InstallScript"
+	default:
+		return "INVALID"
+	}
+}
+
 type EWorkshopEnumerationType int32
 
 const (
@@ -2493,6 +7255,27 @@ const (
 	EWorkshopEnumerationType_RecentFromFollowedUsers                          = 6
 )
 
+func (e EWorkshopEnumerationType) String() string {
+	switch e {
+	case EWorkshopEnumerationType_RankedByVote:
+		return "EWorkshopEnumerationType_RankedByVote"
+	case EWorkshopEnumerationType_Recent:
+		return "EWorkshopEnumerationType_Recent"
+	case EWorkshopEnumerationType_Trending:
+		return "EWorkshopEnumerationType_Trending"
+	case EWorkshopEnumerationType_FavoriteOfFriends:
+		return "EWorkshopEnumerationType_FavoriteOfFriends"
+	case EWorkshopEnumerationType_VotedByFriends:
+		return "EWorkshopEnumerationType_VotedByFriends"
+	case EWorkshopEnumerationType_ContentByFriends:
+		return "EWorkshopEnumerationType_ContentByFriends"
+	case EWorkshopEnumerationType_RecentFromFollowedUsers:
+		return "EWorkshopEnumerationType_RecentFromFollowedUsers"
+	default:
+		return "INVALID"
+	}
+}
+
 type EPublishedFileVisibility int32
 
 const (
@@ -2501,6 +7284,19 @@ const (
 	EPublishedFileVisibility_Private                              = 2
 )
 
+func (e EPublishedFileVisibility) String() string {
+	switch e {
+	case EPublishedFileVisibility_Public:
+		return "EPublishedFileVisibility_Public"
+	case EPublishedFileVisibility_FriendsOnly:
+		return "EPublishedFileVisibility_FriendsOnly"
+	case EPublishedFileVisibility_Private:
+		return "EPublishedFileVisibility_Private"
+	default:
+		return "INVALID"
+	}
+}
+
 type EWorkshopFileAction int32
 
 const (
@@ -2508,39 +7304,109 @@ const (
 	EWorkshopFileAction_Completed                     = 1
 )
 
+func (e EWorkshopFileAction) String() string {
+	switch e {
+	case EWorkshopFileAction_Played:
+		return "EWorkshopFileAction_Played"
+	case EWorkshopFileAction_Completed:
+		return "EWorkshopFileAction_Completed"
+	default:
+		return "INVALID"
+	}
+}
+
 type EEconTradeResponse int32
 
 const (
-	EEconTradeResponse_Accepted                    EEconTradeResponse = 0
-	EEconTradeResponse_Declined                                       = 1
-	EEconTradeResponse_VacBannedInitiator                             = 2 // Deprecated: renamed to TradeBannedInitiator
-	EEconTradeResponse_TradeBannedInitiator                           = 2
-	EEconTradeResponse_VacBannedTarget                                = 3 // Deprecated: renamed to TradeBannedTarget
-	EEconTradeResponse_TradeBannedTarget                              = 3
-	EEconTradeResponse_TargetAlreadyTrading                           = 4
-	EEconTradeResponse_Disabled                                       = 5
-	EEconTradeResponse_NotLoggedIn                                    = 6
-	EEconTradeResponse_Cancel                                         = 7
-	EEconTradeResponse_TooSoon                                        = 8
-	EEconTradeResponse_TooSoonPenalty                                 = 9
-	EEconTradeResponse_ConnectionFailed                               = 10
-	EEconTradeResponse_InitiatorAlreadyTrading                        = 11 // Deprecated: renamed to AlreadyTrading
-	EEconTradeResponse_AlreadyTrading                                 = 11
-	EEconTradeResponse_Error                                          = 12 // Deprecated: renamed to AlreadyHasTradeRequest
-	EEconTradeResponse_AlreadyHasTradeRequest                         = 12
-	EEconTradeResponse_Timeout                                        = 13 // Deprecated: renamed to NoResponse
-	EEconTradeResponse_NoResponse                                     = 13
-	EEconTradeResponse_CyberCafeInitiator                             = 14
-	EEconTradeResponse_CyberCafeTarget                                = 15
-	EEconTradeResponse_SchoolLabInitiator                             = 16
-	EEconTradeResponse_SchoolLabTarget                                = 16
-	EEconTradeResponse_InitiatorBlockedTarget                         = 18
-	EEconTradeResponse_InitiatorNeedsVerifiedEmail                    = 20
-	EEconTradeResponse_InitiatorNeedsSteamGuard                       = 21
-	EEconTradeResponse_TargetAccountCannotTrade                       = 22
-	EEconTradeResponse_InitiatorSteamGuardDuration                    = 23
-	EEconTradeResponse_OKToDeliver                                    = 50
+	EEconTradeResponse_Accepted                        EEconTradeResponse = 0
+	EEconTradeResponse_Declined                                           = 1
+	EEconTradeResponse_VacBannedInitiator                                 = 2 // Deprecated: renamed to TradeBannedInitiator
+	EEconTradeResponse_TradeBannedInitiator                               = 2
+	EEconTradeResponse_VacBannedTarget                                    = 3 // Deprecated: renamed to TradeBannedTarget
+	EEconTradeResponse_TradeBannedTarget                                  = 3
+	EEconTradeResponse_TargetAlreadyTrading                               = 4
+	EEconTradeResponse_Disabled                                           = 5
+	EEconTradeResponse_NotLoggedIn                                        = 6
+	EEconTradeResponse_Cancel                                             = 7
+	EEconTradeResponse_TooSoon                                            = 8
+	EEconTradeResponse_TooSoonPenalty                                     = 9
+	EEconTradeResponse_ConnectionFailed                                   = 10
+	EEconTradeResponse_InitiatorAlreadyTrading                            = 11 // Deprecated: renamed to AlreadyTrading
+	EEconTradeResponse_AlreadyTrading                                     = 11
+	EEconTradeResponse_Error                                              = 12 // Deprecated: renamed to AlreadyHasTradeRequest
+	EEconTradeResponse_AlreadyHasTradeRequest                             = 12
+	EEconTradeResponse_Timeout                                            = 13 // Deprecated: renamed to NoResponse
+	EEconTradeResponse_NoResponse                                         = 13
+	EEconTradeResponse_CyberCafeInitiator                                 = 14
+	EEconTradeResponse_CyberCafeTarget                                    = 15
+	EEconTradeResponse_SchoolLabInitiator                                 = 16
+	EEconTradeResponse_SchoolLabTarget                                    = 16
+	EEconTradeResponse_InitiatorBlockedTarget                             = 18
+	EEconTradeResponse_InitiatorNeedsVerifiedEmail                        = 20
+	EEconTradeResponse_InitiatorNeedsSteamGuard                           = 21
+	EEconTradeResponse_TargetAccountCannotTrade                           = 22
+	EEconTradeResponse_InitiatorSteamGuardDuration                        = 23
+	EEconTradeResponse_InitiatorPasswordResetProbation                    = 24
+	EEconTradeResponse_InitiatorNewDeviceCooldown                         = 25
+	EEconTradeResponse_OKToDeliver                                        = 50
 )
+
+func (e EEconTradeResponse) String() string {
+	switch e {
+	case EEconTradeResponse_Accepted:
+		return "EEconTradeResponse_Accepted"
+	case EEconTradeResponse_Declined:
+		return "EEconTradeResponse_Declined"
+	case EEconTradeResponse_VacBannedInitiator:
+		return "EEconTradeResponse_VacBannedInitiator"
+	case EEconTradeResponse_VacBannedTarget:
+		return "EEconTradeResponse_VacBannedTarget"
+	case EEconTradeResponse_TargetAlreadyTrading:
+		return "EEconTradeResponse_TargetAlreadyTrading"
+	case EEconTradeResponse_Disabled:
+		return "EEconTradeResponse_Disabled"
+	case EEconTradeResponse_NotLoggedIn:
+		return "EEconTradeResponse_NotLoggedIn"
+	case EEconTradeResponse_Cancel:
+		return "EEconTradeResponse_Cancel"
+	case EEconTradeResponse_TooSoon:
+		return "EEconTradeResponse_TooSoon"
+	case EEconTradeResponse_TooSoonPenalty:
+		return "EEconTradeResponse_TooSoonPenalty"
+	case EEconTradeResponse_ConnectionFailed:
+		return "EEconTradeResponse_ConnectionFailed"
+	case EEconTradeResponse_InitiatorAlreadyTrading:
+		return "EEconTradeResponse_InitiatorAlreadyTrading"
+	case EEconTradeResponse_Error:
+		return "EEconTradeResponse_Error"
+	case EEconTradeResponse_Timeout:
+		return "EEconTradeResponse_Timeout"
+	case EEconTradeResponse_CyberCafeInitiator:
+		return "EEconTradeResponse_CyberCafeInitiator"
+	case EEconTradeResponse_CyberCafeTarget:
+		return "EEconTradeResponse_CyberCafeTarget"
+	case EEconTradeResponse_SchoolLabInitiator:
+		return "EEconTradeResponse_SchoolLabInitiator"
+	case EEconTradeResponse_InitiatorBlockedTarget:
+		return "EEconTradeResponse_InitiatorBlockedTarget"
+	case EEconTradeResponse_InitiatorNeedsVerifiedEmail:
+		return "EEconTradeResponse_InitiatorNeedsVerifiedEmail"
+	case EEconTradeResponse_InitiatorNeedsSteamGuard:
+		return "EEconTradeResponse_InitiatorNeedsSteamGuard"
+	case EEconTradeResponse_TargetAccountCannotTrade:
+		return "EEconTradeResponse_TargetAccountCannotTrade"
+	case EEconTradeResponse_InitiatorSteamGuardDuration:
+		return "EEconTradeResponse_InitiatorSteamGuardDuration"
+	case EEconTradeResponse_InitiatorPasswordResetProbation:
+		return "EEconTradeResponse_InitiatorPasswordResetProbation"
+	case EEconTradeResponse_InitiatorNewDeviceCooldown:
+		return "EEconTradeResponse_InitiatorNewDeviceCooldown"
+	case EEconTradeResponse_OKToDeliver:
+		return "EEconTradeResponse_OKToDeliver"
+	default:
+		return "INVALID"
+	}
+}
 
 type EMarketingMessageFlags int32
 
@@ -2549,8 +7415,28 @@ const (
 	EMarketingMessageFlags_HighPriority                                = 1
 	EMarketingMessageFlags_PlatformWindows                             = 2
 	EMarketingMessageFlags_PlatformMac                                 = 4
-	EMarketingMessageFlags_PlatformRestrictions                        = 6
+	EMarketingMessageFlags_PlatformLinux                               = 8
+	EMarketingMessageFlags_PlatformRestrictions                        = EMarketingMessageFlags_PlatformWindows | EMarketingMessageFlags_PlatformMac | EMarketingMessageFlags_PlatformLinux
 )
+
+func (e EMarketingMessageFlags) String() string {
+	switch e {
+	case EMarketingMessageFlags_None:
+		return "EMarketingMessageFlags_None"
+	case EMarketingMessageFlags_HighPriority:
+		return "EMarketingMessageFlags_HighPriority"
+	case EMarketingMessageFlags_PlatformWindows:
+		return "EMarketingMessageFlags_PlatformWindows"
+	case EMarketingMessageFlags_PlatformMac:
+		return "EMarketingMessageFlags_PlatformMac"
+	case EMarketingMessageFlags_PlatformLinux:
+		return "EMarketingMessageFlags_PlatformLinux"
+	case EMarketingMessageFlags_PlatformRestrictions:
+		return "EMarketingMessageFlags_PlatformRestrictions"
+	default:
+		return "INVALID"
+	}
+}
 
 type ENewsUpdateType int32
 
@@ -2561,6 +7447,23 @@ const (
 	ENewsUpdateType_CDDBUpdate                   = 3
 	ENewsUpdateType_ClientUpdate                 = 4
 )
+
+func (e ENewsUpdateType) String() string {
+	switch e {
+	case ENewsUpdateType_AppNews:
+		return "ENewsUpdateType_AppNews"
+	case ENewsUpdateType_SteamAds:
+		return "ENewsUpdateType_SteamAds"
+	case ENewsUpdateType_SteamNews:
+		return "ENewsUpdateType_SteamNews"
+	case ENewsUpdateType_CDDBUpdate:
+		return "ENewsUpdateType_CDDBUpdate"
+	case ENewsUpdateType_ClientUpdate:
+		return "ENewsUpdateType_ClientUpdate"
+	default:
+		return "INVALID"
+	}
+}
 
 type ESystemIMType int32
 
@@ -2578,6 +7481,35 @@ const (
 	ESystemIMType_Max                                    = 10
 )
 
+func (e ESystemIMType) String() string {
+	switch e {
+	case ESystemIMType_RawText:
+		return "ESystemIMType_RawText"
+	case ESystemIMType_InvalidCard:
+		return "ESystemIMType_InvalidCard"
+	case ESystemIMType_RecurringPurchaseFailed:
+		return "ESystemIMType_RecurringPurchaseFailed"
+	case ESystemIMType_CardWillExpire:
+		return "ESystemIMType_CardWillExpire"
+	case ESystemIMType_SubscriptionExpired:
+		return "ESystemIMType_SubscriptionExpired"
+	case ESystemIMType_GuestPassReceived:
+		return "ESystemIMType_GuestPassReceived"
+	case ESystemIMType_GuestPassGranted:
+		return "ESystemIMType_GuestPassGranted"
+	case ESystemIMType_GiftRevoked:
+		return "ESystemIMType_GiftRevoked"
+	case ESystemIMType_SupportMessage:
+		return "ESystemIMType_SupportMessage"
+	case ESystemIMType_SupportMessageClearAlert:
+		return "ESystemIMType_SupportMessageClearAlert"
+	case ESystemIMType_Max:
+		return "ESystemIMType_Max"
+	default:
+		return "INVALID"
+	}
+}
+
 type EChatFlags int32
 
 const (
@@ -2586,6 +7518,21 @@ const (
 	EChatFlags_Moderated                     = 4
 	EChatFlags_Unjoinable                    = 8
 )
+
+func (e EChatFlags) String() string {
+	switch e {
+	case EChatFlags_Locked:
+		return "EChatFlags_Locked"
+	case EChatFlags_InvisibleToFriends:
+		return "EChatFlags_InvisibleToFriends"
+	case EChatFlags_Moderated:
+		return "EChatFlags_Moderated"
+	case EChatFlags_Unjoinable:
+		return "EChatFlags_Unjoinable"
+	default:
+		return "INVALID"
+	}
+}
 
 type ERemoteStoragePlatform int32
 
@@ -2598,6 +7545,27 @@ const (
 	ERemoteStoragePlatform_Reserved2                        = 16
 	ERemoteStoragePlatform_All                              = -1
 )
+
+func (e ERemoteStoragePlatform) String() string {
+	switch e {
+	case ERemoteStoragePlatform_None:
+		return "ERemoteStoragePlatform_None"
+	case ERemoteStoragePlatform_Windows:
+		return "ERemoteStoragePlatform_Windows"
+	case ERemoteStoragePlatform_OSX:
+		return "ERemoteStoragePlatform_OSX"
+	case ERemoteStoragePlatform_PS3:
+		return "ERemoteStoragePlatform_PS3"
+	case ERemoteStoragePlatform_Reserved1:
+		return "ERemoteStoragePlatform_Reserved1"
+	case ERemoteStoragePlatform_Reserved2:
+		return "ERemoteStoragePlatform_Reserved2"
+	case ERemoteStoragePlatform_All:
+		return "ERemoteStoragePlatform_All"
+	default:
+		return "INVALID"
+	}
+}
 
 type EDRMBlobDownloadType int32
 
@@ -2612,6 +7580,31 @@ const (
 	EDRMBlobDownloadType_AddTimestamp                      = 32
 	EDRMBlobDownloadType_LowPriority                       = 64
 )
+
+func (e EDRMBlobDownloadType) String() string {
+	switch e {
+	case EDRMBlobDownloadType_Error:
+		return "EDRMBlobDownloadType_Error"
+	case EDRMBlobDownloadType_File:
+		return "EDRMBlobDownloadType_File"
+	case EDRMBlobDownloadType_Parts:
+		return "EDRMBlobDownloadType_Parts"
+	case EDRMBlobDownloadType_Compressed:
+		return "EDRMBlobDownloadType_Compressed"
+	case EDRMBlobDownloadType_AllMask:
+		return "EDRMBlobDownloadType_AllMask"
+	case EDRMBlobDownloadType_IsJob:
+		return "EDRMBlobDownloadType_IsJob"
+	case EDRMBlobDownloadType_HighPriority:
+		return "EDRMBlobDownloadType_HighPriority"
+	case EDRMBlobDownloadType_AddTimestamp:
+		return "EDRMBlobDownloadType_AddTimestamp"
+	case EDRMBlobDownloadType_LowPriority:
+		return "EDRMBlobDownloadType_LowPriority"
+	default:
+		return "INVALID"
+	}
+}
 
 type EDRMBlobDownloadErrorDetail int32
 
@@ -2641,6 +7634,59 @@ const (
 	EDRMBlobDownloadErrorDetail_NextBase                                              = 131072
 )
 
+func (e EDRMBlobDownloadErrorDetail) String() string {
+	switch e {
+	case EDRMBlobDownloadErrorDetail_None:
+		return "EDRMBlobDownloadErrorDetail_None"
+	case EDRMBlobDownloadErrorDetail_DownloadFailed:
+		return "EDRMBlobDownloadErrorDetail_DownloadFailed"
+	case EDRMBlobDownloadErrorDetail_TargetLocked:
+		return "EDRMBlobDownloadErrorDetail_TargetLocked"
+	case EDRMBlobDownloadErrorDetail_OpenZip:
+		return "EDRMBlobDownloadErrorDetail_OpenZip"
+	case EDRMBlobDownloadErrorDetail_ReadZipDirectory:
+		return "EDRMBlobDownloadErrorDetail_ReadZipDirectory"
+	case EDRMBlobDownloadErrorDetail_UnexpectedZipEntry:
+		return "EDRMBlobDownloadErrorDetail_UnexpectedZipEntry"
+	case EDRMBlobDownloadErrorDetail_UnzipFullFile:
+		return "EDRMBlobDownloadErrorDetail_UnzipFullFile"
+	case EDRMBlobDownloadErrorDetail_UnknownBlobType:
+		return "EDRMBlobDownloadErrorDetail_UnknownBlobType"
+	case EDRMBlobDownloadErrorDetail_UnzipStrips:
+		return "EDRMBlobDownloadErrorDetail_UnzipStrips"
+	case EDRMBlobDownloadErrorDetail_UnzipMergeGuid:
+		return "EDRMBlobDownloadErrorDetail_UnzipMergeGuid"
+	case EDRMBlobDownloadErrorDetail_UnzipSignature:
+		return "EDRMBlobDownloadErrorDetail_UnzipSignature"
+	case EDRMBlobDownloadErrorDetail_ApplyStrips:
+		return "EDRMBlobDownloadErrorDetail_ApplyStrips"
+	case EDRMBlobDownloadErrorDetail_ApplyMergeGuid:
+		return "EDRMBlobDownloadErrorDetail_ApplyMergeGuid"
+	case EDRMBlobDownloadErrorDetail_ApplySignature:
+		return "EDRMBlobDownloadErrorDetail_ApplySignature"
+	case EDRMBlobDownloadErrorDetail_AppIdMismatch:
+		return "EDRMBlobDownloadErrorDetail_AppIdMismatch"
+	case EDRMBlobDownloadErrorDetail_AppIdUnexpected:
+		return "EDRMBlobDownloadErrorDetail_AppIdUnexpected"
+	case EDRMBlobDownloadErrorDetail_AppliedSignatureCorrupt:
+		return "EDRMBlobDownloadErrorDetail_AppliedSignatureCorrupt"
+	case EDRMBlobDownloadErrorDetail_ApplyValveSignatureHeader:
+		return "EDRMBlobDownloadErrorDetail_ApplyValveSignatureHeader"
+	case EDRMBlobDownloadErrorDetail_UnzipValveSignatureHeader:
+		return "EDRMBlobDownloadErrorDetail_UnzipValveSignatureHeader"
+	case EDRMBlobDownloadErrorDetail_PathManipulationError:
+		return "EDRMBlobDownloadErrorDetail_PathManipulationError"
+	case EDRMBlobDownloadErrorDetail_TargetLocked_Base:
+		return "EDRMBlobDownloadErrorDetail_TargetLocked_Base"
+	case EDRMBlobDownloadErrorDetail_TargetLocked_Max:
+		return "EDRMBlobDownloadErrorDetail_TargetLocked_Max"
+	case EDRMBlobDownloadErrorDetail_NextBase:
+		return "EDRMBlobDownloadErrorDetail_NextBase"
+	default:
+		return "INVALID"
+	}
+}
+
 type EClientStat int32
 
 const (
@@ -2652,6 +7698,25 @@ const (
 	EClientStat_Max                             = 5
 )
 
+func (e EClientStat) String() string {
+	switch e {
+	case EClientStat_P2PConnectionsUDP:
+		return "EClientStat_P2PConnectionsUDP"
+	case EClientStat_P2PConnectionsRelay:
+		return "EClientStat_P2PConnectionsRelay"
+	case EClientStat_P2PGameConnections:
+		return "EClientStat_P2PGameConnections"
+	case EClientStat_P2PVoiceConnections:
+		return "EClientStat_P2PVoiceConnections"
+	case EClientStat_BytesDownloaded:
+		return "EClientStat_BytesDownloaded"
+	case EClientStat_Max:
+		return "EClientStat_Max"
+	default:
+		return "INVALID"
+	}
+}
+
 type EClientStatAggregateMethod int32
 
 const (
@@ -2660,6 +7725,21 @@ const (
 	EClientStatAggregateMethod_Event                                 = 2
 	EClientStatAggregateMethod_Scalar                                = 3
 )
+
+func (e EClientStatAggregateMethod) String() string {
+	switch e {
+	case EClientStatAggregateMethod_LatestOnly:
+		return "EClientStatAggregateMethod_LatestOnly"
+	case EClientStatAggregateMethod_Sum:
+		return "EClientStatAggregateMethod_Sum"
+	case EClientStatAggregateMethod_Event:
+		return "EClientStatAggregateMethod_Event"
+	case EClientStatAggregateMethod_Scalar:
+		return "EClientStatAggregateMethod_Scalar"
+	default:
+		return "INVALID"
+	}
+}
 
 type ELeaderboardDataRequest int32
 
@@ -2670,6 +7750,21 @@ const (
 	ELeaderboardDataRequest_Users                                    = 3
 )
 
+func (e ELeaderboardDataRequest) String() string {
+	switch e {
+	case ELeaderboardDataRequest_Global:
+		return "ELeaderboardDataRequest_Global"
+	case ELeaderboardDataRequest_GlobalAroundUser:
+		return "ELeaderboardDataRequest_GlobalAroundUser"
+	case ELeaderboardDataRequest_Friends:
+		return "ELeaderboardDataRequest_Friends"
+	case ELeaderboardDataRequest_Users:
+		return "ELeaderboardDataRequest_Users"
+	default:
+		return "INVALID"
+	}
+}
+
 type ELeaderboardSortMethod int32
 
 const (
@@ -2678,6 +7773,19 @@ const (
 	ELeaderboardSortMethod_Descending                        = 2
 )
 
+func (e ELeaderboardSortMethod) String() string {
+	switch e {
+	case ELeaderboardSortMethod_None:
+		return "ELeaderboardSortMethod_None"
+	case ELeaderboardSortMethod_Ascending:
+		return "ELeaderboardSortMethod_Ascending"
+	case ELeaderboardSortMethod_Descending:
+		return "ELeaderboardSortMethod_Descending"
+	default:
+		return "INVALID"
+	}
+}
+
 type ELeaderboardUploadScoreMethod int32
 
 const (
@@ -2685,6 +7793,19 @@ const (
 	ELeaderboardUploadScoreMethod_KeepBest                                  = 1
 	ELeaderboardUploadScoreMethod_ForceUpdate                               = 2
 )
+
+func (e ELeaderboardUploadScoreMethod) String() string {
+	switch e {
+	case ELeaderboardUploadScoreMethod_None:
+		return "ELeaderboardUploadScoreMethod_None"
+	case ELeaderboardUploadScoreMethod_KeepBest:
+		return "ELeaderboardUploadScoreMethod_KeepBest"
+	case ELeaderboardUploadScoreMethod_ForceUpdate:
+		return "ELeaderboardUploadScoreMethod_ForceUpdate"
+	default:
+		return "INVALID"
+	}
+}
 
 type EUCMFilePrivacyState int32
 
@@ -2695,6 +7816,23 @@ const (
 	EUCMFilePrivacyState_Public                           = 8
 	EUCMFilePrivacyState_All                              = EUCMFilePrivacyState_Public | EUCMFilePrivacyState_FriendsOnly | EUCMFilePrivacyState_Private
 )
+
+func (e EUCMFilePrivacyState) String() string {
+	switch e {
+	case EUCMFilePrivacyState_Invalid:
+		return "EUCMFilePrivacyState_Invalid"
+	case EUCMFilePrivacyState_Private:
+		return "EUCMFilePrivacyState_Private"
+	case EUCMFilePrivacyState_FriendsOnly:
+		return "EUCMFilePrivacyState_FriendsOnly"
+	case EUCMFilePrivacyState_Public:
+		return "EUCMFilePrivacyState_Public"
+	case EUCMFilePrivacyState_All:
+		return "EUCMFilePrivacyState_All"
+	default:
+		return "INVALID"
+	}
+}
 
 type EUdpPacketType uint8
 
@@ -2709,3 +7847,28 @@ const (
 	EUdpPacketType_Datagram                    = 7
 	EUdpPacketType_Max                         = 8
 )
+
+func (e EUdpPacketType) String() string {
+	switch e {
+	case EUdpPacketType_Invalid:
+		return "EUdpPacketType_Invalid"
+	case EUdpPacketType_ChallengeReq:
+		return "EUdpPacketType_ChallengeReq"
+	case EUdpPacketType_Challenge:
+		return "EUdpPacketType_Challenge"
+	case EUdpPacketType_Connect:
+		return "EUdpPacketType_Connect"
+	case EUdpPacketType_Accept:
+		return "EUdpPacketType_Accept"
+	case EUdpPacketType_Disconnect:
+		return "EUdpPacketType_Disconnect"
+	case EUdpPacketType_Data:
+		return "EUdpPacketType_Data"
+	case EUdpPacketType_Datagram:
+		return "EUdpPacketType_Datagram"
+	case EUdpPacketType_Max:
+		return "EUdpPacketType_Max"
+	default:
+		return "INVALID"
+	}
+}

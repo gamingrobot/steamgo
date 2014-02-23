@@ -2,6 +2,15 @@
 // source: encrypted_app_ticket.proto
 // DO NOT EDIT!
 
+/*
+Package encrypted_app_ticket is a generated protocol buffer package.
+
+It is generated from these files:
+	encrypted_app_ticket.proto
+
+It has these top-level messages:
+	EncryptedAppTicket
+*/
 package internal
 
 import proto "code.google.com/p/goprotobuf/proto"

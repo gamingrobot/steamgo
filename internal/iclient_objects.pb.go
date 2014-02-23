@@ -2,6 +2,15 @@
 // source: iclient_objects.proto
 // DO NOT EDIT!
 
+/*
+Package iclient_objects is a generated protocol buffer package.
+
+It is generated from these files:
+	iclient_objects.proto
+
+It has these top-level messages:
+	ClientAppInfo
+*/
 package internal
 
 import proto "code.google.com/p/goprotobuf/proto"

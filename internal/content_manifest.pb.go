@@ -2,6 +2,17 @@
 // source: content_manifest.proto
 // DO NOT EDIT!
 
+/*
+Package content_manifest is a generated protocol buffer package.
+
+It is generated from these files:
+	content_manifest.proto
+
+It has these top-level messages:
+	ContentManifestPayload
+	ContentManifestMetadata
+	ContentManifestSignature
+*/
 package internal
 
 import proto "code.google.com/p/goprotobuf/proto"

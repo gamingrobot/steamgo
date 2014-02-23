@@ -6,7 +6,7 @@ package internal
 import (
 	"code.google.com/p/goprotobuf/proto"
 	"encoding/binary"
-	. "github.com/Philipp15b/go-steam/steamid"
+	. "github.com/GamingRobot/steamgo/steamid"
 	"io"
 )
 
@@ -721,7 +721,7 @@ func (d *MsgClientNewLoginKeyAccepted) Deserialize(r io.Reader) error {
 
 const (
 	MsgClientLogon_ObfuscationMask                                      uint32 = 0xBAADF00D
-	MsgClientLogon_CurrentProtocol                                      uint32 = 65575
+	MsgClientLogon_CurrentProtocol                                      uint32 = 65579
 	MsgClientLogon_ProtocolVerMajorMask                                 uint32 = 0xFFFF0000
 	MsgClientLogon_ProtocolVerMinorMask                                 uint32 = 0xFFFF
 	MsgClientLogon_ProtocolVerMinorMinGameServers                       uint16 = 4
@@ -742,6 +742,7 @@ const (
 	MsgClientLogon_ProtocolVerMinorMinForMachineAuth                    uint16 = 33
 	MsgClientLogon_ProtocolVerMinorMinForSessionIDLastAnon              uint16 = 36
 	MsgClientLogon_ProtocolVerMinorMinForEnhancedAppList                uint16 = 40
+	MsgClientLogon_ProtocolVerMinorMinForGzipMultiMessages              uint16 = 43
 )
 
 type MsgClientLogon struct {
@@ -2459,5 +2460,38 @@ func (d *MsgClientCreateChatResponse) Deserialize(r io.Reader) error {
 		return err
 	}
 	d.SteamIdFriendChat = SteamId(t3)
+	return err
+}
+
+type MsgClientMarketingMessageUpdate2 struct {
+	MarketingMessageUpdateTime uint32
+	Count                      uint32
+}
+
+func NewMsgClientMarketingMessageUpdate2() *MsgClientMarketingMessageUpdate2 {
+	return &MsgClientMarketingMessageUpdate2{}
+}
+
+func (d *MsgClientMarketingMessageUpdate2) GetEMsg() EMsg {
+	return EMsg_ClientMarketingMessageUpdate2
+}
+
+func (d *MsgClientMarketingMessageUpdate2) Serialize(w io.Writer) error {
+	var err error
+	err = binary.Write(w, binary.LittleEndian, d.MarketingMessageUpdateTime)
+	if err != nil {
+		return err
+	}
+	err = binary.Write(w, binary.LittleEndian, d.Count)
+	return err
+}
+
+func (d *MsgClientMarketingMessageUpdate2) Deserialize(r io.Reader) error {
+	var err error
+	d.MarketingMessageUpdateTime, err = readUint32(r)
+	if err != nil {
+		return err
+	}
+	d.Count, err = readUint32(r)
 	return err
 }

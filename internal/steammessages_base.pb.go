@@ -2,6 +2,20 @@
 // source: steammessages_base.proto
 // DO NOT EDIT!
 
+/*
+Package steammessages_base is a generated protocol buffer package.
+
+It is generated from these files:
+	steammessages_base.proto
+
+It has these top-level messages:
+	CMsgProtoBufHeader
+	CMsgMulti
+	CMsgProtobufWrapped
+	CMsgAuthTicket
+	CCDDBAppDetailCommon
+	CMsgAppRights
+*/
 package internal
 
 import proto "code.google.com/p/goprotobuf/proto"
@@ -26,7 +40,7 @@ type CMsgProtoBufHeader struct {
 	Ip                *uint32 `protobuf:"varint,15,opt,name=ip" json:"ip,omitempty"`
 	AuthAccountFlags  *uint32 `protobuf:"varint,16,opt,name=auth_account_flags" json:"auth_account_flags,omitempty"`
 	TokenSource       *uint32 `protobuf:"varint,22,opt,name=token_source" json:"token_source,omitempty"`
-	AdminSpoofingUser *bool   `protobuf:"varint,24,opt,name=admin_spoofing_user" json:"admin_spoofing_user,omitempty"`
+	AdminSpoofingUser *bool   `protobuf:"varint,23,opt,name=admin_spoofing_user" json:"admin_spoofing_user,omitempty"`
 	TransportError    *int32  `protobuf:"varint,17,opt,name=transport_error,def=1" json:"transport_error,omitempty"`
 	Messageid         *uint64 `protobuf:"varint,18,opt,name=messageid,def=18446744073709551615" json:"messageid,omitempty"`
 	PublisherGroupId  *uint32 `protobuf:"varint,19,opt,name=publisher_group_id" json:"publisher_group_id,omitempty"`
