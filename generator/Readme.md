@@ -9,4 +9,4 @@ go run generator.go
 install monodevelop 4.x
 install mono-xbuild
 xbuild GoSteamLanguageGenerator.csproj /p:OutputPath=bin/Debug
-go run generator.go
+go run generator.go clean proto steamlang
