@@ -3,7 +3,7 @@ package steam
 import (
 	"bytes"
 	"code.google.com/p/goprotobuf/proto"
-	. "github.com/Philipp15b/go-steam/internal"
+	. "github.com/GamingRobot/steamgo/internal"
 )
 
 type GameCoordinator struct {
