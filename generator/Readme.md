@@ -8,6 +8,5 @@ go run generator.go
 #linux
 install monodevelop 4.x
 install mono-xbuild
-xbuild
+xbuild GoSteamLanguageGenerator.csproj /p:OutputPath=bin/Debug
 go run generator.go
-
