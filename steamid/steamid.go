@@ -81,3 +81,7 @@ func (s SteamId) GetAccountUniverse() int32 {
 func (s SteamId) SetAccountUniverse(universe int32) SteamId {
 	return s.set(56, 0xF, uint64(universe))
 }
+
+func (s SteamId) StringUint64() string {
+	return strconv.FormatUint(uint64(s), 10)
+}
