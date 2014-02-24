@@ -302,7 +302,6 @@ func (c *Client) handleMulti(packet *PacketMsg) {
 	payload := body.GetMessageBody()
 
 	if body.GetSizeUnzipped() > 0 {
-		//archive, err := zip.NewReader(bytes.NewReader(payload), int64(len(payload)))
 		archive, err := gzip.NewReader(bytes.NewReader(payload))
 		if err != nil {
 			panic(err)
