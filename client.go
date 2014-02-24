@@ -12,7 +12,7 @@ import (
 	"hash/crc32"
 	"io/ioutil"
 	"log"
-	"reflect"
+	//"reflect"
 	"sync"
 	"sync/atomic"
 	"time"
@@ -79,7 +79,7 @@ func (c *Client) Events() <-chan interface{} {
 }
 
 func (c *Client) Emit(event interface{}) {
-	fmt.Printf("%v\n", reflect.TypeOf(event))
+	//fmt.Printf("%v\n", reflect.TypeOf(event))
 	c.events <- event
 }
 
@@ -241,7 +241,7 @@ func (c *Client) heartbeatLoop(seconds time.Duration) {
 }
 
 func (c *Client) handlePacket(packet *PacketMsg) {
-	fmt.Println(packet.EMsg)
+	//fmt.Println(packet.EMsg)
 	switch packet.EMsg {
 	case EMsg_ChannelEncryptRequest:
 		c.handleChannelEncryptRequest(packet)
