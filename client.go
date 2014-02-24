@@ -125,6 +125,7 @@ func (c *Client) Connected() bool {
 // If this client is already connected, it is disconnected first.
 func (c *Client) Connect() string {
 	server := getRandomCM()
+	log.Println("Connected to server:", server)
 	c.ConnectTo(server)
 	return server
 }

@@ -45,6 +45,7 @@ func dialTCP(addr string) (*tcpConnection, error) {
 
 func (c *tcpConnection) Read() (*PacketMsg, error) {
 	// All packets begin with a packet length
+	//fmt.Println(c)
 	var packetLen uint32
 	err := binary.Read(c.conn, binary.LittleEndian, &packetLen)
 	if err != nil {
