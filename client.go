@@ -1,7 +1,8 @@
 package steam
 
 import (
-	"archive/zip"
+	"compress/gzip"
+	//"archive/zip"
 	"bytes"
 	"crypto/rand"
 	"encoding/binary"
@@ -15,6 +16,7 @@ import (
 	"sync"
 	"sync/atomic"
 	"time"
+	"reflect"
 )
 
 // Represents a client to the Steam network.
@@ -78,6 +80,7 @@ func (c *Client) Events() <-chan interface{} {
 }
 
 func (c *Client) Emit(event interface{}) {
+	fmt.Printf("%v\n", reflect.TypeOf(event))
 	c.events <- event
 }
 
@@ -239,6 +242,7 @@ func (c *Client) heartbeatLoop(seconds time.Duration) {
 }
 
 func (c *Client) handlePacket(packet *PacketMsg) {
+	fmt.Println(packet.EMsg)
 	switch packet.EMsg {
 	case EMsg_ChannelEncryptRequest:
 		c.handleChannelEncryptRequest(packet)
@@ -298,23 +302,16 @@ func (c *Client) handleMulti(packet *PacketMsg) {
 	payload := body.GetMessageBody()
 
 	if body.GetSizeUnzipped() > 0 {
-		archive, err := zip.NewReader(bytes.NewReader(payload), int64(len(payload)))
+		//archive, err := zip.NewReader(bytes.NewReader(payload), int64(len(payload)))
+		archive, err := gzip.NewReader(bytes.NewReader(payload))
 		if err != nil {
 			panic(err)
 		}
 
-		for _, f := range archive.File {
-			if f.Name == "z" {
-				r, _ := f.Open()
-				payload, _ = ioutil.ReadAll(r)
-				goto okay
-			}
+		payload, err = ioutil.ReadAll(archive)
+		if err != nil {
+			panic(err)
 		}
-
-		c.Errorf("Invalid Multi packet %v: Could not find 'z' file!", packet)
-		return
-
-	okay: // jump over error
 	}
 
 	pr := bytes.NewReader(payload)
