@@ -111,7 +111,7 @@ func (s *Social) handleFriendsList(packet *PacketMsg) {
 		isClan := steamId.GetAccountType() == int32(EAccountType_Clan)
 
 		if isClan {
-			/*rel := EClanRelationship(friend.GetEfriendrelationship())
+			rel := EClanRelationship(friend.GetEfriendrelationship())
 			if rel == EClanRelationship_None {
 				s.Groups.remove(steamId)
 			} else {
@@ -122,7 +122,7 @@ func (s *Social) handleFriendsList(packet *PacketMsg) {
 			}
 			if list.GetBincremental() {
 				s.client.Emit(&GroupStateEvent{steamId, rel})
-			}*/
+			}
 		} else {
 			rel := EFriendRelationship(friend.GetEfriendrelationship())
 			if rel == EFriendRelationship_None {
@@ -293,7 +293,7 @@ func (f *Friend) GameAppId() uint64 {
 }
 
 type GroupsList struct {
-	mutex *sync.RWMutex
+	mutex sync.RWMutex
 
 	first *Group
 	last  *Group
