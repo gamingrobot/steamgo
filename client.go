@@ -2,7 +2,6 @@ package steam
 
 import (
 	"compress/gzip"
-	//"archive/zip"
 	"bytes"
 	"crypto/rand"
 	"encoding/binary"
