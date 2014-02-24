@@ -1,8 +1,8 @@
 package steam
 
 import (
-	"compress/gzip"
 	"bytes"
+	"compress/gzip"
 	"crypto/rand"
 	"encoding/binary"
 	"fmt"
@@ -12,10 +12,10 @@ import (
 	"hash/crc32"
 	"io/ioutil"
 	"log"
+	"reflect"
 	"sync"
 	"sync/atomic"
 	"time"
-	"reflect"
 )
 
 // Represents a client to the Steam network.
