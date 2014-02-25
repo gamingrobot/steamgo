@@ -55,11 +55,19 @@ func (s *Social) SetPersonaState(state EPersonaState) {
 	}))
 }
 
+func (s *Social) SendMessage(to SteamId, entryType EChatEntryType, message string) {
+	if to.GetAccountType() == int32(EAccountType_Individual) || to.GetAccountType() == int32(EAccountType_ConsoleUser) {
+		s.SendChatMessage(to, entryType, message)
+	} else if to.GetAccountType() == int32(EAccountType_Clan) || to.GetAccountType() == int32(EAccountType_Chat) {
+		s.SendChatRoomMessage(to, entryType, message)
+	}
+}
+
 // Sends a chat message to the given friend.
-func (s *Social) SendChatMessage(to SteamId, message string) {
+func (s *Social) SendChatMessage(to SteamId, entryType EChatEntryType, message string) {
 	s.client.Write(NewClientMsgProtobuf(EMsg_ClientFriendMsg, &CMsgClientFriendMsg{
 		Steamid:       proto.Uint64(to.ToUint64()),
-		ChatEntryType: proto.Int32(int32(EChatEntryType_ChatMsg)),
+		ChatEntryType: proto.Int32(int32(entryType)),
 		Message:       []byte(message),
 	}))
 }
@@ -105,7 +113,7 @@ func (s *Social) LeaveChat(id SteamId) {
 }
 
 // Sends a chat message to a chat room
-func (s *Social) SendChatRoomMessage(to SteamId, message string) {
+func (s *Social) SendChatRoomMessage(to SteamId, entryType EChatEntryType, message string) {
 	chatId := SteamId(to)
 	if chatId.GetAccountType() == int32(EAccountType_Clan) {
 		chatId = chatId.SetAccountInstance(uint32(Clan))
