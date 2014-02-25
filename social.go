@@ -121,9 +121,9 @@ func (s *Social) SendChatRoomMessage(to SteamId, entryType EChatEntryType, messa
 		chatId = chatId.SetAccountType(EAccountType_Chat)
 	}
 	s.client.Write(NewClientMsg(&MsgClientChatMsg{
-		ChatMsgType:     int32(entryType),
-		SteamIdChatRoom: chatId.ToUint64(),
-		SteamIdChatter:  s.client.SteamId().ToUint64(),
+		ChatMsgType:     entryType,
+		SteamIdChatRoom: chatId,
+		SteamIdChatter:  s.client.SteamId(),
 	}, []byte(message)))
 }
 
