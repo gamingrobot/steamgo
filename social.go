@@ -108,7 +108,8 @@ func (s *Social) LeaveChat(id SteamId) {
 	binary.Write(payload, binary.LittleEndian, uint32(EChatMemberStateChange_Left)) // StateChange
 	binary.Write(payload, binary.LittleEndian, s.client.SteamId().ToUint64())       // ChatterActedBy
 	s.client.Write(NewClientMsg(&MsgClientChatMemberInfo{
-		SteamIdChat: chatId, Type: EChatInfoType_StateChange,
+		SteamIdChat: chatId,
+		Type:        EChatInfoType_StateChange,
 	}, payload.Bytes()))
 }
 
@@ -120,7 +121,9 @@ func (s *Social) SendChatRoomMessage(to SteamId, entryType EChatEntryType, messa
 		chatId = chatId.SetAccountType(EAccountType_Chat)
 	}
 	s.client.Write(NewClientMsg(&MsgClientChatMsg{
-		ChatMsgType: EChatEntryType_ChatMsg, SteamIdChatRoom: chatId, SteamIdChatter: s.client.SteamId(),
+		ChatMsgType:     int32(entryType),
+		SteamIdChatRoom: chatId.ToUint64(),
+		SteamIdChatter:  s.client.SteamId().ToUint64(),
 	}, []byte(message)))
 }
 
