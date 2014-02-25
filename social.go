@@ -3,6 +3,7 @@ package steam
 import (
 	"bytes"
 	"code.google.com/p/goprotobuf/proto"
+	"encoding/binary"
 	. "github.com/GamingRobot/steamgo/internal"
 	. "github.com/GamingRobot/steamgo/steamid"
 	"sync"
@@ -40,6 +41,8 @@ func (s *Social) HandlePacket(packet *PacketMsg) {
 		s.handleFriendsList(packet)
 	case EMsg_ClientFriendMsgIncoming:
 		s.handleFriendMsg(packet)
+	case EMsg_ClientChatEnter:
+		s.handleChatEnter(packet)
 	}
 }
 
@@ -49,21 +52,11 @@ func (s *Social) SetPersonaState(state EPersonaState) {
 	}))
 }
 
-// Sends a chat message to the given friend. Chatrooms/Group chats are not supported yet.
-// This just calls SendMessage with EChatEntryType_ChatMsg as the entry type.
+// Sends a chat message to the given friend.
 func (s *Social) SendChatMessage(to SteamId, message string) {
-	s.SendMessage(to, message, EChatEntryType_ChatMsg)
-}
-
-// Sends a chat message to the given friend. Chatrooms/Group chats are not supported yet.
-func (s *Social) SendMessage(to SteamId, message string, entryType EChatEntryType) {
-	if to.GetAccountType() != int32(EAccountType_Individual) && to.GetAccountType() != int32(EAccountType_ConsoleUser) {
-		panic("Messages to users other than individuals or consoles are not supported yet.")
-	}
-
 	s.client.Write(NewClientMsgProtobuf(EMsg_ClientFriendMsg, &CMsgClientFriendMsg{
 		Steamid:       proto.Uint64(to.ToUint64()),
-		ChatEntryType: proto.Int32(int32(entryType)),
+		ChatEntryType: proto.Int32(int32(EChatEntryType_ChatMsg)),
 		Message:       []byte(message),
 	}))
 }
@@ -80,6 +73,44 @@ func (s *Social) RemoveFriend(id SteamId) {
 	s.client.Write(NewClientMsgProtobuf(EMsg_ClientRemoveFriend, &CMsgClientRemoveFriend{
 		Friendid: proto.Uint64(uint64(id)),
 	}))
+}
+
+// Attempts to join a chat room.
+func (s *Social) JoinChat(id SteamId) {
+	chatId := SteamId(id)
+	if chatId.GetAccountType() == int32(EAccountType_Clan) {
+		chatId = chatId.SetAccountInstance(uint32(Clan))
+		chatId = chatId.SetAccountType(EAccountType_Chat)
+	}
+	s.client.Write(NewClientMsg(&MsgClientJoinChat{SteamIdChat: chatId}, make([]byte, 0)))
+}
+
+// Attempts to leave a chat room.
+func (s *Social) LeaveChat(id SteamId) {
+	chatId := SteamId(id)
+	if chatId.GetAccountType() == int32(EAccountType_Clan) {
+		chatId = chatId.SetAccountInstance(uint32(Clan))
+		chatId = chatId.SetAccountType(EAccountType_Chat)
+	}
+	payload := new(bytes.Buffer)
+	binary.Write(payload, binary.LittleEndian, s.client.SteamId().ToUint64())       // ChatterActedOn
+	binary.Write(payload, binary.LittleEndian, uint32(EChatMemberStateChange_Left)) // StateChange
+	binary.Write(payload, binary.LittleEndian, s.client.SteamId().ToUint64())       // ChatterActedBy
+	s.client.Write(NewClientMsg(&MsgClientChatMemberInfo{
+		SteamIdChat: chatId, Type: EChatInfoType_StateChange,
+	}, payload.Bytes()))
+}
+
+// Sends a chat message to a chat room
+func (s *Social) SendChatRoomMessage(to SteamId, message string) {
+	chatId := SteamId(to)
+	if chatId.GetAccountType() == int32(EAccountType_Clan) {
+		chatId = chatId.SetAccountInstance(uint32(Clan))
+		chatId = chatId.SetAccountType(EAccountType_Chat)
+	}
+	s.client.Write(NewClientMsg(&MsgClientChatMsg{
+		ChatMsgType: EChatEntryType_ChatMsg, SteamIdChatRoom: chatId, SteamIdChatter: s.client.SteamId(),
+	}, []byte(message)))
 }
 
 type FriendListEvent struct{}
@@ -166,6 +197,14 @@ func (s *Social) handleFriendMsg(packet *PacketMsg) {
 		Message: message,
 		Type:    EChatEntryType(body.GetChatEntryType()),
 	})
+}
+
+type ChatEnterEvent struct{} //TODO: Make a useful event
+
+func (s *Social) handleChatEnter(packet *PacketMsg) {
+	body := new(MsgClientChatEnter)
+	packet.ReadMsg(body)
+	s.client.Emit(&ChatEnterEvent{})
 }
 
 type FriendsList struct {
