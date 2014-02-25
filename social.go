@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"code.google.com/p/goprotobuf/proto"
 	"encoding/binary"
+	"fmt"
 	. "github.com/GamingRobot/steamgo/internal"
 	. "github.com/GamingRobot/steamgo/steamid"
 	"sync"
@@ -41,6 +42,8 @@ func (s *Social) HandlePacket(packet *PacketMsg) {
 		s.handleFriendsList(packet)
 	case EMsg_ClientFriendMsgIncoming:
 		s.handleFriendMsg(packet)
+	case EMsg_ClientChatMsg:
+		s.handleChatMsg(packet)
 	case EMsg_ClientChatEnter:
 		s.handleChatEnter(packet)
 	}
@@ -205,6 +208,14 @@ func (s *Social) handleChatEnter(packet *PacketMsg) {
 	body := new(MsgClientChatEnter)
 	packet.ReadMsg(body)
 	s.client.Emit(&ChatEnterEvent{})
+}
+
+func (s *Social) handleChatMsg(packet *PacketMsg) { //TODO: not working currently
+	body := new(MsgClientChatMsg)
+	packet.ReadMsg(body)
+	//fmt.Println(body)
+	fmt.Println(packet)
+	s.client.Emit(&ChatMsgEvent{Chatroom: body.SteamIdChatRoom, Sender: body.SteamIdChatter, Type: body.ChatMsgType})
 }
 
 type FriendsList struct {
