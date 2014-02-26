@@ -212,14 +212,6 @@ func (s *Social) handleFriendMsg(packet *PacketMsg) {
 	})
 }
 
-type ChatEnterEvent struct{} //TODO: Make a useful event
-
-func (s *Social) handleChatEnter(packet *PacketMsg) {
-	body := new(MsgClientChatEnter)
-	packet.ReadMsg(body)
-	s.client.Emit(&ChatEnterEvent{})
-}
-
 func (s *Social) handleChatMsg(packet *PacketMsg) {
 	body := new(MsgClientChatMsg)
 	payload := packet.ReadClientMsg(body).Payload
@@ -230,6 +222,14 @@ func (s *Social) handleChatMsg(packet *PacketMsg) {
 		Message:  message,
 		Type:     EChatEntryType(body.ChatMsgType),
 	})
+}
+
+type ChatEnterEvent struct{} //TODO: Make a useful event
+
+func (s *Social) handleChatEnter(packet *PacketMsg) {
+	body := new(MsgClientChatEnter)
+	packet.ReadMsg(body)
+	s.client.Emit(&ChatEnterEvent{})
 }
 
 type FriendsList struct {
