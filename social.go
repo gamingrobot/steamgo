@@ -35,19 +35,6 @@ func newSocial(client *Client) *Social {
 	}
 }
 
-func (s *Social) HandlePacket(packet *PacketMsg) {
-	switch packet.EMsg {
-	case EMsg_ClientFriendsList:
-		s.handleFriendsList(packet)
-	case EMsg_ClientFriendMsgIncoming:
-		s.handleFriendMsg(packet)
-	case EMsg_ClientChatEnter:
-		s.handleChatEnter(packet)
-	case EMsg_ClientChatMsg:
-		s.handleChatMsg(packet)
-	}
-}
-
 func (s *Social) SetPersonaState(state EPersonaState) {
 	s.client.Write(NewClientMsgProtobuf(EMsg_ClientChangeStatus, &CMsgClientChangeStatus{
 		PersonaState: proto.Uint32(uint32(state)),
@@ -126,6 +113,44 @@ func (s *Social) SendChatRoomMessage(to SteamId, entryType EChatEntryType, messa
 	}, []byte(message)))
 }
 
+func (s *Social) HandlePacket(packet *PacketMsg) {
+	switch packet.EMsg {
+	case EMsg_ClientPersonaState:
+		s.handlePersonaState(packet)
+	case EMsg_ClientClanState:
+		s.handleClanState(packet)
+	case EMsg_ClientFriendsList:
+		s.handleFriendsList(packet)
+	case EMsg_ClientFriendMsgIncoming:
+		s.handleFriendMsg(packet)
+	case EMsg_ClientAccountInfo:
+		s.handleAccountInfo(packet)
+	case EMsg_ClientAddFriendResponse:
+		s.handleFriendResponse(packet)
+	case EMsg_ClientChatEnter:
+		s.handleChatEnter(packet)
+	case EMsg_ClientChatMsg:
+		s.handleChatMsg(packet)
+	case EMsg_ClientChatMemberInfo:
+		s.handleChatMemberInfo(packet)
+	case EMsg_ClientChatActionResult:
+		s.handleChatActionResult(packet)
+	case EMsg_ClientChatInvite:
+		s.handleChatInvite(packet)
+	case EMsg_ClientSetIgnoreFriendResponse:
+		s.handleIgnoreFriendResponse(packet)
+	case EMsg_ClientFriendProfileInfoResponse:
+		s.handleProfileInfoResponse(packet)
+	}
+}
+
+//TODO: handleAccountInfo
+func (s *Social) handleAccountInfo(packet *PacketMsg) {
+	body := new(CMsgClientAccountInfo)
+	packet.ReadProtoMsg(body)
+	//fmt.Printf("%+v\n", body)
+}
+
 type FriendListEvent struct{}
 
 type FriendStateEvent struct {
@@ -188,6 +213,27 @@ func (s *Social) handleFriendsList(packet *PacketMsg) {
 	}
 }
 
+//TODO: handlePersonaState
+func (s *Social) handlePersonaState(packet *PacketMsg) {
+	body := new(CMsgClientPersonaState)
+	packet.ReadProtoMsg(body)
+	//fmt.Printf("%+v\n", body)
+}
+
+//TODO: handleClanState
+func (s *Social) handleClanState(packet *PacketMsg) {
+	body := new(CMsgClientClanState)
+	packet.ReadProtoMsg(body)
+	//fmt.Printf("%+v\n", body)
+}
+
+//TODO: handleFriendResponse
+func (s *Social) handleFriendResponse(packet *PacketMsg) {
+	body := new(CMsgClientAddFriendResponse)
+	packet.ReadProtoMsg(body)
+	//fmt.Printf("%+v\n", body)
+}
+
 type ChatMsgEvent struct {
 	Chatroom SteamId // not set for friend messages
 	Sender   SteamId
@@ -232,6 +278,44 @@ func (s *Social) handleChatEnter(packet *PacketMsg) {
 	s.client.Emit(&ChatEnterEvent{})
 }
 
+//TODO: handleChatMemberInfo
+func (s *Social) handleChatMemberInfo(packet *PacketMsg) {
+	body := new(MsgClientChatMemberInfo)
+	packet.ReadClientMsg(body)
+	//payload := packet.ReadClientMsg(body).Payload //commented out for now
+	//fmt.Printf("%+v %v\n", body, payload)
+}
+
+//TODO: handleChatActionResult
+func (s *Social) handleChatActionResult(packet *PacketMsg) {
+	body := new(MsgClientChatActionResult)
+	packet.ReadClientMsg(body)
+	//fmt.Printf("%+v\n", body)
+}
+
+//TODO: handleChatInvite
+func (s *Social) handleChatInvite(packet *PacketMsg) {
+	body := new(CMsgClientChatInvite)
+	packet.ReadProtoMsg(body)
+	//fmt.Printf("%+v\n", body)
+}
+
+//TODO: handleIgnoreFriendResponse
+func (s *Social) handleIgnoreFriendResponse(packet *PacketMsg) {
+	body := new(MsgClientSetIgnoreFriendResponse)
+	packet.ReadMsg(body)
+	//fmt.Printf("%+v\n", body)
+}
+
+//TODO: handleProfileInfoResponse
+func (s *Social) handleProfileInfoResponse(packet *PacketMsg) {
+	body := new(CMsgClientFriendProfileInfoResponse)
+	packet.ReadProtoMsg(body)
+	//fmt.Printf("%+v\n", body)
+}
+
+// A thread-safe friend list which contains references to its predecessor and successor.
+// It is mutable and will be changed by Social.
 type FriendsList struct {
 	mutex sync.RWMutex
 
@@ -356,6 +440,8 @@ func (f *Friend) GameAppId() uint64 {
 	return f.gameAppId
 }
 
+// A thread-safe group list which contains references to its predecessor and successor.
+// It is mutable and will be changed by Social.
 type GroupsList struct {
 	mutex sync.RWMutex
 
@@ -424,7 +510,8 @@ func (list *GroupsList) ById(id SteamId) *Group {
 	return list.byId[id]
 }
 
-// Represents a group within a doubly-linked group list.
+// A thread-safe group in a group list which contains references to its predecessor and successor.
+// It is mutable and will be changed by Social.
 type Group struct {
 	mutex sync.RWMutex
 
