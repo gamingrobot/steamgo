@@ -2,7 +2,10 @@ package steamid
 
 import (
 	"fmt"
+	"log"
+	"regexp"
 	"strconv"
+	"strings"
 )
 
 type ChatInstanceFlag uint64
@@ -15,12 +18,30 @@ const (
 
 type SteamId uint64
 
-func New(accountId, instance uint32, universe int32, accountType int32) SteamId {
+func New(id string) SteamId {
+	valid, err := regexp.MatchString(`STEAM_[0-5]:[01]:\d+`, id)
+	if !valid || err != nil {
+		log.Println("Invalid SteamId", id)
+		return SteamId(0)
+	}
+	id = strings.Replace(id, "STEAM_", "", -1) // remove STEAM_
+	splitid := strings.Split(id, ":")          // split 0:1:00000000 into 0 1 00000000
+	//universe, _ := strconv.ParseInt(splitid[0], 10, 32) //its not this its just one
+	authServer, _ := strconv.ParseUint(splitid[1], 10, 32)
+	accId, _ := strconv.ParseUint(splitid[2], 10, 32)
+	universe := int32(1)    //EUniverse_Public
+	accountType := int32(1) //EAccountType_Individual
+	accountId := (uint32(accId) << 1) | uint32(authServer)
+	return NewAdv(uint32(accountId), 1, universe, accountType)
+}
+
+func NewAdv(accountId, instance uint32, universe int32, accountType int32) SteamId {
 	s := SteamId(0)
 	s = s.SetAccountId(accountId)
 	s = s.SetAccountInstance(instance)
 	s = s.SetAccountUniverse(universe)
-	return s.SetAccountType(accountType)
+	s = s.SetAccountType(accountType)
+	return s
 }
 
 func (s SteamId) ToUint64() uint64 {
