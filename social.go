@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"code.google.com/p/goprotobuf/proto"
 	"encoding/binary"
-	"fmt"
 	. "github.com/GamingRobot/steamgo/internal"
 	. "github.com/GamingRobot/steamgo/steamid"
 	"sync"
@@ -42,10 +41,10 @@ func (s *Social) HandlePacket(packet *PacketMsg) {
 		s.handleFriendsList(packet)
 	case EMsg_ClientFriendMsgIncoming:
 		s.handleFriendMsg(packet)
-	case EMsg_ClientChatMsg:
-		s.handleChatMsg(packet)
 	case EMsg_ClientChatEnter:
 		s.handleChatEnter(packet)
+	case EMsg_ClientChatMsg:
+		s.handleChatMsg(packet)
 	}
 }
 
@@ -221,12 +220,16 @@ func (s *Social) handleChatEnter(packet *PacketMsg) {
 	s.client.Emit(&ChatEnterEvent{})
 }
 
-func (s *Social) handleChatMsg(packet *PacketMsg) { //TODO: not working currently
+func (s *Social) handleChatMsg(packet *PacketMsg) {
 	body := new(MsgClientChatMsg)
-	packet.ReadMsg(body)
-	//fmt.Println(body)
-	fmt.Println(packet)
-	s.client.Emit(&ChatMsgEvent{Chatroom: body.SteamIdChatRoom, Sender: body.SteamIdChatter, Type: body.ChatMsgType})
+	payload := packet.ReadClientMsg(body).Payload
+	message := string(bytes.Split(payload, []byte{0x0})[0])
+	s.client.Emit(&ChatMsgEvent{
+		Chatroom: SteamId(body.SteamIdChatRoom),
+		Sender:   SteamId(body.SteamIdChatter),
+		Message:  message,
+		Type:     EChatEntryType(body.ChatMsgType),
+	})
 }
 
 type FriendsList struct {
