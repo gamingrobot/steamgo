@@ -26,13 +26,15 @@ func New(id string) SteamId {
 	}
 	id = strings.Replace(id, "STEAM_", "", -1) // remove STEAM_
 	splitid := strings.Split(id, ":")          // split 0:1:00000000 into 0 1 00000000
-	//universe, _ := strconv.ParseInt(splitid[0], 10, 32) //its not this its just one
+	universe, _ := strconv.ParseInt(splitid[0], 10, 32)
+	if universe == 0 {
+		universe = 1 //EUniverse_Public
+	}
 	authServer, _ := strconv.ParseUint(splitid[1], 10, 32)
 	accId, _ := strconv.ParseUint(splitid[2], 10, 32)
-	universe := int32(1)    //EUniverse_Public
 	accountType := int32(1) //EAccountType_Individual
 	accountId := (uint32(accId) << 1) | uint32(authServer)
-	return NewAdv(uint32(accountId), 1, universe, accountType)
+	return NewAdv(uint32(accountId), 1, int32(universe), accountType)
 }
 
 func NewAdv(accountId, instance uint32, universe int32, accountType int32) SteamId {
