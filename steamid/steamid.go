@@ -27,7 +27,7 @@ func New(id string) SteamId {
 	id = strings.Replace(id, "STEAM_", "", -1) // remove STEAM_
 	splitid := strings.Split(id, ":")          // split 0:1:00000000 into 0 1 00000000
 	universe, _ := strconv.ParseInt(splitid[0], 10, 32)
-	if universe == 0 {
+	if universe == 0 { //EUniverse_Invalid
 		universe = 1 //EUniverse_Public
 	}
 	authServer, _ := strconv.ParseUint(splitid[1], 10, 32)
