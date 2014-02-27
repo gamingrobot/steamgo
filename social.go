@@ -107,9 +107,9 @@ func (s *Social) RemoveFriend(id SteamId) {
 
 // Ignores or unignores a friend on Steam
 func (s *Social) IgnoreFriend(id SteamId, setIgnore bool) {
-	ignore := byte(1) //True
+	ignore := uint8(1) //True
 	if !setIgnore {
-		ignore = byte(0) //False
+		ignore = uint8(0) //False
 	}
 	s.client.Write(NewClientMsg(&MsgClientSetIgnoreFriend{
 		MySteamId:     s.client.SteamId(),
