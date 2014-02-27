@@ -55,7 +55,7 @@ func (a *Auth) HandlePacket(packet *PacketMsg) {
 	case EMsg_ClientLogOnResponse:
 		a.handleLogOnResponse(packet)
 	case EMsg_ClientNewLoginKey:
-		a.handleNewLoginKey(packet)
+		a.handleLoginKey(packet)
 	case EMsg_ClientSessionToken:
 		a.handleSessionToken(packet)
 	case EMsg_ClientLoggedOff:
@@ -100,8 +100,21 @@ func (a *Auth) handleLogOnResponse(packet *PacketMsg) {
 	}
 }
 
-//TODO: handleNewLoginKey
-func (a *Auth) handleNewLoginKey(packet *PacketMsg) {
+type LoginKeyEvent struct {
+	UniqueId uint32
+	LoginKey string
+}
+
+func (a *Auth) handleLoginKey(packet *PacketMsg) {
+	body := new(CMsgClientNewLoginKey)
+	packet.ReadProtoMsg(body)
+	a.client.Write(NewClientMsgProtobuf(EMsg_ClientNewLoginKeyAccepted, &CMsgClientNewLoginKeyAccepted{
+		UniqueId: proto.Uint32(body.GetUniqueId()),
+	}))
+	a.client.Emit(&LoginKeyEvent{
+		UniqueId: body.GetUniqueId(),
+		LoginKey: body.GetLoginKey(),
+	})
 }
 
 //TODO: handleSessionToken
