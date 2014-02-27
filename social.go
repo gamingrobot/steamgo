@@ -219,11 +219,13 @@ func (s *Social) HandlePacket(packet *PacketMsg) {
 	}
 }
 
-//TODO: handleAccountInfo
 func (s *Social) handleAccountInfo(packet *PacketMsg) {
 	body := new(CMsgClientAccountInfo)
 	packet.ReadProtoMsg(body)
-	//fmt.Printf("%+v\n", body)
+	s.mutex.Lock()
+	defer s.mutex.Unlock()
+	//just set the name Auth handles the callback
+	s.name = body.GetPersonaName()
 }
 
 type FriendListEvent struct{}
@@ -325,7 +327,6 @@ func (s *Social) handleFriendMsg(packet *PacketMsg) {
 	body := new(CMsgClientFriendMsgIncoming)
 	packet.ReadProtoMsg(body)
 	message := string(bytes.Split(body.GetMessage(), []byte{0x0})[0])
-
 	s.client.Emit(&ChatMsgEvent{
 		Sender:  SteamId(body.GetSteamidFrom()),
 		Message: message,
