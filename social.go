@@ -19,6 +19,8 @@ import (
 type Social struct {
 	mutex sync.RWMutex
 
+	name         string
+	avatarHash   []byte
 	personaState EPersonaState
 
 	Friends *FriendsList
@@ -35,12 +37,42 @@ func newSocial(client *Client) *Social {
 	}
 }
 
+// Gets the local user's persona name
+func (s *Social) GetPersonaName() string {
+	s.mutex.RLock()
+	defer s.mutex.RUnlock()
+	return s.name
+}
+
+// Sets the local user's persona name and broadcasts it over the network
+func (s *Social) SetPersonaName(name string) {
+	s.mutex.Lock()
+	defer s.mutex.Unlock()
+	s.name = name
+	s.client.Write(NewClientMsgProtobuf(EMsg_ClientChangeStatus, &CMsgClientChangeStatus{
+		PersonaState: proto.Uint32(uint32(s.personaState)),
+		PlayerName:   proto.String(name),
+	}))
+}
+
+// Gets the local user's persona state
+func (s *Social) GetPersonaState() EPersonaState {
+	s.mutex.RLock()
+	defer s.mutex.RUnlock()
+	return s.personaState
+}
+
+// Sets the local user's persona state and broadcasts it over the network
 func (s *Social) SetPersonaState(state EPersonaState) {
+	s.mutex.Lock()
+	defer s.mutex.Unlock()
+	s.personaState = state
 	s.client.Write(NewClientMsgProtobuf(EMsg_ClientChangeStatus, &CMsgClientChangeStatus{
 		PersonaState: proto.Uint32(uint32(state)),
 	}))
 }
 
+// Sends a chat message to ether a room or friend
 func (s *Social) SendMessage(to SteamId, entryType EChatEntryType, message string) {
 	if to.GetAccountType() == int32(EAccountType_Individual) || to.GetAccountType() == int32(EAccountType_ConsoleUser) {
 		s.SendChatMessage(to, entryType, message)
@@ -49,7 +81,7 @@ func (s *Social) SendMessage(to SteamId, entryType EChatEntryType, message strin
 	}
 }
 
-// Sends a chat message to the given friend.
+// Sends a chat message to a friend
 func (s *Social) SendChatMessage(to SteamId, entryType EChatEntryType, message string) {
 	s.client.Write(NewClientMsgProtobuf(EMsg_ClientFriendMsg, &CMsgClientFriendMsg{
 		Steamid:       proto.Uint64(to.ToUint64()),
@@ -59,36 +91,53 @@ func (s *Social) SendChatMessage(to SteamId, entryType EChatEntryType, message s
 }
 
 // Adds a friend to your friends list or accepts a friend. You'll receive a FriendStateEvent
-// for every new/changed friend.
+// for every new/changed friend
 func (s *Social) AddFriend(id SteamId) {
 	s.client.Write(NewClientMsgProtobuf(EMsg_ClientAddFriend, &CMsgClientAddFriend{
 		SteamidToAdd: proto.Uint64(uint64(id)),
 	}))
 }
 
+// Removes a friend from your friends list
 func (s *Social) RemoveFriend(id SteamId) {
 	s.client.Write(NewClientMsgProtobuf(EMsg_ClientRemoveFriend, &CMsgClientRemoveFriend{
 		Friendid: proto.Uint64(uint64(id)),
 	}))
 }
 
-// Attempts to join a chat room.
-func (s *Social) JoinChat(id SteamId) {
-	chatId := SteamId(id)
-	if chatId.GetAccountType() == int32(EAccountType_Clan) {
-		chatId = chatId.SetAccountInstance(uint32(Clan))
-		chatId = chatId.SetAccountType(EAccountType_Chat)
+// Ignores or unignores a friend on Steam
+func (s *Social) IgnoreFriend(id SteamId, setIgnore bool) {
+	ignore := byte(1) //True
+	if !setIgnore {
+		ignore = byte(0) //False
 	}
-	s.client.Write(NewClientMsg(&MsgClientJoinChat{SteamIdChat: chatId}, make([]byte, 0)))
+	s.client.Write(NewClientMsg(&MsgClientSetIgnoreFriend{
+		MySteamId:     s.client.SteamId(),
+		SteamIdFriend: id,
+		Ignore:        ignore,
+	}, make([]byte, 0)))
 }
 
-// Attempts to leave a chat room.
-func (s *Social) LeaveChat(id SteamId) {
-	chatId := SteamId(id)
-	if chatId.GetAccountType() == int32(EAccountType_Clan) {
-		chatId = chatId.SetAccountInstance(uint32(Clan))
-		chatId = chatId.SetAccountType(EAccountType_Chat)
+//used to fix the clan SteamId to a chat SteamId
+func fixClanId(id SteamId) SteamId {
+	if id.GetAccountType() == int32(EAccountType_Clan) {
+		id = id.SetAccountInstance(uint32(Clan))
+		id = id.SetAccountType(EAccountType_Chat)
 	}
+	return id
+}
+
+// Attempts to join a chat room
+func (s *Social) JoinChat(id SteamId) {
+	chatId := fixClanId(SteamId(id))
+	s.client.Write(NewClientMsg(&MsgClientJoinChat{
+		SteamIdChat: chatId,
+	}, make([]byte, 0)))
+}
+
+// Attempts to leave a chat room
+func (s *Social) LeaveChat(id SteamId) {
+	chatId := fixClanId(SteamId(id))
 	payload := new(bytes.Buffer)
 	binary.Write(payload, binary.LittleEndian, s.client.SteamId().ToUint64())       // ChatterActedOn
 	binary.Write(payload, binary.LittleEndian, uint32(EChatMemberStateChange_Left)) // StateChange
@@ -100,17 +149,43 @@ func (s *Social) LeaveChat(id SteamId) {
 }
 
 // Sends a chat message to a chat room
-func (s *Social) SendChatRoomMessage(to SteamId, entryType EChatEntryType, message string) {
-	chatId := SteamId(to)
-	if chatId.GetAccountType() == int32(EAccountType_Clan) {
-		chatId = chatId.SetAccountInstance(uint32(Clan))
-		chatId = chatId.SetAccountType(EAccountType_Chat)
-	}
+func (s *Social) SendChatRoomMessage(room SteamId, entryType EChatEntryType, message string) {
+	chatId := fixClanId(SteamId(room))
 	s.client.Write(NewClientMsg(&MsgClientChatMsg{
 		ChatMsgType:     entryType,
 		SteamIdChatRoom: chatId,
 		SteamIdChatter:  s.client.SteamId(),
 	}, []byte(message)))
+}
+
+// Kicks the specified chat member from the given chat room
+func (s *Social) KickChatMember(room SteamId, user SteamId) {
+	chatId := fixClanId(SteamId(room))
+	s.client.Write(NewClientMsg(&MsgClientChatAction{
+		SteamIdChat:        chatId,
+		SteamIdUserToActOn: user,
+		ChatAction:         EChatAction_Kick,
+	}, make([]byte, 0)))
+}
+
+// Bans the specified chat member from the given chat room
+func (s *Social) BanChatMember(room SteamId, user SteamId) {
+	chatId := fixClanId(SteamId(room))
+	s.client.Write(NewClientMsg(&MsgClientChatAction{
+		SteamIdChat:        chatId,
+		SteamIdUserToActOn: user,
+		ChatAction:         EChatAction_Ban,
+	}, make([]byte, 0)))
+}
+
+// Unbans the specified chat member from the given chat room
+func (s *Social) UnbanChatMember(room SteamId, user SteamId) {
+	chatId := fixClanId(SteamId(room))
+	s.client.Write(NewClientMsg(&MsgClientChatAction{
+		SteamIdChat:        chatId,
+		SteamIdUserToActOn: user,
+		ChatAction:         EChatAction_UnBan,
+	}, make([]byte, 0)))
 }
 
 func (s *Social) HandlePacket(packet *PacketMsg) {
@@ -383,6 +458,12 @@ func (f *FriendsList) ById(id SteamId) *Friend {
 	return f.byId[id]
 }
 
+func (f *FriendsList) Count() int {
+	f.mutex.Lock()
+	defer f.mutex.Unlock()
+	return len(f.byId)
+}
+
 // A thread-safe friend in a friend list which contains references to its predecessor and successor.
 // It is mutable and will be changed by Social.
 type Friend struct {
@@ -508,6 +589,12 @@ func (list *GroupsList) ById(id SteamId) *Group {
 	list.mutex.RLock()
 	defer list.mutex.RUnlock()
 	return list.byId[id]
+}
+
+func (list *GroupsList) Count() int {
+	list.mutex.Lock()
+	defer list.mutex.Unlock()
+	return len(list.byId)
 }
 
 // A thread-safe group in a group list which contains references to its predecessor and successor.
