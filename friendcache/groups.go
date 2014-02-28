@@ -22,6 +22,7 @@ type GroupsList struct {
 	byId map[SteamId]*lockingGroup // fast lookup by ID
 }
 
+// Returns a new groups list
 func NewGroupsList() *GroupsList {
 	return &GroupsList{byId: make(map[SteamId]*lockingGroup)}
 }

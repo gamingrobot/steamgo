@@ -22,6 +22,7 @@ type FriendsList struct {
 	byId map[SteamId]*lockingFriend // fast lookup by ID
 }
 
+// Returns a new friends list
 func NewFriendsList() *FriendsList {
 	return &FriendsList{byId: make(map[SteamId]*lockingFriend)}
 }
