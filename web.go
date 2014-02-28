@@ -8,6 +8,7 @@ import (
 	"encoding/json"
 	"github.com/GamingRobot/steamgo/cryptoutil"
 	. "github.com/GamingRobot/steamgo/internal"
+	"github.com/GamingRobot/steamgo/keys"
 	"io/ioutil"
 	"net/http"
 	"net/url"
@@ -66,7 +67,7 @@ func (w *Web) apiLogOn() error {
 	sessionKey := make([]byte, 32)
 	rand.Read(sessionKey)
 
-	cryptedSessionKey := cryptoutil.RSAEncrypt(GetPublicKey(EUniverse_Public), sessionKey)
+	cryptedSessionKey := cryptoutil.RSAEncrypt(keys.GetPublicKey(EUniverse_Public), sessionKey)
 	ciph, _ := aes.NewCipher(sessionKey)
 	cryptedLoginKey := cryptoutil.SymmetricEncrypt(ciph, []byte(w.webLoginKey))
 

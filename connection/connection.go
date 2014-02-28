@@ -1,4 +1,4 @@
-package steam
+package connection
 
 import (
 	"crypto/aes"
@@ -12,7 +12,7 @@ import (
 	"sync"
 )
 
-type connection interface {
+type Connection interface {
 	Read() (*PacketMsg, error)
 	Write([]byte) error
 	Close() error
@@ -28,7 +28,7 @@ type tcpConnection struct {
 	cipherMutex sync.RWMutex
 }
 
-func dialTCP(addr string) (*tcpConnection, error) {
+func DialTCP(addr string) (*tcpConnection, error) {
 	tcpAddr, err := net.ResolveTCPAddr("tcp", addr)
 	if err != nil {
 		return nil, err

@@ -18,7 +18,7 @@ const (
 
 type SteamId uint64
 
-func New(id string) SteamId {
+func NewId(id string) SteamId {
 	valid, err := regexp.MatchString(`STEAM_[0-5]:[01]:\d+`, id)
 	if !valid || err != nil {
 		log.Println("Invalid SteamId", id)
@@ -34,10 +34,10 @@ func New(id string) SteamId {
 	accId, _ := strconv.ParseUint(splitid[2], 10, 32)
 	accountType := int32(1) //EAccountType_Individual
 	accountId := (uint32(accId) << 1) | uint32(authServer)
-	return NewAdv(uint32(accountId), 1, int32(universe), accountType)
+	return NewIdAdv(uint32(accountId), 1, int32(universe), accountType)
 }
 
-func NewAdv(accountId, instance uint32, universe int32, accountType int32) SteamId {
+func NewIdAdv(accountId, instance uint32, universe int32, accountType int32) SteamId {
 	s := SteamId(0)
 	s = s.SetAccountId(accountId)
 	s = s.SetAccountInstance(instance)

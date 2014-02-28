@@ -1,4 +1,4 @@
-package steam
+package keys
 
 import (
 	"crypto/rsa"

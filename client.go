@@ -6,8 +6,10 @@ import (
 	"crypto/rand"
 	"encoding/binary"
 	"fmt"
+	"github.com/GamingRobot/steamgo/connection"
 	"github.com/GamingRobot/steamgo/cryptoutil"
 	. "github.com/GamingRobot/steamgo/internal"
+	"github.com/GamingRobot/steamgo/keys"
 	. "github.com/GamingRobot/steamgo/steamid"
 	"hash/crc32"
 	"io/ioutil"
@@ -44,7 +46,7 @@ type Client struct {
 	ConnectionTimeout time.Duration
 
 	mutex     sync.RWMutex // guarding connection, heartbeat and writeChan
-	conn      connection
+	conn      connection.Connection
 	writeChan chan IMsg
 	writeBuf  *bytes.Buffer
 	heartbeat *time.Ticker
@@ -135,7 +137,7 @@ func (c *Client) Connect() string {
 func (c *Client) ConnectTo(address string) {
 	c.Disconnect()
 
-	conn, err := dialTCP(address)
+	conn, err := connection.DialTCP(address)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -266,7 +268,7 @@ func (c *Client) handleChannelEncryptRequest(packet *PacketMsg) {
 
 	c.tempSessionKey = make([]byte, 32)
 	rand.Read(c.tempSessionKey)
-	encryptedKey := cryptoutil.RSAEncrypt(GetPublicKey(EUniverse_Public), c.tempSessionKey)
+	encryptedKey := cryptoutil.RSAEncrypt(keys.GetPublicKey(EUniverse_Public), c.tempSessionKey)
 
 	payload := new(bytes.Buffer)
 	payload.Write(encryptedKey)
