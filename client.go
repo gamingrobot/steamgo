@@ -10,6 +10,7 @@ import (
 	"github.com/GamingRobot/steamgo/cryptoutil"
 	. "github.com/GamingRobot/steamgo/internal"
 	"github.com/GamingRobot/steamgo/keys"
+	"github.com/GamingRobot/steamgo/servers"
 	. "github.com/GamingRobot/steamgo/steamid"
 	"hash/crc32"
 	"io/ioutil"
@@ -126,7 +127,7 @@ func (c *Client) Connected() bool {
 // Connects to a random server of the Steam network and returns the server.
 // If this client is already connected, it is disconnected first.
 func (c *Client) Connect() string {
-	server := getRandomCM()
+	server := servers.GetRandomCM()
 	log.Println("Connected to server:", server)
 	c.ConnectTo(server)
 	return server

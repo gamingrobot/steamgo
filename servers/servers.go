@@ -1,4 +1,4 @@
-package steam
+package servers
 
 import (
 	"math/rand"
@@ -53,7 +53,7 @@ var CMServers = []string{
 	"103.28.54.11":27017}*/
 }
 
-func getRandomCM() string {
+func GetRandomCM() string {
 	rng := rand.New(rand.NewSource(time.Now().Unix()))
 	return CMServers[rng.Int31n(int32(len(CMServers)))]
 }
