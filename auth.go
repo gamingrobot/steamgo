@@ -5,7 +5,6 @@ import (
 	"crypto/sha1"
 	. "github.com/GamingRobot/steamgo/internal"
 	"github.com/GamingRobot/steamgo/steamid"
-	"log"
 	"sync/atomic"
 	"time"
 )
@@ -85,7 +84,6 @@ func (a *Auth) handleLogOnResponse(packet *PacketMsg) {
 	msg := packet.ReadProtoMsg(body)
 
 	result := EResult(body.GetEresult())
-	log.Println(result)
 	if result == EResult_OK {
 		atomic.StoreInt32(&a.client.sessionId, msg.Header.Proto.GetClientSessionid())
 		atomic.StoreUint64(&a.client.steamId, msg.Header.Proto.GetSteamid())
