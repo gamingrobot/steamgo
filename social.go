@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"code.google.com/p/goprotobuf/proto"
 	"encoding/binary"
+	"fmt"
 	"github.com/GamingRobot/steamgo/friendcache"
 	. "github.com/GamingRobot/steamgo/internal"
 	. "github.com/GamingRobot/steamgo/steamid"
@@ -341,20 +342,53 @@ func (s *Social) handleChatMsg(packet *PacketMsg) {
 	})
 }
 
-type ChatEnterEvent struct{} //TODO: Make a useful event
+type ChatEnterEvent struct {
+	SteamIdChat   SteamId
+	SteamIdFriend SteamId
+	ChatRoomType  EChatRoomType
+	SteamIdOwner  SteamId
+	SteamIdClan   SteamId
+	ChatFlags     byte
+	EnterResponse EChatRoomEnterResponse
+}
 
 func (s *Social) handleChatEnter(packet *PacketMsg) {
 	body := new(MsgClientChatEnter)
 	packet.ReadMsg(body)
-	s.client.Emit(&ChatEnterEvent{})
+	s.client.Emit(&ChatEnterEvent{
+		SteamIdChat:   SteamId(body.SteamIdChat),
+		SteamIdFriend: SteamId(body.SteamIdFriend),
+		ChatRoomType:  body.ChatRoomType,
+		SteamIdOwner:  SteamId(body.SteamIdOwner),
+		SteamIdClan:   SteamId(body.SteamIdClan),
+		ChatFlags:     byte(body.ChatFlags),
+		EnterResponse: body.EnterResponse,
+	})
+}
+
+type StateChangeDetails struct {
+	ChatterActedOn SteamId
+	StateChange    EChatMemberStateChange
+	ChatterActedBy SteamId
+}
+
+type ChatMemberInfoEvent struct {
+	SteamIdChat SteamId
+	Type        EChatInfoType
 }
 
 //TODO: handleChatMemberInfo
 func (s *Social) handleChatMemberInfo(packet *PacketMsg) {
 	body := new(MsgClientChatMemberInfo)
-	packet.ReadClientMsg(body)
-	//payload := packet.ReadClientMsg(body).Payload //commented out for now
-	//fmt.Printf("%+v %v\n", body, payload)
+	payload := packet.ReadClientMsg(body).Payload
+	switch body.Type {
+	case EChatInfoType_StateChange:
+		fmt.Println("StateChange", payload)
+	case EChatInfoType_MemberLimitChange:
+		fmt.Println("MemberLimitChange", payload)
+	case EChatInfoType_InfoUpdate:
+		fmt.Println("InfoUpdate", payload)
+	}
 }
 
 //TODO: handleChatActionResult

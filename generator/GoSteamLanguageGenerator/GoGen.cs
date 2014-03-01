@@ -315,7 +315,7 @@ namespace GoSteamLanguageGenerator
 				if (node.Flags == "const") {
 					continue;
 				} else if (node.Flags == "boolmarshal") {
-					sb.AppendLine("    err = writeBool2Byte(w, d." + GetUpperName(node.Name) + ")");
+					sb.AppendLine("    err = WriteBool2Byte(w, d." + GetUpperName(node.Name) + ")");
 				} else if (node.Flags == "steamidmarshal") {
 					sb.AppendLine("    err = binary.Write(w, binary.LittleEndian, d." + GetUpperName(node.Name) + ")");
 				} else if (node.Flags == "protomask") {
@@ -344,9 +344,9 @@ namespace GoSteamLanguageGenerator
 				if (node.Flags == "const") {
 					continue;
 				} else if (node.Flags == "boolmarshal") {
-					sb.AppendLine("    d." + GetUpperName(node.Name) + ", err = readByte2Bool(r)");
+					sb.AppendLine("    d." + GetUpperName(node.Name) + ", err = ReadByte2Bool(r)");
 				} else if (node.Flags == "steamidmarshal") {
-					sb.AppendLine("    t" + tempNum + ", err := readUint64(r)");
+					sb.AppendLine("    t" + tempNum + ", err := ReadUint64(r)");
 					sb.AppendLine("    if err != nil { return err }");
 					sb.AppendLine("    d." + GetUpperName(node.Name) + " = SteamId(t" + tempNum + ")");
 					tempNum++;
@@ -355,13 +355,13 @@ namespace GoSteamLanguageGenerator
 					string type = EmitType(node.Type);
 					if (enumTypes.ContainsKey(type))
 						type = enumTypes[type];
-					sb.AppendLine("    t" + tempNum + ", err := read" + GetUpperName(type) + "(r)");
+					sb.AppendLine("    t" + tempNum + ", err := Read" + GetUpperName(type) + "(r)");
 					sb.AppendLine("    if err != nil { return err }");
 					sb.AppendLine("    d." + GetUpperName(node.Name) + " = EMsg(uint32(t" + tempNum + ") & eMsgMask)");
 					tempNum++;
 					continue;
 				} else if (node.Flags == "protomaskgc") {
-					sb.AppendLine("    t" + tempNum + ", err := read" + GetUpperName(EmitType(node.Type)) + "(r)");
+					sb.AppendLine("    t" + tempNum + ", err := Read" + GetUpperName(EmitType(node.Type)) + "(r)");
 					sb.AppendLine("    if err != nil { return err }");
 					sb.AppendLine("    d." + GetUpperName(node.Name) + " = uint32(t" + tempNum + ") & eMsgMask");
 					tempNum++;
@@ -377,9 +377,9 @@ namespace GoSteamLanguageGenerator
 					if (!String.IsNullOrEmpty(node.FlagsOpt)) {
 						sb.AppendLine("    err = binary.Read(r, binary.LittleEndian, d." + GetUpperName(node.Name) + ")");
 					} else if (!enumTypes.ContainsKey(type)) {
-						sb.AppendLine("    d." + GetUpperName(node.Name) + ", err = read" + GetUpperName(type) + "(r)");
+						sb.AppendLine("    d." + GetUpperName(node.Name) + ", err = Read" + GetUpperName(type) + "(r)");
 					} else {
-						sb.AppendLine("    t" + tempNum + ", err := read" + GetUpperName(enumTypes[type]) + "(r)");
+						sb.AppendLine("    t" + tempNum + ", err := Read" + GetUpperName(enumTypes[type]) + "(r)");
 						if (node != cnode.childNodes[cnode.childNodes.Count - 1])
 							sb.AppendLine("    if err != nil { return err }");
 						sb.AppendLine("    d." + GetUpperName(node.Name) + " = " + type + "(t" + tempNum + ")");
