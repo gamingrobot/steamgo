@@ -128,7 +128,20 @@ func (c *Client) Connected() bool {
 // If this client is already connected, it is disconnected first.
 func (c *Client) Connect() string {
 	server := servers.GetRandomCM()
-	log.Println("Connected to server:", server)
+	c.ConnectTo(server)
+	return server
+}
+
+// Connects to a random North American server on the Steam network
+func (c *Client) ConnectNorthAmerica() string {
+	server := servers.GetRandomNorthAmericaCM()
+	c.ConnectTo(server)
+	return server
+}
+
+// Connects to a random Europe server on the Steam network
+func (c *Client) ConnectEurope() string {
+	server := servers.GetRandomEuropeCM()
 	c.ConnectTo(server)
 	return server
 }
