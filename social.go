@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"code.google.com/p/goprotobuf/proto"
 	"encoding/binary"
-	"fmt"
 	"github.com/GamingRobot/steamgo/friendcache"
 	. "github.com/GamingRobot/steamgo/internal"
 	. "github.com/GamingRobot/steamgo/steamid"
@@ -373,21 +372,29 @@ type StateChangeDetails struct {
 }
 
 type ChatMemberInfoEvent struct {
-	SteamIdChat SteamId
-	Type        EChatInfoType
+	SteamIdChat     SteamId
+	Type            EChatInfoType
+	StateChangeInfo StateChangeDetails
 }
 
-//TODO: handleChatMemberInfo
 func (s *Social) handleChatMemberInfo(packet *PacketMsg) {
 	body := new(MsgClientChatMemberInfo)
 	payload := packet.ReadClientMsg(body).Payload
-	switch body.Type {
-	case EChatInfoType_StateChange:
-		fmt.Println("StateChange", payload)
-	case EChatInfoType_MemberLimitChange:
-		fmt.Println("MemberLimitChange", payload)
-	case EChatInfoType_InfoUpdate:
-		fmt.Println("InfoUpdate", payload)
+	state := bytes.NewBuffer(payload)
+	if body.Type == EChatInfoType_StateChange {
+		actedOn, _ := ReadUint64(state)
+		stateChange, _ := ReadInt32(state)
+		actedBy, _ := ReadUint64(state)
+		stateInfo := StateChangeDetails{
+			ChatterActedOn: SteamId(actedOn),
+			StateChange:    EChatMemberStateChange(stateChange),
+			ChatterActedBy: SteamId(actedBy),
+		}
+		s.client.Emit(&ChatMemberInfoEvent{
+			SteamIdChat:     SteamId(body.SteamIdChat),
+			Type:            body.Type,
+			StateChangeInfo: stateInfo,
+		})
 	}
 }
 
