@@ -42,7 +42,7 @@ type MessageBody interface {
 	GetEMsg() EMsg
 }
 
-// Helpers for steam_language code
+// Helpers for reading
 
 func ReadByte2Bool(r io.Reader) (bool, error) {
 	var c uint8
@@ -94,6 +94,26 @@ func ReadInt32(r io.Reader) (int32, error) {
 
 func ReadInt64(r io.Reader) (int64, error) {
 	var c int64
+	err := binary.Read(r, binary.LittleEndian, &c)
+	return c, err
+}
+
+func ReadString(r io.Reader) (string, error) {
+	c := make([]byte, 0)
+	var err error
+	for {
+		var temp byte
+		err = binary.Read(r, binary.LittleEndian, &temp)
+		if temp == byte(0x0) || err != nil {
+			break
+		}
+		c = append(c, temp)
+	}
+	return string(c), err
+}
+
+func ReadByte(r io.Reader) (byte, error) {
+	var c byte
 	err := binary.Read(r, binary.LittleEndian, &c)
 	return c, err
 }
