@@ -369,6 +369,8 @@ type StateChangeDetails struct {
 	ChatterActedOn SteamId
 	StateChange    EChatMemberStateChange
 	ChatterActedBy SteamId
+	Permissions    EChatPermission
+	Rank           EClanRank
 }
 
 type ChatMemberInfoEvent struct {
@@ -385,10 +387,31 @@ func (s *Social) handleChatMemberInfo(packet *PacketMsg) {
 		actedOn, _ := ReadUint64(state)
 		stateChange, _ := ReadInt32(state)
 		actedBy, _ := ReadUint64(state)
+		var permissions, rank int32
+		if EChatMemberStateChange(stateChange) == EChatMemberStateChange_Entered {
+			ReadByte(state)   // null byte
+			ReadString(state) // MessageObject
+			ReadByte(state)   // 7
+			ReadString(state) //steamid
+			ReadUint64(state) //always the same at actedOn
+			ReadByte(state)   // 2
+			ReadString(state) //Permissions
+			permissions, _ = ReadInt32(state)
+			ReadByte(state)   // 2
+			ReadString(state) //Details
+			rank, _ = ReadInt32(state)
+			if rank == 4 { //Fix rank to match EClanRank
+				rank = EClanRank_Member
+			} else if rank == 8 {
+				rank = EClanRank_Moderator
+			}
+		}
 		stateInfo := StateChangeDetails{
 			ChatterActedOn: SteamId(actedOn),
 			StateChange:    EChatMemberStateChange(stateChange),
 			ChatterActedBy: SteamId(actedBy),
+			Permissions:    EChatPermission(permissions),
+			Rank:           EClanRank(rank),
 		}
 		s.client.Emit(&ChatMemberInfoEvent{
 			SteamIdChat:     SteamId(body.SteamIdChat),
