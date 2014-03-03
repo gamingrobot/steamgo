@@ -8,152 +8,65 @@ import (
 
 // Friend list is implemented as doubly-linked lists for thread-safety.
 // They can be iterated over like so:
-// 	for friend := client.Social.Friends.First(); friend != nil; friend = friend.Next() {
-// 		log.Println(friend.SteamId())
+// 	for id, friend := range client.Social.Friends.GetCopy() {
+// 		log.Println(id, friend.Name)
 // 	}
 
-// A thread-safe friend list which contains references to its predecessor and successor.
+// A thread-safe friend list
 type FriendsList struct {
 	mutex sync.RWMutex
-
-	first *lockingFriend
-	last  *lockingFriend
-
-	byId map[SteamId]*lockingFriend // fast lookup by ID
+	byId  map[SteamId]*Friend
 }
 
 // Returns a new friends list
 func NewFriendsList() *FriendsList {
-	return &FriendsList{byId: make(map[SteamId]*lockingFriend)}
+	return &FriendsList{byId: make(map[SteamId]*Friend)}
 }
 
+// Adds a friend to the friend list
 func (list *FriendsList) Add(friend *Friend) {
-	lockfriend := &lockingFriend{friend: friend}
 	list.mutex.Lock()
 	defer list.mutex.Unlock()
-
-	lockfriend.mutex = &list.mutex
-
-	list.byId[friend.SteamId] = lockfriend
-
-	if list.first == nil {
-		list.first = lockfriend
-		list.last = lockfriend
-	} else {
-		lockfriend.prev = list.last
-		list.last.next = lockfriend
-		list.last = lockfriend
-	}
+	list.byId[friend.SteamId] = friend
 }
 
+// Removes a friend from the friend list
 func (list *FriendsList) Remove(id SteamId) {
 	list.mutex.Lock()
 	defer list.mutex.Unlock()
-
-	lockfriend := list.byId[id]
-	if lockfriend == nil {
-		return
-	}
-
-	if list.first == lockfriend {
-		list.first = nil
-	} else {
-		lockfriend.prev.next = lockfriend.next
-	}
-
-	if list.last == lockfriend {
-		list.last = nil
-	} else {
-		lockfriend.next.prev = lockfriend.prev
-	}
+	delete(list.byId, id)
 }
 
-// Returns the first friend in the friend list or nil if the list is empty.
-func (f *FriendsList) First() *lockingFriend {
-	f.mutex.RLock()
-	defer f.mutex.RUnlock()
-	return f.first
+// Returns a copy of the friends map
+func (list *FriendsList) GetCopy() map[SteamId]Friend {
+	list.mutex.RLock()
+	defer list.mutex.RUnlock()
+	flist := make(map[SteamId]Friend)
+	for key, friend := range list.byId {
+		flist[key] = *friend
+	}
+	return flist
 }
 
-// Returns the last friend in the friend list or nil if the list is empty.
-func (f *FriendsList) Last() *lockingFriend {
-	f.mutex.RLock()
-	defer f.mutex.RUnlock()
-	return f.last
-}
-
-// Returns the friend by a SteamId or nil if there is no such friend.
-func (f *FriendsList) ById(id SteamId) *lockingFriend {
-	f.mutex.RLock()
-	defer f.mutex.RUnlock()
-	return f.byId[id]
+// Returns a copy of the friend of a given SteamId
+func (list *FriendsList) ById(id SteamId) Friend {
+	list.mutex.RLock()
+	defer list.mutex.RUnlock()
+	return *list.byId[id]
 }
 
 // Returns the number of friends
-func (f *FriendsList) Count() int {
-	f.mutex.Lock()
-	defer f.mutex.Unlock()
-	return len(f.byId)
+func (list *FriendsList) Count() int {
+	list.mutex.Lock()
+	defer list.mutex.Unlock()
+	return len(list.byId)
 }
 
-// A friend
+// A Friend
 type Friend struct {
 	SteamId           SteamId
 	Name              string
 	Relationship      EFriendRelationship
 	PersonaStateFlags EPersonaStateFlag
 	GameAppId         uint64
-}
-
-// A internal type for keeping things threadsafe
-type lockingFriend struct {
-	mutex *sync.RWMutex
-
-	prev *lockingFriend
-	next *lockingFriend
-
-	friend *Friend
-}
-
-// Returns the previous element in the friend list or nil if this friend is the first in the list.
-func (f *lockingFriend) Next() *lockingFriend {
-	f.mutex.RLock()
-	defer f.mutex.RUnlock()
-	return f.next
-}
-
-// Returns the next element in the friend list or nil if this friend is the last in the list.
-func (f *lockingFriend) Prev() *lockingFriend {
-	f.mutex.RLock()
-	defer f.mutex.RUnlock()
-	return f.prev
-}
-
-func (f *lockingFriend) SteamId() SteamId {
-	// the steam id of a friend never changes, so we don't need to lock here
-	return f.friend.SteamId
-}
-
-func (f *lockingFriend) Name() string {
-	f.mutex.RLock()
-	defer f.mutex.RUnlock()
-	return f.friend.Name
-}
-
-func (f *lockingFriend) Relationship() EFriendRelationship {
-	f.mutex.RLock()
-	defer f.mutex.RUnlock()
-	return f.friend.Relationship
-}
-
-func (f *lockingFriend) PersonaStateFlags() EPersonaStateFlag {
-	f.mutex.RLock()
-	defer f.mutex.RUnlock()
-	return f.friend.PersonaStateFlags
-}
-
-func (f *lockingFriend) GameAppId() uint64 {
-	f.mutex.RLock()
-	defer f.mutex.RUnlock()
-	return f.friend.GameAppId
 }
