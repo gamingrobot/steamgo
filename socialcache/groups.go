@@ -98,15 +98,6 @@ func (list *GroupsList) Count() int {
 	return len(list.byId)
 }
 
-//used to fix the clan SteamId to a chat SteamId
-func fixChatId(id SteamId) SteamId {
-	if id.GetAccountType() == int32(EAccountType_Clan) {
-		id = id.SetAccountInstance(uint32(Clan))
-		id = id.SetAccountType(EAccountType_Chat)
-	}
-	return id
-}
-
 // A group
 type Group struct {
 	SteamId      SteamId
