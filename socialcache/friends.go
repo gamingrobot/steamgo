@@ -1,4 +1,4 @@
-package friendcache
+package socialcache
 
 import (
 	. "github.com/GamingRobot/steamgo/internal"
