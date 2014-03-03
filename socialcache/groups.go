@@ -12,10 +12,10 @@ import (
 // 		log.Println(id, group.Name)
 // 	}
 
-// A thread-safe group list which contains references to its predecessor and successor.
+// A thread-safe group list
 type GroupsList struct {
 	mutex sync.RWMutex
-	byId  map[SteamId]*Group // fast lookup by ID
+	byId  map[SteamId]*Group
 }
 
 // Returns a new groups list
