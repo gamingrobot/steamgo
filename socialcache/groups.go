@@ -162,6 +162,10 @@ func (g *lockingGroup) ChatMembers() *chatMemberList {
 	return g.group.ChatMembers
 }
 
+//	for member := client.Social.Groups.ById(groupid).ChatMembers().First(); member != nil; member = member.Next() {
+//		log.Println(member.SteamId())
+//	}
+
 // A thread-safe Chat Member list which contains references to its predecessor and successor.
 type chatMemberList struct {
 	mutex *sync.RWMutex
