@@ -355,8 +355,8 @@ func (s *Social) handleChatEnter(packet *PacketMsg) {
 	for i := 0; i < int(count); i++ {
 		id, permissions, rank := readChatMember(reader)
 		ReadBytes(reader, 6) //No idea what this is
-		s.Groups.ById(chatId).ChatMembers().Add(&socialcache.ChatMember{
-			SteamId:     id,
+		s.Groups.AddChatMember(chatId, socialcache.ChatMember{
+			SteamId:     SteamId(id),
 			Permissions: permissions,
 			Rank:        rank,
 		})
@@ -394,17 +394,18 @@ func (s *Social) handleChatMemberInfo(packet *PacketMsg) {
 		actedOn, _ := ReadUint64(reader)
 		state, _ := ReadInt32(reader)
 		actedBy, _ := ReadUint64(reader)
+		ReadByte(reader) //0
 		stateChange := EChatMemberStateChange(state)
 		if stateChange == EChatMemberStateChange_Entered {
-			id, permissions, rank := readChatMember(reader)
-			s.Groups.ById(chatId).ChatMembers().Add(&socialcache.ChatMember{
-				SteamId:     id,
+			_, permissions, rank := readChatMember(reader)
+			s.Groups.AddChatMember(chatId, socialcache.ChatMember{
+				SteamId:     SteamId(actedOn),
 				Permissions: permissions,
 				Rank:        rank,
 			})
 		} else if stateChange == EChatMemberStateChange_Banned || stateChange == EChatMemberStateChange_Kicked ||
 			stateChange == EChatMemberStateChange_Disconnected || stateChange == EChatMemberStateChange_Left {
-			s.Groups.ById(chatId).ChatMembers().Remove(SteamId(actedOn))
+			s.Groups.RemoveChatMember(chatId, SteamId(actedOn))
 		}
 		stateInfo := StateChangeDetails{
 			ChatterActedOn: SteamId(actedOn),
