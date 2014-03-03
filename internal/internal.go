@@ -118,6 +118,12 @@ func ReadByte(r io.Reader) (byte, error) {
 	return c, err
 }
 
+func ReadBytes(r io.Reader, num int32) ([]byte, error) {
+	c := make([]byte, num)
+	err := binary.Read(r, binary.LittleEndian, &c)
+	return c, err
+}
+
 func WriteBool2Byte(w io.Writer, b bool) error {
 	var err error
 	if b {
