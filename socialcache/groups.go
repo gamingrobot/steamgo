@@ -1,7 +1,6 @@
 package socialcache
 
 import (
-	"fmt"
 	. "github.com/GamingRobot/steamgo/internal"
 	. "github.com/GamingRobot/steamgo/steamid"
 	"sync"
@@ -89,7 +88,6 @@ func (list *GroupsList) ById(id SteamId) *lockingGroup {
 	list.mutex.RLock()
 	defer list.mutex.RUnlock()
 	id = id.ChatToClan()
-	fmt.Println("chattoclan", id)
 	return list.byId[id]
 }
 
