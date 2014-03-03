@@ -108,3 +108,21 @@ func (s SteamId) SetAccountUniverse(universe int32) SteamId {
 func (s SteamId) StringUint64() string {
 	return strconv.FormatUint(uint64(s), 10)
 }
+
+//used to fix the Clan SteamId to a Chat SteamId
+func (s SteamId) ClanToChat() SteamId {
+	if s.GetAccountType() == int32(7) { //EAccountType_Clan
+		s = s.SetAccountInstance(uint32(Clan))
+		s = s.SetAccountType(8) //EAccountType_Chat
+	}
+	return s
+}
+
+//used to fix the Chat SteamId to a Clan SteamId
+func (s SteamId) ChatToClan() SteamId {
+	if s.GetAccountType() == int32(8) { //EAccountType_Chat
+		s = s.SetAccountInstance(0)
+		s = s.SetAccountType(int32(7)) //EAccountType_Clan
+	}
+	return s
+}
