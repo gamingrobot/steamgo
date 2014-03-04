@@ -24,10 +24,10 @@ func NewGroupsList() *GroupsList {
 }
 
 // Adds a group to the group list
-func (list *GroupsList) Add(group *Group) {
+func (list *GroupsList) Add(group Group) {
 	list.mutex.Lock()
 	defer list.mutex.Unlock()
-	list.byId[group.SteamId] = group
+	list.byId[group.SteamId] = &group
 }
 
 // Removes a group from the group list
@@ -44,7 +44,7 @@ func (list *GroupsList) AddChatMember(id SteamId, member ChatMember) {
 	id = id.ChatToClan()
 	group := list.byId[id]
 	if group == nil { //Group doesn't exist
-		list.Add(&Group{SteamId: id})
+		list.Add(Group{SteamId: id})
 	}
 	if group.ChatMembers == nil { //New group chat
 		group.ChatMembers = make(map[SteamId]ChatMember)

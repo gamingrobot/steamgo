@@ -248,7 +248,7 @@ func (s *Social) handleFriendsList(packet *PacketMsg) {
 			if rel == EClanRelationship_None {
 				s.Groups.Remove(steamId)
 			} else {
-				s.Groups.Add(&socialcache.Group{
+				s.Groups.Add(socialcache.Group{
 					SteamId:      steamId,
 					Relationship: rel,
 				})
@@ -261,7 +261,7 @@ func (s *Social) handleFriendsList(packet *PacketMsg) {
 			if rel == EFriendRelationship_None {
 				s.Friends.Remove(steamId)
 			} else {
-				s.Friends.Add(&socialcache.Friend{
+				s.Friends.Add(socialcache.Friend{
 					SteamId:      steamId,
 					Relationship: rel,
 				})

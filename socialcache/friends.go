@@ -24,10 +24,10 @@ func NewFriendsList() *FriendsList {
 }
 
 // Adds a friend to the friend list
-func (list *FriendsList) Add(friend *Friend) {
+func (list *FriendsList) Add(friend Friend) {
 	list.mutex.Lock()
 	defer list.mutex.Unlock()
-	list.byId[friend.SteamId] = friend
+	list.byId[friend.SteamId] = &friend
 }
 
 // Removes a friend from the friend list
