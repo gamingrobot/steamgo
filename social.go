@@ -286,11 +286,77 @@ func (s *Social) handlePersonaState(packet *PacketMsg) {
 }
 
 // Fired when a clan's state has been changed
-//TODO: handleClanState
+type ClanStateEvent struct {
+	ClandId             SteamId
+	StateFlags          EClientPersonaStateFlag
+	AccountFlags        EAccountFlags
+	ClanName            string
+	AvatarHash          []byte
+	MemberTotalCount    uint32
+	MemberOnlineCount   uint32
+	MemberChattingCount uint32
+	MemberInGameCount   uint32
+	Events              []ClanEventDetails
+	Announcements       []ClanEventDetails
+}
+
+type ClanEventDetails struct {
+	Id         uint64
+	EventTime  uint32
+	Headline   string
+	GameId     uint64
+	JustPosted bool
+}
+
 func (s *Social) handleClanState(packet *PacketMsg) {
 	body := new(CMsgClientClanState)
 	packet.ReadProtoMsg(body)
-	//fmt.Printf("%+v\n", body)
+	var name string
+	var avatar []byte
+	if body.GetNameInfo() != nil {
+		name = body.GetNameInfo().GetClanName()
+		avatar = body.GetNameInfo().GetShaAvatar()
+	}
+	var totalCount, onlineCount, chattingCount, ingameCount uint32
+	if body.GetUserCounts() != nil {
+		usercounts := body.GetUserCounts()
+		totalCount = usercounts.GetMembers()
+		onlineCount = usercounts.GetOnline()
+		chattingCount = usercounts.GetChatting()
+		ingameCount = usercounts.GetInGame()
+	}
+	var events, announcements []ClanEventDetails
+	for _, event := range body.GetEvents() {
+		events = append(events, ClanEventDetails{
+			Id:         event.GetGid(),
+			EventTime:  event.GetEventTime(),
+			Headline:   event.GetHeadline(),
+			GameId:     event.GetGameId(),
+			JustPosted: event.GetJustPosted(),
+		})
+	}
+	for _, announce := range body.GetAnnouncements() {
+		announcements = append(announcements, ClanEventDetails{
+			Id:         announce.GetGid(),
+			EventTime:  announce.GetEventTime(),
+			Headline:   announce.GetHeadline(),
+			GameId:     announce.GetGameId(),
+			JustPosted: announce.GetJustPosted(),
+		})
+	}
+	s.client.Emit(&ClanStateEvent{
+		ClandId:             SteamId(body.GetSteamidClan()),
+		StateFlags:          EClientPersonaStateFlag(body.GetMUnStatusFlags()),
+		AccountFlags:        EAccountFlags(body.GetClanAccountFlags()),
+		ClanName:            name,
+		AvatarHash:          avatar,
+		MemberTotalCount:    totalCount,
+		MemberOnlineCount:   onlineCount,
+		MemberChattingCount: chattingCount,
+		MemberInGameCount:   ingameCount,
+		Events:              events,
+		Announcements:       announcements,
+	})
 }
 
 // Fired in response to adding a friend to your friends list
