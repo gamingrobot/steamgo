@@ -308,15 +308,15 @@ func (s *Social) handleFriendResponse(packet *PacketMsg) {
 }
 
 type ChatMsgEvent struct {
-	Chatroom SteamId // not set for friend messages
-	Sender   SteamId
-	Message  string
-	Type     EChatEntryType
+	ChatRoomId SteamId // not set for friend messages
+	ChatterId  SteamId
+	Message    string
+	EntryType  EChatEntryType
 }
 
 // Whether the type is ChatMsg
 func (c *ChatMsgEvent) IsMessage() bool {
-	return c.Type == EChatEntryType_ChatMsg
+	return c.EntryType == EChatEntryType_ChatMsg
 }
 
 func (s *Social) handleFriendMsg(packet *PacketMsg) {
@@ -324,9 +324,9 @@ func (s *Social) handleFriendMsg(packet *PacketMsg) {
 	packet.ReadProtoMsg(body)
 	message := string(bytes.Split(body.GetMessage(), []byte{0x0})[0])
 	s.client.Emit(&ChatMsgEvent{
-		Sender:  SteamId(body.GetSteamidFrom()),
-		Message: message,
-		Type:    EChatEntryType(body.GetChatEntryType()),
+		ChatterId: SteamId(body.GetSteamidFrom()),
+		Message:   message,
+		EntryType: EChatEntryType(body.GetChatEntryType()),
 	})
 }
 
@@ -335,19 +335,19 @@ func (s *Social) handleChatMsg(packet *PacketMsg) {
 	payload := packet.ReadClientMsg(body).Payload
 	message := string(bytes.Split(payload, []byte{0x0})[0])
 	s.client.Emit(&ChatMsgEvent{
-		Chatroom: SteamId(body.SteamIdChatRoom),
-		Sender:   SteamId(body.SteamIdChatter),
-		Message:  message,
-		Type:     EChatEntryType(body.ChatMsgType),
+		ChatRoomId: SteamId(body.SteamIdChatRoom),
+		ChatterId:  SteamId(body.SteamIdChatter),
+		Message:    message,
+		EntryType:  EChatEntryType(body.ChatMsgType),
 	})
 }
 
 type ChatEnterEvent struct {
-	SteamIdChat   SteamId
-	SteamIdFriend SteamId
+	ChatRoomId    SteamId
+	FriendId      SteamId
 	ChatRoomType  EChatRoomType
-	SteamIdOwner  SteamId
-	SteamIdClan   SteamId
+	OwnerId       SteamId
+	ClanId        SteamId
 	ChatFlags     byte
 	EnterResponse EChatRoomEnterResponse
 	Name          string
@@ -371,11 +371,11 @@ func (s *Social) handleChatEnter(packet *PacketMsg) {
 		})
 	}
 	s.client.Emit(&ChatEnterEvent{
-		SteamIdChat:   SteamId(body.SteamIdChat),
-		SteamIdFriend: SteamId(body.SteamIdFriend),
+		ChatRoomId:    SteamId(body.SteamIdChat),
+		FriendId:      SteamId(body.SteamIdFriend),
 		ChatRoomType:  EChatRoomType(body.ChatRoomType),
-		SteamIdOwner:  SteamId(body.SteamIdOwner),
-		SteamIdClan:   SteamId(body.SteamIdClan),
+		OwnerId:       SteamId(body.SteamIdOwner),
+		ClanId:        SteamId(body.SteamIdClan),
 		ChatFlags:     byte(body.ChatFlags),
 		EnterResponse: EChatRoomEnterResponse(body.EnterResponse),
 		Name:          name,
@@ -389,7 +389,7 @@ type StateChangeDetails struct {
 }
 
 type ChatMemberInfoEvent struct {
-	SteamIdChat     SteamId
+	ChatRoomId      SteamId
 	Type            EChatInfoType
 	StateChangeInfo StateChangeDetails
 }
@@ -422,7 +422,7 @@ func (s *Social) handleChatMemberInfo(packet *PacketMsg) {
 			ChatterActedBy: SteamId(actedBy),
 		}
 		s.client.Emit(&ChatMemberInfoEvent{
-			SteamIdChat:     SteamId(body.SteamIdChat),
+			ChatRoomId:      SteamId(body.SteamIdChat),
 			Type:            EChatInfoType(body.Type),
 			StateChangeInfo: stateInfo,
 		})
@@ -449,44 +449,44 @@ func readChatMember(r io.Reader) (SteamId, EChatPermission, EClanRank) {
 }
 
 type ChatActionResultEvent struct {
-	SteamIdChat        SteamId
-	SteamIdUserActedOn SteamId
-	ChatAction         EChatAction
-	ActionResult       EChatActionResult
+	ChatRoomId SteamId
+	ChatterId  SteamId
+	Action     EChatAction
+	Result     EChatActionResult
 }
 
 func (s *Social) handleChatActionResult(packet *PacketMsg) {
 	body := new(MsgClientChatActionResult)
 	packet.ReadClientMsg(body)
 	s.client.Emit(&ChatActionResultEvent{
-		SteamIdChat:        SteamId(body.SteamIdChat),
-		SteamIdUserActedOn: SteamId(body.SteamIdUserActedOn),
-		ChatAction:         EChatAction(body.ChatAction),
-		ActionResult:       EChatActionResult(body.ActionResult),
+		ChatRoomId: SteamId(body.SteamIdChat),
+		ChatterId:  SteamId(body.SteamIdUserActedOn),
+		Action:     EChatAction(body.ChatAction),
+		Result:     EChatActionResult(body.ActionResult),
 	})
 }
 
 type ChatInviteEvent struct {
-	SteamIdInvited    SteamId
-	SteamIdChat       SteamId
-	SteamIdPatron     SteamId
-	ChatRoomType      EChatRoomType
-	SteamIdFriendChat SteamId
-	ChatName          string
-	GameId            uint64
+	InvitedId    SteamId
+	ChatRoomId   SteamId
+	PatronId     SteamId
+	ChatRoomType EChatRoomType
+	FriendChatId SteamId
+	ChatRoomName string
+	GameId       uint64
 }
 
 func (s *Social) handleChatInvite(packet *PacketMsg) {
 	body := new(CMsgClientChatInvite)
 	packet.ReadProtoMsg(body)
 	s.client.Emit(&ChatInviteEvent{
-		SteamIdInvited:    SteamId(body.GetSteamIdInvited()),
-		SteamIdChat:       SteamId(body.GetSteamIdChat()),
-		SteamIdPatron:     SteamId(body.GetSteamIdPatron()),
-		ChatRoomType:      EChatRoomType(body.GetChatroomType()),
-		SteamIdFriendChat: SteamId(body.GetSteamIdFriendChat()),
-		ChatName:          body.GetChatName(),
-		GameId:            body.GetGameId(),
+		InvitedId:    SteamId(body.GetSteamIdInvited()),
+		ChatRoomId:   SteamId(body.GetSteamIdChat()),
+		PatronId:     SteamId(body.GetSteamIdPatron()),
+		ChatRoomType: EChatRoomType(body.GetChatroomType()),
+		FriendChatId: SteamId(body.GetSteamIdFriendChat()),
+		ChatRoomName: body.GetChatName(),
+		GameId:       body.GetGameId(),
 	})
 }
 

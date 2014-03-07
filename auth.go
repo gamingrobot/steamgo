@@ -157,42 +157,30 @@ func (a *Auth) handleUpdateMachineAuth(packet *PacketMsg) {
 }
 
 type AccountInfoEvent struct {
-	PersonaName                     string
-	IpCountry                       string
-	SaltPassword                    []byte
-	ShaDigest_Password              []byte
-	CountAuthedComputers            int32
-	LockedWithIpt                   bool
-	AccountFlags                    uint32
-	FacebookId                      uint64
-	FacebookName                    string
-	SteamGuardProvider              int32
-	SteamguardRequireCodeDefault    bool
-	SteamguardShowProviders         bool
-	SteamguardCanUseMobileProvider  bool
-	SteamguardNotifyNewmachines     bool
-	SteamguardMachineNameUserChosen string
+	PersonaName          string
+	Country              string
+	PasswordSalt         []byte
+	PasswordSHADisgest   []byte
+	CountAuthedComputers int32
+	LockedWithIpt        bool
+	AccountFlags         EAccountFlags
+	FacebookId           uint64
+	FacebookName         string
 }
 
 func (a *Auth) handleAccountInfo(packet *PacketMsg) {
 	body := new(CMsgClientAccountInfo)
 	packet.ReadProtoMsg(body)
 	a.client.Emit(&AccountInfoEvent{
-		PersonaName:                     body.GetPersonaName(),
-		IpCountry:                       body.GetIpCountry(),
-		SaltPassword:                    body.GetSaltPassword(),
-		ShaDigest_Password:              body.GetShaDigest_Password(),
-		CountAuthedComputers:            body.GetCountAuthedComputers(),
-		LockedWithIpt:                   body.GetLockedWithIpt(),
-		AccountFlags:                    body.GetAccountFlags(),
-		FacebookId:                      body.GetFacebookId(),
-		FacebookName:                    body.GetFacebookName(),
-		SteamGuardProvider:              body.GetSteamGuardProvider(),
-		SteamguardRequireCodeDefault:    body.GetSteamguardRequireCodeDefault(),
-		SteamguardShowProviders:         body.GetSteamguardShowProviders(),
-		SteamguardCanUseMobileProvider:  body.GetSteamguardCanUseMobileProvider(),
-		SteamguardNotifyNewmachines:     body.GetSteamguardNotifyNewmachines(),
-		SteamguardMachineNameUserChosen: body.GetSteamguardMachineNameUserChosen(),
+		PersonaName:          body.GetPersonaName(),
+		Country:              body.GetIpCountry(),
+		PasswordSalt:         body.GetSaltPassword(),
+		PasswordSHADisgest:   body.GetShaDigest_Password(),
+		CountAuthedComputers: body.GetCountAuthedComputers(),
+		LockedWithIpt:        body.GetLockedWithIpt(),
+		AccountFlags:         EAccountFlags(body.GetAccountFlags()),
+		FacebookId:           body.GetFacebookId(),
+		FacebookName:         body.GetFacebookName(),
 	})
 }
 
