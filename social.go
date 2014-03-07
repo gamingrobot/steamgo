@@ -277,6 +277,7 @@ func (s *Social) handleFriendsList(packet *PacketMsg) {
 	}
 }
 
+// Fired when someone changing their friend details
 //TODO: handlePersonaState
 func (s *Social) handlePersonaState(packet *PacketMsg) {
 	body := new(CMsgClientPersonaState)
@@ -284,6 +285,7 @@ func (s *Social) handlePersonaState(packet *PacketMsg) {
 	//fmt.Printf("%+v\n", body)
 }
 
+// Fired when a clan's state has been changed
 //TODO: handleClanState
 func (s *Social) handleClanState(packet *PacketMsg) {
 	body := new(CMsgClientClanState)
@@ -291,6 +293,7 @@ func (s *Social) handleClanState(packet *PacketMsg) {
 	//fmt.Printf("%+v\n", body)
 }
 
+// Fired in response to adding a friend to your friends list
 type FriendAddedEvent struct {
 	Result      EResult
 	SteamId     SteamId
@@ -307,7 +310,7 @@ func (s *Social) handleFriendResponse(packet *PacketMsg) {
 	})
 }
 
-// Chat Message Event used for both Friend and Chat messages
+// Fired when the client receives a message from either a friend or a chat room
 type ChatMsgEvent struct {
 	ChatRoomId SteamId // not set for friend messages
 	ChatterId  SteamId
@@ -343,6 +346,7 @@ func (s *Social) handleChatMsg(packet *PacketMsg) {
 	})
 }
 
+// Fired in response to joining a chat
 type ChatEnterEvent struct {
 	ChatRoomId    SteamId
 	FriendId      SteamId
@@ -383,16 +387,17 @@ func (s *Social) handleChatEnter(packet *PacketMsg) {
 	})
 }
 
-type StateChangeDetails struct {
-	ChatterActedOn SteamId
-	StateChange    EChatMemberStateChange
-	ChatterActedBy SteamId
-}
-
+// Fired in response to a chat member's info being received
 type ChatMemberInfoEvent struct {
 	ChatRoomId      SteamId
 	Type            EChatInfoType
 	StateChangeInfo StateChangeDetails
+}
+
+type StateChangeDetails struct {
+	ChatterActedOn SteamId
+	StateChange    EChatMemberStateChange
+	ChatterActedBy SteamId
 }
 
 func (s *Social) handleChatMemberInfo(packet *PacketMsg) {
@@ -449,6 +454,7 @@ func readChatMember(r io.Reader) (SteamId, EChatPermission, EClanRank) {
 	return SteamId(id), EChatPermission(permissions), EClanRank(rank)
 }
 
+// Fired when a chat action has completed
 type ChatActionResultEvent struct {
 	ChatRoomId SteamId
 	ChatterId  SteamId
@@ -467,6 +473,7 @@ func (s *Social) handleChatActionResult(packet *PacketMsg) {
 	})
 }
 
+// Fired when a chat invite is received
 type ChatInviteEvent struct {
 	InvitedId    SteamId
 	ChatRoomId   SteamId
@@ -491,6 +498,7 @@ func (s *Social) handleChatInvite(packet *PacketMsg) {
 	})
 }
 
+// Fired in response to ignoring a friend
 type IgnoreFriendEvent struct {
 	Result EResult
 }
@@ -503,6 +511,7 @@ func (s *Social) handleIgnoreFriendResponse(packet *PacketMsg) {
 	})
 }
 
+// Fired in response to requesting profile info for a user
 type ProfileInfoEvent struct {
 	Result      EResult
 	SteamId     SteamId
