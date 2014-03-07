@@ -215,7 +215,7 @@ func (s *Social) handleAccountInfo(packet *PacketMsg) {
 	s.name = body.GetPersonaName()
 }
 
-type FriendListEvent struct{}
+type FriendsListEvent struct{}
 
 type FriendStateEvent struct {
 	SteamId      SteamId
@@ -273,7 +273,7 @@ func (s *Social) handleFriendsList(packet *PacketMsg) {
 	}
 
 	if !list.GetBincremental() {
-		s.client.Emit(new(FriendListEvent))
+		s.client.Emit(&FriendsListEvent{})
 	}
 }
 
