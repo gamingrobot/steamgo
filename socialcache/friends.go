@@ -66,7 +66,11 @@ func (list *FriendsList) Count() int {
 type Friend struct {
 	SteamId           SteamId
 	Name              string
+	AvatarHash        []byte
 	Relationship      EFriendRelationship
+	PersonaState      EPersonaState
 	PersonaStateFlags EPersonaStateFlag
 	GameAppId         uint64
+	GameId            uint64
+	GameName          string
 }

@@ -98,6 +98,7 @@ func (list *GroupsList) Count() int {
 type Group struct {
 	SteamId      SteamId
 	Name         string
+	AvatarHash   []byte
 	Relationship EClanRelationship
 	ChatMembers  map[SteamId]ChatMember
 }
