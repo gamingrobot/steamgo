@@ -307,6 +307,7 @@ func (s *Social) handleFriendResponse(packet *PacketMsg) {
 	})
 }
 
+// Chat Message Event used for both Friend and Chat messages
 type ChatMsgEvent struct {
 	ChatRoomId SteamId // not set for friend messages
 	ChatterId  SteamId
