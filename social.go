@@ -344,6 +344,11 @@ func (s *Social) handleClanState(packet *PacketMsg) {
 			JustPosted: announce.GetJustPosted(),
 		})
 	}
+	//Add stuff to group
+	group := s.Groups.ById(SteamId(body.GetSteamidClan()))
+	group.Name = name
+	group.AvatarHash = avatar
+	s.Groups.Add(group) //replace the previous version
 	s.client.Emit(&ClanStateEvent{
 		ClandId:             SteamId(body.GetSteamidClan()),
 		StateFlags:          EClientPersonaStateFlag(body.GetMUnStatusFlags()),
