@@ -90,14 +90,14 @@ func (s *Social) SendChatMessage(to SteamId, entryType EChatEntryType, message s
 // for every new/changed friend
 func (s *Social) AddFriend(id SteamId) {
 	s.client.Write(NewClientMsgProtobuf(EMsg_ClientAddFriend, &CMsgClientAddFriend{
-		SteamidToAdd: proto.Uint64(uint64(id)),
+		SteamidToAdd: proto.Uint64(id.ToUint64()),
 	}))
 }
 
 // Removes a friend from your friends list
 func (s *Social) RemoveFriend(id SteamId) {
 	s.client.Write(NewClientMsgProtobuf(EMsg_ClientRemoveFriend, &CMsgClientRemoveFriend{
-		Friendid: proto.Uint64(uint64(id)),
+		Friendid: proto.Uint64(id.ToUint64()),
 	}))
 }
 
@@ -112,6 +112,30 @@ func (s *Social) IgnoreFriend(id SteamId, setIgnore bool) {
 		SteamIdFriend: id,
 		Ignore:        ignore,
 	}, make([]byte, 0)))
+}
+
+// Requests persona state for a list of specified SteamIds
+func (s *Social) RequestFriendListInfo(ids []SteamId, requestedInfo EClientPersonaStateFlag) {
+	var friends []uint64
+	for _, id := range ids {
+		friends = append(friends, id.ToUint64())
+	}
+	s.client.Write(NewClientMsgProtobuf(EMsg_ClientRequestFriendData, &CMsgClientRequestFriendData{
+		PersonaStateRequested: proto.Uint32(uint32(requestedInfo)),
+		Friends:               friends,
+	}))
+}
+
+// Requests persona state for a specified SteamId
+func (s *Social) RequestFriendInfo(id SteamId, requestedInfo EClientPersonaStateFlag) {
+	s.RequestFriendListInfo([]SteamId{id}, requestedInfo)
+}
+
+// Requests profile information for a specified SteamId
+func (s *Social) RequestProfileInfo(id SteamId) {
+	s.client.Write(NewClientMsgProtobuf(EMsg_ClientFriendProfileInfo, &CMsgClientFriendProfileInfo{
+		SteamidFriend: proto.Uint64(id.ToUint64()),
+	}))
 }
 
 // Attempts to join a chat room
