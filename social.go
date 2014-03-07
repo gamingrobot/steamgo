@@ -231,8 +231,8 @@ type GroupStateEvent struct {
 	Relationship EClanRelationship
 }
 
-func (f *FriendStateEvent) IsMember() bool {
-	return f.Relationship == EClanRelationship_Member
+func (g *GroupStateEvent) IsMember() bool {
+	return g.Relationship == EClanRelationship_Member
 }
 
 func (s *Social) handleFriendsList(packet *PacketMsg) {
