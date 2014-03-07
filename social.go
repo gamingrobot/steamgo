@@ -439,11 +439,22 @@ func readChatMember(r io.Reader) (SteamId, EChatPermission, EClanRank) {
 	return SteamId(id), EChatPermission(permissions), EClanRank(rank)
 }
 
-//TODO: handleChatActionResult
+type ChatActionResultEvent struct {
+	SteamIdChat        SteamId
+	SteamIdUserActedOn SteamId
+	ChatAction         EChatAction
+	ActionResult       EChatActionResult
+}
+
 func (s *Social) handleChatActionResult(packet *PacketMsg) {
 	body := new(MsgClientChatActionResult)
 	packet.ReadClientMsg(body)
-	//fmt.Printf("%+v\n", body)
+	s.client.Emit(&ChatActionResultEvent{
+		SteamIdChat:        SteamId(body.SteamIdChat),
+		SteamIdUserActedOn: SteamId(body.SteamIdUserActedOn),
+		ChatAction:         EChatAction(body.ChatAction),
+		ActionResult:       EChatActionResult(body.ActionResult),
+	})
 }
 
 type ChatInviteEvent struct {
