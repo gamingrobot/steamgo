@@ -490,11 +490,16 @@ func (s *Social) handleChatInvite(packet *PacketMsg) {
 	})
 }
 
-//TODO: handleIgnoreFriendResponse
+type IgnoreFriendEvent struct {
+	Result EResult
+}
+
 func (s *Social) handleIgnoreFriendResponse(packet *PacketMsg) {
 	body := new(MsgClientSetIgnoreFriendResponse)
 	packet.ReadClientMsg(body)
-	//fmt.Printf("%+v\n", body)
+	s.client.Emit(&IgnoreFriendEvent{
+		Result: EResult(body.Result),
+	})
 }
 
 //TODO: handleProfileInfoResponse
