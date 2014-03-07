@@ -291,11 +291,20 @@ func (s *Social) handleClanState(packet *PacketMsg) {
 	//fmt.Printf("%+v\n", body)
 }
 
-//TODO: handleFriendResponse
+type FriendAddedEvent struct {
+	Result      EResult
+	SteamId     SteamId
+	PersonaName string
+}
+
 func (s *Social) handleFriendResponse(packet *PacketMsg) {
 	body := new(CMsgClientAddFriendResponse)
 	packet.ReadProtoMsg(body)
-	//fmt.Printf("%+v\n", body)
+	s.client.Emit(&FriendAddedEvent{
+		Result:      EResult(body.GetEresult()),
+		SteamId:     SteamId(body.GetSteamIdAdded()),
+		PersonaName: body.GetPersonaNameAdded(),
+	})
 }
 
 type ChatMsgEvent struct {
