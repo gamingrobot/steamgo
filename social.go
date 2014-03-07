@@ -502,9 +502,30 @@ func (s *Social) handleIgnoreFriendResponse(packet *PacketMsg) {
 	})
 }
 
-//TODO: handleProfileInfoResponse
+type ProfileInfoEvent struct {
+	Result      EResult
+	SteamId     SteamId
+	TimeCreated uint32
+	RealName    string
+	CityName    string
+	StateName   string
+	CountryName string
+	Headline    string
+	Summary     string
+}
+
 func (s *Social) handleProfileInfoResponse(packet *PacketMsg) {
 	body := new(CMsgClientFriendProfileInfoResponse)
 	packet.ReadProtoMsg(body)
-	//fmt.Printf("%+v\n", body)
+	s.client.Emit(&ProfileInfoEvent{
+		Result:      EResult(body.GetEresult()),
+		SteamId:     SteamId(body.GetSteamidFriend()),
+		TimeCreated: body.GetTimeCreated(),
+		RealName:    body.GetRealName(),
+		CityName:    body.GetCityName(),
+		StateName:   body.GetStateName(),
+		CountryName: body.GetCountryName(),
+		Headline:    body.GetHeadline(),
+		Summary:     body.GetSummary(),
+	})
 }
