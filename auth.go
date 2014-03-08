@@ -72,8 +72,6 @@ func (a *Auth) HandlePacket(packet *PacketMsg) {
 	}
 }
 
-type LoggedOnEvent struct{}
-
 func (a *Auth) handleLogOnResponse(packet *PacketMsg) {
 	if !packet.IsProto {
 		a.client.Fatalf("Got non-proto logon response!")
@@ -98,11 +96,6 @@ func (a *Auth) handleLogOnResponse(packet *PacketMsg) {
 	}
 }
 
-type LoginKeyEvent struct {
-	UniqueId uint32
-	LoginKey string
-}
-
 func (a *Auth) handleLoginKey(packet *PacketMsg) {
 	body := new(CMsgClientNewLoginKey)
 	packet.ReadProtoMsg(body)
@@ -119,10 +112,6 @@ func (a *Auth) handleLoginKey(packet *PacketMsg) {
 func (a *Auth) handleSessionToken(packet *PacketMsg) {
 }
 
-type LoggedOffEvent struct {
-	Result EResult
-}
-
 func (a *Auth) handleLoggedOff(packet *PacketMsg) {
 	result := EResult_Invalid
 	if packet.IsProto {
@@ -135,10 +124,6 @@ func (a *Auth) handleLoggedOff(packet *PacketMsg) {
 		result = body.Result
 	}
 	a.client.Emit(&LoggedOffEvent{Result: result})
-}
-
-type MachineAuthUpdateEvent struct {
-	Hash []byte
 }
 
 func (a *Auth) handleUpdateMachineAuth(packet *PacketMsg) {
@@ -154,18 +139,6 @@ func (a *Auth) handleUpdateMachineAuth(packet *PacketMsg) {
 	a.client.Write(msg)
 
 	a.client.Emit(&MachineAuthUpdateEvent{sha})
-}
-
-type AccountInfoEvent struct {
-	PersonaName          string
-	Country              string
-	PasswordSalt         []byte
-	PasswordSHADisgest   []byte
-	CountAuthedComputers int32
-	LockedWithIpt        bool
-	AccountFlags         EAccountFlags
-	FacebookId           uint64
-	FacebookName         string
 }
 
 func (a *Auth) handleAccountInfo(packet *PacketMsg) {

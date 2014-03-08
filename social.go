@@ -239,26 +239,6 @@ func (s *Social) handleAccountInfo(packet *PacketMsg) {
 	s.name = body.GetPersonaName()
 }
 
-type FriendsListEvent struct{}
-
-type FriendStateEvent struct {
-	SteamId      SteamId
-	Relationship EFriendRelationship
-}
-
-func (f *FriendStateEvent) IsFriend() bool {
-	return f.Relationship == EFriendRelationship_Friend
-}
-
-type GroupStateEvent struct {
-	SteamId      SteamId
-	Relationship EClanRelationship
-}
-
-func (g *GroupStateEvent) IsMember() bool {
-	return g.Relationship == EClanRelationship_Member
-}
-
 func (s *Social) handleFriendsList(packet *PacketMsg) {
 	list := new(CMsgClientFriendsList)
 	packet.ReadProtoMsg(list)
@@ -298,33 +278,6 @@ func (s *Social) handleFriendsList(packet *PacketMsg) {
 	if !list.GetBincremental() {
 		s.client.Emit(&FriendsListEvent{})
 	}
-}
-
-// Fired when someone changing their friend details
-type PersonaStateEvent struct {
-	StatusFlags            EClientPersonaStateFlag
-	FriendId               SteamId
-	State                  EPersonaState
-	StateFlags             EPersonaStateFlag
-	GameAppId              uint32
-	GameId                 uint64
-	GameName               string
-	GameServerIp           uint32
-	GameServerPort         uint32
-	QueryPort              uint32
-	SourceSteamId          SteamId
-	GameDataBlob           []byte
-	Name                   string
-	AvatarHash             []byte
-	LastLogOff             uint32
-	LastLogOn              uint32
-	ClanRank               uint32
-	ClanTag                string
-	OnlineSessionInstances uint32
-	PublishedSessionId     uint32
-	PersonaSetByUser       bool
-	FacebookName           string
-	FacebookId             uint64
 }
 
 func (s *Social) handlePersonaState(packet *PacketMsg) {
@@ -380,29 +333,6 @@ func (s *Social) handlePersonaState(packet *PacketMsg) {
 			FacebookId:             friend.GetFacebookId(),
 		})
 	}
-}
-
-// Fired when a clan's state has been changed
-type ClanStateEvent struct {
-	ClandId             SteamId
-	StateFlags          EClientPersonaStateFlag
-	AccountFlags        EAccountFlags
-	ClanName            string
-	AvatarHash          []byte
-	MemberTotalCount    uint32
-	MemberOnlineCount   uint32
-	MemberChattingCount uint32
-	MemberInGameCount   uint32
-	Events              []ClanEventDetails
-	Announcements       []ClanEventDetails
-}
-
-type ClanEventDetails struct {
-	Id         uint64
-	EventTime  uint32
-	Headline   string
-	GameId     uint64
-	JustPosted bool
 }
 
 func (s *Social) handleClanState(packet *PacketMsg) {
@@ -463,13 +393,6 @@ func (s *Social) handleClanState(packet *PacketMsg) {
 	})
 }
 
-// Fired in response to adding a friend to your friends list
-type FriendAddedEvent struct {
-	Result      EResult
-	SteamId     SteamId
-	PersonaName string
-}
-
 func (s *Social) handleFriendResponse(packet *PacketMsg) {
 	body := new(CMsgClientAddFriendResponse)
 	packet.ReadProtoMsg(body)
@@ -478,19 +401,6 @@ func (s *Social) handleFriendResponse(packet *PacketMsg) {
 		SteamId:     SteamId(body.GetSteamIdAdded()),
 		PersonaName: body.GetPersonaNameAdded(),
 	})
-}
-
-// Fired when the client receives a message from either a friend or a chat room
-type ChatMsgEvent struct {
-	ChatRoomId SteamId // not set for friend messages
-	ChatterId  SteamId
-	Message    string
-	EntryType  EChatEntryType
-}
-
-// Whether the type is ChatMsg
-func (c *ChatMsgEvent) IsMessage() bool {
-	return c.EntryType == EChatEntryType_ChatMsg
 }
 
 func (s *Social) handleFriendMsg(packet *PacketMsg) {
@@ -514,18 +424,6 @@ func (s *Social) handleChatMsg(packet *PacketMsg) {
 		Message:    message,
 		EntryType:  EChatEntryType(body.ChatMsgType),
 	})
-}
-
-// Fired in response to joining a chat
-type ChatEnterEvent struct {
-	ChatRoomId    SteamId
-	FriendId      SteamId
-	ChatRoomType  EChatRoomType
-	OwnerId       SteamId
-	ClanId        SteamId
-	ChatFlags     byte
-	EnterResponse EChatRoomEnterResponse
-	Name          string
 }
 
 func (s *Social) handleChatEnter(packet *PacketMsg) {
@@ -555,19 +453,6 @@ func (s *Social) handleChatEnter(packet *PacketMsg) {
 		EnterResponse: EChatRoomEnterResponse(body.EnterResponse),
 		Name:          name,
 	})
-}
-
-// Fired in response to a chat member's info being received
-type ChatMemberInfoEvent struct {
-	ChatRoomId      SteamId
-	Type            EChatInfoType
-	StateChangeInfo StateChangeDetails
-}
-
-type StateChangeDetails struct {
-	ChatterActedOn SteamId
-	StateChange    EChatMemberStateChange
-	ChatterActedBy SteamId
 }
 
 func (s *Social) handleChatMemberInfo(packet *PacketMsg) {
@@ -624,14 +509,6 @@ func readChatMember(r io.Reader) (SteamId, EChatPermission, EClanRank) {
 	return SteamId(id), EChatPermission(permissions), EClanRank(rank)
 }
 
-// Fired when a chat action has completed
-type ChatActionResultEvent struct {
-	ChatRoomId SteamId
-	ChatterId  SteamId
-	Action     EChatAction
-	Result     EChatActionResult
-}
-
 func (s *Social) handleChatActionResult(packet *PacketMsg) {
 	body := new(MsgClientChatActionResult)
 	packet.ReadClientMsg(body)
@@ -641,17 +518,6 @@ func (s *Social) handleChatActionResult(packet *PacketMsg) {
 		Action:     EChatAction(body.ChatAction),
 		Result:     EChatActionResult(body.ActionResult),
 	})
-}
-
-// Fired when a chat invite is received
-type ChatInviteEvent struct {
-	InvitedId    SteamId
-	ChatRoomId   SteamId
-	PatronId     SteamId
-	ChatRoomType EChatRoomType
-	FriendChatId SteamId
-	ChatRoomName string
-	GameId       uint64
 }
 
 func (s *Social) handleChatInvite(packet *PacketMsg) {
@@ -668,30 +534,12 @@ func (s *Social) handleChatInvite(packet *PacketMsg) {
 	})
 }
 
-// Fired in response to ignoring a friend
-type IgnoreFriendEvent struct {
-	Result EResult
-}
-
 func (s *Social) handleIgnoreFriendResponse(packet *PacketMsg) {
 	body := new(MsgClientSetIgnoreFriendResponse)
 	packet.ReadClientMsg(body)
 	s.client.Emit(&IgnoreFriendEvent{
 		Result: EResult(body.Result),
 	})
-}
-
-// Fired in response to requesting profile info for a user
-type ProfileInfoEvent struct {
-	Result      EResult
-	SteamId     SteamId
-	TimeCreated uint32
-	RealName    string
-	CityName    string
-	StateName   string
-	CountryName string
-	Headline    string
-	Summary     string
 }
 
 func (s *Social) handleProfileInfoResponse(packet *PacketMsg) {

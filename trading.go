@@ -19,22 +19,6 @@ type Trading struct {
 
 type TradeRequestId uint32
 
-type TradeProposedEvent struct {
-	RequestId TradeRequestId
-	Other     SteamId
-	OtherName string
-}
-
-type TradeResultEvent struct {
-	RequestId TradeRequestId
-	Response  EEconTradeResponse
-	Other     SteamId
-}
-
-type TradeSessionStartEvent struct {
-	Other SteamId
-}
-
 func (t *Trading) HandlePacket(packet *PacketMsg) {
 	switch packet.EMsg {
 	case EMsg_EconTrading_InitiateTradeProposed:

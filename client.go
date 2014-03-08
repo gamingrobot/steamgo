@@ -295,8 +295,6 @@ func (c *Client) handleChannelEncryptRequest(packet *PacketMsg) {
 	c.Write(NewMsg(NewMsgChannelEncryptResponse(), payload.Bytes()))
 }
 
-type ConnectedEvent struct{}
-
 func (c *Client) handleChannelEncryptResult(packet *PacketMsg) {
 	body := NewMsgChannelEncryptResult()
 	packet.ReadMsg(body)
@@ -308,7 +306,7 @@ func (c *Client) handleChannelEncryptResult(packet *PacketMsg) {
 	c.conn.SetEncryptionKey(c.tempSessionKey)
 	c.tempSessionKey = nil
 
-	c.Emit(new(ConnectedEvent))
+	c.Emit(&ConnectedEvent{})
 }
 
 func (c *Client) handleMulti(packet *PacketMsg) {
