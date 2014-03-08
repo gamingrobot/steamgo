@@ -235,7 +235,7 @@ func (s *Social) handleAccountInfo(packet *PacketMsg) {
 	packet.ReadProtoMsg(body)
 	s.mutex.Lock()
 	defer s.mutex.Unlock()
-	//just set the name Auth handles the callback
+	//Just set the name, Auth handles the callback
 	s.name = body.GetPersonaName()
 }
 
@@ -295,18 +295,91 @@ func (s *Social) handleFriendsList(packet *PacketMsg) {
 			}
 		}
 	}
-
 	if !list.GetBincremental() {
 		s.client.Emit(&FriendsListEvent{})
 	}
 }
 
 // Fired when someone changing their friend details
-//TODO: handlePersonaState
+type PersonaStateEvent struct {
+	StatusFlags            EClientPersonaStateFlag
+	FriendId               SteamId
+	State                  EPersonaState
+	StateFlags             EPersonaStateFlag
+	GameAppId              uint32
+	GameId                 uint64
+	GameName               string
+	GameServerIp           uint32
+	GameServerPort         uint32
+	QueryPort              uint32
+	SourceSteamId          SteamId
+	GameDataBlob           []byte
+	Name                   string
+	AvatarHash             []byte
+	LastLogOff             uint32
+	LastLogOn              uint32
+	ClanRank               uint32
+	ClanTag                string
+	OnlineSessionInstances uint32
+	PublishedSessionId     uint32
+	PersonaSetByUser       bool
+	FacebookName           string
+	FacebookId             uint64
+}
+
 func (s *Social) handlePersonaState(packet *PacketMsg) {
-	body := new(CMsgClientPersonaState)
-	packet.ReadProtoMsg(body)
-	//fmt.Printf("%+v\n", body)
+	list := new(CMsgClientPersonaState)
+	packet.ReadProtoMsg(list)
+	flags := EClientPersonaStateFlag(list.GetStatusFlags())
+	for _, friend := range list.GetFriends() {
+		friendId := SteamId(friend.GetFriendid())
+		if friendId.GetAccountType() == int32(EAccountType_Individual) {
+			cacheFriend, err := s.Friends.ById(friendId)
+			if err == nil {
+				cacheFriend.Name = friend.GetPlayerName()
+				cacheFriend.AvatarHash = friend.GetAvatarHash()
+				cacheFriend.PersonaState = EPersonaState(friend.GetPersonaState())
+				cacheFriend.PersonaStateFlags = EPersonaStateFlag(friend.GetPersonaStateFlags())
+				cacheFriend.GameName = friend.GetGameName()
+				cacheFriend.GameId = friend.GetGameid()
+				cacheFriend.GameAppId = friend.GetGamePlayedAppId()
+				s.Friends.Add(cacheFriend)
+			}
+
+		} else if friendId.GetAccountType() == int32(EAccountType_Clan) {
+			cacheGroup, err := s.Groups.ById(friendId)
+			if err == nil {
+				cacheGroup.Name = friend.GetPlayerName()
+				cacheGroup.AvatarHash = friend.GetAvatarHash()
+				s.Groups.Add(cacheGroup)
+			}
+		}
+		s.client.Emit(&PersonaStateEvent{
+			StatusFlags:            flags,
+			FriendId:               friendId,
+			State:                  EPersonaState(friend.GetPersonaState()),
+			StateFlags:             EPersonaStateFlag(friend.GetPersonaStateFlags()),
+			GameAppId:              friend.GetGamePlayedAppId(),
+			GameId:                 friend.GetGameid(),
+			GameName:               friend.GetGameName(),
+			GameServerIp:           friend.GetGameServerIp(),
+			GameServerPort:         friend.GetGameServerPort(),
+			QueryPort:              friend.GetQueryPort(),
+			SourceSteamId:          SteamId(friend.GetSteamidSource()),
+			GameDataBlob:           friend.GetGameDataBlob(),
+			Name:                   friend.GetPlayerName(),
+			AvatarHash:             friend.GetAvatarHash(),
+			LastLogOff:             friend.GetLastLogoff(),
+			LastLogOn:              friend.GetLastLogon(),
+			ClanRank:               friend.GetClanRank(),
+			ClanTag:                friend.GetClanTag(),
+			OnlineSessionInstances: friend.GetOnlineSessionInstances(),
+			PublishedSessionId:     friend.GetPublishedInstanceId(),
+			PersonaSetByUser:       friend.GetPersonaSetByUser(),
+			FacebookName:           friend.GetFacebookName(),
+			FacebookId:             friend.GetFacebookId(),
+		})
+	}
 }
 
 // Fired when a clan's state has been changed
@@ -369,10 +442,12 @@ func (s *Social) handleClanState(packet *PacketMsg) {
 		})
 	}
 	//Add stuff to group
-	group := s.Groups.ById(SteamId(body.GetSteamidClan()))
-	group.Name = name
-	group.AvatarHash = avatar
-	s.Groups.Add(group) //replace the previous version
+	group, err := s.Groups.ById(SteamId(body.GetSteamidClan()))
+	if err == nil {
+		group.Name = name
+		group.AvatarHash = avatar
+		s.Groups.Add(group) //replace the previous version
+	}
 	s.client.Emit(&ClanStateEvent{
 		ClandId:             SteamId(body.GetSteamidClan()),
 		StateFlags:          EClientPersonaStateFlag(body.GetMUnStatusFlags()),
