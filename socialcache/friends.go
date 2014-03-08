@@ -1,6 +1,7 @@
 package socialcache
 
 import (
+	"errors"
 	. "github.com/GamingRobot/steamgo/internal"
 	. "github.com/GamingRobot/steamgo/steamid"
 	"sync"
@@ -49,10 +50,13 @@ func (list *FriendsList) GetCopy() map[SteamId]Friend {
 }
 
 // Returns a copy of the friend of a given SteamId
-func (list *FriendsList) ById(id SteamId) Friend {
+func (list *FriendsList) ById(id SteamId) (Friend, error) {
 	list.mutex.RLock()
 	defer list.mutex.RUnlock()
-	return *list.byId[id]
+	if val, ok := list.byId[id]; ok {
+		return *val, nil
+	}
+	return Friend{}, errors.New("Friend not found")
 }
 
 // Returns the number of friends
@@ -70,7 +74,7 @@ type Friend struct {
 	Relationship      EFriendRelationship
 	PersonaState      EPersonaState
 	PersonaStateFlags EPersonaStateFlag
-	GameAppId         uint64
+	GameAppId         uint32
 	GameId            uint64
 	GameName          string
 }

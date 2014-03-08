@@ -1,6 +1,7 @@
 package socialcache
 
 import (
+	"errors"
 	. "github.com/GamingRobot/steamgo/internal"
 	. "github.com/GamingRobot/steamgo/steamid"
 	"sync"
@@ -80,11 +81,14 @@ func (list *GroupsList) GetCopy() map[SteamId]Group {
 }
 
 // Returns a copy of the group of a given SteamId
-func (list *GroupsList) ById(id SteamId) Group {
+func (list *GroupsList) ById(id SteamId) (Group, error) {
 	list.mutex.RLock()
 	defer list.mutex.RUnlock()
 	id = id.ChatToClan()
-	return *list.byId[id]
+	if val, ok := list.byId[id]; ok {
+		return *val, nil
+	}
+	return Group{}, errors.New("Group not found")
 }
 
 // Returns the number of groups
