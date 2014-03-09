@@ -6,17 +6,17 @@ and wait for a ConnectedCallback. This means you can now call the Login method i
 with your login information. This is covered in more detail in the method's documentation. After you've
 received the LoggedOnEvent, you should set your persona state to online to receive friend lists etc.
 
-	client := steam.NewClient()
+	client := steamgo.NewClient()
 	client.Connect()
 	for event := range client.Events() {
 		switch e := event.(type) {
-		case *steam.ConnectedEvent:
+		case *steamgo.ConnectedEvent:
 			client.Auth.LogOn(myLoginInfo)
-		case *steam.MachineAuthUpdateEvent:
+		case *steamgo.MachineAuthUpdateEvent:
 			ioutil.WriteFile("sentry", e.Hash, 0666)
-		case *steam.LoggedOnEvent:
+		case *steamgo.LoggedOnEvent:
 			client.Social.SetPersonaState(internal.EPersonaState_Online)
-		case steam.FatalError:
+		case steamgo.FatalError:
 			client.Connect() // please do some real error handling here
 			log.Print(e)
 		case error:
@@ -25,4 +25,4 @@ received the LoggedOnEvent, you should set your persona state to online to recei
 	}
 
 */
-package steam
+package steamgo

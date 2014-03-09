@@ -1,4 +1,4 @@
-package steam
+package steamgo
 
 import (
 	"code.google.com/p/goprotobuf/proto"

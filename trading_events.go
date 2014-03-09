@@ -1,4 +1,4 @@
-package steam
+package steamgo
 
 import (
 	. "github.com/GamingRobot/steamgo/internal"
