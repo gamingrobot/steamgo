@@ -4,7 +4,7 @@ import (
 	"code.google.com/p/goprotobuf/proto"
 	"crypto/sha1"
 	. "github.com/GamingRobot/steamgo/internal"
-	"github.com/GamingRobot/steamgo/steamid"
+	. "github.com/GamingRobot/steamgo/steamid"
 	"sync/atomic"
 	"time"
 )
@@ -44,7 +44,7 @@ func (a *Auth) LogOn(details *LogOnDetails) {
 	logon.ProtocolVersion = proto.Uint32(MsgClientLogon_CurrentProtocol)
 	logon.ShaSentryfile = details.SentryFileHash
 
-	atomic.StoreUint64(&a.client.steamId, uint64(steamid.NewIdAdv(0, 1, int32(EUniverse_Public), EAccountType_Individual)))
+	atomic.StoreUint64(&a.client.steamId, uint64(NewIdAdv(0, 1, int32(EUniverse_Public), EAccountType_Individual)))
 
 	a.client.Write(NewClientMsgProtobuf(EMsg_ClientLogon, logon))
 }
@@ -88,7 +88,26 @@ func (a *Auth) handleLogOnResponse(packet *PacketMsg) {
 
 		go a.client.heartbeatLoop(time.Duration(body.GetOutOfGameHeartbeatSeconds()))
 
-		a.client.Emit(&LoggedOnEvent{})
+		a.client.Emit(&LoggedOnEvent{
+			Result:                    EResult(body.GetEresult()),
+			ExtendedResult:            EResult(body.GetEresultExtended()),
+			OutOfGameSecsPerHeartbeat: body.GetOutOfGameHeartbeatSeconds(),
+			InGameSecsPerHeartbeat:    body.GetInGameHeartbeatSeconds(),
+			PublicIp:                  body.GetPublicIp(),
+			ServerTime:                body.GetRtime32ServerTime(),
+			AccountFlags:              EAccountFlags(body.GetAccountFlags()),
+			ClientSteamId:             SteamId(body.GetClientSuppliedSteamid()),
+			EmailDomain:               body.GetEmailDomain(),
+			CellId:                    body.GetCellId(),
+			CellIdPingThreshold:       body.GetCellIdPingThreshold(),
+			Steam2Ticket:              body.GetSteam2Ticket(),
+			UsePics:                   body.GetUsePics(),
+			WebApiUserNonce:           body.GetWebapiAuthenticateUserNonce(),
+			IpCountryCode:             body.GetIpCountryCode(),
+			VanityUrl:                 body.GetVanityUrl(),
+			NumLoginFailuresToMigrate: body.GetCountLoginfailuresToMigrate(),
+			NumDisconnectsToMigrate:   body.GetCountDisconnectsToMigrate(),
+		})
 	} else if result == EResult_Fail || result == EResult_ServiceUnavailable || result == EResult_TryAnotherCM {
 		// some error on Steam's side, we'll get an EOF later
 	} else {

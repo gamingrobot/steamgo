@@ -2,9 +2,29 @@ package steam
 
 import (
 	. "github.com/GamingRobot/steamgo/internal"
+	. "github.com/GamingRobot/steamgo/steamid"
 )
 
-type LoggedOnEvent struct{}
+type LoggedOnEvent struct {
+	Result                    EResult
+	ExtendedResult            EResult
+	OutOfGameSecsPerHeartbeat int32
+	InGameSecsPerHeartbeat    int32
+	PublicIp                  uint32
+	ServerTime                uint32
+	AccountFlags              EAccountFlags
+	ClientSteamId             SteamId
+	EmailDomain               string
+	CellId                    uint32
+	CellIdPingThreshold       uint32
+	Steam2Ticket              []byte
+	UsePics                   bool
+	WebApiUserNonce           string
+	IpCountryCode             string
+	VanityUrl                 string
+	NumLoginFailuresToMigrate int32
+	NumDisconnectsToMigrate   int32
+}
 
 type LoginKeyEvent struct {
 	UniqueId uint32
