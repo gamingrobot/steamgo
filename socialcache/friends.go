@@ -7,7 +7,7 @@ import (
 	"sync"
 )
 
-// Friend list is implemented as doubly-linked lists for thread-safety.
+// Friends list is a thread safe map
 // They can be iterated over like so:
 // 	for id, friend := range client.Social.Friends.GetCopy() {
 // 		log.Println(id, friend.Name)

@@ -7,7 +7,7 @@ import (
 	"sync"
 )
 
-// Group list is implemented as doubly-linked lists for thread-safety.
+// Groups list is a thread safe map
 // They can be iterated over like so:
 // 	for id, group := range client.Social.Groups.GetCopy() {
 // 		log.Println(id, group.Name)
