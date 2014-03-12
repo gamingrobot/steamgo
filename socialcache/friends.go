@@ -61,9 +61,74 @@ func (list *FriendsList) ById(id SteamId) (Friend, error) {
 
 // Returns the number of friends
 func (list *FriendsList) Count() int {
+	list.mutex.RLock()
+	defer list.mutex.RUnlock()
+	return len(list.byId)
+}
+
+//Setter methods
+func (list *FriendsList) SetName(id SteamId, name string) {
 	list.mutex.Lock()
 	defer list.mutex.Unlock()
-	return len(list.byId)
+	if val, ok := list.byId[id]; ok {
+		val.Name = name
+	}
+}
+
+func (list *FriendsList) SetAvatarHash(id SteamId, hash []byte) {
+	list.mutex.Lock()
+	defer list.mutex.Unlock()
+	if val, ok := list.byId[id]; ok {
+		val.AvatarHash = hash
+	}
+}
+
+func (list *FriendsList) SetRelationship(id SteamId, relationship EFriendRelationship) {
+	list.mutex.Lock()
+	defer list.mutex.Unlock()
+	if val, ok := list.byId[id]; ok {
+		val.Relationship = relationship
+	}
+}
+
+func (list *FriendsList) SetPersonaState(id SteamId, state EPersonaState) {
+	list.mutex.Lock()
+	defer list.mutex.Unlock()
+	if val, ok := list.byId[id]; ok {
+		val.PersonaState = state
+	}
+}
+
+func (list *FriendsList) SetPersonaStateFlags(id SteamId, flags EPersonaStateFlag) {
+	list.mutex.Lock()
+	defer list.mutex.Unlock()
+	if val, ok := list.byId[id]; ok {
+		val.PersonaStateFlags = flags
+	}
+}
+
+func (list *FriendsList) SetGameAppId(id SteamId, gameappid uint32) {
+	list.mutex.Lock()
+	defer list.mutex.Unlock()
+	if val, ok := list.byId[id]; ok {
+		val.GameAppId = gameappid
+	}
+}
+
+func (list *FriendsList) SetGameId(id SteamId, gameid uint64) {
+	list.mutex.Lock()
+	defer list.mutex.Unlock()
+	if val, ok := list.byId[id]; ok {
+		val.GameId = gameid
+	}
+}
+
+func (list *FriendsList) SetGameName(id SteamId, name string) {
+	list.mutex.Lock()
+	defer list.mutex.Unlock()
+	if val, ok := list.byId[id]; ok {
+		val.GameName = name
+	}
 }
 
 // A Friend

@@ -98,6 +98,34 @@ func (list *GroupsList) Count() int {
 	return len(list.byId)
 }
 
+//Setter methods
+func (list *GroupsList) SetName(id SteamId, name string) {
+	list.mutex.Lock()
+	defer list.mutex.Unlock()
+	id = id.ChatToClan()
+	if val, ok := list.byId[id]; ok {
+		val.Name = name
+	}
+}
+
+func (list *GroupsList) SetAvatarHash(id SteamId, hash []byte) {
+	list.mutex.Lock()
+	defer list.mutex.Unlock()
+	id = id.ChatToClan()
+	if val, ok := list.byId[id]; ok {
+		val.AvatarHash = hash
+	}
+}
+
+func (list *GroupsList) SetRelationship(id SteamId, relationship EClanRelationship) {
+	list.mutex.Lock()
+	defer list.mutex.Unlock()
+	id = id.ChatToClan()
+	if val, ok := list.byId[id]; ok {
+		val.Relationship = relationship
+	}
+}
+
 // A Group
 type Group struct {
 	SteamId      SteamId
