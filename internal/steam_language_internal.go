@@ -6,7 +6,7 @@ package internal
 import (
 	"code.google.com/p/goprotobuf/proto"
 	"encoding/binary"
-	. "github.com/GamingRobot/steamgo/steamid"
+	. "github.com/gamingrobot/steamgo/steamid"
 	"io"
 )
 

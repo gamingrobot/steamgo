@@ -2,8 +2,8 @@ package keys
 
 import (
 	"crypto/rsa"
-	"github.com/GamingRobot/steamgo/cryptoutil"
-	. "github.com/GamingRobot/steamgo/internal"
+	"github.com/gamingrobot/steamgo/cryptoutil"
+	. "github.com/gamingrobot/steamgo/internal"
 )
 
 var publicKeys = map[EUniverse][]byte{

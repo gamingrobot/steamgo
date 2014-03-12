@@ -2,8 +2,8 @@ package steamgo
 
 import (
 	"code.google.com/p/goprotobuf/proto"
-	. "github.com/GamingRobot/steamgo/internal"
-	. "github.com/GamingRobot/steamgo/steamid"
+	. "github.com/gamingrobot/steamgo/internal"
+	. "github.com/gamingrobot/steamgo/steamid"
 )
 
 // Provides access to the Steam client's part of Steam Trading, that is bootstrapping

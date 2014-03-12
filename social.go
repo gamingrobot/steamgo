@@ -4,9 +4,9 @@ import (
 	"bytes"
 	"code.google.com/p/goprotobuf/proto"
 	"encoding/binary"
-	. "github.com/GamingRobot/steamgo/internal"
-	"github.com/GamingRobot/steamgo/socialcache"
-	. "github.com/GamingRobot/steamgo/steamid"
+	. "github.com/gamingrobot/steamgo/internal"
+	"github.com/gamingrobot/steamgo/socialcache"
+	. "github.com/gamingrobot/steamgo/steamid"
 	"io"
 	"sync"
 )

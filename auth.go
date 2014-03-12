@@ -3,8 +3,8 @@ package steamgo
 import (
 	"code.google.com/p/goprotobuf/proto"
 	"crypto/sha1"
-	. "github.com/GamingRobot/steamgo/internal"
-	. "github.com/GamingRobot/steamgo/steamid"
+	. "github.com/gamingrobot/steamgo/internal"
+	. "github.com/gamingrobot/steamgo/steamid"
 	"sync/atomic"
 	"time"
 )

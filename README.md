@@ -6,12 +6,12 @@ It's a port of [SteamKit2](https://github.com/SteamRE/SteamKit) to Go.
 
 ## Installation
 
-    go get github.com/GamingRobot/steamgo
+    go get github.com/gamingrobot/steamgo
 
 ## Usage
 
 You can view the documentation with the `godoc` tool or
-[online on godoc.org](http://godoc.org/github.com/GamingRobot/steamgo).
+[online on godoc.org](http://godoc.org/github.com/gamingrobot/steamgo).
 
 ## License
 
