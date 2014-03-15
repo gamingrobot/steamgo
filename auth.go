@@ -29,7 +29,7 @@ type LogOnDetails struct {
 //
 // If you don't use Steam Guard, username and password are enough.
 //TODO: Make sure Steam Guard works
-func (a *Auth) LogOn(details *LogOnDetails) {
+func (a *Auth) LogOn(details LogOnDetails) {
 	if len(details.Username) == 0 || len(details.Password) == 0 {
 		panic("Username and password must be set!")
 	}
@@ -67,7 +67,7 @@ func (a *Auth) HandlePacket(packet *PacketMsg) {
 		a.handleWalletInfo(packet)
 	case EMsg_ClientRequestWebAPIAuthenticateUserNonceResponse:
 		a.handleWebAPIUserNonce(packet)
-	case EMsg_ClientMarketingMessageUpdate2:
+	case EMsg_ClientMarketingMessageUpdate:
 		a.handleMarketingMessageUpdate(packet)
 	}
 }
