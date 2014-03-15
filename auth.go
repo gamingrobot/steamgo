@@ -88,7 +88,7 @@ func (a *Auth) handleLogOnResponse(packet *PacketMsg) {
 
 		go a.client.heartbeatLoop(time.Duration(body.GetOutOfGameHeartbeatSeconds()))
 
-		a.client.Emit(&LoggedOnEvent{
+		a.client.Emit(LoggedOnEvent{
 			Result:                    EResult(body.GetEresult()),
 			ExtendedResult:            EResult(body.GetEresultExtended()),
 			OutOfGameSecsPerHeartbeat: body.GetOutOfGameHeartbeatSeconds(),
@@ -121,7 +121,7 @@ func (a *Auth) handleLoginKey(packet *PacketMsg) {
 	a.client.Write(NewClientMsgProtobuf(EMsg_ClientNewLoginKeyAccepted, &CMsgClientNewLoginKeyAccepted{
 		UniqueId: proto.Uint32(body.GetUniqueId()),
 	}))
-	a.client.Emit(&LoginKeyEvent{
+	a.client.Emit(LoginKeyEvent{
 		UniqueId: body.GetUniqueId(),
 		LoginKey: body.GetLoginKey(),
 	})
@@ -142,7 +142,7 @@ func (a *Auth) handleLoggedOff(packet *PacketMsg) {
 		packet.ReadClientMsg(body)
 		result = body.Result
 	}
-	a.client.Emit(&LoggedOffEvent{Result: result})
+	a.client.Emit(LoggedOffEvent{Result: result})
 }
 
 func (a *Auth) handleUpdateMachineAuth(packet *PacketMsg) {
@@ -157,13 +157,13 @@ func (a *Auth) handleUpdateMachineAuth(packet *PacketMsg) {
 	msg.SetTargetJobId(packet.SourceJobId)
 	a.client.Write(msg)
 
-	a.client.Emit(&MachineAuthUpdateEvent{sha})
+	a.client.Emit(MachineAuthUpdateEvent{sha})
 }
 
 func (a *Auth) handleAccountInfo(packet *PacketMsg) {
 	body := new(CMsgClientAccountInfo)
 	packet.ReadProtoMsg(body)
-	a.client.Emit(&AccountInfoEvent{
+	a.client.Emit(AccountInfoEvent{
 		PersonaName:          body.GetPersonaName(),
 		Country:              body.GetIpCountry(),
 		PasswordSalt:         body.GetSaltPassword(),

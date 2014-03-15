@@ -24,7 +24,7 @@ func (t *Trading) HandlePacket(packet *PacketMsg) {
 	case EMsg_EconTrading_InitiateTradeProposed:
 		msg := new(CMsgTrading_InitiateTradeRequest)
 		packet.ReadProtoMsg(msg)
-		t.client.Emit(&TradeProposedEvent{
+		t.client.Emit(TradeProposedEvent{
 			RequestId: TradeRequestId(msg.GetTradeRequestId()),
 			Other:     SteamId(msg.GetOtherSteamid()),
 			OtherName: msg.GetOtherName(),
@@ -32,7 +32,7 @@ func (t *Trading) HandlePacket(packet *PacketMsg) {
 	case EMsg_EconTrading_InitiateTradeResult:
 		msg := new(CMsgTrading_InitiateTradeResponse)
 		packet.ReadProtoMsg(msg)
-		t.client.Emit(&TradeResultEvent{
+		t.client.Emit(TradeResultEvent{
 			RequestId: TradeRequestId(msg.GetTradeRequestId()),
 			Response:  EEconTradeResponse(msg.GetResponse()),
 			Other:     SteamId(msg.GetOtherSteamid()),
@@ -40,7 +40,7 @@ func (t *Trading) HandlePacket(packet *PacketMsg) {
 	case EMsg_EconTrading_StartSession:
 		msg := new(CMsgTrading_StartSession)
 		packet.ReadProtoMsg(msg)
-		t.client.Emit(&TradeSessionStartEvent{
+		t.client.Emit(TradeSessionStartEvent{
 			Other: SteamId(msg.GetOtherSteamid()),
 		})
 	}

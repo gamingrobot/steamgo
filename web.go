@@ -103,7 +103,7 @@ func (w *Web) apiLogOn() error {
 
 	w.SteamLogin = result.Authenticateuser.Token
 
-	w.client.Emit(new(WebLoggedOnEvent))
+	w.client.Emit(WebLoggedOnEvent{})
 	return nil
 }
 
@@ -119,7 +119,7 @@ func (w *Web) handleNewLoginKey(packet *PacketMsg) {
 	// number -> string -> bytes -> base64
 	w.WebSessionId = base64.StdEncoding.EncodeToString([]byte(strconv.FormatUint(uint64(msg.GetUniqueId()), 10)))
 
-	w.client.Emit(new(WebSessionIdEvent))
+	w.client.Emit(WebSessionIdEvent{})
 }
 
 func (w *Web) handleAuthNonceResponse(packet *PacketMsg) {
@@ -133,6 +133,6 @@ func (w *Web) handleAuthNonceResponse(packet *PacketMsg) {
 	if atomic.CompareAndSwapUint32(&w.relogOnNonce, 1, 0) {
 		w.LogOn()
 	} else {
-		w.client.Emit(new(WebSessionIdEvent))
+		w.client.Emit(WebSessionIdEvent{})
 	}
 }

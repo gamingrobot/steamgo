@@ -306,7 +306,7 @@ func (c *Client) handleChannelEncryptResult(packet *PacketMsg) {
 	c.conn.SetEncryptionKey(c.tempSessionKey)
 	c.tempSessionKey = nil
 
-	c.Emit(&ConnectedEvent{})
+	c.Emit(ConnectedEvent{})
 }
 
 func (c *Client) handleMulti(packet *PacketMsg) {

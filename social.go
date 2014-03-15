@@ -259,7 +259,7 @@ func (s *Social) handleFriendsList(packet *PacketMsg) {
 
 			}
 			if list.GetBincremental() {
-				s.client.Emit(&GroupStateEvent{steamId, rel})
+				s.client.Emit(GroupStateEvent{steamId, rel})
 			}
 		} else {
 			rel := EFriendRelationship(friend.GetEfriendrelationship())
@@ -273,12 +273,12 @@ func (s *Social) handleFriendsList(packet *PacketMsg) {
 
 			}
 			if list.GetBincremental() {
-				s.client.Emit(&FriendStateEvent{steamId, rel})
+				s.client.Emit(FriendStateEvent{steamId, rel})
 			}
 		}
 	}
 	if !list.GetBincremental() {
-		s.client.Emit(&FriendsListEvent{})
+		s.client.Emit(FriendsListEvent{})
 	}
 }
 
@@ -300,7 +300,7 @@ func (s *Social) handlePersonaState(packet *PacketMsg) {
 			s.Groups.SetName(id, friend.GetPlayerName())
 			s.Groups.SetAvatarHash(id, friend.GetAvatarHash())
 		}
-		s.client.Emit(&PersonaStateEvent{
+		s.client.Emit(PersonaStateEvent{
 			StatusFlags:            flags,
 			FriendId:               id,
 			State:                  EPersonaState(friend.GetPersonaState()),
@@ -368,7 +368,7 @@ func (s *Social) handleClanState(packet *PacketMsg) {
 	clanid := SteamId(body.GetSteamidClan())
 	s.Groups.SetName(clanid, name)
 	s.Groups.SetAvatarHash(clanid, avatar)
-	s.client.Emit(&ClanStateEvent{
+	s.client.Emit(ClanStateEvent{
 		ClandId:             clanid,
 		StateFlags:          EClientPersonaStateFlag(body.GetMUnStatusFlags()),
 		AccountFlags:        EAccountFlags(body.GetClanAccountFlags()),
@@ -386,7 +386,7 @@ func (s *Social) handleClanState(packet *PacketMsg) {
 func (s *Social) handleFriendResponse(packet *PacketMsg) {
 	body := new(CMsgClientAddFriendResponse)
 	packet.ReadProtoMsg(body)
-	s.client.Emit(&FriendAddedEvent{
+	s.client.Emit(FriendAddedEvent{
 		Result:      EResult(body.GetEresult()),
 		SteamId:     SteamId(body.GetSteamIdAdded()),
 		PersonaName: body.GetPersonaNameAdded(),
@@ -397,7 +397,7 @@ func (s *Social) handleFriendMsg(packet *PacketMsg) {
 	body := new(CMsgClientFriendMsgIncoming)
 	packet.ReadProtoMsg(body)
 	message := string(bytes.Split(body.GetMessage(), []byte{0x0})[0])
-	s.client.Emit(&ChatMsgEvent{
+	s.client.Emit(ChatMsgEvent{
 		ChatterId: SteamId(body.GetSteamidFrom()),
 		Message:   message,
 		EntryType: EChatEntryType(body.GetChatEntryType()),
@@ -408,7 +408,7 @@ func (s *Social) handleChatMsg(packet *PacketMsg) {
 	body := new(MsgClientChatMsg)
 	payload := packet.ReadClientMsg(body).Payload
 	message := string(bytes.Split(payload, []byte{0x0})[0])
-	s.client.Emit(&ChatMsgEvent{
+	s.client.Emit(ChatMsgEvent{
 		ChatRoomId: SteamId(body.SteamIdChatRoom),
 		ChatterId:  SteamId(body.SteamIdChatter),
 		Message:    message,
@@ -433,7 +433,7 @@ func (s *Social) handleChatEnter(packet *PacketMsg) {
 			Rank:        rank,
 		})
 	}
-	s.client.Emit(&ChatEnterEvent{
+	s.client.Emit(ChatEnterEvent{
 		ChatRoomId:    SteamId(body.SteamIdChat),
 		FriendId:      SteamId(body.SteamIdFriend),
 		ChatRoomType:  EChatRoomType(body.ChatRoomType),
@@ -472,7 +472,7 @@ func (s *Social) handleChatMemberInfo(packet *PacketMsg) {
 			StateChange:    EChatMemberStateChange(stateChange),
 			ChatterActedBy: SteamId(actedBy),
 		}
-		s.client.Emit(&ChatMemberInfoEvent{
+		s.client.Emit(ChatMemberInfoEvent{
 			ChatRoomId:      SteamId(body.SteamIdChat),
 			Type:            EChatInfoType(body.Type),
 			StateChangeInfo: stateInfo,
@@ -502,7 +502,7 @@ func readChatMember(r io.Reader) (SteamId, EChatPermission, EClanRank) {
 func (s *Social) handleChatActionResult(packet *PacketMsg) {
 	body := new(MsgClientChatActionResult)
 	packet.ReadClientMsg(body)
-	s.client.Emit(&ChatActionResultEvent{
+	s.client.Emit(ChatActionResultEvent{
 		ChatRoomId: SteamId(body.SteamIdChat),
 		ChatterId:  SteamId(body.SteamIdUserActedOn),
 		Action:     EChatAction(body.ChatAction),
@@ -513,7 +513,7 @@ func (s *Social) handleChatActionResult(packet *PacketMsg) {
 func (s *Social) handleChatInvite(packet *PacketMsg) {
 	body := new(CMsgClientChatInvite)
 	packet.ReadProtoMsg(body)
-	s.client.Emit(&ChatInviteEvent{
+	s.client.Emit(ChatInviteEvent{
 		InvitedId:    SteamId(body.GetSteamIdInvited()),
 		ChatRoomId:   SteamId(body.GetSteamIdChat()),
 		PatronId:     SteamId(body.GetSteamIdPatron()),
@@ -527,7 +527,7 @@ func (s *Social) handleChatInvite(packet *PacketMsg) {
 func (s *Social) handleIgnoreFriendResponse(packet *PacketMsg) {
 	body := new(MsgClientSetIgnoreFriendResponse)
 	packet.ReadClientMsg(body)
-	s.client.Emit(&IgnoreFriendEvent{
+	s.client.Emit(IgnoreFriendEvent{
 		Result: EResult(body.Result),
 	})
 }
@@ -535,7 +535,7 @@ func (s *Social) handleIgnoreFriendResponse(packet *PacketMsg) {
 func (s *Social) handleProfileInfoResponse(packet *PacketMsg) {
 	body := new(CMsgClientFriendProfileInfoResponse)
 	packet.ReadProtoMsg(body)
-	s.client.Emit(&ProfileInfoEvent{
+	s.client.Emit(ProfileInfoEvent{
 		Result:      EResult(body.GetEresult()),
 		SteamId:     SteamId(body.GetSteamidFriend()),
 		TimeCreated: body.GetTimeCreated(),
