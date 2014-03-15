@@ -10,11 +10,11 @@ received the LoggedOnEvent, you should set your persona state to online to recei
 	client.Connect()
 	for event := range client.Events() {
 		switch e := event.(type) {
-		case *steamgo.ConnectedEvent:
+		case steamgo.ConnectedEvent:
 			client.Auth.LogOn(myLoginInfo)
-		case *steamgo.MachineAuthUpdateEvent:
+		case steamgo.MachineAuthUpdateEvent:
 			ioutil.WriteFile("sentry", e.Hash, 0666)
-		case *steamgo.LoggedOnEvent:
+		case steamgo.LoggedOnEvent:
 			client.Social.SetPersonaState(internal.EPersonaState_Online)
 		case steamgo.FatalError:
 			client.Connect() // please do some real error handling here
