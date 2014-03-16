@@ -7,16 +7,16 @@ import (
 
 type TradeProposedEvent struct {
 	RequestId TradeRequestId
-	Other     SteamId
+	Other     SteamId `json:",string"`
 	OtherName string
 }
 
 type TradeResultEvent struct {
 	RequestId TradeRequestId
 	Response  EEconTradeResponse
-	Other     SteamId
+	Other     SteamId `json:",string"`
 }
 
 type TradeSessionStartEvent struct {
-	Other SteamId
+	Other SteamId `json:",string"`
 }

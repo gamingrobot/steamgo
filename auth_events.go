@@ -13,7 +13,7 @@ type LoggedOnEvent struct {
 	PublicIp                  uint32
 	ServerTime                uint32
 	AccountFlags              EAccountFlags
-	ClientSteamId             SteamId
+	ClientSteamId             SteamId `json:",string"`
 	EmailDomain               string
 	CellId                    uint32
 	CellIdPingThreshold       uint32
@@ -47,6 +47,6 @@ type AccountInfoEvent struct {
 	CountAuthedComputers int32
 	LockedWithIpt        bool
 	AccountFlags         EAccountFlags
-	FacebookId           uint64
+	FacebookId           uint64 `json:",string"`
 	FacebookName         string
 }
