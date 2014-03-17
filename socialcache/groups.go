@@ -128,7 +128,7 @@ func (list *GroupsList) SetRelationship(id SteamId, relationship EClanRelationsh
 
 // A Group
 type Group struct {
-	SteamId      SteamId
+	SteamId      SteamId `json:",string"`
 	Name         string
 	AvatarHash   []byte
 	Relationship EClanRelationship
@@ -137,7 +137,7 @@ type Group struct {
 
 // A Chat Member
 type ChatMember struct {
-	SteamId     SteamId
+	SteamId     SteamId `json:",string"`
 	Permissions EChatPermission
 	Rank        EClanRank
 }

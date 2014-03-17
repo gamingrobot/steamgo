@@ -133,13 +133,13 @@ func (list *FriendsList) SetGameName(id SteamId, name string) {
 
 // A Friend
 type Friend struct {
-	SteamId           SteamId
+	SteamId           SteamId `json:",string"`
 	Name              string
 	AvatarHash        []byte
 	Relationship      EFriendRelationship
 	PersonaState      EPersonaState
 	PersonaStateFlags EPersonaStateFlag
 	GameAppId         uint32
-	GameId            uint64
+	GameId            uint64 `json:",string"`
 	GameName          string
 }
