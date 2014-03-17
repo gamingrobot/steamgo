@@ -108,12 +108,12 @@ func (list *GroupsList) SetName(id SteamId, name string) {
 	}
 }
 
-func (list *GroupsList) SetAvatarHash(id SteamId, hash []byte) {
+func (list *GroupsList) SetAvatar(id SteamId, hash string) {
 	list.mutex.Lock()
 	defer list.mutex.Unlock()
 	id = id.ChatToClan()
 	if val, ok := list.byId[id]; ok {
-		val.AvatarHash = hash
+		val.Avatar = hash
 	}
 }
 
@@ -130,7 +130,7 @@ func (list *GroupsList) SetRelationship(id SteamId, relationship EClanRelationsh
 type Group struct {
 	SteamId      SteamId `json:",string"`
 	Name         string
-	AvatarHash   []byte
+	Avatar       string
 	Relationship EClanRelationship
 	ChatMembers  map[SteamId]ChatMember
 }

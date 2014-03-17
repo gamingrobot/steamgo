@@ -40,7 +40,7 @@ type PersonaStateEvent struct {
 	SourceSteamId          SteamId `json:",string"`
 	GameDataBlob           []byte
 	Name                   string
-	AvatarHash             []byte
+	Avatar                 string
 	LastLogOff             uint32
 	LastLogOn              uint32
 	ClanRank               uint32
@@ -58,7 +58,7 @@ type ClanStateEvent struct {
 	StateFlags          EClientPersonaStateFlag
 	AccountFlags        EAccountFlags
 	ClanName            string
-	AvatarHash          []byte
+	Avatar              string
 	MemberTotalCount    uint32
 	MemberOnlineCount   uint32
 	MemberChattingCount uint32

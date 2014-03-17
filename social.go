@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"code.google.com/p/goprotobuf/proto"
 	"encoding/binary"
+	"encoding/hex"
 	. "github.com/gamingrobot/steamgo/internal"
 	"github.com/gamingrobot/steamgo/socialcache"
 	. "github.com/gamingrobot/steamgo/steamid"
@@ -16,7 +17,7 @@ type Social struct {
 	mutex sync.RWMutex
 
 	name         string
-	avatarHash   []byte
+	avatar       string
 	personaState EPersonaState
 
 	Friends *socialcache.FriendsList
@@ -290,7 +291,7 @@ func (s *Social) handlePersonaState(packet *PacketMsg) {
 		id := SteamId(friend.GetFriendid())
 		if id.GetAccountType() == int32(EAccountType_Individual) {
 			s.Friends.SetName(id, friend.GetPlayerName())
-			s.Friends.SetAvatarHash(id, friend.GetAvatarHash())
+			s.Friends.SetAvatar(id, hex.EncodeToString(friend.GetAvatarHash()))
 			s.Friends.SetPersonaState(id, EPersonaState(friend.GetPersonaState()))
 			s.Friends.SetPersonaStateFlags(id, EPersonaStateFlag(friend.GetPersonaStateFlags()))
 			s.Friends.SetGameAppId(id, friend.GetGamePlayedAppId())
@@ -298,7 +299,7 @@ func (s *Social) handlePersonaState(packet *PacketMsg) {
 			s.Friends.SetGameName(id, friend.GetGameName())
 		} else if id.GetAccountType() == int32(EAccountType_Clan) {
 			s.Groups.SetName(id, friend.GetPlayerName())
-			s.Groups.SetAvatarHash(id, friend.GetAvatarHash())
+			s.Groups.SetAvatar(id, hex.EncodeToString(friend.GetAvatarHash()))
 		}
 		s.client.Emit(PersonaStateEvent{
 			StatusFlags:            flags,
@@ -314,7 +315,7 @@ func (s *Social) handlePersonaState(packet *PacketMsg) {
 			SourceSteamId:          SteamId(friend.GetSteamidSource()),
 			GameDataBlob:           friend.GetGameDataBlob(),
 			Name:                   friend.GetPlayerName(),
-			AvatarHash:             friend.GetAvatarHash(),
+			Avatar:                 hex.EncodeToString(friend.GetAvatarHash()),
 			LastLogOff:             friend.GetLastLogoff(),
 			LastLogOn:              friend.GetLastLogon(),
 			ClanRank:               friend.GetClanRank(),
@@ -332,10 +333,10 @@ func (s *Social) handleClanState(packet *PacketMsg) {
 	body := new(CMsgClientClanState)
 	packet.ReadProtoMsg(body)
 	var name string
-	var avatar []byte
+	var avatar string
 	if body.GetNameInfo() != nil {
 		name = body.GetNameInfo().GetClanName()
-		avatar = body.GetNameInfo().GetShaAvatar()
+		avatar = hex.EncodeToString(body.GetNameInfo().GetShaAvatar())
 	}
 	var totalCount, onlineCount, chattingCount, ingameCount uint32
 	if body.GetUserCounts() != nil {
@@ -367,13 +368,13 @@ func (s *Social) handleClanState(packet *PacketMsg) {
 	//Add stuff to group
 	clanid := SteamId(body.GetSteamidClan())
 	s.Groups.SetName(clanid, name)
-	s.Groups.SetAvatarHash(clanid, avatar)
+	s.Groups.SetAvatar(clanid, avatar)
 	s.client.Emit(ClanStateEvent{
 		ClandId:             clanid,
 		StateFlags:          EClientPersonaStateFlag(body.GetMUnStatusFlags()),
 		AccountFlags:        EAccountFlags(body.GetClanAccountFlags()),
 		ClanName:            name,
-		AvatarHash:          avatar,
+		Avatar:              avatar,
 		MemberTotalCount:    totalCount,
 		MemberOnlineCount:   onlineCount,
 		MemberChattingCount: chattingCount,

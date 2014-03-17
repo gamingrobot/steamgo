@@ -75,11 +75,11 @@ func (list *FriendsList) SetName(id SteamId, name string) {
 	}
 }
 
-func (list *FriendsList) SetAvatarHash(id SteamId, hash []byte) {
+func (list *FriendsList) SetAvatar(id SteamId, hash string) {
 	list.mutex.Lock()
 	defer list.mutex.Unlock()
 	if val, ok := list.byId[id]; ok {
-		val.AvatarHash = hash
+		val.Avatar = hash
 	}
 }
 
@@ -135,7 +135,7 @@ func (list *FriendsList) SetGameName(id SteamId, name string) {
 type Friend struct {
 	SteamId           SteamId `json:",string"`
 	Name              string
-	AvatarHash        []byte
+	Avatar            string
 	Relationship      EFriendRelationship
 	PersonaState      EPersonaState
 	PersonaStateFlags EPersonaStateFlag
