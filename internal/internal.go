@@ -42,6 +42,13 @@ type MessageBody interface {
 	GetEMsg() EMsg
 }
 
+//Extra consts
+
+// the default details to request in most situations
+const EClientPersonaStateFlag_DefaultInfoRequest = EClientPersonaStateFlag_PlayerName |
+	EClientPersonaStateFlag_Presence | EClientPersonaStateFlag_SourceID |
+	EClientPersonaStateFlag_GameExtraInfo
+
 // Helpers for reading
 
 func ReadByte2Bool(r io.Reader) (bool, error) {

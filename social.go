@@ -243,7 +243,7 @@ func (s *Social) handleAccountInfo(packet *PacketMsg) {
 func (s *Social) handleFriendsList(packet *PacketMsg) {
 	list := new(CMsgClientFriendsList)
 	packet.ReadProtoMsg(list)
-
+	var friends []SteamId
 	for _, friend := range list.GetFriends() {
 		steamId := SteamId(friend.GetUlfriendid())
 		isClan := steamId.GetAccountType() == int32(EAccountType_Clan)
@@ -277,8 +277,12 @@ func (s *Social) handleFriendsList(packet *PacketMsg) {
 				s.client.Emit(FriendStateEvent{steamId, rel})
 			}
 		}
+		if !list.GetBincremental() {
+			friends = append(friends, steamId)
+		}
 	}
 	if !list.GetBincremental() {
+		s.RequestFriendListInfo(friends, EClientPersonaStateFlag_DefaultInfoRequest)
 		s.client.Emit(FriendsListEvent{})
 	}
 }
