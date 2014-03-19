@@ -295,7 +295,9 @@ func (s *Social) handlePersonaState(packet *PacketMsg) {
 		id := SteamId(friend.GetFriendid())
 		if id.GetAccountType() == int32(EAccountType_Individual) {
 			if (flags & EClientPersonaStateFlag_PlayerName) == EClientPersonaStateFlag_PlayerName {
-				s.Friends.SetName(id, friend.GetPlayerName())
+				if friend.GetPlayerName() != "" {
+					s.Friends.SetName(id, friend.GetPlayerName())
+				}
 			}
 			if (flags & EClientPersonaStateFlag_Presence) == EClientPersonaStateFlag_Presence {
 				s.Friends.SetAvatar(id, hex.EncodeToString(friend.GetAvatarHash()))
