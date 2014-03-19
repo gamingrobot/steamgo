@@ -294,16 +294,23 @@ func (s *Social) handlePersonaState(packet *PacketMsg) {
 	for _, friend := range list.GetFriends() {
 		id := SteamId(friend.GetFriendid())
 		if id.GetAccountType() == int32(EAccountType_Individual) {
-			s.Friends.SetName(id, friend.GetPlayerName())
-			s.Friends.SetAvatar(id, hex.EncodeToString(friend.GetAvatarHash()))
-			s.Friends.SetPersonaState(id, EPersonaState(friend.GetPersonaState()))
-			s.Friends.SetPersonaStateFlags(id, EPersonaStateFlag(friend.GetPersonaStateFlags()))
-			s.Friends.SetGameAppId(id, friend.GetGamePlayedAppId())
-			s.Friends.SetGameId(id, friend.GetGameid())
-			s.Friends.SetGameName(id, friend.GetGameName())
+			if (flags & EClientPersonaStateFlag_PlayerName) == EClientPersonaStateFlag_PlayerName {
+				s.Friends.SetName(id, friend.GetPlayerName())
+			} else if (flags & EClientPersonaStateFlag_Presence) == EClientPersonaStateFlag_Presence {
+				s.Friends.SetAvatar(id, hex.EncodeToString(friend.GetAvatarHash()))
+				s.Friends.SetPersonaState(id, EPersonaState(friend.GetPersonaState()))
+				s.Friends.SetPersonaStateFlags(id, EPersonaStateFlag(friend.GetPersonaStateFlags()))
+			} else if (flags & EClientPersonaStateFlag_GameDataBlob) == EClientPersonaStateFlag_GameDataBlob {
+				s.Friends.SetGameAppId(id, friend.GetGamePlayedAppId())
+				s.Friends.SetGameId(id, friend.GetGameid())
+				s.Friends.SetGameName(id, friend.GetGameName())
+			}
 		} else if id.GetAccountType() == int32(EAccountType_Clan) {
-			s.Groups.SetName(id, friend.GetPlayerName())
-			s.Groups.SetAvatar(id, hex.EncodeToString(friend.GetAvatarHash()))
+			if (flags & EClientPersonaStateFlag_PlayerName) == EClientPersonaStateFlag_PlayerName {
+				s.Groups.SetName(id, friend.GetPlayerName())
+			} else if (flags & EClientPersonaStateFlag_Presence) == EClientPersonaStateFlag_Presence {
+				s.Groups.SetAvatar(id, hex.EncodeToString(friend.GetAvatarHash()))
+			}
 		}
 		s.client.Emit(PersonaStateEvent{
 			StatusFlags:            flags,
