@@ -314,7 +314,9 @@ func (s *Social) handlePersonaState(packet *PacketMsg) {
 			}
 		} else if id.GetAccountType() == int32(EAccountType_Clan) {
 			if (flags & EClientPersonaStateFlag_PlayerName) == EClientPersonaStateFlag_PlayerName {
-				s.Groups.SetName(id, friend.GetPlayerName())
+				if friend.GetPlayerName() != "" {
+					s.Groups.SetName(id, friend.GetPlayerName())
+				}
 			}
 			if (flags & EClientPersonaStateFlag_Presence) == EClientPersonaStateFlag_Presence {
 				avatar := hex.EncodeToString(friend.GetAvatarHash())
