@@ -176,6 +176,7 @@ func (c *Client) Disconnect() {
 		c.heartbeat = nil
 	}
 	close(c.writeChan)
+	c.Emit(DisconnectedEvent{})
 }
 
 // Adds a message to the send queue. Modifications to the given message after
