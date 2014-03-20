@@ -300,7 +300,10 @@ func (s *Social) handlePersonaState(packet *PacketMsg) {
 				}
 			}
 			if (flags & EClientPersonaStateFlag_Presence) == EClientPersonaStateFlag_Presence {
-				s.Friends.SetAvatar(id, hex.EncodeToString(friend.GetAvatarHash()))
+				avatar := hex.EncodeToString(friend.GetAvatarHash())
+				if ValidAvatar(avatar) {
+					s.Friends.SetAvatar(id, avatar)
+				}
 				s.Friends.SetPersonaState(id, EPersonaState(friend.GetPersonaState()))
 				s.Friends.SetPersonaStateFlags(id, EPersonaStateFlag(friend.GetPersonaStateFlags()))
 			}
@@ -314,7 +317,10 @@ func (s *Social) handlePersonaState(packet *PacketMsg) {
 				s.Groups.SetName(id, friend.GetPlayerName())
 			}
 			if (flags & EClientPersonaStateFlag_Presence) == EClientPersonaStateFlag_Presence {
-				s.Groups.SetAvatar(id, hex.EncodeToString(friend.GetAvatarHash()))
+				avatar := hex.EncodeToString(friend.GetAvatarHash())
+				if ValidAvatar(avatar) {
+					s.Groups.SetAvatar(id, avatar)
+				}
 			}
 		}
 		s.client.Emit(PersonaStateEvent{

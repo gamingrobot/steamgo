@@ -49,6 +49,14 @@ const EClientPersonaStateFlag_DefaultInfoRequest = EClientPersonaStateFlag_Playe
 	EClientPersonaStateFlag_Presence | EClientPersonaStateFlag_SourceID |
 	EClientPersonaStateFlag_GameExtraInfo
 
+const DefaultAvatar = "fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb"
+
+//Helper functions
+
+func ValidAvatar(avatar string) bool {
+	return !(avatar == "0000000000000000000000000000000000000000" || len(avatar) != 40)
+}
+
 // Helpers for reading
 
 func ReadByte2Bool(r io.Reader) (bool, error) {
