@@ -34,6 +34,13 @@ func newSocial(client *Client) *Social {
 	}
 }
 
+// Gets the local user's avatar
+func (s *Social) GetAvatar() string {
+	s.mutex.RLock()
+	defer s.mutex.RUnlock()
+	return s.avatar
+}
+
 // Gets the local user's persona name
 func (s *Social) GetPersonaName() string {
 	s.mutex.RLock()
@@ -232,12 +239,9 @@ func (s *Social) HandlePacket(packet *PacketMsg) {
 }
 
 func (s *Social) handleAccountInfo(packet *PacketMsg) {
-	body := new(CMsgClientAccountInfo)
-	packet.ReadProtoMsg(body)
-	s.mutex.Lock()
-	defer s.mutex.Unlock()
-	//Just set the name, Auth handles the callback
-	s.name = body.GetPersonaName()
+	//Just fire the personainfo, Auth handles the callback
+	flags := EClientPersonaStateFlag_PlayerName | EClientPersonaStateFlag_Presence | EClientPersonaStateFlag_SourceID
+	s.RequestFriendInfo(s.client.SteamId(), EClientPersonaStateFlag(flags))
 }
 
 func (s *Social) handleFriendsList(packet *PacketMsg) {
@@ -293,7 +297,17 @@ func (s *Social) handlePersonaState(packet *PacketMsg) {
 	flags := EClientPersonaStateFlag(list.GetStatusFlags())
 	for _, friend := range list.GetFriends() {
 		id := SteamId(friend.GetFriendid())
-		if id.GetAccountType() == int32(EAccountType_Individual) {
+		if id == s.client.SteamId() { //this is our client id
+			s.mutex.Lock()
+			if friend.GetPlayerName() != "" {
+				s.name = friend.GetPlayerName()
+			}
+			avatar := hex.EncodeToString(friend.GetAvatarHash())
+			if ValidAvatar(avatar) {
+				s.avatar = avatar
+			}
+			s.mutex.Unlock()
+		} else if id.GetAccountType() == int32(EAccountType_Individual) {
 			if (flags & EClientPersonaStateFlag_PlayerName) == EClientPersonaStateFlag_PlayerName {
 				if friend.GetPlayerName() != "" {
 					s.Friends.SetName(id, friend.GetPlayerName())
