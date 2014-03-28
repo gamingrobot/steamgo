@@ -126,13 +126,53 @@ func (list *GroupsList) SetRelationship(id SteamId, relationship EClanRelationsh
 	}
 }
 
+func (list *GroupsList) SetMemberTotalCount(id SteamId, count uint32) {
+	list.mutex.Lock()
+	defer list.mutex.Unlock()
+	id = id.ChatToClan()
+	if val, ok := list.byId[id]; ok {
+		val.MemberTotalCount = count
+	}
+}
+
+func (list *GroupsList) SetMemberOnlineCount(id SteamId, count uint32) {
+	list.mutex.Lock()
+	defer list.mutex.Unlock()
+	id = id.ChatToClan()
+	if val, ok := list.byId[id]; ok {
+		val.MemberOnlineCount = count
+	}
+}
+
+func (list *GroupsList) SetMemberChattingCount(id SteamId, count uint32) {
+	list.mutex.Lock()
+	defer list.mutex.Unlock()
+	id = id.ChatToClan()
+	if val, ok := list.byId[id]; ok {
+		val.MemberChattingCount = count
+	}
+}
+
+func (list *GroupsList) SetMemberInGameCount(id SteamId, count uint32) {
+	list.mutex.Lock()
+	defer list.mutex.Unlock()
+	id = id.ChatToClan()
+	if val, ok := list.byId[id]; ok {
+		val.MemberInGameCount = count
+	}
+}
+
 // A Group
 type Group struct {
-	SteamId      SteamId `json:",string"`
-	Name         string
-	Avatar       string
-	Relationship EClanRelationship
-	ChatMembers  map[SteamId]ChatMember
+	SteamId             SteamId `json:",string"`
+	Name                string
+	Avatar              string
+	Relationship        EClanRelationship
+	MemberTotalCount    uint32
+	MemberOnlineCount   uint32
+	MemberChattingCount uint32
+	MemberInGameCount   uint32
+	ChatMembers         map[SteamId]ChatMember
 }
 
 // A Chat Member

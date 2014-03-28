@@ -403,10 +403,23 @@ func (s *Social) handleClanState(packet *PacketMsg) {
 			JustPosted: announce.GetJustPosted(),
 		})
 	}
+	flags := EClientPersonaStateFlag(body.GetMUnStatusFlags())
 	//Add stuff to group
 	clanid := SteamId(body.GetSteamidClan())
-	s.Groups.SetName(clanid, name)
-	s.Groups.SetAvatar(clanid, avatar)
+	if (flags & EClientPersonaStateFlag_PlayerName) == EClientPersonaStateFlag_PlayerName {
+		if name != "" {
+			s.Groups.SetName(clanid, name)
+		}
+	}
+	if (flags & EClientPersonaStateFlag_Presence) == EClientPersonaStateFlag_Presence {
+		if ValidAvatar(avatar) {
+			s.Groups.SetAvatar(clanid, avatar)
+		}
+	}
+	s.Groups.SetMemberTotalCount(clanid, totalCount)
+	s.Groups.SetMemberOnlineCount(clanid, onlineCount)
+	s.Groups.SetMemberChattingCount(clanid, chattingCount)
+	s.Groups.SetMemberInGameCount(clanid, ingameCount)
 	s.client.Emit(ClanStateEvent{
 		ClandId:             clanid,
 		StateFlags:          EClientPersonaStateFlag(body.GetMUnStatusFlags()),
