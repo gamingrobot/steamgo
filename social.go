@@ -477,12 +477,12 @@ func (s *Social) handleChatEnter(packet *PacketMsg) {
 	ReadByte(reader) //0
 	chatId := SteamId(body.SteamIdChat)
 	for i := 0; i < int(count); i++ {
-		id, permissions, rank := readChatMember(reader)
+		id, chatPerm, clanPerm := readChatMember(reader)
 		ReadBytes(reader, 6) //No idea what this is
 		s.Groups.AddChatMember(chatId, socialcache.ChatMember{
-			SteamId:     SteamId(id),
-			Permissions: permissions,
-			Rank:        rank,
+			SteamId:         SteamId(id),
+			ChatPermissions: chatPerm,
+			ClanPermissions: clanPerm,
 		})
 	}
 	s.client.Emit(ChatEnterEvent{
@@ -509,11 +509,11 @@ func (s *Social) handleChatMemberInfo(packet *PacketMsg) {
 		ReadByte(reader) //0
 		stateChange := EChatMemberStateChange(state)
 		if stateChange == EChatMemberStateChange_Entered {
-			_, permissions, rank := readChatMember(reader)
+			_, chatPerm, clanPerm := readChatMember(reader)
 			s.Groups.AddChatMember(chatId, socialcache.ChatMember{
-				SteamId:     SteamId(actedOn),
-				Permissions: permissions,
-				Rank:        rank,
+				SteamId:         SteamId(actedOn),
+				ChatPermissions: chatPerm,
+				ClanPermissions: clanPerm,
 			})
 		} else if stateChange == EChatMemberStateChange_Banned || stateChange == EChatMemberStateChange_Kicked ||
 			stateChange == EChatMemberStateChange_Disconnected || stateChange == EChatMemberStateChange_Left {
@@ -532,23 +532,18 @@ func (s *Social) handleChatMemberInfo(packet *PacketMsg) {
 	}
 }
 
-func readChatMember(r io.Reader) (SteamId, EChatPermission, EClanRank) {
+func readChatMember(r io.Reader) (SteamId, EChatPermission, EClanPermission) {
 	ReadString(r) // MessageObject
 	ReadByte(r)   // 7
 	ReadString(r) //steamid
 	id, _ := ReadUint64(r)
 	ReadByte(r)   // 2
 	ReadString(r) //Permissions
-	permissions, _ := ReadInt32(r)
+	chat, _ := ReadInt32(r)
 	ReadByte(r)   // 2
 	ReadString(r) //Details
-	rank, _ := ReadInt32(r)
-	if rank == 4 { //Fix rank to match EClanRank
-		rank = EClanRank_Member
-	} else if rank == 8 {
-		rank = EClanRank_Moderator
-	}
-	return SteamId(id), EChatPermission(permissions), EClanRank(rank)
+	clan, _ := ReadInt32(r)
+	return SteamId(id), EChatPermission(chat), EClanPermission(clan)
 }
 
 func (s *Social) handleChatActionResult(packet *PacketMsg) {

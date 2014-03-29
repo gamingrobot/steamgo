@@ -177,7 +177,7 @@ type Group struct {
 
 // A Chat Member
 type ChatMember struct {
-	SteamId     SteamId `json:",string"`
-	Permissions EChatPermission
-	Rank        EClanRank
+	SteamId         SteamId `json:",string"`
+	ChatPermissions EChatPermission
+	ClanPermissions EClanPermission
 }
