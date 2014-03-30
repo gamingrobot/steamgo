@@ -45,13 +45,13 @@ func (list *GroupsList) AddChatMember(id SteamId, member ChatMember) {
 	id = id.ChatToClan()
 	group := list.byId[id]
 	if group == nil { //Group doesn't exist
-		list.Add(Group{SteamId: id})
+		group = &Group{SteamId: id}
+		list.byId[id] = group
 	}
 	if group.ChatMembers == nil { //New group chat
 		group.ChatMembers = make(map[SteamId]ChatMember)
 	}
 	group.ChatMembers[member.SteamId] = member
-
 }
 
 // Removes a chat member from a given group
