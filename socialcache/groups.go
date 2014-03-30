@@ -28,7 +28,10 @@ func NewGroupsList() *GroupsList {
 func (list *GroupsList) Add(group Group) {
 	list.mutex.Lock()
 	defer list.mutex.Unlock()
-	list.byId[group.SteamId] = &group
+	_, exists := list.byId[group.SteamId]
+	if !exists { //make sure this doesnt already exist
+		list.byId[group.SteamId] = &group
+	}
 }
 
 // Removes a group from the group list
@@ -36,37 +39,6 @@ func (list *GroupsList) Remove(id SteamId) {
 	list.mutex.Lock()
 	defer list.mutex.Unlock()
 	delete(list.byId, id)
-}
-
-// Adds a chat member to a given group
-func (list *GroupsList) AddChatMember(id SteamId, member ChatMember) {
-	list.mutex.Lock()
-	defer list.mutex.Unlock()
-	id = id.ChatToClan()
-	group := list.byId[id]
-	if group == nil { //Group doesn't exist
-		group = &Group{SteamId: id}
-		list.byId[id] = group
-	}
-	if group.ChatMembers == nil { //New group chat
-		group.ChatMembers = make(map[SteamId]ChatMember)
-	}
-	group.ChatMembers[member.SteamId] = member
-}
-
-// Removes a chat member from a given group
-func (list *GroupsList) RemoveChatMember(id SteamId, member SteamId) {
-	list.mutex.Lock()
-	defer list.mutex.Unlock()
-	id = id.ChatToClan()
-	group := list.byId[id]
-	if group == nil { //Group doesn't exist
-		return
-	}
-	if group.ChatMembers == nil { //New group chat
-		return
-	}
-	delete(group.ChatMembers, member)
 }
 
 // Returns a copy of the groups map
@@ -172,12 +144,4 @@ type Group struct {
 	MemberOnlineCount   uint32
 	MemberChattingCount uint32
 	MemberInGameCount   uint32
-	ChatMembers         map[SteamId]ChatMember
-}
-
-// A Chat Member
-type ChatMember struct {
-	SteamId         SteamId `json:",string"`
-	ChatPermissions EChatPermission
-	ClanPermissions EClanPermission
 }

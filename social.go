@@ -22,6 +22,7 @@ type Social struct {
 
 	Friends *socialcache.FriendsList
 	Groups  *socialcache.GroupsList
+	Chats   *socialcache.ChatsList
 
 	client *Client
 }
@@ -30,6 +31,7 @@ func newSocial(client *Client) *Social {
 	return &Social{
 		Friends: socialcache.NewFriendsList(),
 		Groups:  socialcache.NewGroupsList(),
+		Chats:   socialcache.NewChatsList(),
 		client:  client,
 	}
 }
@@ -476,10 +478,12 @@ func (s *Social) handleChatEnter(packet *PacketMsg) {
 	name, _ := ReadString(reader)
 	ReadByte(reader) //0
 	chatId := SteamId(body.SteamIdChat)
+	clanId := SteamId(body.SteamIdClan)
+	s.Chats.Add(socialcache.Chat{SteamId: chatId, GroupId: clanId})
 	for i := 0; i < int(count); i++ {
 		id, chatPerm, clanPerm := readChatMember(reader)
 		ReadBytes(reader, 6) //No idea what this is
-		s.Groups.AddChatMember(chatId, socialcache.ChatMember{
+		s.Chats.AddChatMember(chatId, socialcache.ChatMember{
 			SteamId:         SteamId(id),
 			ChatPermissions: chatPerm,
 			ClanPermissions: clanPerm,
@@ -510,14 +514,14 @@ func (s *Social) handleChatMemberInfo(packet *PacketMsg) {
 		stateChange := EChatMemberStateChange(state)
 		if stateChange == EChatMemberStateChange_Entered {
 			_, chatPerm, clanPerm := readChatMember(reader)
-			s.Groups.AddChatMember(chatId, socialcache.ChatMember{
+			s.Chats.AddChatMember(chatId, socialcache.ChatMember{
 				SteamId:         SteamId(actedOn),
 				ChatPermissions: chatPerm,
 				ClanPermissions: clanPerm,
 			})
 		} else if stateChange == EChatMemberStateChange_Banned || stateChange == EChatMemberStateChange_Kicked ||
 			stateChange == EChatMemberStateChange_Disconnected || stateChange == EChatMemberStateChange_Left {
-			s.Groups.RemoveChatMember(chatId, SteamId(actedOn))
+			s.Chats.RemoveChatMember(chatId, SteamId(actedOn))
 		}
 		stateInfo := StateChangeDetails{
 			ChatterActedOn: SteamId(actedOn),

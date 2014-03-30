@@ -28,7 +28,10 @@ func NewFriendsList() *FriendsList {
 func (list *FriendsList) Add(friend Friend) {
 	list.mutex.Lock()
 	defer list.mutex.Unlock()
-	list.byId[friend.SteamId] = &friend
+	_, exists := list.byId[friend.SteamId]
+	if !exists { //make sure this doesnt already exist
+		list.byId[friend.SteamId] = &friend
+	}
 }
 
 // Removes a friend from the friend list
