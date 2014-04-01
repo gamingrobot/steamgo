@@ -418,10 +418,12 @@ func (s *Social) handleClanState(packet *PacketMsg) {
 			s.Groups.SetAvatar(clanid, avatar)
 		}
 	}
-	s.Groups.SetMemberTotalCount(clanid, totalCount)
-	s.Groups.SetMemberOnlineCount(clanid, onlineCount)
-	s.Groups.SetMemberChattingCount(clanid, chattingCount)
-	s.Groups.SetMemberInGameCount(clanid, ingameCount)
+	if body.GetUserCounts() != nil {
+		s.Groups.SetMemberTotalCount(clanid, totalCount)
+		s.Groups.SetMemberOnlineCount(clanid, onlineCount)
+		s.Groups.SetMemberChattingCount(clanid, chattingCount)
+		s.Groups.SetMemberInGameCount(clanid, ingameCount)
+	}
 	s.client.Emit(ClanStateEvent{
 		ClandId:             clanid,
 		StateFlags:          EClientPersonaStateFlag(body.GetMUnStatusFlags()),
