@@ -146,9 +146,8 @@ func (a *Auth) handleLoggedOff(packet *PacketMsg) {
 }
 
 func (a *Auth) handleUpdateMachineAuth(packet *PacketMsg) {
-	body := new(CMsgClientUpdateMachineAuth)
 	hash := sha1.New()
-	hash.Write(body.GetBytes())
+	hash.Write(packet.Data)
 	sha := hash.Sum(nil)
 
 	msg := NewClientMsgProtobuf(EMsg_ClientUpdateMachineAuthResponse, &CMsgClientUpdateMachineAuthResponse{
