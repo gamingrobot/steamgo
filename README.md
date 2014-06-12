@@ -54,3 +54,7 @@ func main() {
 }
 
 ```
+
+##Zephyr
+Web based steam client that uses steamgo  
+https://github.com/gamingrobot/zephyr
